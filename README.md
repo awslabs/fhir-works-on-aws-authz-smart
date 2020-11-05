@@ -37,8 +37,6 @@ This package is dependent on:
 
 - [interface component](https://github.com/awslabs/fhir-works-on-aws-interface)
   - This package defines the interface we are trying to use
-- [deployment component](https://github.com/awslabs/fhir-works-on-aws-deployment)
-  - This package deploys this and all the default components
 
 ## Known issues
 
