@@ -1,0 +1,22 @@
+/.serverless
+/.vscode
+!/.gitignore
+/build
+/node_modules
+# Ignore any zip files
+*.zip
+
+Info_Output.yml
+dist
+lib
+.build
+.idea
+yarn-error.log
+
+coverage
+##############################
+## local Development
+##############################
+serverless-output.yml
+serverless-output.yaml
+serverless_config.json
