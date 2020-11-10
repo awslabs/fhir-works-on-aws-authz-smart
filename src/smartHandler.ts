@@ -39,11 +39,14 @@ export class SMARTHandler implements Authorization {
         // Decoding first to determine if it passes scope & claims check first
         const decoded = decode(request.accessToken, { json: true }) || {};
         const { aud, iss } = decoded;
+        const audArray = Array.isArray(aud) ? aud : [aud];
+
         // verify aud & iss
-        if (this.config.expectedAudValue !== aud || this.config.expectedIssValue !== iss) {
+        if (!audArray.includes(this.config.expectedAudValue) || this.config.expectedIssValue !== iss) {
             console.error('aud or iss is not matching');
             throw new UnauthorizedError('Error validating the validity of the access_token');
         }
+
         // verify scope
         let scopes: string[] = [];
         if (this.config.scopeValueType === 'space' && typeof decoded[this.config.scopeKey] === 'string') {

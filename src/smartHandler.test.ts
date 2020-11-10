@@ -49,8 +49,12 @@ const scopeRule: ScopeRule = {
 
 const noFHIRScopesAccess: string =
     'eyJraWQiOiJETmJFNVpJalFmR2FJTEY3RlBmZHVZMjdCQ1R0THZ0QTVCTGRlWUFQcFFRIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.wvziVAfCAM3Lmg2xeiZ991fuKtVSIY7uJItBCYfOc_fNceZzCitMTRhbBFBR65C9qPemmJOGgnVIWsy2fWwkWqIS9f4jhYW5VstmxsJpZDpJFi1Junrhb3kFzTQr80yP3unGlQMLv91x4E4RWcmXOr0akh9Z7PuO2M0LUwup4riix4X2do-nqepVp-7PTd-t3AqC8ohK5_vrPbi4YFKOtp7TJEfSm251OMI_TaXr0o83Gr8i25QITo8uZE87mIlWw9Y84mETos2U8fpYfHE1rvTev1zu5Qu38DCZeuppDnftvTvOfZY25TbdjzrUEUNypVGro38UxVoLh9d5rGZZxw';
-const audWrongAccess: string =
+const audStringWrongAccess: string =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdHFxcSIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsInBhdGllbnQvKi4qIl0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUGF0aWVudC8xMjM0In0.7SWjgXwiHdZHH9p3GX6ef994ZdPO3XLC2St-HSIpuCA';
+const audArrayWrongAccess: string =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjpbImFwaTovL2RlZmF1bHRxcXEiXSwiaWF0IjoxNjAzMTE4MTM4LCJleHAiOjE2MDMxMjE3MzgsImNpZCI6IjBvYThtdWF6S1N5azlnUDV5NWQ1IiwidWlkIjoiMDB1ODVvendqaldSZDE3UEI1ZDUiLCJzY3AiOlsiZmhpclVzZXIiLCJvcGVuaWQiLCJwcm9maWxlIiwicGF0aWVudC8qLioiXSwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.oSOQuWe-hW6SS8rjczDijBsws9sNHNwwK7eiTnfE1Uw';
+const audArrayValidAccess: string =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjpbImFwaTovL2RlZmF1bHRxcXEiLCJhcGk6Ly9kZWZhdWx0Il0sImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.p9yVl9xYXhin-xMgpxWaWlot1yj0qrMTZxfnqLPv6tA';
 const issWrongAccess: string =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL2Zha2UvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2MDMxMTgxMzgsImV4cCI6MTYwMzEyMTczOCwiY2lkIjoiMG9hOG11YXpLU3lrOWdQNXk1ZDUiLCJ1aWQiOiIwMHU4NW96d2pqV1JkMTdQQjVkNSIsInNjcCI6WyJmaGlyVXNlciIsIm9wZW5pZCIsInByb2ZpbGUiLCJwYXRpZW50LyouKiJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.KD39_myQqMW5lckO4iS_XAU9Ygs59t5i70EZFFTxe7U';
 const launchAccess: string =
@@ -70,8 +74,41 @@ const manyReadAccessScopeSpaces: string =
 const manyReadAccessScopeSpacesJustLaunch: string =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjoiZmhpclVzZXIgb3BlbmlkIHByb2ZpbGUgbGF1bmNoIiwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.mExtrUuJhXRaKlpJ72-3CrsX5CezkYC-tVY1dg4frlw';
 
-const cases: (string | boolean | AuthorizationRequest)[][] = [
-    ['aud_failure', { accessToken: audWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
+const expectedAud = 'api://default';
+const expectedIss = 'https://dev-6460611.okta.com/oauth2/default';
+const authZConfig: SMARTConfig = {
+    version: 1.0,
+    scopeKey: 'scp',
+    scopeValueType: 'array',
+    scopeRule,
+    expectedAudValue: expectedAud,
+    expectedIssValue: expectedIss,
+    expectedFhirUserClaimKey: 'fhirUser',
+    fhirUserClaimRegex: /(\w+)\/(\w+)/g,
+    authZUserInfoUrl: `${expectedIss}/userInfo`,
+};
+
+const mock = new MockAdapter(axios);
+beforeEach(() => {
+    expect.assertions(1);
+});
+afterEach(() => {
+    mock.reset();
+});
+describe('constructor', () => {
+    test('ERROR: Attempt to create a handler to support a new config version', async () => {
+        expect(() => {
+            // eslint-disable-next-line no-new
+            new SMARTHandler({
+                ...authZConfig,
+                version: 2.0,
+            });
+        }).toThrow(new Error('Authorization configuration version does not match handler version'));
+    });
+});
+
+const arrayScopesCases: (string | boolean | AuthorizationRequest)[][] = [
+    ['aud_failure', { accessToken: audStringWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
     ['iss_failure', { accessToken: issWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
     ['no_fhir_scopes', { accessToken: noFHIRScopesAccess, operation: 'create', resourceType: 'Patient' }, false],
     ['launch_scope', { accessToken: launchAccess, operation: 'create', resourceType: 'Patient' }, false],
@@ -105,43 +142,9 @@ const cases: (string | boolean | AuthorizationRequest)[][] = [
     ['sys_history', { accessToken: allSysAccess, operation: 'history-system' }, true],
     ['sys_fakeType', { accessToken: allSysAccess, operation: 'create', resourceType: 'Fake' }, true],
 ];
-
-const expectedAud = 'api://default';
-const expectedIss = 'https://dev-6460611.okta.com/oauth2/default';
-
-const authZConfig: SMARTConfig = {
-    version: 1.0,
-    scopeKey: 'scp',
-    scopeValueType: 'array',
-    scopeRule,
-    expectedAudValue: expectedAud,
-    expectedIssValue: expectedIss,
-    expectedFhirUserClaimKey: 'fhirUser',
-    fhirUserClaimRegex: /(\w+)\/(\w+)/g,
-    authZUserInfoUrl: `${expectedIss}/userInfo`,
-};
-
-const mock = new MockAdapter(axios);
-beforeEach(() => {
-    expect.assertions(1);
-});
-afterEach(() => {
-    mock.reset();
-});
-describe('constructor', () => {
-    test('ERROR: Attempt to create a handler to support a new config version', async () => {
-        expect(() => {
-            // eslint-disable-next-line no-new
-            new SMARTHandler({
-                ...authZConfig,
-                version: 2.0,
-            });
-        }).toThrow(new Error('Authorization configuration version does not match handler version'));
-    });
-});
 describe('isAuthorized; scopes are in an array', () => {
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
-    test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
+    test.each(arrayScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
         mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
         if (!isValid) {
             await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
@@ -153,7 +156,7 @@ describe('isAuthorized; scopes are in an array', () => {
     });
 });
 
-const spaceCases: (string | boolean | AuthorizationRequest)[][] = [
+const spaceScopesCases: (string | boolean | AuthorizationRequest)[][] = [
     [
         'manyRead_Write',
         { accessToken: manyReadAccessScopeSpaces, operation: 'update', resourceType: 'Patient', id: '12' },
@@ -180,13 +183,12 @@ const spaceCases: (string | boolean | AuthorizationRequest)[][] = [
         false,
     ],
 ];
-
 describe('isAuthorized; scopes are space delimited', () => {
     const authZHandler: SMARTHandler = new SMARTHandler({
         ...authZConfig,
         scopeValueType: 'space',
     });
-    test.each(spaceCases)('CASE: %p', async (_firstArg, request, isValid) => {
+    test.each(spaceScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
         mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
         if (!isValid) {
             await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
@@ -197,6 +199,32 @@ describe('isAuthorized; scopes are space delimited', () => {
         }
     });
 });
+
+const arrayAUDCases: (string | boolean | AuthorizationRequest)[][] = [
+    [
+        'aud_not_in_array',
+        { accessToken: audArrayWrongAccess, operation: 'search-type', resourceType: 'Observation' },
+        false,
+    ],
+    ['aud_in_array', { accessToken: audArrayValidAccess, operation: 'search-type', resourceType: 'Observation' }, true],
+];
+describe('isAuthorized; aud is in an array', () => {
+    const authZHandler: SMARTHandler = new SMARTHandler({
+        ...authZConfig,
+        scopeValueType: 'array',
+    });
+    test.each(arrayAUDCases)('CASE: %p', async (_firstArg, request, isValid) => {
+        mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
+        if (!isValid) {
+            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
+                UnauthorizedError,
+            );
+        } else {
+            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).resolves.not.toThrow();
+        }
+    });
+});
+
 const apiCases: (string | boolean | AuthorizationRequest | number | any)[][] = [
     [
         '200; sucess',
