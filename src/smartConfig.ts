@@ -3,6 +3,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 import { TypeOperation, SystemOperation } from 'fhir-works-on-aws-interface';
+import { AuthStrategy } from './smartStrategy';
 
 export interface SMARTConfig {
     version: number;
@@ -38,6 +39,10 @@ export interface SMARTConfig {
      * OAuth2 standard URL used to verify the access_token and get all user claims
      */
     authZUserInfoUrl: string;
+    /**
+     * The authorization strategy to use to validate access
+     */
+    authStrategies: AuthStrategy[];
 }
 
 export type AccessModifier = 'read' | 'write';

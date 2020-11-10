@@ -14,7 +14,6 @@ import {
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
 } from 'fhir-works-on-aws-interface';
-import axios from 'axios';
 import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -62,20 +61,12 @@ export class SMARTHandler implements Authorization {
         }
 
         // Verify token
-        let response;
-        try {
-            response = await axios.post(
-                this.config.authZUserInfoUrl,
-                {},
-                { headers: { Authorization: `Bearer ${request.accessToken}` } },
-            );
-        } catch (e) {
-            console.error('Post to authZUserInfoUrl failed', e);
+        const results = [];
+        for (let i = 0; i < this.config.authStrategies.length; i += 1) {
+            const strategy = this.config.authStrategies[i];
+            results.push(strategy.isTokenValid(request.accessToken));
         }
-        if (!response || !response.data[this.config.expectedFhirUserClaimKey]) {
-            console.error(`result from AuthZ did not have ${this.config.expectedFhirUserClaimKey} claim`);
-            throw new UnauthorizedError("Cannot determine requester's identity");
-        }
+        await Promise.all(results);
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
@@ -100,7 +91,7 @@ export class SMARTHandler implements Authorization {
         await this.isAuthorized({ accessToken: request.accessToken, operation: request.operation });
     }
 
-    private isScopeSufficient(
+    protected isScopeSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
@@ -140,7 +131,7 @@ export class SMARTHandler implements Authorization {
         return false;
     }
 
-    private getValidOperation(scopeType: ScopeType, accessType: string) {
+    protected getValidOperation(scopeType: ScopeType, accessType: string) {
         let validOperations: (TypeOperation | SystemOperation)[] = [];
         if (accessType === '*' || accessType === 'read') {
             validOperations = this.config.scopeRule[scopeType].read;

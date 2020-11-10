@@ -7,6 +7,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { AuthorizationRequest, SystemOperation, TypeOperation, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from './smartHandler';
 import { SMARTConfig, ScopeRule } from './smartConfig';
+import { TokenIntrospectionStrategy } from './smartStrategy';
 
 const allReadOperations: (TypeOperation | SystemOperation)[] = [
     'read',
@@ -86,6 +87,7 @@ const authZConfig: SMARTConfig = {
     expectedFhirUserClaimKey: 'fhirUser',
     fhirUserClaimRegex: /(\w+)\/(\w+)/g,
     authZUserInfoUrl: `${expectedIss}/userInfo`,
+    authStrategies: [new TokenIntrospectionStrategy(`${expectedIss}/userInfo`, 'fhirUser')],
 };
 
 const mock = new MockAdapter(axios);

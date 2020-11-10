@@ -3,4 +3,5 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 export * from './smartConfig';
+export * from './smartStrategy';
 export * from './smartHandler';
