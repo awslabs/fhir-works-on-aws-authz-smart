@@ -7,7 +7,7 @@ export interface AuthStrategy {
      * @param accessToken
      * @throws UnauthorizedError
      */
-    isTokenValid(accessToken: string): Promise<void>;
+    validateToken(accessToken: string): Promise<void>;
 }
 
 /**
@@ -24,7 +24,7 @@ export class UserInfoStrategy implements AuthStrategy {
         this.expectedFhirUserClaimKey = expectedFhirUserClaimKey;
     }
 
-    async isTokenValid(accessToken: string): Promise<void> {
+    async validateToken(accessToken: string): Promise<void> {
         let response;
         try {
             response = await axios.post(
