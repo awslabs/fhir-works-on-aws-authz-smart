@@ -61,11 +61,9 @@ export class SMARTHandler implements Authorization {
         }
 
         // Verify token
-        const results = [];
-        for (let i = 0; i < this.config.authStrategies.length; i += 1) {
-            const strategy = this.config.authStrategies[i];
-            results.push(strategy.validateToken(request.accessToken));
-        }
+        const results = this.config.authStrategies.map(strategy => {
+            return strategy.validateToken(request.accessToken);
+        });
         await Promise.all(results);
     }
 
