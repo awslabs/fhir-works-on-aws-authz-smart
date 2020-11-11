@@ -10,6 +10,10 @@ export interface AuthStrategy {
     isTokenValid(accessToken: string): Promise<void>;
 }
 
+/**
+ * This strategy uses the /userinfo endpoint to verify the `access_token` and get the `fhirUser` claim for further authorization.
+ * userinfo endpoint is OIDC compliant: https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+ */
 export class UserInfoStrategy implements AuthStrategy {
     private readonly authZUserInfoUrl: string;
 
