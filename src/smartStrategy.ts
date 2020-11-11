@@ -10,7 +10,7 @@ export interface AuthStrategy {
     isTokenValid(accessToken: string): Promise<void>;
 }
 
-export class TokenIntrospectionStrategy implements AuthStrategy {
+export class UserInfoStrategy implements AuthStrategy {
     private readonly authZUserInfoUrl: string;
 
     private readonly expectedFhirUserClaimKey: string;
