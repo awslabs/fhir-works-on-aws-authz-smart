@@ -89,7 +89,7 @@ export class SMARTHandler implements Authorization {
         await this.isAuthorized({ accessToken: request.accessToken, operation: request.operation });
     }
 
-    protected isScopeSufficient(
+    private isScopeSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
@@ -129,7 +129,7 @@ export class SMARTHandler implements Authorization {
         return false;
     }
 
-    protected getValidOperation(scopeType: ScopeType, accessType: string) {
+    private getValidOperation(scopeType: ScopeType, accessType: string) {
         let validOperations: (TypeOperation | SystemOperation)[] = [];
         if (accessType === '*' || accessType === 'read') {
             validOperations = this.config.scopeRule[scopeType].read;
