@@ -14,6 +14,7 @@ import {
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
 } from 'fhir-works-on-aws-interface';
+import axios from 'axios';
 import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -61,10 +62,29 @@ export class SMARTHandler implements Authorization {
         }
 
         // Verify token
-        const results = this.config.authStrategies.map(strategy => {
-            return strategy.validateToken(request.accessToken);
+        let userinfo: { [k: string]: any } = {};
+        try {
+            const response = await axios.post(
+                this.config.authZUserInfoUrl,
+                {},
+                { headers: { Authorization: `Bearer ${request.accessToken}` } },
+            );
+            userinfo = response.data;
+        } catch (e) {
+            console.error('Post to authZUserInfoUrl failed', e);
+        }
+
+        const fhirUser = userinfo[this.config.expectedFhirUserClaimKey];
+        if (!fhirUser) {
+            console.error(`result from AuthZ did not have ${this.config.expectedFhirUserClaimKey} claim`);
+            throw new UnauthorizedError("Cannot determine requester's identity");
+        }
+
+        // Check additional auth strategies
+        const results = this.config.authStrategies?.map(strategy => {
+            return strategy.validateAccess(decoded, userinfo, fhirUser);
         });
-        await Promise.all(results);
+        if (results) await Promise.all(results);
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {

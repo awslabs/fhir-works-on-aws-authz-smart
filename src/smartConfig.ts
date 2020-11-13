@@ -42,7 +42,7 @@ export interface SMARTConfig {
     /**
      * The authorization strategy to use to validate access
      */
-    authStrategies: AuthStrategy[];
+    authStrategies?: AuthStrategy[];
 }
 
 export type AccessModifier = 'read' | 'write';
