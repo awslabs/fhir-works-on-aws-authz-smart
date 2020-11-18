@@ -4,7 +4,12 @@
  */
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { AuthorizationRequest, SystemOperation, TypeOperation, UnauthorizedError } from 'fhir-works-on-aws-interface';
+import {
+    VerifyAccessTokenRequest,
+    SystemOperation,
+    TypeOperation,
+    UnauthorizedError,
+} from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from './smartHandler';
 import { SMARTConfig, ScopeRule } from './smartConfig';
 
@@ -85,7 +90,7 @@ const authZConfig: SMARTConfig = {
     expectedIssValue: expectedIss,
     expectedFhirUserClaimKey: 'fhirUser',
     fhirUserClaimRegex: /(\w+)\/(\w+)/g,
-    authZUserInfoUrl: `${expectedIss}/userInfo`,
+    userInfoEndpoint: `${expectedIss}/userInfo`,
 };
 
 const mock = new MockAdapter(axios);
@@ -107,7 +112,7 @@ describe('constructor', () => {
     });
 });
 
-const arrayScopesCases: (string | boolean | AuthorizationRequest)[][] = [
+const arrayScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
     ['aud_failure', { accessToken: audStringWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
     ['iss_failure', { accessToken: issWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
     ['no_fhir_scopes', { accessToken: noFHIRScopesAccess, operation: 'create', resourceType: 'Patient' }, false],
@@ -142,21 +147,24 @@ const arrayScopesCases: (string | boolean | AuthorizationRequest)[][] = [
     ['sys_history', { accessToken: allSysAccess, operation: 'history-system' }, true],
     ['sys_fakeType', { accessToken: allSysAccess, operation: 'create', resourceType: 'Fake' }, true],
 ];
-describe('isAuthorized; scopes are in an array', () => {
+describe('verifyAccessToken; scopes are in an array', () => {
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
     test.each(arrayScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
+        const userIdentity = { fhirUser: '123' };
+        mock.onGet(authZConfig.userInfoEndpoint).reply(200, userIdentity);
         if (!isValid) {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         } else {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).resolves.not.toThrow();
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(
+                userIdentity,
+            );
         }
     });
 });
 
-const spaceScopesCases: (string | boolean | AuthorizationRequest)[][] = [
+const spaceScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
     [
         'manyRead_Write',
         { accessToken: manyReadAccessScopeSpaces, operation: 'update', resourceType: 'Patient', id: '12' },
@@ -183,24 +191,28 @@ const spaceScopesCases: (string | boolean | AuthorizationRequest)[][] = [
         false,
     ],
 ];
-describe('isAuthorized; scopes are space delimited', () => {
+describe('verifyAccessToken; scopes are space delimited', () => {
     const authZHandler: SMARTHandler = new SMARTHandler({
         ...authZConfig,
         scopeValueType: 'space',
     });
+    const userIdentity = { fhirUser: '123' };
+
     test.each(spaceScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
+        mock.onGet(authZConfig.userInfoEndpoint).reply(200, { fhirUser: '123' });
         if (!isValid) {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         } else {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).resolves.not.toThrow();
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(
+                userIdentity,
+            );
         }
     });
 });
 
-const arrayAUDCases: (string | boolean | AuthorizationRequest)[][] = [
+const arrayAUDCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
     [
         'aud_not_in_array',
         { accessToken: audArrayWrongAccess, operation: 'search-type', resourceType: 'Observation' },
@@ -208,24 +220,28 @@ const arrayAUDCases: (string | boolean | AuthorizationRequest)[][] = [
     ],
     ['aud_in_array', { accessToken: audArrayValidAccess, operation: 'search-type', resourceType: 'Observation' }, true],
 ];
-describe('isAuthorized; aud is in an array', () => {
+describe('verifyAccessToken; aud is in an array', () => {
     const authZHandler: SMARTHandler = new SMARTHandler({
         ...authZConfig,
         scopeValueType: 'array',
     });
+    const userIdentity = { fhirUser: '123' };
+
     test.each(arrayAUDCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        mock.onPost(authZConfig.authZUserInfoUrl).reply(200, { fhirUser: '123' });
+        mock.onGet(authZConfig.userInfoEndpoint).reply(200, { fhirUser: '123' });
         if (!isValid) {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         } else {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).resolves.not.toThrow();
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(
+                userIdentity,
+            );
         }
     });
 });
 
-const apiCases: (string | boolean | AuthorizationRequest | number | any)[][] = [
+const apiCases: (string | boolean | VerifyAccessTokenRequest | number | any)[][] = [
     [
         '200; sucess',
         { accessToken: manyReadAccess, operation: 'search-type', resourceType: 'Observation' },
@@ -250,21 +266,23 @@ const apiCases: (string | boolean | AuthorizationRequest | number | any)[][] = [
         false,
     ],
 ];
-describe("isAuthorized; AuthZ's userInfo interactions", () => {
+describe("verifyAccessToken; AuthZ's userInfo interactions", () => {
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
     test.each(apiCases)('CASE: %p', async (_firstArg, request, authRespCode, authRespBody, isValid) => {
-        mock.onPost(authZConfig.authZUserInfoUrl).reply(<number>authRespCode, authRespBody);
+        mock.onGet(authZConfig.userInfoEndpoint).reply(<number>authRespCode, authRespBody);
         if (!isValid) {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).rejects.toThrowError(
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         } else {
-            await expect(authZHandler.isAuthorized(<AuthorizationRequest>request)).resolves.not.toThrow();
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(
+                authRespBody,
+            );
         }
     });
     test('CASE: network error', async () => {
-        mock.onPost(authZConfig.authZUserInfoUrl).networkError();
-        await expect(authZHandler.isAuthorized(<AuthorizationRequest>apiCases[0][1])).rejects.toThrowError(
+        mock.onGet(authZConfig.userInfoEndpoint).networkError();
+        await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>apiCases[0][1])).rejects.toThrowError(
             UnauthorizedError,
         );
     });

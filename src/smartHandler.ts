@@ -5,7 +5,7 @@
 import { decode } from 'jsonwebtoken';
 import {
     Authorization,
-    AuthorizationRequest,
+    VerifyAccessTokenRequest,
     AuthorizationBundleRequest,
     AllowedResourceTypesForOperationRequest,
     SystemOperation,
@@ -13,6 +13,8 @@ import {
     UnauthorizedError,
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
+    AccessBulkDataJobRequest,
+    R4_PATIENT_COMPARTMENT_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
@@ -34,7 +36,7 @@ export class SMARTHandler implements Authorization {
         this.config = config;
     }
 
-    async isAuthorized(request: AuthorizationRequest): Promise<void> {
+    async verifyAccessToken(request: VerifyAccessTokenRequest) {
         // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
         // Decoding first to determine if it passes scope & claims check first
         const decoded = decode(request.accessToken, { json: true }) || {};
@@ -54,7 +56,7 @@ export class SMARTHandler implements Authorization {
         } else if (this.config.scopeValueType === 'array' && Array.isArray(decoded[this.config.scopeKey])) {
             scopes = decoded[this.config.scopeKey];
         }
-        if (!this.isScopeSufficient(scopes, request.operation, request.resourceType)) {
+        if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
             console.error(
                 `User supplied scopes are insuffiecient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
             );
@@ -64,11 +66,9 @@ export class SMARTHandler implements Authorization {
         // Verify token
         let response;
         try {
-            response = await axios.post(
-                this.config.authZUserInfoUrl,
-                {},
-                { headers: { Authorization: `Bearer ${request.accessToken}` } },
-            );
+            response = await axios.get(this.config.userInfoEndpoint, {
+                headers: { Authorization: `Bearer ${request.accessToken}` },
+            });
         } catch (e) {
             console.error('Post to authZUserInfoUrl failed', e);
         }
@@ -76,31 +76,39 @@ export class SMARTHandler implements Authorization {
             console.error(`result from AuthZ did not have ${this.config.expectedFhirUserClaimKey} claim`);
             throw new UnauthorizedError("Cannot determine requester's identity");
         }
+        return response.data;
     }
 
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
+    async isAccessBulkDataJobAllowed(request: AccessBulkDataJobRequest): Promise<void> {
+        // TODO not supported for now
+        throw new UnauthorizedError('Bulk access is not allowed');
+    }
+
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
-        // TODO this is stubbed for now
-        await this.isAuthorized({ accessToken: request.accessToken, operation: 'transaction' });
+        // TODO not supported for now
+        throw new UnauthorizedError('Bundle operation is not authorzied');
     }
 
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
         // TODO this is stubbed for now
-        await this.isAuthorized({ accessToken: request.accessToken, operation: request.operation });
-        return [];
+        return R4_PATIENT_COMPARTMENT_RESOURCES;
     }
 
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         // TODO this is stubbed for now
-        await this.isAuthorized({ accessToken: request.accessToken, operation: request.operation });
         return request.readResponse;
     }
 
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
         // TODO this is stubbed for now
-        await this.isAuthorized({ accessToken: request.accessToken, operation: request.operation });
     }
 
-    private isScopeSufficient(
+    private areScopesSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
@@ -127,10 +135,10 @@ export class SMARTHandler implements Authorization {
                     const { scopeResourceType, accessType } = match.groups!;
                     if (resourceType) {
                         if (scopeResourceType === '*' || scopeResourceType === resourceType) {
-                            validOperations = this.getValidOperation(<ScopeType>scopeType, accessType);
+                            validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
                         }
                     } else if (scopeResourceType === '*') {
-                        validOperations = this.getValidOperation(<ScopeType>scopeType, accessType);
+                        validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
                     }
                 }
                 const isAuthorized = validOperations.includes(operation);
@@ -140,7 +148,7 @@ export class SMARTHandler implements Authorization {
         return false;
     }
 
-    private getValidOperation(scopeType: ScopeType, accessType: string) {
+    private getValidOperationsForScope(scopeType: ScopeType, accessType: string) {
         let validOperations: (TypeOperation | SystemOperation)[] = [];
         if (accessType === '*' || accessType === 'read') {
             validOperations = this.config.scopeRule[scopeType].read;

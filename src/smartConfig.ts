@@ -27,7 +27,7 @@ export interface SMARTConfig {
      */
     expectedIssValue: string;
     /**
-     * Per SMART spec this is the 'iss' key found in the access_token
+     * Name of the claim found in the access_token that represents the requestors FHIR Id
      */
     expectedFhirUserClaimKey: 'fhirUser' | 'profile';
     /**
@@ -37,7 +37,7 @@ export interface SMARTConfig {
     /**
      * OAuth2 standard URL used to verify the access_token and get all user claims
      */
-    authZUserInfoUrl: string;
+    userInfoEndpoint: string;
 }
 
 export type AccessModifier = 'read' | 'write';
