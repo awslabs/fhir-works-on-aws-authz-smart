@@ -15,6 +15,7 @@ import {
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
     R4_PATIENT_COMPARTMENT_RESOURCES,
+    KeyValueMap,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
@@ -36,12 +37,12 @@ export class SMARTHandler implements Authorization {
         this.config = config;
     }
 
-    async verifyAccessToken(request: VerifyAccessTokenRequest) {
+    async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
         if (
             request.operation === 'read' &&
             (request.resourceType === 'metadata' || request.resourceType === '.well-known')
         ) {
-            return;
+            return {};
         }
 
         // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
