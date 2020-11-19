@@ -171,7 +171,6 @@ describe('verifyAccessToken; metadata and well-known route', () => {
     ];
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
     test.each(cases)('CASE: %p', async (_firstArg, request) => {
-        // const request: VerifyAccessTokenRequest = { accessToken: '', operation: 'read', resourceType: 'metadata' };
         expect(authZHandler.verifyAccessToken(request as VerifyAccessTokenRequest)).resolves.toEqual({});
     });
 });
