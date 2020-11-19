@@ -61,7 +61,7 @@ export class SMARTHandler implements Authorization {
             throw new UnauthorizedError('User does not have permission for requested operation');
         }
 
-        // Verify token
+        // verify token
         let userinfo: { [k: string]: any } = {};
         try {
             const response = await axios.post(
@@ -80,11 +80,14 @@ export class SMARTHandler implements Authorization {
             throw new UnauthorizedError("Cannot determine requester's identity");
         }
 
-        // Check additional auth strategies
-        const results = this.config.authStrategies?.map(strategy => {
-            return strategy.validateAccess(decoded, userinfo, fhirUser);
-        });
-        if (results) await Promise.all(results);
+        // verify with additional auth strategies
+        const results = []
+        for (let strategy of this.config.authStrategies || []) {
+            results.push(strategy.verifyAccessToken(decoded));
+            results.push(strategy.verifyUserInfo(userinfo));
+            results.push(strategy.verifyFhirUserClaim(fhirUser));
+        }
+        await Promise.all(results);
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {

@@ -4,16 +4,31 @@
  */
 
 export interface AuthStrategy {
+
     /**
-     * Validates access for a given access token, fhirUser claim, and all the userinfo
+     * Verifies the access_token contents
      * @param decodedAccessToken
-     * @param fhirUser
+     * @throws UnauthorizedError
+     */
+    verifyAccessToken(decodedAccessToken: { [k: string]: any }): Promise<void>;
+
+    /**
+     * Verifies the /userinfo contents (which mimics the id_token)
      * @param userinfo
      * @throws UnauthorizedError
      */
-    validateAccess(
-        decodedAccessToken: { [k: string]: any },
-        userinfo: { [k: string]: any },
-        fhirUser: string,
-    ): Promise<void>;
+    verifyUserInfo(userinfo: { [k: string]: any }): Promise<void>;
+
+    /**
+     * Verifies the fhirUser claim
+     * @param fhirUser
+     * @throws UnauthorizedError
+     */
+    verifyFhirUserClaim(fhirUser: string): Promise<void>;
+
+    /**
+     * Verifies and authorizes access to the ReadResponse
+     * @throws UnauthorizedError
+     */
+    authorizeReadResponse(): Promise<void>;
 }
