@@ -15,6 +15,7 @@ import {
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
     R4_PATIENT_COMPARTMENT_RESOURCES,
+    KeyValueMap,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
@@ -36,7 +37,14 @@ export class SMARTHandler implements Authorization {
         this.config = config;
     }
 
-    async verifyAccessToken(request: VerifyAccessTokenRequest) {
+    async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
+        if (
+            request.operation === 'read' &&
+            (request.resourceType === 'metadata' || request.resourceType === '.well-known')
+        ) {
+            return {};
+        }
+
         // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
         // Decoding first to determine if it passes scope & claims check first
         const decoded = decode(request.accessToken, { json: true }) || {};
@@ -58,7 +66,7 @@ export class SMARTHandler implements Authorization {
         }
         if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
             console.error(
-                `User supplied scopes are insuffiecient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
+                `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
             );
             throw new UnauthorizedError('User does not have permission for requested operation');
         }

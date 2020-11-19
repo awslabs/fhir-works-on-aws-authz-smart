@@ -164,6 +164,17 @@ describe('verifyAccessToken; scopes are in an array', () => {
     });
 });
 
+describe('verifyAccessToken; metadata and well-known route', () => {
+    const cases = [
+        ['metadata', { accessToken: '', operation: 'read', resourceType: 'metadata' }],
+        ['well-known', { accessToken: '', operation: 'read', resourceType: '.well-known' }],
+    ];
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
+    test.each(cases)('CASE: %p', async (_firstArg, request) => {
+        expect(authZHandler.verifyAccessToken(request as VerifyAccessTokenRequest)).resolves.toEqual({});
+    });
+});
+
 const spaceScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
     [
         'manyRead_Write',
@@ -266,6 +277,7 @@ const apiCases: (string | boolean | VerifyAccessTokenRequest | number | any)[][]
         false,
     ],
 ];
+
 describe("verifyAccessToken; AuthZ's userInfo interactions", () => {
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig);
     test.each(apiCases)('CASE: %p', async (_firstArg, request, authRespCode, authRespBody, isValid) => {
