@@ -29,11 +29,7 @@ export interface SMARTConfig {
     /**
      * Name of the claim found in the access_token that represents the requestors FHIR Id
      */
-    expectedFhirUserClaimKey: 'fhirUser' | 'profile';
-    /**
-     * This regex representing what the `fhirUser` claim will become
-     */
-    fhirUserClaimRegex: RegExp;
+    fhirUserClaimKey: 'fhirUser' | 'profile';
     /**
      * OAuth2 standard URL used to verify the access_token and get all user claims
      */

@@ -26,15 +26,28 @@ export class SMARTHandler implements Authorization {
 
     static readonly LAUNCH_SCOPE_REGEX = /^(?<scopeType>launch)(\/(?<launchType>patient|encounter))?$/;
 
+    static readonly FHIR_USER_REGEX = /(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+
+    private readonly searchOperations: (TypeOperation | SystemOperation)[] = [
+        'history-type',
+        'history-instance',
+        'search-type',
+        'search-system',
+        'history-system',
+    ];
+
     private readonly version: number = 1.0;
 
     private readonly config: SMARTConfig;
 
-    constructor(config: SMARTConfig) {
+    private readonly apiUrl: string;
+
+    constructor(config: SMARTConfig, apiUrl: string) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
         this.config = config;
+        this.apiUrl = apiUrl;
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
@@ -71,7 +84,7 @@ export class SMARTHandler implements Authorization {
             throw new UnauthorizedError('User does not have permission for requested operation');
         }
 
-        // Verify token
+        // verify token
         let response;
         try {
             response = await axios.get(this.config.userInfoEndpoint, {
@@ -80,9 +93,15 @@ export class SMARTHandler implements Authorization {
         } catch (e) {
             console.error('Post to authZUserInfoUrl failed', e);
         }
-        if (!response || !response.data[this.config.expectedFhirUserClaimKey]) {
-            console.error(`result from AuthZ did not have ${this.config.expectedFhirUserClaimKey} claim`);
+        const { fhirUserClaimKey } = this.config;
+        if (!response || !response.data[fhirUserClaimKey]) {
+            console.error(`result from AuthZ did not have ${fhirUserClaimKey} claim`);
             throw new UnauthorizedError("Cannot determine requester's identity");
+        } else if (!response.data[fhirUserClaimKey].match(SMARTHandler.FHIR_USER_REGEX)) {
+            console.error(
+                `User identity found does not conform to the expected format: ${SMARTHandler.FHIR_USER_REGEX}`,
+            );
+            throw new UnauthorizedError("Requester's identity is in the incorrect format");
         }
         return response.data;
     }
@@ -107,13 +126,64 @@ export class SMARTHandler implements Authorization {
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
-        // TODO this is stubbed for now
-        return request.readResponse;
+        const fhirUser = this.getFhirUser(request.userIdentity);
+        const { operation, readResponse } = request;
+        if (this.searchOperations.includes(operation)) {
+            const entries = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
+                this.authorizeResource(fhirUser, entry.resource),
+            );
+            return { ...readResponse, entry: entries };
+        }
+        if (!this.authorizeResource(fhirUser, readResponse)) {
+            throw new UnauthorizedError('User does not have permission for requested resource');
+        }
+
+        return readResponse;
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
         // TODO this is stubbed for now
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    private authorizeResource(
+        fhirUser: { hostname: string; resourceType: string; id: string },
+        resource: any,
+    ): boolean {
+        const jsonStr = JSON.stringify(resource);
+        if (fhirUser.hostname !== this.apiUrl) {
+            // If requester is not from this FHIR Server they must be a fully qualified reference
+            return jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`);
+        }
+        if (fhirUser.resourceType === resource.resourceType) {
+            // Attempting to look up its own record
+            return fhirUser.id === resource.id || this.isLocalUserInJsonAsReference(jsonStr, fhirUser);
+        }
+        return this.isLocalUserInJsonAsReference(jsonStr, fhirUser);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    private isLocalUserInJsonAsReference(
+        jsonStr: string,
+        fhirUser: { hostname: string; resourceType: string; id: string },
+    ) {
+        return (
+            jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`) ||
+            jsonStr.includes(`"reference":"${fhirUser.resourceType}/${fhirUser.id}"`)
+        );
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    private getFhirUser(userIdentity: KeyValueMap): { hostname: string; resourceType: string; id: string } {
+        const { fhirUserClaimKey } = this.config;
+        const fhirUserValue = userIdentity[fhirUserClaimKey];
+        const match = fhirUserValue.match(SMARTHandler.FHIR_USER_REGEX);
+        if (match) {
+            const { hostname, resourceType, id } = match.groups!;
+            return { hostname, resourceType, id };
+        }
+        throw new UnauthorizedError("Requester's identity is in the incorrect format");
     }
 
     private areScopesSufficient(
