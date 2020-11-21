@@ -595,7 +595,27 @@ describe('authorizeAndFilterReadResponse', () => {
             {},
         ],
         [
-            'READ: external FHIR Server Practitioner able to read Encounter',
+            'READ: Practitioner able to read Encounter',
+            {
+                userIdentity: validPractitionerIdentity,
+                operation: 'read',
+                readResponse: validPatientEncounter,
+            },
+            true,
+            validPatientEncounter,
+        ],
+        [
+            'READ: Practitioner able to read unrelated Observation',
+            {
+                userIdentity: validPractitionerIdentity,
+                operation: 'read',
+                readResponse: validPatientObservation,
+            },
+            true,
+            validPatientObservation,
+        ],
+        [
+            'READ: external Practitioner able to read Encounter',
             {
                 userIdentity: validExternalPractitionerIdentity,
                 operation: 'read',
@@ -605,7 +625,7 @@ describe('authorizeAndFilterReadResponse', () => {
             validPatientEncounter,
         ],
         [
-            'READ: external FHIR Server Practitioner unable to read Observation',
+            'READ: external Practitioner unable to read Observation',
             {
                 userIdentity: validExternalPractitionerIdentity,
                 operation: 'read',
@@ -655,7 +675,7 @@ describe('authorizeAndFilterReadResponse', () => {
             emptySearchResult,
         ],
         [
-            'SEARCH: Practitioner able to search and filtered to just the encounter',
+            'SEARCH: external Practitioner able to search and filtered to just the encounter',
             {
                 userIdentity: validExternalPractitionerIdentity,
                 operation: 'search-type',
@@ -663,6 +683,16 @@ describe('authorizeAndFilterReadResponse', () => {
             },
             true,
             { ...emptySearchResult, entry: [createEntry(validPatientEncounter)] },
+        ],
+        [
+            'SEARCH: Practitioner able to search and get ALL results',
+            {
+                userIdentity: validPractitionerIdentity,
+                operation: 'search-type',
+                readResponse: searchAllEntitiesMatch,
+            },
+            true,
+            searchAllEntitiesMatch,
         ],
     ];
 

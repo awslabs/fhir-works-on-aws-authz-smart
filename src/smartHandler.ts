@@ -161,6 +161,9 @@ export class SMARTHandler implements Authorization {
             // If requester is not from this FHIR Server they must be a fully qualified reference
             return jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`);
         }
+        if (fhirUser.resourceType === 'Practitioner') {
+            return true;
+        }
         if (fhirUser.resourceType === resource.resourceType) {
             // Attempting to look up its own record
             return fhirUser.id === resource.id || this.isLocalUserInJsonAsReference(jsonStr, fhirUser);
@@ -224,8 +227,7 @@ export class SMARTHandler implements Authorization {
                         validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
                     }
                 }
-                const isAuthorized = validOperations.includes(operation);
-                if (isAuthorized) return true;
+                if (validOperations.includes(operation)) return true;
             }
         }
         return false;
