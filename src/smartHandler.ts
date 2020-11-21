@@ -126,7 +126,6 @@ export class SMARTHandler implements Authorization {
         return R4_PATIENT_COMPARTMENT_RESOURCES;
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         const fhirUser = this.getFhirUser(request.userIdentity);
         const { operation, readResponse } = request;
@@ -143,7 +142,6 @@ export class SMARTHandler implements Authorization {
         return readResponse;
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
         const fhirUser = this.getFhirUser(request.userIdentity);
         if (fhirUser.hostname !== this.apiUrl || !this.typesWithWriteAccess.includes(fhirUser.resourceType)) {
@@ -151,7 +149,6 @@ export class SMARTHandler implements Authorization {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
     private authorizeResource(
         fhirUser: { hostname: string; resourceType: IdentityType; id: string },
         resource: any,
@@ -182,7 +179,6 @@ export class SMARTHandler implements Authorization {
         );
     }
 
-    // eslint-disable-next-line class-methods-use-this
     private getFhirUser(userIdentity: KeyValueMap): { hostname: string; resourceType: IdentityType; id: string } {
         const { fhirUserClaimKey } = this.config;
         const fhirUserValue = userIdentity[fhirUserClaimKey];
