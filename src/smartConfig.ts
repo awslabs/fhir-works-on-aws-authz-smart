@@ -39,6 +39,7 @@ export interface SMARTConfig {
 export type AccessModifier = 'read' | 'write';
 export type ScopeType = 'patient' | 'user' | 'system';
 export type LaunchType = 'patient' | 'encounter';
+export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
 
 // Determines what each scope has access to
 export type ScopeRule = {

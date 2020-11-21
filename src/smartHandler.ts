@@ -18,7 +18,7 @@ import {
     KeyValueMap,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
-import { LaunchType, ScopeType, SMARTConfig } from './smartConfig';
+import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig';
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -35,6 +35,8 @@ export class SMARTHandler implements Authorization {
         'search-system',
         'history-system',
     ];
+
+    private readonly typesWithWriteAccess: IdentityType[] = ['Practitioner'];
 
     private readonly version: number = 1.0;
 
@@ -143,12 +145,15 @@ export class SMARTHandler implements Authorization {
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
-        // TODO this is stubbed for now
+        const fhirUser = this.getFhirUser(request.userIdentity);
+        if (fhirUser.hostname !== this.apiUrl || !this.typesWithWriteAccess.includes(fhirUser.resourceType)) {
+            throw new UnauthorizedError('User does not have permission for requested operation');
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this
     private authorizeResource(
-        fhirUser: { hostname: string; resourceType: string; id: string },
+        fhirUser: { hostname: string; resourceType: IdentityType; id: string },
         resource: any,
     ): boolean {
         const jsonStr = JSON.stringify(resource);
@@ -166,7 +171,7 @@ export class SMARTHandler implements Authorization {
     // eslint-disable-next-line class-methods-use-this
     private isLocalUserInJsonAsReference(
         jsonStr: string,
-        fhirUser: { hostname: string; resourceType: string; id: string },
+        fhirUser: { hostname: string; resourceType: IdentityType; id: string },
     ) {
         return (
             jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`) ||
@@ -175,7 +180,7 @@ export class SMARTHandler implements Authorization {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    private getFhirUser(userIdentity: KeyValueMap): { hostname: string; resourceType: string; id: string } {
+    private getFhirUser(userIdentity: KeyValueMap): { hostname: string; resourceType: IdentityType; id: string } {
         const { fhirUserClaimKey } = this.config;
         const fhirUserValue = userIdentity[fhirUserClaimKey];
         const match = fhirUserValue.match(SMARTHandler.FHIR_USER_REGEX);

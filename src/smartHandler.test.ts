@@ -10,6 +10,7 @@ import {
     SystemOperation,
     TypeOperation,
     UnauthorizedError,
+    WriteRequestAuthorizedRequest,
 } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from './smartHandler';
 import { SMARTConfig, ScopeRule } from './smartConfig';
@@ -95,7 +96,129 @@ const authZConfig: SMARTConfig = {
 const apiUrl = 'https://fhir.server.com/dev/';
 const patientId = 'Patient/1234';
 const validPatientIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}${patientId}` };
+const validPractitionerIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}Practitioner/1234` };
 const validExternalPractitionerIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}test/Practitioner/1234` };
+
+const validPatient = {
+    resourceType: 'Patient',
+    id: '1234',
+    meta: {
+        versionId: '1',
+        lastUpdated: '2020-06-28T12:03:29.421+00:00',
+    },
+    name: [
+        {
+            given: ['JONNY'],
+        },
+    ],
+    gender: 'male',
+    birthDate: '1972-10-13',
+    address: [
+        {
+            city: 'Ruppertshofen',
+        },
+    ],
+};
+const validPatientObservation = {
+    resourceType: 'Observation',
+    id: '1274045',
+    meta: {
+        versionId: '1',
+        lastUpdated: '2020-06-28T12:55:47.134+00:00',
+    },
+    status: 'final',
+    code: {
+        coding: [
+            {
+                system: 'http://loinc.org',
+                code: '15074-8',
+                display: 'Glucose [Moles/volume] in Blood',
+            },
+        ],
+    },
+    subject: {
+        reference: validPatientIdentity[authZConfig.fhirUserClaimKey],
+        display: 'JONNY',
+    },
+    effectivePeriod: {
+        start: '2013-04-02T09:30:10+01:00',
+    },
+    issued: '2013-04-03T15:30:10+01:00',
+    valueQuantity: {
+        value: 6.3,
+        unit: 'mmol/l',
+        system: 'http://unitsofmeasure.org',
+        code: 'mmol/L',
+    },
+    interpretation: [
+        {
+            coding: [
+                {
+                    system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                    code: 'H',
+                    display: 'High',
+                },
+            ],
+        },
+    ],
+    referenceRange: [
+        {
+            low: {
+                value: 3.1,
+                unit: 'mmol/l',
+                system: 'http://unitsofmeasure.org',
+                code: 'mmol/L',
+            },
+            high: {
+                value: 6.2,
+                unit: 'mmol/l',
+                system: 'http://unitsofmeasure.org',
+                code: 'mmol/L',
+            },
+        },
+    ],
+};
+const validPatientEncounter = {
+    resourceType: 'Encounter',
+    id: '1339909',
+    meta: {
+        versionId: '1',
+        lastUpdated: '2019-02-06T19:32:37.166+00:00',
+    },
+    status: 'finished',
+    class: {
+        code: 'WELLNESS',
+    },
+    type: [
+        {
+            coding: [
+                {
+                    system: 'http://snomed.info/sct',
+                    code: '185349003',
+                    display: 'Encounter for check up (procedure)',
+                },
+            ],
+            text: 'Encounter for check up (procedure)',
+        },
+    ],
+    subject: {
+        reference: patientId,
+    },
+    participant: [
+        {
+            individual: {
+                reference: validExternalPractitionerIdentity[authZConfig.fhirUserClaimKey],
+            },
+        },
+    ],
+    period: {
+        start: '2011-12-22T21:49:35-05:00',
+        end: '2011-12-22T22:19:35-05:00',
+    },
+    serviceProvider: {
+        reference: 'Organization/1339537',
+    },
+};
 
 const mock = new MockAdapter(axios);
 beforeEach(() => {
@@ -379,126 +502,6 @@ function createEntry(resource: any, searchMode = 'match') {
     };
 }
 describe('authorizeAndFilterReadResponse', () => {
-    const validPatient = {
-        resourceType: 'Patient',
-        id: '1234',
-        meta: {
-            versionId: '1',
-            lastUpdated: '2020-06-28T12:03:29.421+00:00',
-        },
-        name: [
-            {
-                given: ['JONNY'],
-            },
-        ],
-        gender: 'male',
-        birthDate: '1972-10-13',
-        address: [
-            {
-                city: 'Ruppertshofen',
-            },
-        ],
-    };
-    const validPatientObservation = {
-        resourceType: 'Observation',
-        id: '1274045',
-        meta: {
-            versionId: '1',
-            lastUpdated: '2020-06-28T12:55:47.134+00:00',
-        },
-        status: 'final',
-        code: {
-            coding: [
-                {
-                    system: 'http://loinc.org',
-                    code: '15074-8',
-                    display: 'Glucose [Moles/volume] in Blood',
-                },
-            ],
-        },
-        subject: {
-            reference: validPatientIdentity[authZConfig.fhirUserClaimKey],
-            display: 'JONNY',
-        },
-        effectivePeriod: {
-            start: '2013-04-02T09:30:10+01:00',
-        },
-        issued: '2013-04-03T15:30:10+01:00',
-        valueQuantity: {
-            value: 6.3,
-            unit: 'mmol/l',
-            system: 'http://unitsofmeasure.org',
-            code: 'mmol/L',
-        },
-        interpretation: [
-            {
-                coding: [
-                    {
-                        system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
-                        code: 'H',
-                        display: 'High',
-                    },
-                ],
-            },
-        ],
-        referenceRange: [
-            {
-                low: {
-                    value: 3.1,
-                    unit: 'mmol/l',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'mmol/L',
-                },
-                high: {
-                    value: 6.2,
-                    unit: 'mmol/l',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'mmol/L',
-                },
-            },
-        ],
-    };
-    const validPatientEncounter = {
-        resourceType: 'Encounter',
-        id: '1339909',
-        meta: {
-            versionId: '1',
-            lastUpdated: '2019-02-06T19:32:37.166+00:00',
-        },
-        status: 'finished',
-        class: {
-            code: 'WELLNESS',
-        },
-        type: [
-            {
-                coding: [
-                    {
-                        system: 'http://snomed.info/sct',
-                        code: '185349003',
-                        display: 'Encounter for check up (procedure)',
-                    },
-                ],
-                text: 'Encounter for check up (procedure)',
-            },
-        ],
-        subject: {
-            reference: patientId,
-        },
-        participant: [
-            {
-                individual: {
-                    reference: validExternalPractitionerIdentity[authZConfig.fhirUserClaimKey],
-                },
-            },
-        ],
-        period: {
-            start: '2011-12-22T21:49:35-05:00',
-            end: '2011-12-22T22:19:35-05:00',
-        },
-        serviceProvider: {
-            reference: 'Organization/1339537',
-        },
-    };
     const emptySearchResult = {
         resourceType: 'Bundle',
         id: '0694266b-9415-4a69-a6f1-43be974c2c46',
@@ -673,6 +676,50 @@ describe('authorizeAndFilterReadResponse', () => {
             await expect(
                 authZHandler.authorizeAndFilterReadResponse(<ReadResponseAuthorizedRequest>request),
             ).resolves.toEqual(respBody);
+        }
+    });
+});
+describe('isWriteRequestAuthorized', () => {
+    const cases: (string | WriteRequestAuthorizedRequest | boolean)[][] = [
+        [
+            'Patient unable to write own Encounter',
+            {
+                userIdentity: validPatientIdentity,
+                operation: 'create',
+                resourceBody: validPatientEncounter,
+            },
+            false,
+        ],
+        [
+            'Practitioner able to write Patient',
+            {
+                userIdentity: validPractitionerIdentity,
+                operation: 'vread',
+                resourceBody: validPatient,
+            },
+            true,
+        ],
+        [
+            'External practitioner unable to write Patient',
+            {
+                userIdentity: validExternalPractitionerIdentity,
+                operation: 'vread',
+                resourceBody: validPatient,
+            },
+            false,
+        ],
+    ];
+
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl);
+    test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
+        if (!isValid) {
+            await expect(
+                authZHandler.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>request),
+            ).rejects.toThrowError(UnauthorizedError);
+        } else {
+            await expect(
+                authZHandler.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>request),
+            ).resolves.not.toThrow();
         }
     });
 });
