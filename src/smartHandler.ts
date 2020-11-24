@@ -22,13 +22,13 @@ import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig'
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
-    static readonly CLINICAL_SCOPE_REGEX = /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+    static readonly CLINICAL_SCOPE_REGEX = /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
 
     static readonly LAUNCH_SCOPE_REGEX = /^(?<scopeType>launch)(\/(?<launchType>patient|encounter))?$/;
 
-    static readonly FHIR_USER_REGEX = /(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+    static readonly FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
-    private readonly searchOperations: (TypeOperation | SystemOperation)[] = [
+    static readonly SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
         'history-type',
         'history-instance',
         'search-type',
@@ -129,12 +129,14 @@ export class SMARTHandler implements Authorization {
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         const fhirUser = this.getFhirUser(request.userIdentity);
         const { operation, readResponse } = request;
-        if (this.searchOperations.includes(operation)) {
+        // If request is a search treat the readResponse as a bundle
+        if (SMARTHandler.SEARCH_OPERATIONS.includes(operation)) {
             const entries = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
                 this.authorizeResource(fhirUser, entry.resource),
             );
             return { ...readResponse, entry: entries };
         }
+        // If request is != search treat the readResponse as just a resource
         if (!this.authorizeResource(fhirUser, readResponse)) {
             throw new UnauthorizedError('User does not have permission for requested resource');
         }
