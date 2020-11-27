@@ -316,17 +316,6 @@ describe('verifyAccessToken; scopes are in an array', () => {
     });
 });
 
-describe('verifyAccessToken; metadata and well-known route', () => {
-    const cases = [
-        ['metadata', { accessToken: '', operation: 'read', resourceType: 'metadata' }],
-        ['well-known', { accessToken: '', operation: 'read', resourceType: '.well-known' }],
-    ];
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl);
-    test.each(cases)('CASE: %p', async (_firstArg, request) => {
-        expect(authZHandler.verifyAccessToken(request as VerifyAccessTokenRequest)).resolves.toEqual({});
-    });
-});
-
 describe('verifyAccessToken; scopes are space delimited', () => {
     const spaceScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
         [

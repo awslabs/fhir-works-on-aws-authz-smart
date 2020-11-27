@@ -53,13 +53,6 @@ export class SMARTHandler implements Authorization {
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
-        if (
-            request.operation === 'read' &&
-            (request.resourceType === 'metadata' || request.resourceType === '.well-known')
-        ) {
-            return {};
-        }
-
         // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
         // Decoding first to determine if it passes scope & claims check first
         const decoded = decode(request.accessToken, { json: true }) || {};
