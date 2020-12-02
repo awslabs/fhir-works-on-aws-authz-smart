@@ -176,8 +176,35 @@ export class SMARTHandler implements Authorization {
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
-        // TODO this is stubbed for now
-        return R4_PATIENT_COMPARTMENT_RESOURCES;
+        const { scopes } = request.userIdentity;
+        const { scopeRule } = this.config;
+        let validOperations: (TypeOperation | SystemOperation)[] = [];
+        scopes.forEach((scope: string) => {
+            let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+            if (!match) {
+                match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+            }
+            if (match !== null) {
+                const { scopeType } = match.groups!;
+                if (scopeType === 'launch') {
+                    const { launchType } = match.groups!;
+                    // TODO: should launch have access to only certain resourceTypes?
+                    if (['patient', 'encounter'].includes(launchType)) {
+                        validOperations = scopeRule[scopeType][<LaunchType>launchType];
+                    } else if (!launchType) {
+                        validOperations = validOperations.concat(scopeRule[scopeType].launch);
+                    }
+                } else if (['patient', 'user', 'system'].includes(scopeType)) {
+                    const { accessType } = match.groups!;
+                    validOperations = validOperations.concat(
+                        this.getValidOperationsForScope(<ScopeType>scopeType, accessType),
+                    );
+                }
+            }
+        });
+        validOperations = [...new Set(validOperations)];
+        console.log('validOperations', validOperations);
+        return validOperations;
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
