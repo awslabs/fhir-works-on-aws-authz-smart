@@ -16,9 +16,14 @@ import {
     AccessBulkDataJobRequest,
     R4_PATIENT_COMPARTMENT_RESOURCES,
     KeyValueMap,
+    BulkDataAuth,
+    stubs,
+    clone,
+    BatchReadWriteRequest,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig';
+import bulkDataAccess = stubs.bulkDataAccess;
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -26,7 +31,12 @@ export class SMARTHandler implements Authorization {
 
     static readonly LAUNCH_SCOPE_REGEX = /^(?<scopeType>launch)(\/(?<launchType>patient|encounter))?$/;
 
-    static readonly FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+    // http://server.com/Person/123 => [http://server.com/,Person,123]
+    static readonly FHIR_USER_REGEX = /(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+
+    // Don't include the slash
+    // http://server.com/Person/123 => [http://server.com,Person,123]
+    // static readonly FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*)+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
     static readonly SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
         'history-type',
@@ -37,6 +47,8 @@ export class SMARTHandler implements Authorization {
     ];
 
     private readonly typesWithWriteAccess: IdentityType[] = ['Practitioner'];
+
+    private readonly adminAccessTypes: IdentityType[] = ['Practitioner'];
 
     private readonly version: number = 1.0;
 
@@ -66,13 +78,10 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify scope
-        let scopes: string[] = [];
-        if (this.config.scopeValueType === 'space' && typeof decoded[this.config.scopeKey] === 'string') {
-            scopes = decoded[this.config.scopeKey].split(' ');
-        } else if (this.config.scopeValueType === 'array' && Array.isArray(decoded[this.config.scopeKey])) {
-            scopes = decoded[this.config.scopeKey];
-        }
-        if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
+        const scopes = this.getScopes(decoded);
+        console.log('request', request);
+        console.log('scopes', scopes);
+        if (!this.areScopesSufficient(scopes, request.operation, request.bulkDataAuth, request.resourceType)) {
             console.error(
                 `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
             );
@@ -80,14 +89,22 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify token
-        let response;
-        try {
-            response = await axios.get(this.config.userInfoEndpoint, {
-                headers: { Authorization: `Bearer ${request.accessToken}` },
-            });
-        } catch (e) {
-            console.error('Post to authZUserInfoUrl failed', e);
-        }
+        // let response;
+        // try {
+        //     response = await axios.get(this.config.userInfoEndpoint, {
+        //         headers: { Authorization: `Bearer ${request.accessToken}` },
+        //     });
+        // } catch (e) {
+        //     console.error('Post to authZUserInfoUrl failed', e);
+        // }
+
+        const response: any = {
+            data: {
+                fhirUser: 'https://API_URL.com/Practitioner/123',
+                sub: 'fakeSub1',
+            },
+        };
+
         const { fhirUserClaimKey } = this.config;
         if (!response || !response.data[fhirUserClaimKey]) {
             console.error(`result from AuthZ did not have ${fhirUserClaimKey} claim`);
@@ -97,20 +114,64 @@ export class SMARTHandler implements Authorization {
                 `User identity found does not conform to the expected format: ${SMARTHandler.FHIR_USER_REGEX}`,
             );
             throw new UnauthorizedError("Requester's identity is in the incorrect format");
+        } else if (bulkDataAccess) {
+            const fhirUser = this.getFhirUser(response.data);
+            if (fhirUser.hostname !== this.apiUrl || !this.adminAccessTypes.includes(fhirUser.resourceType)) {
+                throw new UnauthorizedError('User does not have permission for requested operation');
+            }
         }
-        return response.data;
+
+        const userIdentity = clone(response.data);
+        userIdentity.scopes = scopes;
+        return userIdentity;
+    }
+
+    private getScopes(decoded: any): string[] {
+        if (this.config.scopeValueType === 'space' && typeof decoded[this.config.scopeKey] === 'string') {
+            return decoded[this.config.scopeKey].split(' ');
+        }
+        if (this.config.scopeValueType === 'array' && Array.isArray(decoded[this.config.scopeKey])) {
+            return decoded[this.config.scopeKey];
+        }
+        return [];
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isAccessBulkDataJobAllowed(request: AccessBulkDataJobRequest): Promise<void> {
-        // TODO not supported for now
-        throw new UnauthorizedError('Bulk access is not allowed');
+        if (request.userIdentity.sub !== request.jobOwnerId) {
+            throw new UnauthorizedError('User does not have permission to access this Bulk Data Export job');
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
-        // TODO not supported for now
-        throw new UnauthorizedError('Bundle operation is not authorzied');
+        const { scopes } = request.userIdentity;
+        request.requests.forEach((req: BatchReadWriteRequest) => {
+            if (!this.areScopesSufficient(scopes, req.operation, undefined, req.resourceType)) {
+                console.error(
+                    `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
+                );
+                throw new UnauthorizedError('Bundle operation is not authorzied');
+            }
+        });
+        const authWritePromises = request.requests.map(req => {
+            // https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L71
+            // search-system, patch, vread not supported
+            if (['create', 'update', 'delete'].includes(req.operation)) {
+                this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
+                    userIdentity: request.userIdentity,
+                    operation: req.operation,
+                    resourceBody: req.resource,
+                });
+            }
+            return Promise.resolve({});
+        });
+
+        try {
+            await Promise.all(authWritePromises);
+        } catch (e) {
+            throw new UnauthorizedError('Bundle operation is not authorized');
+        }
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
@@ -188,6 +249,7 @@ export class SMARTHandler implements Authorization {
     private areScopesSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
+        bulkDataAuth?: BulkDataAuth,
         resourceType?: string,
     ): boolean {
         const { scopeRule } = this.config;
@@ -200,6 +262,13 @@ export class SMARTHandler implements Authorization {
             if (match !== null) {
                 const { scopeType } = match.groups!;
                 let validOperations: (TypeOperation | SystemOperation)[] = [];
+                if (bulkDataAuth) {
+                    if (['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation)) {
+                        const { scopeResourceType, accessType } = match.groups!;
+                        return scopeType === 'user' && scopeResourceType === '*' && ['*', 'read'].includes(accessType);
+                    }
+                    return false;
+                }
                 if (scopeType === 'launch') {
                     const { launchType } = match.groups!;
                     // TODO: should launch have access to only certain resourceTypes?
@@ -210,6 +279,10 @@ export class SMARTHandler implements Authorization {
                     }
                 } else if (['patient', 'user', 'system'].includes(scopeType)) {
                     const { scopeResourceType, accessType } = match.groups!;
+                    // transaction operations do not have a resourceType
+                    if (operation === 'transaction') {
+                        validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, '*');
+                    }
                     if (resourceType) {
                         if (scopeResourceType === '*' || scopeResourceType === resourceType) {
                             validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
