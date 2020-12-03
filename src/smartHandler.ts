@@ -47,12 +47,15 @@ export class SMARTHandler implements Authorization {
 
     private readonly apiUrl: string;
 
-    constructor(config: SMARTConfig, apiUrl: string) {
+    private readonly operationToAllowedResources: Record<string, string[]>;
+
+    constructor(config: SMARTConfig, apiUrl: string, operationToAllowedResources: Record<string, string[]>) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
         this.config = config;
         this.apiUrl = apiUrl;
+        this.operationToAllowedResources = operationToAllowedResources;
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
@@ -80,21 +83,21 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify token
-        let response;
-        try {
-            response = await axios.get(this.config.userInfoEndpoint, {
-                headers: { Authorization: `Bearer ${request.accessToken}` },
-            });
-        } catch (e) {
-            console.error('Post to authZUserInfoUrl failed', e);
-        }
+        // let response;
+        // try {
+        //     response = await axios.get(this.config.userInfoEndpoint, {
+        //         headers: { Authorization: `Bearer ${request.accessToken}` },
+        //     });
+        // } catch (e) {
+        //     console.error('Post to authZUserInfoUrl failed', e);
+        // }
 
-        // const response: any = {
-        //     data: {
-        //         fhirUser: 'https://API_URL.com/Practitioner/123',
-        //         sub: 'fakeSub1',
-        //     },
-        // };
+        const response: any = {
+            data: {
+                fhirUser: 'https://API_URL.com/Practitioner/123',
+                sub: 'fakeSub1',
+            },
+        };
 
         const { fhirUserClaimKey } = this.config;
         if (!response || !response.data[fhirUserClaimKey]) {
@@ -146,8 +149,6 @@ export class SMARTHandler implements Authorization {
             }
         });
         const authWritePromises = request.requests.map(req => {
-            // https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L71
-            // search-system, patch, vread not supported
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
                 return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
                     userIdentity: request.userIdentity,
@@ -167,35 +168,46 @@ export class SMARTHandler implements Authorization {
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
+        console.log('beginning of getAllowedResourceTypesForOperation');
         const { scopes } = request.userIdentity;
-        const { scopeRule } = this.config;
-        let validOperations: (TypeOperation | SystemOperation)[] = [];
-        scopes.forEach((scope: string) => {
-            let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
-            if (!match) {
-                match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
-            }
-            if (match !== null) {
-                const { scopeType } = match.groups!;
-                if (scopeType === 'launch') {
-                    const { launchType } = match.groups!;
-                    // TODO: should launch have access to only certain resourceTypes?
-                    if (['patient', 'encounter'].includes(launchType)) {
-                        validOperations = validOperations.concat(scopeRule[scopeType][<LaunchType>launchType]);
-                    } else if (!launchType) {
-                        validOperations = validOperations.concat(scopeRule[scopeType].launch);
+        let allowedResources: string[] = [];
+
+        for (let i = 0; i < scopes.length; i += 1) {
+            const scope = scopes[i];
+            const validOperations = this.getValidOperationsForScope(scope);
+            console.log('validOperations', validOperations);
+            if (validOperations.includes(request.operation)) {
+                let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+                if (!match) {
+                    match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+                }
+                if (match !== null) {
+                    const { scopeType } = match.groups!;
+                    const allowedResourcesForScope = this.operationToAllowedResources[request.operation];
+                    if (scopeType === 'launch') {
+                        const { launchType } = match.groups!;
+                        // TODO: should launch have access to only certain resourceTypes?
+                        if (launchType === 'patient' && allowedResourcesForScope.includes('Patient')) {
+                            allowedResources = allowedResources.concat('Patient');
+                        } else if (launchType === 'encounter' && allowedResourcesForScope.includes('Encounter')) {
+                            allowedResources = allowedResources.concat('Encounter');
+                        }
+                    } else if (['patient', 'user', 'system'].includes(scopeType)) {
+                        const { scopeResourceType, accessType } = match.groups!;
+                        if (['*', 'read'].includes(accessType)) {
+                            if (scopeResourceType === '*') {
+                                allowedResources = allowedResources.concat(allowedResourcesForScope);
+                            } else if (allowedResourcesForScope.includes(scopeResourceType)) {
+                                allowedResources = allowedResources.concat(scopeResourceType);
+                            }
+                        }
                     }
-                } else if (['patient', 'user', 'system'].includes(scopeType)) {
-                    const { accessType } = match.groups!;
-                    validOperations = validOperations.concat(
-                        this.getValidOperationsForScope(<ScopeType>scopeType, accessType),
-                    );
                 }
             }
-        });
-        validOperations = [...new Set(validOperations)];
-        console.log('validOperations', validOperations);
-        return validOperations;
+        }
+        allowedResources = [...new Set(allowedResources)];
+        console.log('allowedResources', allowedResources);
+        return allowedResources;
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
@@ -269,45 +281,68 @@ export class SMARTHandler implements Authorization {
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
     ): boolean {
-        const { scopeRule } = this.config;
         for (let i = 0; i < scopes.length; i += 1) {
             const scope = scopes[i];
-            let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
-            if (!match) {
-                match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
-            }
-            if (match !== null) {
-                const { scopeType } = match.groups!;
-                let validOperations: (TypeOperation | SystemOperation)[] = [];
-                if (scopeType === 'launch') {
-                    const { launchType } = match.groups!;
-                    // TODO: should launch have access to only certain resourceTypes?
-                    if (['patient', 'encounter'].includes(launchType)) {
-                        validOperations = scopeRule[scopeType][<LaunchType>launchType];
-                    } else if (!launchType) {
-                        validOperations = scopeRule[scopeType].launch;
-                    }
-                } else if (['patient', 'user', 'system'].includes(scopeType)) {
-                    const { scopeResourceType, accessType } = match.groups!;
-                    // transaction operations do not have a resourceType
-                    if (operation === 'transaction') {
-                        validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, '*');
-                    }
-                    if (resourceType) {
-                        if (scopeResourceType === '*' || scopeResourceType === resourceType) {
-                            validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
-                        }
-                    } else if (scopeResourceType === '*') {
-                        validOperations = this.getValidOperationsForScope(<ScopeType>scopeType, accessType);
-                    }
-                }
-                if (validOperations.includes(operation)) return true;
-            }
+            const validOperations: (TypeOperation | SystemOperation)[] = this.getValidOperationsForScope(
+                scope,
+                resourceType,
+                operation === 'transaction',
+            );
+            if (validOperations.includes(operation)) return true;
         }
         return false;
     }
 
-    private getValidOperationsForScope(scopeType: ScopeType, accessType: string) {
+    private getValidOperationsForScope(
+        scope: string,
+        resourceType?: string,
+        isTransactionOperation: boolean = false,
+    ): (TypeOperation | SystemOperation)[] {
+        console.log('scope, resourceType', scope, resourceType);
+        const { scopeRule } = this.config;
+        let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+        if (!match) {
+            match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+        }
+        let validOperations: (TypeOperation | SystemOperation)[] = [];
+        if (match !== null) {
+            const { scopeType } = match.groups!;
+            if (scopeType === 'launch') {
+                const { launchType } = match.groups!;
+                // TODO: should launch have access to only certain resourceTypes?
+                if (['patient', 'encounter'].includes(launchType)) {
+                    validOperations = scopeRule[scopeType][<LaunchType>launchType];
+                } else if (!launchType) {
+                    validOperations = scopeRule[scopeType].launch;
+                }
+            } else if (['patient', 'user', 'system'].includes(scopeType)) {
+                const { scopeResourceType, accessType } = match.groups!;
+                // transaction operations do not have a resourceType
+                // entries in a transaction can be either 'read' or 'write' therefore we need to check if 'transaction' is allowed in the scope rules for 'read' or 'write'
+                if (isTransactionOperation) {
+                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, '*');
+                }
+                if (resourceType) {
+                    if (scopeResourceType === '*' || scopeResourceType === resourceType) {
+                        validOperations = this.getValidOperationsForScopeGivenScopeRule(
+                            <ScopeType>scopeType,
+                            accessType,
+                        );
+                    }
+                } else if (scopeResourceType === '*' || resourceType === undefined) {
+                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
+                }
+            }
+        }
+
+        console.log('validOperations before', validOperations);
+        return validOperations;
+    }
+
+    private getValidOperationsForScopeGivenScopeRule(
+        scopeType: ScopeType,
+        accessType: string,
+    ): (TypeOperation | SystemOperation)[] {
         let validOperations: (TypeOperation | SystemOperation)[] = [];
         if (accessType === '*' || accessType === 'read') {
             validOperations = this.config.scopeRule[scopeType].read;
