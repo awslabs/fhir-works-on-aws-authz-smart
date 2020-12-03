@@ -92,6 +92,7 @@ export class SMARTHandler implements Authorization {
         //     console.error('Post to authZUserInfoUrl failed', e);
         // }
 
+        // Code for testing locally, code will be deleted before merging
         const response: any = {
             data: {
                 fhirUser: 'https://API_URL.com/Practitioner/123',
@@ -176,6 +177,7 @@ export class SMARTHandler implements Authorization {
             const scope = scopes[i];
             const validOperations = this.getValidOperationsForScope(scope);
             console.log('validOperations', validOperations);
+            // If the scope allows request.operation, get the resources allowed for that operation as defined by 'this.operationToAllowedResources'
             if (validOperations.includes(request.operation)) {
                 let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
                 if (!match) {
@@ -186,20 +188,17 @@ export class SMARTHandler implements Authorization {
                     const allowedResourcesForScope = this.operationToAllowedResources[request.operation];
                     if (scopeType === 'launch') {
                         const { launchType } = match.groups!;
-                        // TODO: should launch have access to only certain resourceTypes?
                         if (launchType === 'patient' && allowedResourcesForScope.includes('Patient')) {
                             allowedResources = allowedResources.concat('Patient');
                         } else if (launchType === 'encounter' && allowedResourcesForScope.includes('Encounter')) {
                             allowedResources = allowedResources.concat('Encounter');
                         }
                     } else if (['patient', 'user', 'system'].includes(scopeType)) {
-                        const { scopeResourceType, accessType } = match.groups!;
-                        if (['*', 'read'].includes(accessType)) {
-                            if (scopeResourceType === '*') {
-                                allowedResources = allowedResources.concat(allowedResourcesForScope);
-                            } else if (allowedResourcesForScope.includes(scopeResourceType)) {
-                                allowedResources = allowedResources.concat(scopeResourceType);
-                            }
+                        const { scopeResourceType } = match.groups!;
+                        if (scopeResourceType === '*') {
+                            allowedResources = allowedResources.concat(allowedResourcesForScope);
+                        } else if (allowedResourcesForScope.includes(scopeResourceType)) {
+                            allowedResources = allowedResources.concat(scopeResourceType);
                         }
                     }
                 }
@@ -334,8 +333,6 @@ export class SMARTHandler implements Authorization {
                 }
             }
         }
-
-        console.log('validOperations before', validOperations);
         return validOperations;
     }
 
