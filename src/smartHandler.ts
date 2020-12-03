@@ -14,16 +14,12 @@ import {
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
-    R4_PATIENT_COMPARTMENT_RESOURCES,
     KeyValueMap,
-    BulkDataAuth,
-    stubs,
     clone,
     BatchReadWriteRequest,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig';
-import bulkDataAccess = stubs.bulkDataAccess;
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -31,12 +27,7 @@ export class SMARTHandler implements Authorization {
 
     static readonly LAUNCH_SCOPE_REGEX = /^(?<scopeType>launch)(\/(?<launchType>patient|encounter))?$/;
 
-    // http://server.com/Person/123 => [http://server.com/,Person,123]
-    static readonly FHIR_USER_REGEX = /(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
-
-    // Don't include the slash
-    // http://server.com/Person/123 => [http://server.com,Person,123]
-    // static readonly FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*)+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+    static readonly FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
     static readonly SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
         'history-type',
@@ -81,7 +72,7 @@ export class SMARTHandler implements Authorization {
         const scopes = this.getScopes(decoded);
         console.log('request', request);
         console.log('scopes', scopes);
-        if (!this.areScopesSufficient(scopes, request.operation, request.bulkDataAuth, request.resourceType)) {
+        if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
             console.error(
                 `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
             );
@@ -114,7 +105,7 @@ export class SMARTHandler implements Authorization {
                 `User identity found does not conform to the expected format: ${SMARTHandler.FHIR_USER_REGEX}`,
             );
             throw new UnauthorizedError("Requester's identity is in the incorrect format");
-        } else if (bulkDataAccess) {
+        } else if (request.bulkDataAuth) {
             const fhirUser = this.getFhirUser(response.data);
             if (fhirUser.hostname !== this.apiUrl || !this.adminAccessTypes.includes(fhirUser.resourceType)) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
@@ -147,7 +138,7 @@ export class SMARTHandler implements Authorization {
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
         const { scopes } = request.userIdentity;
         request.requests.forEach((req: BatchReadWriteRequest) => {
-            if (!this.areScopesSufficient(scopes, req.operation, undefined, req.resourceType)) {
+            if (!this.areScopesSufficient(scopes, req.operation, req.resourceType)) {
                 console.error(
                     `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
                 );
@@ -157,14 +148,14 @@ export class SMARTHandler implements Authorization {
         const authWritePromises = request.requests.map(req => {
             // https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L71
             // search-system, patch, vread not supported
-            if (['create', 'update', 'delete'].includes(req.operation)) {
-                this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
+            if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
+                return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
                     userIdentity: request.userIdentity,
                     operation: req.operation,
                     resourceBody: req.resource,
                 });
             }
-            return Promise.resolve({});
+            return Promise.resolve();
         });
 
         try {
@@ -190,7 +181,7 @@ export class SMARTHandler implements Authorization {
                     const { launchType } = match.groups!;
                     // TODO: should launch have access to only certain resourceTypes?
                     if (['patient', 'encounter'].includes(launchType)) {
-                        validOperations = scopeRule[scopeType][<LaunchType>launchType];
+                        validOperations = validOperations.concat(scopeRule[scopeType][<LaunchType>launchType]);
                     } else if (!launchType) {
                         validOperations = validOperations.concat(scopeRule[scopeType].launch);
                     }
@@ -276,7 +267,6 @@ export class SMARTHandler implements Authorization {
     private areScopesSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
-        bulkDataAuth?: BulkDataAuth,
         resourceType?: string,
     ): boolean {
         const { scopeRule } = this.config;
@@ -289,13 +279,6 @@ export class SMARTHandler implements Authorization {
             if (match !== null) {
                 const { scopeType } = match.groups!;
                 let validOperations: (TypeOperation | SystemOperation)[] = [];
-                if (bulkDataAuth) {
-                    if (['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation)) {
-                        const { scopeResourceType, accessType } = match.groups!;
-                        return scopeType === 'user' && scopeResourceType === '*' && ['*', 'read'].includes(accessType);
-                    }
-                    return false;
-                }
                 if (scopeType === 'launch') {
                     const { launchType } = match.groups!;
                     // TODO: should launch have access to only certain resourceTypes?
