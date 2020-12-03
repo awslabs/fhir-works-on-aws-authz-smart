@@ -89,21 +89,21 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify token
-        // let response;
-        // try {
-        //     response = await axios.get(this.config.userInfoEndpoint, {
-        //         headers: { Authorization: `Bearer ${request.accessToken}` },
-        //     });
-        // } catch (e) {
-        //     console.error('Post to authZUserInfoUrl failed', e);
-        // }
+        let response;
+        try {
+            response = await axios.get(this.config.userInfoEndpoint, {
+                headers: { Authorization: `Bearer ${request.accessToken}` },
+            });
+        } catch (e) {
+            console.error('Post to authZUserInfoUrl failed', e);
+        }
 
-        const response: any = {
-            data: {
-                fhirUser: 'https://API_URL.com/Practitioner/123',
-                sub: 'fakeSub1',
-            },
-        };
+        // const response: any = {
+        //     data: {
+        //         fhirUser: 'https://API_URL.com/Practitioner/123',
+        //         sub: 'fakeSub1',
+        //     },
+        // };
 
         const { fhirUserClaimKey } = this.config;
         if (!response || !response.data[fhirUserClaimKey]) {
