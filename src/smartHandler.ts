@@ -17,6 +17,9 @@ import {
     KeyValueMap,
     clone,
     BatchReadWriteRequest,
+    BASE_R4_RESOURCES,
+    FhirVersion,
+    BASE_STU3_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig';
@@ -47,15 +50,15 @@ export class SMARTHandler implements Authorization {
 
     private readonly apiUrl: string;
 
-    private readonly operationToAllowedResources: Record<string, string[]>;
+    private readonly fhirVersion: FhirVersion;
 
-    constructor(config: SMARTConfig, apiUrl: string, operationToAllowedResources: Record<string, string[]>) {
+    constructor(config: SMARTConfig, apiUrl: string, fhirVersion: FhirVersion) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
         this.config = config;
         this.apiUrl = apiUrl;
-        this.operationToAllowedResources = operationToAllowedResources;
+        this.fhirVersion = fhirVersion;
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
@@ -121,7 +124,7 @@ export class SMARTHandler implements Authorization {
         return userIdentity;
     }
 
-    private getScopes(decoded: any): string[] {
+    private getScopes(decoded: Record<string, any>): string[] {
         if (this.config.scopeValueType === 'space' && typeof decoded[this.config.scopeKey] === 'string') {
             return decoded[this.config.scopeKey].split(' ');
         }
@@ -138,7 +141,6 @@ export class SMARTHandler implements Authorization {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
         const { scopes } = request.userIdentity;
         request.requests.forEach((req: BatchReadWriteRequest) => {
@@ -167,33 +169,20 @@ export class SMARTHandler implements Authorization {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
         console.log('beginning of getAllowedResourceTypesForOperation');
-        const { scopes } = request.userIdentity;
         let allowedResources: string[] = [];
-
-        for (let i = 0; i < scopes.length; i += 1) {
-            const scope = scopes[i];
+        request.userIdentity.scopes.forEach((scope: string) => {
             const validOperations = this.getValidOperationsForScope(scope);
             console.log('validOperations', validOperations);
-            // If the scope allows request.operation, get the resources allowed for that operation as defined by 'this.operationToAllowedResources'
+            // If the scope allows request.operation, get all the resources allowed for that operation as defined by the requester's scopes
             if (validOperations.includes(request.operation)) {
-                let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
-                if (!match) {
-                    match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
-                }
+                const match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
                 if (match !== null) {
                     const { scopeType } = match.groups!;
-                    const allowedResourcesForScope = this.operationToAllowedResources[request.operation];
-                    if (scopeType === 'launch') {
-                        const { launchType } = match.groups!;
-                        if (launchType === 'patient' && allowedResourcesForScope.includes('Patient')) {
-                            allowedResources = allowedResources.concat('Patient');
-                        } else if (launchType === 'encounter' && allowedResourcesForScope.includes('Encounter')) {
-                            allowedResources = allowedResources.concat('Encounter');
-                        }
-                    } else if (['patient', 'user', 'system'].includes(scopeType)) {
+                    const allowedResourcesForScope: string[] =
+                        this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
+                    if (['patient', 'user', 'system'].includes(scopeType)) {
                         const { scopeResourceType } = match.groups!;
                         if (scopeResourceType === '*') {
                             allowedResources = allowedResources.concat(allowedResourcesForScope);
@@ -203,7 +192,7 @@ export class SMARTHandler implements Authorization {
                     }
                 }
             }
-        }
+        });
         allowedResources = [...new Set(allowedResources)];
         console.log('allowedResources', allowedResources);
         return allowedResources;
@@ -285,7 +274,7 @@ export class SMARTHandler implements Authorization {
             const validOperations: (TypeOperation | SystemOperation)[] = this.getValidOperationsForScope(
                 scope,
                 resourceType,
-                operation === 'transaction',
+                ['transaction', 'batch'].includes(operation),
             );
             if (validOperations.includes(operation)) return true;
         }
@@ -295,7 +284,7 @@ export class SMARTHandler implements Authorization {
     private getValidOperationsForScope(
         scope: string,
         resourceType?: string,
-        isTransactionOperation: boolean = false,
+        isBundleOperation: boolean = false,
     ): (TypeOperation | SystemOperation)[] {
         console.log('scope, resourceType', scope, resourceType);
         const { scopeRule } = this.config;
@@ -316,23 +305,23 @@ export class SMARTHandler implements Authorization {
                 }
             } else if (['patient', 'user', 'system'].includes(scopeType)) {
                 const { scopeResourceType, accessType } = match.groups!;
-                // transaction operations do not have a resourceType
-                // entries in a transaction can be either 'read' or 'write' therefore we need to check if 'transaction' is allowed in the scope rules for 'read' or 'write'
-                if (isTransactionOperation) {
-                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, '*');
-                }
-                if (resourceType) {
+                // transaction/batch operations do not have a resourceType
+                if (isBundleOperation) {
+                    console.log('inside isBundleOperation');
+                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
+                } else if (resourceType) {
                     if (scopeResourceType === '*' || scopeResourceType === resourceType) {
                         validOperations = this.getValidOperationsForScopeGivenScopeRule(
                             <ScopeType>scopeType,
                             accessType,
                         );
                     }
-                } else if (scopeResourceType === '*' || resourceType === undefined) {
+                } else if (scopeResourceType === '*') {
                     validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
                 }
             }
         }
+        console.log('validOperations', validOperations);
         return validOperations;
     }
 
