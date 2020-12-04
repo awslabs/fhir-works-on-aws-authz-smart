@@ -86,7 +86,7 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify token
-        let response;
+        let response: any;
         try {
             response = await axios.get(this.config.userInfoEndpoint, {
                 headers: { Authorization: `Bearer ${request.accessToken}` },
@@ -96,7 +96,7 @@ export class SMARTHandler implements Authorization {
         }
 
         // Code for testing locally, code will be deleted before merging
-        // const response: any = {
+        // response = {
         //     data: {
         //         fhirUser: 'https://API_URL.com/Practitioner/123',
         //         sub: 'fakeSub1',
@@ -142,13 +142,14 @@ export class SMARTHandler implements Authorization {
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
+        console.log('AuthorizationBundleRequest', request);
         const { scopes } = request.userIdentity;
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (!this.areScopesSufficient(scopes, req.operation, req.resourceType)) {
                 console.error(
                     `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
                 );
-                throw new UnauthorizedError('Bundle operation is not authorzied');
+                throw new UnauthorizedError('Bundle operation is not authorized');
             }
         });
         const authWritePromises = request.requests.map(req => {
@@ -173,7 +174,7 @@ export class SMARTHandler implements Authorization {
         console.log('beginning of getAllowedResourceTypesForOperation');
         let allowedResources: string[] = [];
         request.userIdentity.scopes.forEach((scope: string) => {
-            const validOperations = this.getValidOperationsForScope(scope);
+            const validOperations = this.getValidOperationsForScope(scope, request.operation);
             console.log('validOperations', validOperations);
             // If the scope allows request.operation, get all the resources allowed for that operation as defined by the requester's scopes
             if (validOperations.includes(request.operation)) {
@@ -273,8 +274,8 @@ export class SMARTHandler implements Authorization {
             const scope = scopes[i];
             const validOperations: (TypeOperation | SystemOperation)[] = this.getValidOperationsForScope(
                 scope,
+                operation,
                 resourceType,
-                ['transaction', 'batch'].includes(operation),
             );
             if (validOperations.includes(operation)) return true;
         }
@@ -283,10 +284,10 @@ export class SMARTHandler implements Authorization {
 
     private getValidOperationsForScope(
         scope: string,
-        resourceType?: string,
-        isBundleOperation: boolean = false,
+        reqOperation: TypeOperation | SystemOperation,
+        reqResourceType?: string,
     ): (TypeOperation | SystemOperation)[] {
-        console.log('scope, resourceType', scope, resourceType);
+        console.log('scope, resourceType', scope, reqResourceType);
         const { scopeRule } = this.config;
         let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
         if (!match) {
@@ -305,18 +306,23 @@ export class SMARTHandler implements Authorization {
                 }
             } else if (['patient', 'user', 'system'].includes(scopeType)) {
                 const { scopeResourceType, accessType } = match.groups!;
-                // transaction/batch operations do not have a resourceType
-                if (isBundleOperation) {
-                    console.log('inside isBundleOperation');
-                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
-                } else if (resourceType) {
-                    if (scopeResourceType === '*' || scopeResourceType === resourceType) {
+                if (reqResourceType) {
+                    if (scopeResourceType === '*' || scopeResourceType === reqResourceType) {
                         validOperations = this.getValidOperationsForScopeGivenScopeRule(
                             <ScopeType>scopeType,
                             accessType,
                         );
                     }
-                } else if (scopeResourceType === '*') {
+                }
+                // 'search-system' and 'history-system' request operation requires '*' for scopeResourceType
+                else if (['search-system', 'history-system'].includes(reqOperation)) {
+                    if (scopeResourceType === '*') {
+                        validOperations = this.getValidOperationsForScopeGivenScopeRule(
+                            <ScopeType>scopeType,
+                            accessType,
+                        );
+                    }
+                } else {
                     validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
                 }
             }

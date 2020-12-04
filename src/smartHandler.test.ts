@@ -12,6 +12,10 @@ import {
     UnauthorizedError,
     WriteRequestAuthorizedRequest,
     clone,
+    AccessBulkDataJobRequest,
+    AllowedResourceTypesForOperationRequest,
+    BASE_R4_RESOURCES,
+    AuthorizationBundleRequest,
 } from 'fhir-works-on-aws-interface';
 import { decode } from 'jsonwebtoken';
 import { SMARTHandler } from './smartHandler';
@@ -97,7 +101,7 @@ const authZConfig: SMARTConfig = {
 const apiUrl = 'https://fhir.server.com/dev/';
 const patientId = 'Patient/1234';
 const patientIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}${patientId}` };
-const validPractitionerIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}Practitioner/1234` };
+const practitionerIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}Practitioner/1234` };
 const validExternalPractitionerIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}test/Practitioner/1234` };
 
 const validPatient = {
@@ -600,7 +604,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Practitioner able to read Encounter',
             {
-                userIdentity: validPractitionerIdentity,
+                userIdentity: practitionerIdentityWithoutScopes,
                 operation: 'read',
                 readResponse: validPatientEncounter,
             },
@@ -610,7 +614,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Practitioner able to read unrelated Observation',
             {
-                userIdentity: validPractitionerIdentity,
+                userIdentity: practitionerIdentityWithoutScopes,
                 operation: 'read',
                 readResponse: validPatientObservation,
             },
@@ -690,7 +694,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'SEARCH: Practitioner able to search and get ALL results',
             {
-                userIdentity: validPractitionerIdentity,
+                userIdentity: practitionerIdentityWithoutScopes,
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
@@ -726,7 +730,7 @@ describe('isWriteRequestAuthorized', () => {
         [
             'Practitioner able to write Patient',
             {
-                userIdentity: validPractitionerIdentity,
+                userIdentity: practitionerIdentityWithoutScopes,
                 operation: 'vread',
                 resourceBody: validPatient,
             },
@@ -754,5 +758,137 @@ describe('isWriteRequestAuthorized', () => {
                 authZHandler.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>request),
             ).resolves.not.toThrow();
         }
+    });
+});
+
+describe('isAccessBulkDataJobAllowed', () => {
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+
+    const cases: (string | AccessBulkDataJobRequest | boolean)[][] = [
+        [
+            'userIdentity and jobOwnerId match',
+            {
+                userIdentity: {
+                    sub: 'abc',
+                },
+                jobOwnerId: 'abc',
+            },
+            true,
+        ],
+        [
+            'userIdentity and jobOwnerId does NOT match',
+            {
+                userIdentity: {
+                    sub: 'abc',
+                },
+                jobOwnerId: 'xyz',
+            },
+            false,
+        ],
+    ];
+
+    test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
+        if (isValid) {
+            await expect(
+                authZHandler.isAccessBulkDataJobAllowed(<AccessBulkDataJobRequest>request),
+            ).resolves.not.toThrow();
+        } else {
+            await expect(
+                authZHandler.isAccessBulkDataJobAllowed(<AccessBulkDataJobRequest>request),
+            ).rejects.toThrowError(
+                new UnauthorizedError('User does not have permission to access this Bulk Data Export job'),
+            );
+        }
+    });
+});
+
+describe('isBundleRequestAuthorized', () => {
+    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    authZConfigWithSearchTypeScope.scopeRule.user.write = ['create'];
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '4.0.1');
+
+    const cases: any[][] = [
+        [
+            'practitioner with user scope to create observation: no error',
+            practitionerIdentityWithoutScopes,
+            ['user/Observation.write'],
+            true,
+        ],
+        [
+            'practitioner without user scope to create observation: Unauthorized Error',
+            practitionerIdentityWithoutScopes,
+            ['user/Patient.write'],
+            false,
+        ],
+        [
+            'patient with user scope to create observation but is not in typesWithWriteAccess: Unauthorized Error',
+            patientIdentityWithoutScopes,
+            ['user/Observation.write'],
+            false,
+        ],
+    ];
+    test.each(cases)('CASE: %p', async (_firstArg, baseIdentity, scopes, isAuthorized) => {
+        const userIdentity = clone(baseIdentity);
+        userIdentity.scopes = scopes;
+        const request: AuthorizationBundleRequest = {
+            userIdentity,
+            requests: [
+                {
+                    operation: 'create',
+                    resource: {},
+                    fullUrl: '',
+                    resourceType: 'Observation',
+                    id: '160265f7-e8c2-45ca-a1bc-317399e23549',
+                },
+            ],
+        };
+
+        if (!isAuthorized) {
+            await expect(authZHandler.isBundleRequestAuthorized(request)).rejects.toThrowError(
+                new UnauthorizedError('Bundle operation is not authorized'),
+            );
+        } else {
+            await expect(authZHandler.isBundleRequestAuthorized(request)).resolves.not.toThrow();
+        }
+    });
+});
+
+describe('getAllowedResourceTypesForOperation', () => {
+    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    authZConfigWithSearchTypeScope.scopeRule.user.read = ['search-type'];
+    authZConfigWithSearchTypeScope.scopeRule.user.write = [];
+
+    const cases: (string | string[])[][] = [
+        [
+            'search-type operation: read scope: returns [Patient, Observation]',
+            ['user/Patient.read', 'user/Observation.read'],
+            'search-type',
+            ['Patient', 'Observation'],
+        ],
+        // getAllowedResourceTypesForOperation returns an empty array because scopeRule user.write does not support any operations
+        ['create operation: write scope: returns []', ['user/Patient.write', 'user/Observation.write'], 'created', []],
+        // getAllowedResourceTypesForOperation returns an empty array because scopeRule user.read supports 'search-type' operation not 'vread'
+        ['vread operation: read scope: returns []', ['user/Patient.read', 'user/Observation.read'], 'vread', []],
+        // getAllowedResourceTypesForOperation returns BASE_R4_RESOURCES because resourceScopeType is '*'
+        [
+            'create operation: read scope: returns [BASE_R4_RESOURCES]',
+            ['user/*.read'],
+            'search-type',
+            BASE_R4_RESOURCES,
+        ],
+    ];
+
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '4.0.1');
+    test.each(cases)('CASE: %p', async (_firstArg, scopes, operation, expectedAllowedResources) => {
+        const request: AllowedResourceTypesForOperationRequest = {
+            userIdentity: {
+                scopes,
+            },
+            operation: <TypeOperation | SystemOperation>operation,
+        };
+
+        await expect(authZHandler.getAllowedResourceTypesForOperation(request)).resolves.toEqual(
+            expectedAllowedResources,
+        );
     });
 });
