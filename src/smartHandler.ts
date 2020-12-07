@@ -76,8 +76,6 @@ export class SMARTHandler implements Authorization {
 
         // verify scope
         const scopes = this.getScopes(decoded);
-        console.log('request', request);
-        console.log('scopes', scopes);
         if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
             console.error(
                 `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
@@ -94,14 +92,6 @@ export class SMARTHandler implements Authorization {
         } catch (e) {
             console.error('Post to authZUserInfoUrl failed', e);
         }
-
-        // Code for testing locally, code will be deleted before merging
-        // response = {
-        //     data: {
-        //         fhirUser: 'https://API_URL.com/Practitioner/123',
-        //         sub: 'fakeSub1',
-        //     },
-        // };
 
         const { fhirUserClaimKey } = this.config;
         if (!response || !response.data[fhirUserClaimKey]) {
@@ -142,7 +132,6 @@ export class SMARTHandler implements Authorization {
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
-        console.log('AuthorizationBundleRequest', request);
         const { scopes } = request.userIdentity;
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (!this.areScopesSufficient(scopes, req.operation, req.resourceType)) {
@@ -171,11 +160,9 @@ export class SMARTHandler implements Authorization {
     }
 
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
-        console.log('beginning of getAllowedResourceTypesForOperation');
         let allowedResources: string[] = [];
         request.userIdentity.scopes.forEach((scope: string) => {
             const validOperations = this.getValidOperationsForScope(scope, request.operation);
-            console.log('validOperations', validOperations);
             // If the scope allows request.operation, get all the resources allowed for that operation as defined by the requester's scopes
             if (validOperations.includes(request.operation)) {
                 const match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
@@ -195,7 +182,6 @@ export class SMARTHandler implements Authorization {
             }
         });
         allowedResources = [...new Set(allowedResources)];
-        console.log('allowedResources', allowedResources);
         return allowedResources;
     }
 
@@ -287,7 +273,6 @@ export class SMARTHandler implements Authorization {
         reqOperation: TypeOperation | SystemOperation,
         reqResourceType?: string,
     ): (TypeOperation | SystemOperation)[] {
-        console.log('scope, resourceType', scope, reqResourceType);
         const { scopeRule } = this.config;
         let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
         if (!match) {
@@ -327,7 +312,6 @@ export class SMARTHandler implements Authorization {
                 }
             }
         }
-        console.log('validOperations', validOperations);
         return validOperations;
     }
 

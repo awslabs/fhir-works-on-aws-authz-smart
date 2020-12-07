@@ -102,7 +102,7 @@ const apiUrl = 'https://fhir.server.com/dev/';
 const patientId = 'Patient/1234';
 const patientIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}${patientId}` };
 const practitionerIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}Practitioner/1234` };
-const validExternalPractitionerIdentity = { [authZConfig.fhirUserClaimKey]: `${apiUrl}test/Practitioner/1234` };
+const externalPractitionerIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}test/Practitioner/1234` };
 
 const validPatient = {
     resourceType: 'Patient',
@@ -212,7 +212,7 @@ const validPatientEncounter = {
     participant: [
         {
             individual: {
-                reference: validExternalPractitionerIdentity[authZConfig.fhirUserClaimKey],
+                reference: externalPractitionerIdentityWithoutScopes[authZConfig.fhirUserClaimKey],
             },
         },
     ],
@@ -624,7 +624,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: external Practitioner able to read Encounter',
             {
-                userIdentity: validExternalPractitionerIdentity,
+                userIdentity: externalPractitionerIdentityWithoutScopes,
                 operation: 'read',
                 readResponse: validPatientEncounter,
             },
@@ -634,7 +634,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: external Practitioner unable to read Observation',
             {
-                userIdentity: validExternalPractitionerIdentity,
+                userIdentity: externalPractitionerIdentityWithoutScopes,
                 operation: 'read',
                 readResponse: validPatientObservation,
             },
@@ -684,7 +684,7 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'SEARCH: external Practitioner able to search and filtered to just the encounter',
             {
-                userIdentity: validExternalPractitionerIdentity,
+                userIdentity: externalPractitionerIdentityWithoutScopes,
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
@@ -739,7 +739,7 @@ describe('isWriteRequestAuthorized', () => {
         [
             'External practitioner unable to write Patient',
             {
-                userIdentity: validExternalPractitionerIdentity,
+                userIdentity: externalPractitionerIdentityWithoutScopes,
                 operation: 'vread',
                 resourceBody: validPatient,
             },
