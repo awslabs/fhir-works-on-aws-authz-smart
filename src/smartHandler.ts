@@ -36,13 +36,13 @@ export class SMARTHandler implements Authorization {
         'history-system',
     ];
 
-    private readonly typesWithWriteAccess: IdentityType[] = ['Practitioner'];
+    protected readonly typesWithWriteAccess: IdentityType[] = ['Practitioner'];
 
-    private readonly version: number = 1.0;
+    protected readonly version: number = 1.0;
 
-    private readonly config: SMARTConfig;
+    protected readonly config: SMARTConfig;
 
-    private readonly apiUrl: string;
+    protected readonly apiUrl: string;
 
     constructor(config: SMARTConfig, apiUrl: string) {
         if (config.version !== this.version) {
@@ -185,7 +185,7 @@ export class SMARTHandler implements Authorization {
         throw new UnauthorizedError("Requester's identity is in the incorrect format");
     }
 
-    private areScopesSufficient(
+    protected areScopesSufficient(
         scopes: string[],
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
