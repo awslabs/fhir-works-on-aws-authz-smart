@@ -75,7 +75,7 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify scope
-        const scopes = this.getScopes(decoded);
+        const scopes = this.getScopes(decoded[this.config.scopeKey]);
         if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
             console.error(
                 `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
@@ -114,12 +114,12 @@ export class SMARTHandler implements Authorization {
         return userIdentity;
     }
 
-    private getScopes(decoded: Record<string, any>): string[] {
-        if (this.config.scopeValueType === 'space' && typeof decoded[this.config.scopeKey] === 'string') {
-            return decoded[this.config.scopeKey].split(' ');
+    private getScopes(scopes: string | string[]): string[] {
+        if (this.config.scopeValueType === 'space' && typeof scopes === 'string') {
+            return scopes.split(' ');
         }
-        if (this.config.scopeValueType === 'array' && Array.isArray(decoded[this.config.scopeKey])) {
-            return decoded[this.config.scopeKey];
+        if (this.config.scopeValueType === 'array' && Array.isArray(scopes)) {
+            return scopes;
         }
         return [];
     }
@@ -133,35 +133,36 @@ export class SMARTHandler implements Authorization {
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
         const { scopes } = request.userIdentity;
+        const authWritePromises: Promise<void>[] = [];
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (!this.areScopesSufficient(scopes, req.operation, req.resourceType)) {
                 console.error(
                     `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
                 );
-                throw new UnauthorizedError('Bundle operation is not authorized');
+                throw new UnauthorizedError('An operation with the Bundle is not authorized');
             }
-        });
-        const authWritePromises = request.requests.map(req => {
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
-                return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
-                    userIdentity: request.userIdentity,
-                    operation: req.operation,
-                    resourceBody: req.resource,
-                });
+                authWritePromises.push(
+                    this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
+                        userIdentity: request.userIdentity,
+                        operation: req.operation,
+                        resourceBody: req.resource,
+                    }),
+                );
             }
-            return Promise.resolve();
         });
 
         try {
             await Promise.all(authWritePromises);
         } catch (e) {
-            throw new UnauthorizedError('Bundle operation is not authorized');
+            throw new UnauthorizedError('An operation with the Bundle is not authorized');
         }
     }
 
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
         let allowedResources: string[] = [];
-        request.userIdentity.scopes.forEach((scope: string) => {
+        for (let i = 0; i < request.userIdentity.scopes.length; i += 1) {
+            const scope = request.userIdentity.scopes[i];
             const validOperations = this.getValidOperationsForScope(scope, request.operation);
             // If the scope allows request.operation, get all the resources allowed for that operation as defined by the requester's scopes
             if (validOperations.includes(request.operation)) {
@@ -173,14 +174,15 @@ export class SMARTHandler implements Authorization {
                     if (['patient', 'user', 'system'].includes(scopeType)) {
                         const { scopeResourceType } = match.groups!;
                         if (scopeResourceType === '*') {
-                            allowedResources = allowedResources.concat(allowedResourcesForScope);
-                        } else if (allowedResourcesForScope.includes(scopeResourceType)) {
+                            return allowedResourcesForScope;
+                        }
+                        if (allowedResourcesForScope.includes(scopeResourceType)) {
                             allowedResources = allowedResources.concat(scopeResourceType);
                         }
                     }
                 }
             }
-        });
+        }
         allowedResources = [...new Set(allowedResources)];
         return allowedResources;
     }

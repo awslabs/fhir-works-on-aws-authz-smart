@@ -845,7 +845,7 @@ describe('isBundleRequestAuthorized', () => {
 
         if (!isAuthorized) {
             await expect(authZHandler.isBundleRequestAuthorized(request)).rejects.toThrowError(
-                new UnauthorizedError('Bundle operation is not authorized'),
+                new UnauthorizedError('An operation with the Bundle is not authorized'),
             );
         } else {
             await expect(authZHandler.isBundleRequestAuthorized(request)).resolves.not.toThrow();
@@ -862,6 +862,13 @@ describe('getAllowedResourceTypesForOperation', () => {
         [
             'search-type operation: read scope: returns [Patient, Observation]',
             ['user/Patient.read', 'user/Observation.read'],
+            'search-type',
+            ['Patient', 'Observation'],
+        ],
+        // if there are duplicated scopeResourceType we return an array with the duplicates removed
+        [
+            'search-type operation: read scope: duplicated Observation scopeResourceType still returns [Patient, Observation]',
+            ['user/Patient.read', 'patient/Observation.read', 'user/Observation.read'],
             'search-type',
             ['Patient', 'Observation'],
         ],
