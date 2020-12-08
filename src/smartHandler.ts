@@ -86,9 +86,11 @@ export class SMARTHandler implements Authorization {
         // verify scope
         const scopes = this.getScopes(decoded[this.config.scopeKey]);
         if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
-            console.error(
-                `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${request.operation}\nresourceType: ${request.resourceType}`,
-            );
+            console.error('User supplied scopes are insufficient', {
+                scopes,
+                operation: request.operation,
+                resourceType: request.resourceType,
+            });
             throw new UnauthorizedError('User does not have permission for requested operation');
         }
 
@@ -142,23 +144,26 @@ export class SMARTHandler implements Authorization {
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
         const { scopes } = request.userIdentity;
-        const authWritePromises: Promise<void>[] = [];
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (!this.areScopesSufficient(scopes, req.operation, req.resourceType)) {
-                console.error(
-                    `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
-                );
+                console.error('User supplied scopes are insufficient', {
+                    scopes,
+                    operation: req.operation,
+                    resourceType: req.resourceType,
+                });
                 throw new UnauthorizedError('An entry within the Bundle is not authorized');
             }
+        });
+
+        const authWritePromises: Promise<void>[] = request.requests.map(req => {
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
-                authWritePromises.push(
-                    this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
-                        userIdentity: request.userIdentity,
-                        operation: req.operation,
-                        resourceBody: req.resource,
-                    }),
-                );
+                return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
+                    userIdentity: request.userIdentity,
+                    operation: req.operation,
+                    resourceBody: req.resource,
+                });
             }
+            return Promise.resolve();
         });
 
         try {
@@ -174,7 +179,7 @@ export class SMARTHandler implements Authorization {
             const scope = request.userIdentity.scopes[i];
             try {
                 const smartScope = this.convertScopeToSmartScope(scope);
-                if (smartScope.scopeType !== 'launch') {
+                if (['patient', 'user', 'system'].includes(smartScope.scopeType)) {
                     const clinicalSmartScope = <ClinicalSmartScope>smartScope;
                     const validOperations = this.getValidOperationsForScopeTypeAndAccessType(
                         clinicalSmartScope.scopeType,
@@ -194,8 +199,9 @@ export class SMARTHandler implements Authorization {
                         }
                     }
                 }
-                // eslint-disable-next-line no-empty
-            } catch (e) {}
+            } catch (e) {
+                // We only get allowedResourceTypes for ClinicalSmartScope
+            }
         }
         allowedResources = [...new Set(allowedResources)];
         return allowedResources;
