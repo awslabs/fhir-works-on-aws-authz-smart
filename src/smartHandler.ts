@@ -22,7 +22,16 @@ import {
     BASE_STU3_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
-import { IdentityType, LaunchType, ScopeType, SMARTConfig } from './smartConfig';
+import {
+    IdentityType,
+    LaunchType,
+    ScopeType,
+    SmartScope,
+    SMARTConfig,
+    AccessModifier,
+    LaunchSmartScope,
+    ClinicalSmartScope,
+} from './smartConfig';
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -139,7 +148,7 @@ export class SMARTHandler implements Authorization {
                 console.error(
                     `User supplied scopes are insufficient\nscopes: ${scopes}\noperation: ${req.operation}\nresourceType: ${req.resourceType}`,
                 );
-                throw new UnauthorizedError('An operation with the Bundle is not authorized');
+                throw new UnauthorizedError('An entry within the Bundle is not authorized');
             }
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
                 authWritePromises.push(
@@ -155,7 +164,7 @@ export class SMARTHandler implements Authorization {
         try {
             await Promise.all(authWritePromises);
         } catch (e) {
-            throw new UnauthorizedError('An operation with the Bundle is not authorized');
+            throw new UnauthorizedError('An entry within the Bundle is not authorized');
         }
     }
 
@@ -163,25 +172,30 @@ export class SMARTHandler implements Authorization {
         let allowedResources: string[] = [];
         for (let i = 0; i < request.userIdentity.scopes.length; i += 1) {
             const scope = request.userIdentity.scopes[i];
-            const validOperations = this.getValidOperationsForScope(scope, request.operation);
-            // If the scope allows request.operation, get all the resources allowed for that operation as defined by the requester's scopes
-            if (validOperations.includes(request.operation)) {
-                const match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
-                if (match !== null) {
-                    const { scopeType } = match.groups!;
-                    const allowedResourcesForScope: string[] =
-                        this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
-                    if (['patient', 'user', 'system'].includes(scopeType)) {
-                        const { scopeResourceType } = match.groups!;
-                        if (scopeResourceType === '*') {
-                            return allowedResourcesForScope;
-                        }
-                        if (allowedResourcesForScope.includes(scopeResourceType)) {
-                            allowedResources = allowedResources.concat(scopeResourceType);
+            try {
+                const smartScope = this.convertScopeToSmartScope(scope);
+                if (smartScope.scopeType !== 'launch') {
+                    const clinicalSmartScope = <ClinicalSmartScope>smartScope;
+                    const validOperations = this.getValidOperationsForScopeTypeAndAccessType(
+                        clinicalSmartScope.scopeType,
+                        clinicalSmartScope.accessType,
+                    );
+                    if (validOperations.includes(request.operation)) {
+                        const allowedResourcesForScope: string[] =
+                            this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
+                        if (['patient', 'user', 'system'].includes(clinicalSmartScope.scopeType)) {
+                            const scopeResourceType = clinicalSmartScope.resourceType;
+                            if (scopeResourceType === '*') {
+                                return allowedResourcesForScope;
+                            }
+                            if (allowedResourcesForScope.includes(scopeResourceType)) {
+                                allowedResources = allowedResources.concat(scopeResourceType);
+                            }
                         }
                     }
                 }
-            }
+                // eslint-disable-next-line no-empty
+            } catch (e) {}
         }
         allowedResources = [...new Set(allowedResources)];
         return allowedResources;
@@ -270,54 +284,66 @@ export class SMARTHandler implements Authorization {
         return false;
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    private convertScopeToSmartScope(scope: string): SmartScope {
+        const matchLaunchScope = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+        if (matchLaunchScope) {
+            const { launchType } = matchLaunchScope.groups!;
+            return {
+                scopeType: 'launch',
+                launchType: <LaunchType>launchType,
+            };
+        }
+        const matchClinicalScope = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+        if (matchClinicalScope) {
+            const { scopeType, scopeResourceType, accessType } = matchClinicalScope.groups!;
+
+            return {
+                scopeType: <ScopeType>scopeType,
+                resourceType: scopeResourceType,
+                accessType: <AccessModifier>accessType,
+            };
+        }
+
+        throw new Error('Not a SmartScope');
+    }
+
     private getValidOperationsForScope(
         scope: string,
         reqOperation: TypeOperation | SystemOperation,
         reqResourceType?: string,
     ): (TypeOperation | SystemOperation)[] {
         const { scopeRule } = this.config;
-        let match = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
-        if (!match) {
-            match = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
-        }
         let validOperations: (TypeOperation | SystemOperation)[] = [];
-        if (match !== null) {
-            const { scopeType } = match.groups!;
-            if (scopeType === 'launch') {
-                const { launchType } = match.groups!;
-                // TODO: should launch have access to only certain resourceTypes?
-                if (['patient', 'encounter'].includes(launchType)) {
-                    validOperations = scopeRule[scopeType][<LaunchType>launchType];
-                } else if (!launchType) {
-                    validOperations = scopeRule[scopeType].launch;
+        let smartScope: SmartScope;
+        try {
+            smartScope = this.convertScopeToSmartScope(scope);
+        } catch (e) {
+            return [];
+        }
+        if (smartScope.scopeType === 'launch') {
+            const launchSmartScope = <LaunchSmartScope>smartScope;
+            // TODO: should launch have access to only certain resourceTypes?
+            validOperations = scopeRule.launch[launchSmartScope.launchType ?? 'launch'];
+        } else if ((<ClinicalSmartScope>smartScope).scopeType) {
+            const clinicalSmartScope = <ClinicalSmartScope>smartScope;
+            const { scopeType, resourceType, accessType } = clinicalSmartScope;
+            if (reqResourceType) {
+                if (resourceType === '*' || resourceType === reqResourceType) {
+                    validOperations = this.getValidOperationsForScopeTypeAndAccessType(scopeType, accessType);
                 }
-            } else if (['patient', 'user', 'system'].includes(scopeType)) {
-                const { scopeResourceType, accessType } = match.groups!;
-                if (reqResourceType) {
-                    if (scopeResourceType === '*' || scopeResourceType === reqResourceType) {
-                        validOperations = this.getValidOperationsForScopeGivenScopeRule(
-                            <ScopeType>scopeType,
-                            accessType,
-                        );
-                    }
-                }
-                // 'search-system' and 'history-system' request operation requires '*' for scopeResourceType
-                else if (['search-system', 'history-system'].includes(reqOperation)) {
-                    if (scopeResourceType === '*') {
-                        validOperations = this.getValidOperationsForScopeGivenScopeRule(
-                            <ScopeType>scopeType,
-                            accessType,
-                        );
-                    }
-                } else {
-                    validOperations = this.getValidOperationsForScopeGivenScopeRule(<ScopeType>scopeType, accessType);
-                }
+            }
+            // 'search-system' and 'history-system' request operation requires '*' for scopeResourceType
+            else if (['search-system', 'history-system'].includes(reqOperation) && resourceType === '*') {
+                validOperations = this.getValidOperationsForScopeTypeAndAccessType(scopeType, accessType);
+            } else if (['transaction', 'batch'].includes(reqOperation)) {
+                validOperations = this.getValidOperationsForScopeTypeAndAccessType(scopeType, accessType);
             }
         }
         return validOperations;
     }
 
-    private getValidOperationsForScopeGivenScopeRule(
+    private getValidOperationsForScopeTypeAndAccessType(
         scopeType: ScopeType,
         accessType: string,
     ): (TypeOperation | SystemOperation)[] {

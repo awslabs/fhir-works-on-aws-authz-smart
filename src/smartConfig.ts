@@ -41,6 +41,19 @@ export type ScopeType = 'patient' | 'user' | 'system';
 export type LaunchType = 'patient' | 'encounter';
 export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
 
+export type SmartScope = ClinicalSmartScope | LaunchSmartScope;
+
+export interface ClinicalSmartScope {
+    scopeType: ScopeType;
+    resourceType: string;
+    accessType: AccessModifier;
+}
+
+export interface LaunchSmartScope {
+    scopeType: 'launch';
+    launchType: LaunchType | undefined;
+}
+
 // Determines what each scope has access to
 export type ScopeRule = {
     [scopeType in ScopeType]: AccessRule;

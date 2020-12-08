@@ -845,11 +845,40 @@ describe('isBundleRequestAuthorized', () => {
 
         if (!isAuthorized) {
             await expect(authZHandler.isBundleRequestAuthorized(request)).rejects.toThrowError(
-                new UnauthorizedError('An operation with the Bundle is not authorized'),
+                new UnauthorizedError('An entry within the Bundle is not authorized'),
             );
         } else {
             await expect(authZHandler.isBundleRequestAuthorized(request)).resolves.not.toThrow();
         }
+    });
+
+    test('Bundle request with first Bundle entry passing and second Bundle entry failing', async () => {
+        const userIdentity = clone(practitionerIdentityWithoutScopes);
+        // Requester has permission to write Observation but no permission to read Observation
+        userIdentity.scopes = ['user/Observation.write'];
+        const request: AuthorizationBundleRequest = {
+            userIdentity,
+            requests: [
+                {
+                    operation: 'create',
+                    resource: {},
+                    fullUrl: '',
+                    resourceType: 'Observation',
+                    id: '160265f7-e8c2-45ca-a1bc-317399e23549',
+                },
+                {
+                    operation: 'read',
+                    resource: {},
+                    fullUrl: '',
+                    resourceType: 'Observation',
+                    id: 'fcfe413c-c62d-4097-9e31-02ff6ff523ad',
+                },
+            ],
+        };
+
+        await expect(authZHandler.isBundleRequestAuthorized(request)).rejects.toThrowError(
+            new UnauthorizedError('An entry within the Bundle is not authorized'),
+        );
     });
 });
 
