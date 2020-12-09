@@ -21,6 +21,7 @@ import {
     FhirVersion,
     BASE_STU3_RESOURCES,
     BulkDataAuth,
+    R4_PATIENT_COMPARTMENT_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import {
@@ -292,15 +293,7 @@ export class SMARTHandler implements Authorization {
             }
             if (smartScope) {
                 if (bulkDataAuth) {
-                    const bulkDataRequestHasCorrectScope =
-                        bulkDataAuth.exportType === 'system' && // As of 12/9/20 we only support System Level export
-                        smartScope.scopeType === 'user' &&
-                        smartScope.resourceType === '*' &&
-                        ['*', 'read'].includes(smartScope.accessType);
-                    if (
-                        ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
-                        bulkDataRequestHasCorrectScope
-                    ) {
+                    if (this.isSmartScopeSufficientForBulkDataAccess(bulkDataAuth, smartScope)) {
                         return true;
                     }
                 } else {
@@ -312,6 +305,24 @@ export class SMARTHandler implements Authorization {
                     if (validOperations.includes(operation)) return true;
                 }
             }
+        }
+        return false;
+    }
+
+    private isSmartScopeSufficientForBulkDataAccess(bulkDataAuth: BulkDataAuth, smartScope: SmartScope) {
+        const bulkDataRequestHasCorrectScope =
+            bulkDataAuth.exportType === 'system' && // As of 12/9/20 we only support System Level export
+            smartScope.scopeType === 'user' &&
+            smartScope.resourceType === '*' &&
+            ['*', 'read'].includes(smartScope.accessType) &&
+            this.getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType).includes(
+                'read',
+            );
+        if (
+            ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
+            bulkDataRequestHasCorrectScope
+        ) {
+            return true;
         }
         return false;
     }
