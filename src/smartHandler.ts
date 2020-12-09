@@ -20,6 +20,7 @@ import {
     BASE_R4_RESOURCES,
     FhirVersion,
     BASE_STU3_RESOURCES,
+    BulkDataAuth,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import {
@@ -85,7 +86,7 @@ export class SMARTHandler implements Authorization {
 
         // verify scope
         const scopes = this.getScopes(decoded[this.config.scopeKey]);
-        if (!this.areScopesSufficient(scopes, request.operation, request.resourceType)) {
+        if (!this.areScopesSufficient(scopes, request.operation, request.resourceType, request.bulkDataAuth)) {
             console.error('User supplied scopes are insufficient', {
                 scopes,
                 operation: request.operation,
@@ -278,15 +279,39 @@ export class SMARTHandler implements Authorization {
         scopes: string[],
         operation: TypeOperation | SystemOperation,
         resourceType?: string,
+        bulkDataAuth?: BulkDataAuth,
     ): boolean {
         for (let i = 0; i < scopes.length; i += 1) {
             const scope = scopes[i];
-            const validOperations: (TypeOperation | SystemOperation)[] = this.getValidOperationsForScope(
-                scope,
-                operation,
-                resourceType,
-            );
-            if (validOperations.includes(operation)) return true;
+            let smartScope: SmartScope | undefined;
+            try {
+                smartScope = this.convertScopeToSmartScope(scope);
+            } catch (e) {
+                // Caused by trying to convert non-SmartScope to SmartScope, for example converting scope 'openid' or 'profile'
+                // We don't need to check non-SmartScope
+            }
+            if (smartScope) {
+                if (bulkDataAuth) {
+                    const bulkDataRequestHasCorrectScope =
+                        bulkDataAuth.exportType === 'system' && // As of 12/9/20 we only support System Level export
+                        smartScope.scopeType === 'user' &&
+                        smartScope.resourceType === '*' &&
+                        ['*', 'read'].includes(smartScope.accessType);
+                    if (
+                        ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
+                        bulkDataRequestHasCorrectScope
+                    ) {
+                        return true;
+                    }
+                } else {
+                    const validOperations: (TypeOperation | SystemOperation)[] = this.getValidOperationsForScope(
+                        smartScope,
+                        operation,
+                        resourceType,
+                    );
+                    if (validOperations.includes(operation)) return true;
+                }
+            }
         }
         return false;
     }
@@ -316,18 +341,12 @@ export class SMARTHandler implements Authorization {
     }
 
     private getValidOperationsForScope(
-        scope: string,
+        smartScope: SmartScope,
         reqOperation: TypeOperation | SystemOperation,
         reqResourceType?: string,
     ): (TypeOperation | SystemOperation)[] {
         const { scopeRule } = this.config;
         let validOperations: (TypeOperation | SystemOperation)[] = [];
-        let smartScope: SmartScope;
-        try {
-            smartScope = this.convertScopeToSmartScope(scope);
-        } catch (e) {
-            return [];
-        }
         if (smartScope.scopeType === 'launch') {
             const launchSmartScope = <LaunchSmartScope>smartScope;
             // TODO: should launch have access to only certain resourceTypes?
