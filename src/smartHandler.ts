@@ -21,7 +21,6 @@ import {
     FhirVersion,
     BASE_STU3_RESOURCES,
     BulkDataAuth,
-    R4_PATIENT_COMPARTMENT_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import {
