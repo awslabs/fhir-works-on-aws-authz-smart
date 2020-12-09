@@ -179,6 +179,7 @@ export class SMARTHandler implements Authorization {
             const scope = request.userIdentity.scopes[i];
             try {
                 const smartScope = this.convertScopeToSmartScope(scope);
+                // We only get allowedResourceTypes for ClinicalSmartScope
                 if (['patient', 'user', 'system'].includes(smartScope.scopeType)) {
                     const clinicalSmartScope = <ClinicalSmartScope>smartScope;
                     const validOperations = this.getValidOperationsForScopeTypeAndAccessType(
@@ -200,7 +201,7 @@ export class SMARTHandler implements Authorization {
                     }
                 }
             } catch (e) {
-                // We only get allowedResourceTypes for ClinicalSmartScope
+                // Caused by trying to convert non-SmartScope to SmartScope, for example converting scope 'openid' or 'profile'
             }
         }
         allowedResources = [...new Set(allowedResources)];
