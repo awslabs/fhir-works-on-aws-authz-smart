@@ -16,7 +16,7 @@ import {
     AllowedResourceTypesForOperationRequest,
     BASE_R4_RESOURCES,
     AuthorizationBundleRequest,
-    GetSearchFilterBasedOnIdentity,
+    GetSearchFilterBasedOnIdentityRequest,
 } from 'fhir-works-on-aws-interface';
 import { decode } from 'jsonwebtoken';
 import { SMARTHandler } from './smartHandler';
@@ -1009,7 +1009,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
     test('Patient identity', async () => {
         // BUILD
         const userIdentity = clone(patientIdentityWithoutScopes);
-        const request: GetSearchFilterBasedOnIdentity = {
+        const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
         };
@@ -1029,7 +1029,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
     test('Practitioner identity', async () => {
         // BUILD
         const userIdentity = clone(practitionerIdentityWithoutScopes);
-        const request: GetSearchFilterBasedOnIdentity = {
+        const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
         };

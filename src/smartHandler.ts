@@ -149,7 +149,7 @@ export class SMARTHandler implements Authorization {
         const fhirUser = this.getFhirUser(request.userIdentity);
         const { hostname, resourceType, id } = fhirUser;
 
-        if (resourceType !== 'Practitioner' && ['search-type', 'search-system'].includes(request.operation)) {
+        if (resourceType !== 'Practitioner') {
             return [
                 {
                     key: '_reference',
