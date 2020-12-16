@@ -21,7 +21,7 @@ import {
     FhirVersion,
     BASE_STU3_RESOURCES,
     BulkDataAuth,
-    GetSearchFilterBasedOnIdentity,
+    GetSearchFilterBasedOnIdentityRequest,
     SearchFilter,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
