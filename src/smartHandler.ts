@@ -145,7 +145,7 @@ export class SMARTHandler implements Authorization {
         }
     }
 
-    async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentity): Promise<SearchFilter[]> {
+    async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
         const fhirUser = this.getFhirUser(request.userIdentity);
         const { hostname, resourceType, id } = fhirUser;
 
