@@ -156,7 +156,7 @@ export class SMARTHandler implements Authorization {
                         key: '_reference',
                         value: [`${hostname}${resourceType}/${id}`],
                         operator: '==',
-                        logicalOperator: 'N/A',
+                        logicalOperator: 'AND', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
                     },
                 ];
             }
