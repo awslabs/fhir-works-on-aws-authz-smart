@@ -150,6 +150,16 @@ export class SMARTHandler implements Authorization {
         const { hostname, resourceType, id } = fhirUser;
 
         if (resourceType !== 'Practitioner') {
+            if (hostname !== this.apiUrl) {
+                return [
+                    {
+                        key: '_reference',
+                        value: [`${hostname}${resourceType}/${id}`],
+                        operator: '==',
+                        logicalOperator: 'N/A',
+                    },
+                ];
+            }
             return [
                 {
                     key: '_reference',
