@@ -1019,11 +1019,39 @@ describe('getSearchFilterBasedOnIdentity', () => {
             {
                 key: '_reference',
                 logicalOperator: 'OR',
-                operator: '==',
+                comparisonOperator: '==',
                 value: [patientId, `${apiUrl}${patientId}`],
             },
         ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+
+    test('Patient identity; fhirUser hostname does not match server hostname', async () => {
+        // BUILD
+        const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
+            authZConfig,
+            'https://fhir.server-2.com/dev/',
+            '4.0.1',
+        );
+
+        const userIdentity = clone(patientIdentityWithoutScopes);
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_reference',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [`${apiUrl}${patientId}`],
+            },
+        ];
+        await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
+            expectedFilter,
+        );
     });
 
     test('Practitioner identity', async () => {
