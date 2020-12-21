@@ -21,6 +21,8 @@ import {
     FhirVersion,
     BASE_STU3_RESOURCES,
     BulkDataAuth,
+    GetSearchFilterBasedOnIdentityRequest,
+    SearchFilter,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
 import {
@@ -141,6 +143,27 @@ export class SMARTHandler implements Authorization {
         if (request.userIdentity.sub !== request.jobOwnerId) {
             throw new UnauthorizedError('User does not have permission to access this Bulk Data Export job');
         }
+    }
+
+    async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
+        const fhirUser = this.getFhirUser(request.userIdentity);
+        const { hostname, resourceType, id } = fhirUser;
+
+        // Create a SearchFilter to limit access to only resources that are referring to the requesting user
+        if (resourceType !== 'Practitioner') {
+            const searchFilter: SearchFilter = {
+                key: '_reference',
+                value: [`${hostname}${resourceType}/${id}`],
+                comparisonOperator: '==',
+                logicalOperator: 'OR', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
+            };
+            if (hostname === this.apiUrl) {
+                searchFilter.value = [`${resourceType}/${id}`, `${hostname}${resourceType}/${id}`];
+            }
+            return [searchFilter];
+        }
+
+        return [];
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {

@@ -16,6 +16,7 @@ import {
     AllowedResourceTypesForOperationRequest,
     BASE_R4_RESOURCES,
     AuthorizationBundleRequest,
+    GetSearchFilterBasedOnIdentityRequest,
 } from 'fhir-works-on-aws-interface';
 import { decode } from 'jsonwebtoken';
 import { SMARTHandler } from './smartHandler';
@@ -1000,5 +1001,69 @@ describe('getAllowedResourceTypesForOperation', () => {
         await expect(authZHandler.getAllowedResourceTypesForOperation(request)).resolves.toEqual(
             expectedAllowedResources,
         );
+    });
+});
+
+describe('getSearchFilterBasedOnIdentity', () => {
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    test('Patient identity', async () => {
+        // BUILD
+        const userIdentity = clone(patientIdentityWithoutScopes);
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_reference',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [patientId, `${apiUrl}${patientId}`],
+            },
+        ];
+        await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+
+    test('Patient identity; fhirUser hostname does not match server hostname', async () => {
+        // BUILD
+        const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
+            authZConfig,
+            'https://fhir.server-2.com/dev/',
+            '4.0.1',
+        );
+
+        const userIdentity = clone(patientIdentityWithoutScopes);
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_reference',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [`${apiUrl}${patientId}`],
+            },
+        ];
+        await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
+            expectedFilter,
+        );
+    });
+
+    test('Practitioner identity', async () => {
+        // BUILD
+        const userIdentity = clone(practitionerIdentityWithoutScopes);
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter: [] = [];
+        await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
 });
