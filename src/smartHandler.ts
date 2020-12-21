@@ -150,24 +150,16 @@ export class SMARTHandler implements Authorization {
         const { hostname, resourceType, id } = fhirUser;
 
         if (resourceType !== 'Practitioner') {
-            if (hostname !== this.apiUrl) {
-                return [
-                    {
-                        key: '_reference',
-                        value: [`${hostname}${resourceType}/${id}`],
-                        comparisonOperator: '==',
-                        logicalOperator: 'OR', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
-                    },
-                ];
+            const searchFilter: SearchFilter = {
+                key: '_reference',
+                value: [`${hostname}${resourceType}/${id}`],
+                comparisonOperator: '==',
+                logicalOperator: 'OR', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
+            };
+            if (hostname === this.apiUrl) {
+                searchFilter.value = [`${resourceType}/${id}`, `${hostname}${resourceType}/${id}`];
             }
-            return [
-                {
-                    key: '_reference',
-                    value: [`${resourceType}/${id}`, `${hostname}${resourceType}/${id}`],
-                    comparisonOperator: '==',
-                    logicalOperator: 'OR',
-                },
-            ];
+            return [searchFilter];
         }
 
         return [];
