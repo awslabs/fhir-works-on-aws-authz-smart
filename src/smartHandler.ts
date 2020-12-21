@@ -149,6 +149,7 @@ export class SMARTHandler implements Authorization {
         const fhirUser = this.getFhirUser(request.userIdentity);
         const { hostname, resourceType, id } = fhirUser;
 
+        // Create a SearchFilter to limit access to only resources that are referring to the requesting user
         if (resourceType !== 'Practitioner') {
             const searchFilter: SearchFilter = {
                 key: '_reference',
