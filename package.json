@@ -33,7 +33,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.1",
+    "@types/jest": "^26.0.19",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^12",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
