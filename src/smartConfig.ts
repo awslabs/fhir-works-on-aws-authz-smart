@@ -4,6 +4,66 @@
  */
 import { TypeOperation, SystemOperation } from 'fhir-works-on-aws-interface';
 
+export type AccessModifier = 'read' | 'write';
+export type ScopeType = 'patient' | 'user' | 'system';
+export type LaunchType = 'patient' | 'encounter';
+export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
+
+export interface ClinicalSmartScope {
+    scopeType: ScopeType;
+    resourceType: string;
+    accessType: AccessModifier;
+}
+
+export interface LaunchSmartScope {
+    scopeType: 'launch';
+    launchType: LaunchType | undefined;
+}
+
+export type SmartScope = ClinicalSmartScope | LaunchSmartScope;
+
+export type AccessRule = {
+    [accessType in AccessModifier]: (TypeOperation | SystemOperation)[];
+};
+export type LaunchRule = {
+    [launchType in LaunchType]: (TypeOperation | SystemOperation)[];
+} & {
+    launch: (TypeOperation | SystemOperation)[];
+};
+
+// Determines what each scope has access to
+export type ScopeRule = {
+    [scopeType in ScopeType]: AccessRule;
+} & {
+    launch: LaunchRule;
+};
+
+/**
+ * Example of a scope rule
+ * ```typescript
+    export const scopeRule: ScopeRule = {
+        patient: {
+            read: allReadOperations,
+            write: [],
+        },
+        user: {
+            read: allReadOperations,
+            write: ['update', 'patch', 'create'],
+        },
+        system: {
+            read: allReadOperations,
+            write: allWriteOperations,
+        },
+        launch: {
+            launch: allReadOperations,
+            patient: allReadOperations,
+            encounter: allReadOperations,
+        },
+    };
+
+ * ```
+ */
+
 export interface SMARTConfig {
     version: number;
     /**
@@ -35,62 +95,3 @@ export interface SMARTConfig {
      */
     userInfoEndpoint: string;
 }
-
-export type AccessModifier = 'read' | 'write';
-export type ScopeType = 'patient' | 'user' | 'system';
-export type LaunchType = 'patient' | 'encounter';
-export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
-
-export type SmartScope = ClinicalSmartScope | LaunchSmartScope;
-
-export interface ClinicalSmartScope {
-    scopeType: ScopeType;
-    resourceType: string;
-    accessType: AccessModifier;
-}
-
-export interface LaunchSmartScope {
-    scopeType: 'launch';
-    launchType: LaunchType | undefined;
-}
-
-// Determines what each scope has access to
-export type ScopeRule = {
-    [scopeType in ScopeType]: AccessRule;
-} & {
-    launch: LaunchRule;
-};
-export type AccessRule = {
-    [accessType in AccessModifier]: (TypeOperation | SystemOperation)[];
-};
-export type LaunchRule = {
-    [launchType in LaunchType]: (TypeOperation | SystemOperation)[];
-} & {
-    launch: (TypeOperation | SystemOperation)[];
-};
-
-/**
- * Example of a scope rule
- * ```typescript
-    export const scopeRule: ScopeRule = {
-        patient: {
-            read: allReadOperations,
-            write: [],
-        },
-        user: {
-            read: allReadOperations,
-            write: ['update', 'patch', 'create'],
-        },
-        system: {
-            read: allReadOperations,
-            write: allWriteOperations,
-        },
-        launch: {
-            launch: allReadOperations,
-            patient: allReadOperations,
-            encounter: allReadOperations,
-        },
-    };
-
- * ```
- */
