@@ -30,7 +30,7 @@ import {
     getValidOperationsForScopeTypeAndAccessType,
     SEARCH_OPERATIONS,
 } from './smartScopeHelper';
-import { authorizeResource, FHIR_USER_REGEX, getFhirUser } from './smartAuthorizeHelper';
+import { authorizeResource, FHIR_USER_REGEX, getFhirUser } from './smartAuthorizationHelper';
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {

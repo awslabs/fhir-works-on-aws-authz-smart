@@ -59,7 +59,7 @@ export function getValidOperationsForScopeTypeAndAccessType(
     return validOperations;
 }
 
-export function getValidOperationsForScope(
+function getValidOperationsForScope(
     smartScope: SmartScope,
     scopeRule: ScopeRule,
     reqOperation: TypeOperation | SystemOperation,
@@ -99,7 +99,7 @@ export function getScopes(scopeValueType: 'space' | 'array', scopes: string | st
     return [];
 }
 
-export function isSmartScopeSufficientForBulkDataAccess(
+function isSmartScopeSufficientForBulkDataAccess(
     bulkDataAuth: BulkDataAuth,
     smartScope: SmartScope,
     scopeRule: ScopeRule,
