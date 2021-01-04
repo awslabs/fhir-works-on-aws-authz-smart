@@ -4,7 +4,7 @@
  */
 
 import { CLINICAL_SCOPE_REGEX, LAUNCH_SCOPE_REGEX } from './smartScopeHelper';
-import { FHIR_USER_REGEX } from './smartAuthorizeHelper';
+import { FHIR_USER_REGEX } from './smartAuthorizationHelper';
 
 describe('CLINICAL_SCOPE_REGEX', () => {
     const testCases = [

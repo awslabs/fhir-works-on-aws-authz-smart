@@ -18,7 +18,7 @@ export function getFhirUser(userIdentity: KeyValueMap, fhirUserClaimKey: string)
     throw new UnauthorizedError("Requester's identity is in the incorrect format");
 }
 
-export function isLocalUserInJsonAsReference(jsonStr: string, fhirUser: FhirUser) {
+function isLocalUserInJsonAsReference(jsonStr: string, fhirUser: FhirUser) {
     return (
         jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`) ||
         jsonStr.includes(`"reference":"${fhirUser.resourceType}/${fhirUser.id}"`)
