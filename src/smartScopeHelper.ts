@@ -70,7 +70,7 @@ function getValidOperationsForScope(
         const launchSmartScope = <LaunchSmartScope>smartScope;
         // TODO: should launch have access to only certain resourceTypes?
         validOperations = scopeRule.launch[launchSmartScope.launchType ?? 'launch'];
-    } else if ((<ClinicalSmartScope>smartScope).scopeType) {
+    } else {
         const clinicalSmartScope = <ClinicalSmartScope>smartScope;
         const { scopeType, resourceType, accessType } = clinicalSmartScope;
         if (reqResourceType) {
@@ -112,13 +112,10 @@ function isSmartScopeSufficientForBulkDataAccess(
         getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType, scopeRule).includes(
             'read',
         );
-    if (
+    return (
         ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
         bulkDataRequestHasCorrectScope
-    ) {
-        return true;
-    }
-    return false;
+    );
 }
 
 export function areScopesSufficient(
@@ -130,14 +127,8 @@ export function areScopesSufficient(
 ): boolean {
     for (let i = 0; i < scopes.length; i += 1) {
         const scope = scopes[i];
-        let smartScope: SmartScope | undefined;
         try {
-            smartScope = convertScopeToSmartScope(scope);
-        } catch (e) {
-            // Caused by trying to convert non-SmartScope to SmartScope, for example converting scope 'openid' or 'profile'
-            // We don't need to check non-SmartScope
-        }
-        if (smartScope) {
+            const smartScope = convertScopeToSmartScope(scope);
             if (bulkDataAuth) {
                 if (isSmartScopeSufficientForBulkDataAccess(bulkDataAuth, smartScope, scopeRule)) {
                     return true;
@@ -151,6 +142,8 @@ export function areScopesSufficient(
                 );
                 if (validOperations.includes(operation)) return true;
             }
+        } catch (e) {
+            // Caused by trying to convert non-SmartScope to SmartScope, for example converting non-SMART scope 'openid'
         }
     }
     return false;

@@ -29,22 +29,17 @@ describe('authorizeResource', () => {
         expect(authorizeResource(fhirUser, {}, 'https://fhirServer.com/')).toEqual(true);
     });
     describe('fhirUser resourceType matches resourceType of resource', () => {
+        const patientFhirUser: FhirUser = {
+            hostname: 'https://fhirServer.com/',
+            id: '1234',
+            resourceType: 'Patient',
+        };
         test('fhirUser id matches resource id', () => {
-            const patientFhirUser: FhirUser = {
-                hostname: 'https://fhirServer.com/',
-                id: '1234',
-                resourceType: 'Patient',
-            };
             expect(
                 authorizeResource(patientFhirUser, { resourceType: 'Patient', id: '1234' }, 'https://fhirServer.com/'),
             ).toEqual(true);
         });
         test('fhirUser referenced in resource', () => {
-            const patientFhirUser: FhirUser = {
-                hostname: 'https://fhirServer.com/',
-                id: '1234',
-                resourceType: 'Patient',
-            };
             expect(
                 authorizeResource(
                     patientFhirUser,

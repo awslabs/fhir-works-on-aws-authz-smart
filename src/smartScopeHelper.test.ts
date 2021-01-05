@@ -26,35 +26,60 @@ const scopeRule: ScopeRule = {
         encounter: [],
     },
 };
-describe('areScopesSufficient', () => {
-    test('scope is sufficient to read Observation', () => {
+const areScopesSufficientCases: string[][] = [['user'], ['patient']];
+describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: string) => {
+    test('scope is sufficient to read Observation: Scope with resourceType "Observation" should be able to read "Observation" resources', () => {
         const clonedScopeRule = clone(scopeRule);
-        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule[scopeType].read = ['read'];
 
-        expect(areScopesSufficient(['user/Observation.read'], 'read', clonedScopeRule, 'Observation')).toEqual(true);
-
-        expect(areScopesSufficient(['user/*.read'], 'read', clonedScopeRule, 'Observation')).toEqual(true);
-    });
-    test('scope is NOT sufficient to read Observation', () => {
-        const clonedScopeRule = clone(scopeRule);
-        clonedScopeRule.user.read = ['read'];
-
-        expect(areScopesSufficient(['user/Medication.read'], 'read', clonedScopeRule, 'Observation')).toEqual(false);
+        expect(areScopesSufficient([`${scopeType}/Observation.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+            true,
+        );
     });
 
-    test('scope is sufficient for bulk data access', () => {
+    test('scope is sufficient to read Observation: Scope with resourceType "*" should be able to read "Observation" resources', () => {
         const clonedScopeRule = clone(scopeRule);
-        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule[scopeType].read = ['read'];
+
+        expect(areScopesSufficient([`${scopeType}/*.read`], 'read', clonedScopeRule, 'Observation')).toEqual(true);
+    });
+
+    test('scope is NOT sufficient to read Observation because scopeRule does not allow read operation', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['search-type'];
+
+        expect(areScopesSufficient([`${scopeType}/Medication.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+            false,
+        );
+    });
+
+    test('scope is NOT sufficient to read Observation because resourceType does not match', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['read'];
+
+        expect(areScopesSufficient([`${scopeType}/Medication.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+            false,
+        );
+    });
+
+    test('scope is sufficient for bulk data access with "user" scopeType but not "patient" scopeType', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['read'];
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
-        expect(areScopesSufficient(['user/*.read'], 'read', clonedScopeRule, undefined, bulkDataAuth)).toEqual(true);
+
+        // Only scopeType of user has bulkDataAccess
+        expect(areScopesSufficient([`${scopeType}/*.read`], 'read', clonedScopeRule, undefined, bulkDataAuth)).toEqual(
+            scopeType === 'user',
+        );
     });
 
-    test('scope is NOT sufficient for bulk data access', () => {
+    test('scope is NOT sufficient for bulk data access: Scope needs to have resourceType "*"', () => {
         const clonedScopeRule = clone(scopeRule);
-        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule[scopeType].read = ['read'];
+
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
         expect(
-            areScopesSufficient(['user/Observation.read'], 'read', clonedScopeRule, undefined, bulkDataAuth),
+            areScopesSufficient([`${scopeType}/Observation.read`], 'read', clonedScopeRule, undefined, bulkDataAuth),
         ).toEqual(false);
     });
 });
