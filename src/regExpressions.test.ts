@@ -3,7 +3,8 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-import { SMARTHandler } from './smartHandler';
+import { CLINICAL_SCOPE_REGEX, LAUNCH_SCOPE_REGEX } from './smartScopeHelper';
+import { FHIR_USER_REGEX } from './smartAuthorizationHelper';
 
 describe('CLINICAL_SCOPE_REGEX', () => {
     const testCases = [
@@ -25,7 +26,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
     ];
     test.each(testCases)('CASE: %p/%p.%p; expect: %p', async (scopeType, scopeResourceType, accessType, isSuccess) => {
         const expectedStr = `${scopeType}/${scopeResourceType}.${accessType}`;
-        const actualMatch = expectedStr.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+        const actualMatch = expectedStr.match(CLINICAL_SCOPE_REGEX);
         if (isSuccess) {
             expect(actualMatch).toBeTruthy();
             expect(actualMatch!.groups).toBeTruthy();
@@ -44,7 +45,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['patient.Patient/read '],
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
-        const actualMatch = scope.match(SMARTHandler.CLINICAL_SCOPE_REGEX);
+        const actualMatch = scope.match(CLINICAL_SCOPE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
 });
@@ -61,7 +62,7 @@ describe('LAUNCH_SCOPE_REGEX', () => {
     ];
     test.each(testCases)('CASE: %p/%p; expect: %p', async (scopeType, launchType, isSuccess) => {
         const expectedStr = `${scopeType}/${launchType}`;
-        const actualMatch = expectedStr.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+        const actualMatch = expectedStr.match(LAUNCH_SCOPE_REGEX);
         if (isSuccess) {
             expect(actualMatch).toBeTruthy();
             expect(actualMatch!.groups).toBeTruthy();
@@ -79,7 +80,7 @@ describe('LAUNCH_SCOPE_REGEX', () => {
         ['launch/encounter '],
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
-        const actualMatch = scope.match(SMARTHandler.LAUNCH_SCOPE_REGEX);
+        const actualMatch = scope.match(LAUNCH_SCOPE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
 });
@@ -110,7 +111,7 @@ describe('FHIR_USER_REGEX', () => {
     test.each(testCases)('CASE: %p%p/%p; expect: %p', async (hostname, resourceType, id, isSuccess) => {
         for (let i = 0; i < testCases.length; i += 1) {
             const expectedStr = `${hostname}${resourceType}/${id}`;
-            const actualMatch = expectedStr.match(SMARTHandler.FHIR_USER_REGEX);
+            const actualMatch = expectedStr.match(FHIR_USER_REGEX);
             if (isSuccess) {
                 expect(actualMatch).toBeTruthy();
                 expect(actualMatch!.groups).toBeTruthy();
@@ -130,7 +131,7 @@ describe('FHIR_USER_REGEX', () => {
         ['https://fhir.server.com/dev/'],
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
-        const actualMatch = scope.match(SMARTHandler.FHIR_USER_REGEX);
+        const actualMatch = scope.match(FHIR_USER_REGEX);
         expect(actualMatch).toBeFalsy();
     });
 });
