@@ -1,4 +1,6 @@
-import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+import { BulkDataAuth, SystemOperation, TypeOperation, UnauthorizedError } from 'fhir-works-on-aws-interface';
+import jwksClient, { JwksClient } from 'jwks-rsa';
+import { decode, verify } from 'jsonwebtoken';
 import {
     AccessModifier,
     ClinicalSmartScope,
@@ -147,4 +149,29 @@ export function areScopesSufficient(
         }
     }
     return false;
+}
+
+export function getJwksClient(jwksUri: string): JwksClient {
+    return jwksClient({
+        cache: true,
+        cacheMaxEntries: 5,
+        cacheMaxAge: 600000,
+        rateLimit: true,
+        jwksRequestsPerMinute: 10,
+        jwksUri,
+    });
+}
+
+export async function verifyJwtToken(token: string, client: JwksClient) {
+    const decodedAccessToken = decode(token, { complete: true });
+    if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
+        throw new UnauthorizedError('invalid access token');
+    }
+    try {
+        const { kid } = decodedAccessToken.header!;
+        const key = await client.getSigningKeyAsync(kid);
+        return verify(token, key.getPublicKey());
+    } catch (e) {
+        throw new UnauthorizedError(e.message);
+    }
 }

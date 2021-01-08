@@ -30,7 +30,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "fhir-works-on-aws-interface": "^6.0.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.12.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",

@@ -21,15 +21,17 @@ import {
     GetSearchFilterBasedOnIdentityRequest,
     SearchFilter,
 } from 'fhir-works-on-aws-interface';
-import axios from 'axios';
 import { IdentityType, SMARTConfig, ClinicalSmartScope } from './smartConfig';
 import {
     areScopesSufficient,
     convertScopeToSmartScope,
+    getJwksClient,
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
     SEARCH_OPERATIONS,
+    verifyJwtToken,
 } from './smartScopeHelper';
+
 import { authorizeResource, FHIR_USER_REGEX, getFhirUser } from './smartAuthorizationHelper';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -88,30 +90,43 @@ export class SMARTHandler implements Authorization {
         }
 
         // verify token
-        let response: any;
-        try {
-            response = await axios.get(this.config.userInfoEndpoint, {
-                headers: { Authorization: `Bearer ${request.accessToken}` },
-            });
-        } catch (e) {
-            console.error('Post to authZUserInfoUrl failed', e);
-        }
+        // let response: any;
+        // try {
+        //     response = await axios.get(this.config.userInfoEndpoint, {
+        //         headers: { Authorization: `Bearer ${request.accessToken}` },
+        //     });
+        // } catch (e) {
+        //     console.error('Post to authZUserInfoUrl failed', e);
+        // }
+        const jwksClient = getJwksClient(this.config.jwksEndpoint);
+        // const decodedToken: any = smartScopeHelper.verifyJwtToken(request.accessToken, jwksClient);
+        const decodedToken: any = await verifyJwtToken(request.accessToken, jwksClient);
+
+        // Exp response
+        // response.data = {
+        //     "fhirUser": "https://fhir.server.com/dev/Patient/1234"
+        // };
 
         const { fhirUserClaimKey } = this.config;
-        if (!response || !response.data[fhirUserClaimKey]) {
+
+        if (!decodedToken || !decodedToken[fhirUserClaimKey]) {
             console.error(`result from AuthZ did not have ${fhirUserClaimKey} claim`);
             throw new UnauthorizedError("Cannot determine requester's identity");
-        } else if (!response.data[fhirUserClaimKey].match(FHIR_USER_REGEX)) {
+        } else if (!decodedToken[fhirUserClaimKey].match(FHIR_USER_REGEX)) {
             console.error(`User identity found does not conform to the expected format: ${FHIR_USER_REGEX}`);
             throw new UnauthorizedError("Requester's identity is in the incorrect format");
         } else if (request.bulkDataAuth) {
-            const fhirUser = getFhirUser(response.data, this.config.fhirUserClaimKey);
+            const fhirUser = getFhirUser(decodedToken, this.config.fhirUserClaimKey);
             if (fhirUser.hostname !== this.apiUrl || !this.adminAccessTypes.includes(fhirUser.resourceType)) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
         }
 
-        const userIdentity = clone(response.data);
+        const userIdentity: any = {
+            sub: decodedToken.sub,
+            [fhirUserClaimKey]: decodedToken[fhirUserClaimKey],
+        };
+
         userIdentity.scopes = scopes;
         return userIdentity;
     }
