@@ -3,14 +3,14 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-import { CLINICAL_SCOPE_REGEX, LAUNCH_SCOPE_REGEX } from './smartScopeHelper';
-import { FHIR_USER_REGEX } from './smartAuthorizationHelper';
+import { CLINICAL_SCOPE_REGEX } from './smartScopeHelper';
+import { FHIR_USER_REGEX, FHIR_RESOURCE_REGEX } from './smartAuthorizationHelper';
 
 describe('CLINICAL_SCOPE_REGEX', () => {
     const testCases = [
         ['patient', 'Patient', 'read', true],
         ['user', 'Patient', 'read', true],
-        ['system', 'Patient', 'read', true],
+        ['system', 'Patient', 'read', false],
         ['patient', 'Patient', 'write', true],
         ['patient', 'Patient', '*', true],
         ['patient', 'Observation', 'read', true],
@@ -49,41 +49,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         expect(actualMatch).toBeFalsy();
     });
 });
-describe('LAUNCH_SCOPE_REGEX', () => {
-    const testCases = [
-        ['launch', 'patient', true],
-        ['launch', 'encounter', true],
-        ['Launch', 'encounter', false],
-        ['launch', 'Encounter', false],
-        ['launch1', 'encounter', false],
-        ['launch', 'encounter1', false],
-        ['launch', '', false],
-        ['', 'encounter', false],
-    ];
-    test.each(testCases)('CASE: %p/%p; expect: %p', async (scopeType, launchType, isSuccess) => {
-        const expectedStr = `${scopeType}/${launchType}`;
-        const actualMatch = expectedStr.match(LAUNCH_SCOPE_REGEX);
-        if (isSuccess) {
-            expect(actualMatch).toBeTruthy();
-            expect(actualMatch!.groups).toBeTruthy();
-            expect(actualMatch!.groups!.scopeType).toEqual(scopeType);
-            expect(actualMatch!.groups!.launchType).toEqual(launchType);
-        } else {
-            expect(actualMatch).toBeFalsy();
-        }
-    });
-    const uniqueTestCases = [
-        ['patient/Patient.read'],
-        ['launch.encounter'],
-        ['plain old wrong'],
-        ['launch/encounter launch/encounter'],
-        ['launch/encounter '],
-    ];
-    test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
-        const actualMatch = scope.match(LAUNCH_SCOPE_REGEX);
-        expect(actualMatch).toBeFalsy();
-    });
-});
+
 describe('FHIR_USER_REGEX', () => {
     const testCases = [
         ['https://fhir.server.com/dev/', 'Patient', 'id', true],
@@ -109,18 +75,16 @@ describe('FHIR_USER_REGEX', () => {
         [' https://fhir.server.com/dev/', 'Patient', 'id', false],
     ];
     test.each(testCases)('CASE: %p%p/%p; expect: %p', async (hostname, resourceType, id, isSuccess) => {
-        for (let i = 0; i < testCases.length; i += 1) {
-            const expectedStr = `${hostname}${resourceType}/${id}`;
-            const actualMatch = expectedStr.match(FHIR_USER_REGEX);
-            if (isSuccess) {
-                expect(actualMatch).toBeTruthy();
-                expect(actualMatch!.groups).toBeTruthy();
-                expect(actualMatch!.groups!.hostname).toEqual(hostname);
-                expect(actualMatch!.groups!.resourceType).toEqual(resourceType);
-                expect(actualMatch!.groups!.id).toEqual(id);
-            } else {
-                expect(actualMatch).toBeFalsy();
-            }
+        const expectedStr = `${hostname}${resourceType}/${id}`;
+        const actualMatch = expectedStr.match(FHIR_USER_REGEX);
+        if (isSuccess) {
+            expect(actualMatch).toBeTruthy();
+            expect(actualMatch!.groups).toBeTruthy();
+            expect(actualMatch!.groups!.hostname).toEqual(hostname);
+            expect(actualMatch!.groups!.resourceType).toEqual(resourceType);
+            expect(actualMatch!.groups!.id).toEqual(id);
+        } else {
+            expect(actualMatch).toBeFalsy();
         }
     });
     const uniqueTestCases = [
@@ -132,6 +96,47 @@ describe('FHIR_USER_REGEX', () => {
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
         const actualMatch = scope.match(FHIR_USER_REGEX);
+        expect(actualMatch).toBeFalsy();
+    });
+});
+describe('FHIR_RESOURCE_REGEX', () => {
+    const testCases = [
+        ['https://fhir.server.com/dev/', 'Patient', 'id', true, true],
+        ['http://fhir.server.com/dev-.:/%/$/2/', 'Observation', 'id', true, true],
+        ['http://localhost/projectname/', 'Encounter', 'id', true, true],
+        ['https://127.0.0.1:8080/project_name/', 'Patient', 'id', true, true],
+        ['https://fhir.server.com/dev/', 'Patient', 'idID1234-123.aBc', true, true],
+        ['', 'Patient', 'id', true, false],
+        ['', 'Encounter', 'id', true, false],
+        ['fhir.server.com/dev/', 'Patient', 'id', true, false],
+        ['127.0.0.1/project_name', 'Patient', 'id', true, false],
+    ];
+    test.each(testCases)('CASE: %p%p/%p; expect: %p', async (hostname, resourceType, id, isSuccess, hasHostname) => {
+        const expectedStr = `${hostname}${resourceType}/${id}`;
+        const actualMatch = expectedStr.match(FHIR_RESOURCE_REGEX);
+        if (isSuccess) {
+            expect(actualMatch).toBeTruthy();
+            expect(actualMatch!.groups).toBeTruthy();
+            expect(actualMatch!.groups!.resourceType).toEqual(resourceType);
+            expect(actualMatch!.groups!.id).toEqual(id);
+            if (hasHostname) {
+                expect(actualMatch!.groups!.hostname).toEqual(hostname);
+            } else {
+                expect(actualMatch!.groups!.hostname).toBeFalsy();
+            }
+        } else {
+            expect(actualMatch).toBeFalsy();
+        }
+    });
+    const uniqueTestCases = [
+        ['patient/Patient.read'],
+        ['launch/encounter'],
+        ['just-an-id-1234'],
+        ['Patient'],
+        ['https://fhir.server.com/dev/'],
+    ];
+    test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
+        const actualMatch = scope.match(FHIR_RESOURCE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
 });

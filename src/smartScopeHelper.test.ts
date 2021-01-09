@@ -1,8 +1,9 @@
 import { BulkDataAuth, clone } from 'fhir-works-on-aws-interface';
 import { ScopeRule } from './smartConfig';
 import {
-    areScopesSufficient,
+    isScopeSufficient,
     convertScopeToSmartScope,
+    filterScopes,
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
 } from './smartScopeHelper';
@@ -16,23 +17,14 @@ const scopeRule: ScopeRule = {
         read: [],
         write: [],
     },
-    system: {
-        read: [],
-        write: [],
-    },
-    launch: {
-        launch: [],
-        patient: [],
-        encounter: [],
-    },
 };
-const areScopesSufficientCases: string[][] = [['user'], ['patient']];
-describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: string) => {
+const isScopeSufficientCases: string[][] = [['user'], ['patient']];
+describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: string) => {
     test('scope is sufficient to read Observation: Scope with resourceType "Observation" should be able to read "Observation" resources', () => {
         const clonedScopeRule = clone(scopeRule);
         clonedScopeRule[scopeType].read = ['read'];
 
-        expect(areScopesSufficient([`${scopeType}/Observation.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+        expect(isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', 'Observation')).toEqual(
             true,
         );
     });
@@ -41,14 +33,14 @@ describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: s
         const clonedScopeRule = clone(scopeRule);
         clonedScopeRule[scopeType].read = ['read'];
 
-        expect(areScopesSufficient([`${scopeType}/*.read`], 'read', clonedScopeRule, 'Observation')).toEqual(true);
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', 'Observation')).toEqual(true);
     });
 
     test('scope is NOT sufficient to read Observation because scopeRule does not allow read operation', () => {
         const clonedScopeRule = clone(scopeRule);
         clonedScopeRule[scopeType].read = ['search-type'];
 
-        expect(areScopesSufficient([`${scopeType}/Medication.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+        expect(isScopeSufficient(`${scopeType}/Medication.read`, clonedScopeRule, 'read', 'Observation')).toEqual(
             false,
         );
     });
@@ -57,7 +49,7 @@ describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: s
         const clonedScopeRule = clone(scopeRule);
         clonedScopeRule[scopeType].read = ['read'];
 
-        expect(areScopesSufficient([`${scopeType}/Medication.read`], 'read', clonedScopeRule, 'Observation')).toEqual(
+        expect(isScopeSufficient(`${scopeType}/Medication.read`, clonedScopeRule, 'read', 'Observation')).toEqual(
             false,
         );
     });
@@ -68,7 +60,7 @@ describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: s
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
 
         // Only scopeType of user has bulkDataAccess
-        expect(areScopesSufficient([`${scopeType}/*.read`], 'read', clonedScopeRule, undefined, bulkDataAuth)).toEqual(
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
             scopeType === 'user',
         );
     });
@@ -79,17 +71,88 @@ describe.each(areScopesSufficientCases)('%s: areScopesSufficient', (scopeType: s
 
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
         expect(
-            areScopesSufficient([`${scopeType}/Observation.read`], 'read', clonedScopeRule, undefined, bulkDataAuth),
+            isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
         ).toEqual(false);
+    });
+    test('invalid scope', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['read'];
+
+        expect(isScopeSufficient(`fake`, clonedScopeRule, 'read')).toEqual(false);
     });
 });
 
 describe('getScopes', () => {
     test('scope type delimited by space', () => {
-        expect(getScopes('space', 'launch/encounter user/*.read')).toEqual(['launch/encounter', 'user/*.read']);
+        expect(getScopes('launch/encounter user/*.read fake')).toEqual(['launch/encounter', 'user/*.read', 'fake']);
     });
     test('scope type as array', () => {
-        expect(getScopes('array', ['launch/encounter', 'user/*.read'])).toEqual(['launch/encounter', 'user/*.read']);
+        expect(getScopes(['launch/encounter', 'user/*.read', 'fake'])).toEqual([
+            'launch/encounter',
+            'user/*.read',
+            'fake',
+        ]);
+    });
+});
+describe('filterScopes', () => {
+    test('no filter occuring', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        const expectedScopes = ['user/*.read', 'patient/*.*'];
+        expect(
+            filterScopes(expectedScopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', 'fhirUser'),
+        ).toEqual(expectedScopes);
+    });
+    test('filter user; due to no fhirUser', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        const expectedScopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
+        expect(
+            filterScopes(expectedScopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', undefined),
+        ).toEqual([expectedScopes[2]]);
+    });
+    test('filter user; due to scope being insufficient', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        const expectedScopes = ['user/*.write', 'user/Patient.read', 'patient/*.*'];
+        expect(
+            filterScopes(expectedScopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', 'fhirUser'),
+        ).toEqual([expectedScopes[1], expectedScopes[2]]);
+    });
+    test('filter patient; due to no launch context', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        const expectedScopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
+        expect(
+            filterScopes(expectedScopes, clonedScopeRule, 'read', 'Patient', undefined, undefined, 'fhirUser'),
+        ).toEqual([expectedScopes[0], expectedScopes[1]]);
+    });
+    test('filter patient; due to scope being insufficient', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        const expectedScopes = ['user/Patient.read', 'patient/Obersvation.*', 'patient/*.read'];
+        expect(
+            filterScopes(expectedScopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', 'fhirUser'),
+        ).toEqual([expectedScopes[0], expectedScopes[2]]);
+    });
+
+    test('filter user & patient', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        expect(
+            filterScopes(
+                ['launch', 'fhirUser', 'user/Patient.read', 'patient/Obersvation.*', 'patient/*.read'],
+                clonedScopeRule,
+                'read',
+                'Patient',
+            ),
+        ).toEqual([]);
     });
 });
 
@@ -118,17 +181,24 @@ describe('getValidOperationsForScopeTypeAndAccessType', () => {
 describe('convertScopeToSmartScope', () => {
     test('launchScope', () => {
         const scope = 'launch/encounter';
-        expect(convertScopeToSmartScope(scope)).toEqual({
-            launchType: 'encounter',
-            scopeType: 'launch',
-        });
+        expect(() => {
+            convertScopeToSmartScope(scope);
+        }).toThrowError(new Error('Not a SmartScope'));
     });
-    test('clinicalScope', () => {
+    test('user clinicalScope', () => {
         const scope = 'user/Observation.read';
         expect(convertScopeToSmartScope(scope)).toEqual({
             accessType: 'read',
             resourceType: 'Observation',
             scopeType: 'user',
+        });
+    });
+    test('patient clinicalScope', () => {
+        const scope = 'patient/Fake.*';
+        expect(convertScopeToSmartScope(scope)).toEqual({
+            accessType: '*',
+            resourceType: 'Fake',
+            scopeType: 'patient',
         });
     });
 });

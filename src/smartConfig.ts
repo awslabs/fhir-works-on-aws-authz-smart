@@ -2,11 +2,10 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { TypeOperation, SystemOperation } from 'fhir-works-on-aws-interface';
+import { TypeOperation, SystemOperation, KeyValueMap } from 'fhir-works-on-aws-interface';
 
-export type AccessModifier = 'read' | 'write';
-export type ScopeType = 'patient' | 'user' | 'system';
-export type LaunchType = 'patient' | 'encounter';
+export type ScopeType = 'patient' | 'user';
+export type AccessModifier = 'read' | 'write' | '*';
 export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
 
 export interface ClinicalSmartScope {
@@ -15,54 +14,36 @@ export interface ClinicalSmartScope {
     accessType: AccessModifier;
 }
 
-export interface LaunchSmartScope {
-    scopeType: 'launch';
-    launchType: LaunchType | undefined;
-}
-
-export type SmartScope = ClinicalSmartScope | LaunchSmartScope;
-
 export type AccessRule = {
     [accessType in AccessModifier]: (TypeOperation | SystemOperation)[];
 };
-export type LaunchRule = {
-    [launchType in LaunchType]: (TypeOperation | SystemOperation)[];
-} & {
-    launch: (TypeOperation | SystemOperation)[];
-};
-
-// Determines what each scope has access to
-export type ScopeRule = {
-    [scopeType in ScopeType]: AccessRule;
-} & {
-    launch: LaunchRule;
-};
 
 /**
- * Example of a scope rule
- * ```typescript
-    export const scopeRule: ScopeRule = {
-        patient: {
-            read: allReadOperations,
-            write: [],
-        },
-        user: {
-            read: allReadOperations,
-            write: ['update', 'patch', 'create'],
-        },
-        system: {
-            read: allReadOperations,
-            write: allWriteOperations,
-        },
-        launch: {
-            launch: allReadOperations,
-            patient: allReadOperations,
-            encounter: allReadOperations,
-        },
-    };
-
- * ```
+ * Determines what each scope has access to
+ *
+ *  @example
+ * {
+ *      patient: {
+ *          read: allReadOperations,
+ *          write: [],
+ *      },
+ *      user: {
+ *          read: allReadOperations,
+ *          write: ['update', 'patch', 'create'],
+ *      },
+ *  };
  */
+export type ScopeRule = {
+    [scopeType in ScopeType]: Omit<AccessRule, '*'>;
+};
+
+export type FhirResource = { hostname: string; resourceType: string; id: string };
+
+export interface UserIdentity extends KeyValueMap {
+    scopes: string[];
+    fhirUser: FhirResource;
+    launchResources: FhirResource[];
+}
 
 export interface SMARTConfig {
     version: number;
@@ -70,10 +51,6 @@ export interface SMARTConfig {
      * Within the access_token the scopes are typically sent in the 'scp' or 'scope' key
      */
     scopeKey: string;
-    /**
-     * The value of the scope key can either be an array or a space seperated string
-     */
-    scopeValueType: 'array' | 'space';
     /**
      * Defined more below
      */
@@ -90,6 +67,11 @@ export interface SMARTConfig {
      * Name of the claim found in the access_token that represents the requestors FHIR Id
      */
     fhirUserClaimKey: 'fhirUser' | 'profile';
+    /**
+     * Prefix of the claim found in the access_token that represents the requestors launch context
+     * @example launch_response_
+     */
+    launchContextKeyPrefix: string;
     /**
      * OAuth2 standard URL used to verify the access_token and get all user claims
      */
