@@ -12,7 +12,6 @@ import {
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
-    KeyValueMap,
     clone,
     BatchReadWriteRequest,
     BASE_R4_RESOURCES,
