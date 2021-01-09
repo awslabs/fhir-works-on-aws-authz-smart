@@ -41,8 +41,8 @@ export type FhirResource = { hostname: string; resourceType: string; id: string 
 
 export interface UserIdentity extends KeyValueMap {
     scopes: string[];
-    fhirUser: FhirResource;
-    launchResources: FhirResource[];
+    fhirUserObject?: FhirResource;
+    patientLaunchContext?: FhirResource;
 }
 
 export interface SMARTConfig {

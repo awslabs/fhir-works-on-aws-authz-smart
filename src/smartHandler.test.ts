@@ -483,6 +483,17 @@ describe('verifyAccessToken; System level export requests', () => {
             true,
         ],
         [
+            'External practitioner: initiate-export; fail',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], fhirUser: externalPractitionerIdentity },
+            false,
+        ],
+        [
             'No User read access: initiate-export',
             {
                 accessToken: 'fake',
@@ -883,6 +894,31 @@ describe('isWriteRequestAuthorized', () => {
             },
             true,
         ],
+        [
+            'PATCH: missing user/patient context',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write', 'patient/*.write'],
+                },
+                operation: 'patch',
+                resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
+            },
+            false,
+        ],
+        [
+            'UPDATE: user scope; External practitioner unable to write Patient',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
+                operation: 'update',
+                resourceBody: validPatient,
+            },
+            false,
+        ],
     ];
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
@@ -994,6 +1030,15 @@ describe('isBundleRequestAuthorized', () => {
                 scopes: ['patient/Patient.read'],
                 fhirUserObject: practitionerFhirResource,
                 patientLaunchContext: patientFhirResource,
+            },
+            false,
+        ],
+        [
+            'patient with correct scopes; but does not have write access to resource: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['patient/*.*', 'profile'],
+                patientLaunchContext: externalPractitionerFhirResource,
             },
             false,
         ],

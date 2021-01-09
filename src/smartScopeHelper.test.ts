@@ -74,6 +74,25 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: strin
             isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
         ).toEqual(false);
     });
+    test('scope is sufficient to do a search-system', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['search-system'];
+
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'search-system')).toEqual(true);
+    });
+    test('scope is sufficient to do a transaction', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].write = ['transaction'];
+
+        expect(isScopeSufficient(`${scopeType}/*.write`, clonedScopeRule, 'transaction')).toEqual(true);
+    });
+    test('scope is insufficient to do a transaction', () => {
+        const clonedScopeRule = clone(scopeRule);
+        clonedScopeRule[scopeType].read = ['read'];
+        clonedScopeRule[scopeType].write = ['create'];
+
+        expect(isScopeSufficient(`${scopeType}/*.*`, clonedScopeRule, 'transaction')).toEqual(false);
+    });
     test('invalid scope', () => {
         const clonedScopeRule = clone(scopeRule);
         clonedScopeRule[scopeType].read = ['read'];

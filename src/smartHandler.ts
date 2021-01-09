@@ -22,7 +22,7 @@ import {
     SearchFilter,
 } from 'fhir-works-on-aws-interface';
 import axios from 'axios';
-import { SMARTConfig } from './smartConfig';
+import { SMARTConfig, UserIdentity } from './smartConfig';
 import {
     convertScopeToSmartScope,
     filterScopes,
@@ -54,7 +54,7 @@ export class SMARTHandler implements Authorization {
         this.fhirVersion = fhirVersion;
     }
 
-    async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
+    async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<UserIdentity> {
         // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
         // Decoding first to determine if it passes scope & claims check first
         const decoded = decode(request.accessToken, { json: true }) || {};
@@ -82,7 +82,7 @@ export class SMARTHandler implements Authorization {
         );
         if (!usableScopes.length) {
             console.error('User supplied scopes are insufficient', {
-                usedScopes: usableScopes,
+                usableScopes,
                 operation: request.operation,
                 resourceType: request.resourceType,
             });
@@ -111,7 +111,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        const userIdentity = clone(response.data);
+        const userIdentity: UserIdentity = clone(response.data);
         if (fhirUserClaim && usableScopes.some(scope => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }
@@ -136,7 +136,6 @@ export class SMARTHandler implements Authorization {
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
             if (resourceType === 'Practitioner') {
-                // if fhirUser is
                 return [];
             }
             values.push(`${hostname}${resourceType}/${id}`);
@@ -153,7 +152,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        // Create a SearchFilter to limit access to only resources that are referring to the requesting user
+        // Create a SearchFilter to limit access to only resources that are referring to the requesting user and/or context
         return [
             {
                 key: '_reference',

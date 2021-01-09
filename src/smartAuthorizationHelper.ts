@@ -29,10 +29,10 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
     throw new UnauthorizedError('Resource is in the incorrect format');
 }
 
-function isLocalResourceInJsonAsReference(jsonStr: string, fhirUser: FhirResource): boolean {
+function isLocalResourceInJsonAsReference(jsonStr: string, fhirResource: FhirResource): boolean {
     return (
-        jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`) ||
-        jsonStr.includes(`"reference":"${fhirUser.resourceType}/${fhirUser.id}"`)
+        jsonStr.includes(`"reference":"${fhirResource.hostname}${fhirResource.resourceType}/${fhirResource.id}"`) ||
+        jsonStr.includes(`"reference":"${fhirResource.resourceType}/${fhirResource.id}"`)
     );
 }
 
@@ -47,7 +47,7 @@ export function authorizeResource(fhirResource: FhirResource, resource: any, api
         return true;
     }
     if (resourceType === resource.resourceType) {
-        // Attempting to look up its own record?
+        // Attempting to look up its own record
         return id === resource.id || isLocalResourceInJsonAsReference(jsonStr, fhirResource);
     }
     return isLocalResourceInJsonAsReference(jsonStr, fhirResource);
