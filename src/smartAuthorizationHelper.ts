@@ -1,4 +1,6 @@
 import { KeyValueMap, UnauthorizedError } from 'fhir-works-on-aws-interface';
+import jwksClient, { JwksClient } from 'jwks-rsa';
+import { decode, verify } from 'jsonwebtoken';
 import { IdentityType } from './smartConfig';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
@@ -39,4 +41,28 @@ export function authorizeResource(fhirUser: FhirUser, resource: any, apiUrl: str
         return fhirUser.id === resource.id || isLocalUserInJsonAsReference(jsonStr, fhirUser);
     }
     return isLocalUserInJsonAsReference(jsonStr, fhirUser);
+}
+export function getJwksClient(jwksUri: string): JwksClient {
+    return jwksClient({
+        cache: true,
+        cacheMaxEntries: 5,
+        cacheMaxAge: 600000,
+        rateLimit: true,
+        jwksRequestsPerMinute: 10,
+        jwksUri,
+    });
+}
+
+export async function verifyJwtToken(token: string, client: JwksClient) {
+    const decodedAccessToken = decode(token, { complete: true });
+    if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
+        throw new UnauthorizedError('invalid access token');
+    }
+    try {
+        const { kid } = decodedAccessToken.header!;
+        const key = await client.getSigningKeyAsync(kid);
+        return verify(token, key.getPublicKey());
+    } catch (e) {
+        throw new UnauthorizedError(e.message);
+    }
 }

@@ -13,7 +13,6 @@ import {
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
     KeyValueMap,
-    clone,
     BatchReadWriteRequest,
     BASE_R4_RESOURCES,
     FhirVersion,
@@ -21,18 +20,23 @@ import {
     GetSearchFilterBasedOnIdentityRequest,
     SearchFilter,
 } from 'fhir-works-on-aws-interface';
+import { JwksClient } from 'jwks-rsa';
 import { IdentityType, SMARTConfig, ClinicalSmartScope } from './smartConfig';
 import {
     areScopesSufficient,
     convertScopeToSmartScope,
-    getJwksClient,
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
     SEARCH_OPERATIONS,
-    verifyJwtToken,
 } from './smartScopeHelper';
 
-import { authorizeResource, FHIR_USER_REGEX, getFhirUser } from './smartAuthorizationHelper';
+import {
+    authorizeResource,
+    FHIR_USER_REGEX,
+    getFhirUser,
+    getJwksClient,
+    verifyJwtToken,
+} from './smartAuthorizationHelper';
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -48,6 +52,8 @@ export class SMARTHandler implements Authorization {
 
     private readonly fhirVersion: FhirVersion;
 
+    private readonly jwksClient: JwksClient;
+
     constructor(config: SMARTConfig, apiUrl: string, fhirVersion: FhirVersion) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
@@ -55,6 +61,7 @@ export class SMARTHandler implements Authorization {
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
+        this.jwksClient = getJwksClient(this.config.jwksEndpoint);
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
@@ -89,23 +96,7 @@ export class SMARTHandler implements Authorization {
             throw new UnauthorizedError('User does not have permission for requested operation');
         }
 
-        // verify token
-        // let response: any;
-        // try {
-        //     response = await axios.get(this.config.userInfoEndpoint, {
-        //         headers: { Authorization: `Bearer ${request.accessToken}` },
-        //     });
-        // } catch (e) {
-        //     console.error('Post to authZUserInfoUrl failed', e);
-        // }
-        const jwksClient = getJwksClient(this.config.jwksEndpoint);
-        // const decodedToken: any = smartScopeHelper.verifyJwtToken(request.accessToken, jwksClient);
-        const decodedToken: any = await verifyJwtToken(request.accessToken, jwksClient);
-
-        // Exp response
-        // response.data = {
-        //     "fhirUser": "https://fhir.server.com/dev/Patient/1234"
-        // };
+        const decodedToken: any = await verifyJwtToken(request.accessToken, this.jwksClient);
 
         const { fhirUserClaimKey } = this.config;
 
