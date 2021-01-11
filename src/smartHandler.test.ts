@@ -102,7 +102,6 @@ const authZConfig: SMARTConfig = {
     expectedAudValue: expectedAud,
     expectedIssValue: expectedIss,
     fhirUserClaimKey: 'fhirUser',
-    userInfoEndpoint: `${expectedIss}/userInfo`,
     jwksEndpoint: `${expectedIss}/jwks`,
 };
 const apiUrl = 'https://fhir.server.com/dev/';
