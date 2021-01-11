@@ -2,7 +2,7 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { TypeOperation, SystemOperation, KeyValueMap } from 'fhir-works-on-aws-interface';
+import { KeyValueMap } from 'fhir-works-on-aws-interface';
 
 export type ScopeType = 'patient' | 'user';
 export type AccessModifier = 'read' | 'write' | '*';
@@ -15,27 +15,39 @@ export interface ClinicalSmartScope {
 }
 
 export type AccessRule = {
-    [accessType in AccessModifier]: (TypeOperation | SystemOperation)[];
+    read: (
+        | 'read'
+        | 'vread'
+        | 'history-type'
+        | 'history-instance'
+        | 'search-type'
+        | 'transaction'
+        | 'batch'
+        | 'search-system'
+        | 'history-system'
+    )[];
+    write: ('transaction' | 'batch' | 'create' | 'update' | 'delete' | 'patch')[];
 };
 
 /**
- * Determines what each scope has access to
- *
+ * Determines what each scope has access to do
+ * Scope `patient/Patient.read` maps to `scopeRule.patient.read` operations
  *  @example
  * {
  *      patient: {
- *          read: allReadOperations,
+ *          read: ['read','search-type'],
  *          write: [],
  *      },
  *      user: {
- *          read: allReadOperations,
- *          write: ['update', 'patch', 'create'],
+ *          read: ['read','search-type', 'vread'],
+ *          write: ['transaction','update', 'patch', 'create'],
  *      },
  *  };
  */
-export type ScopeRule = {
-    [scopeType in ScopeType]: Omit<AccessRule, '*'>;
-};
+export interface ScopeRule {
+    patient: AccessRule;
+    user: AccessRule;
+}
 
 export type FhirResource = { hostname: string; resourceType: string; id: string };
 
@@ -68,7 +80,7 @@ export interface SMARTConfig {
      */
     fhirUserClaimKey: 'fhirUser' | 'profile';
     /**
-     * Prefix of the claim found in the access_token that represents the requestors launch context
+     * Prefix of the claim found in the access_token that represents the requestors launch context. The remaining part of the claim will identify the resource type i.e. `launch_response_patient`
      * @example launch_response_
      */
     launchContextKeyPrefix: string;

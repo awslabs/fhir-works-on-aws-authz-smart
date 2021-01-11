@@ -1,7 +1,7 @@
 import { UnauthorizedError } from 'fhir-works-on-aws-interface';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
-export const FHIR_RESOURCE_REGEX = /(?<hostname>^(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_RESOURCE_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
 export interface FhirResource {
     hostname: string;
@@ -19,11 +19,8 @@ export function getFhirUser(fhirUserValue: string): FhirResource {
 export function getFhirResource(resourceValue: string, defaultHostname: string): FhirResource {
     const match = resourceValue.match(FHIR_RESOURCE_REGEX);
     if (match) {
-        // eslint-disable-next-line prefer-const
-        let { hostname, resourceType, id } = match.groups!;
-        if (!hostname) {
-            hostname = defaultHostname;
-        }
+        const { resourceType, id } = match.groups!;
+        const hostname = match.groups!.hostname ?? defaultHostname;
         return { hostname, resourceType, id };
     }
     throw new UnauthorizedError('Resource is in the incorrect format');
@@ -36,7 +33,7 @@ function isLocalResourceInJsonAsReference(jsonStr: string, fhirResource: FhirRes
     );
 }
 
-export function authorizeResource(fhirResource: FhirResource, resource: any, apiUrl: string): boolean {
+export function hasReferenceToResource(fhirResource: FhirResource, resource: any, apiUrl: string): boolean {
     const jsonStr = JSON.stringify(resource);
     const { hostname, resourceType, id } = fhirResource;
     if (hostname !== apiUrl) {

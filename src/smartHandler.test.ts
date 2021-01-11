@@ -11,7 +11,6 @@ import {
     TypeOperation,
     UnauthorizedError,
     WriteRequestAuthorizedRequest,
-    clone,
     AccessBulkDataJobRequest,
     AllowedResourceTypesForOperationRequest,
     BASE_R4_RESOURCES,
@@ -27,48 +26,29 @@ import { getFhirResource, getFhirUser } from './smartAuthorizationHelper';
 
 jest.mock('jsonwebtoken');
 
-const allReadOperations: (TypeOperation | SystemOperation)[] = [
-    'read',
-    'vread',
-    'search-type',
-    'search-system',
-    'history-instance',
-    'history-type',
-    'history-system',
-];
-
-const allWriteOperations: (TypeOperation | SystemOperation)[] = [
-    'create',
-    'update',
-    'delete',
-    'patch',
-    'transaction',
-    'batch',
-];
-
-const scopeRule: ScopeRule = {
+const scopeRule = (): ScopeRule => ({
     patient: {
-        read: allReadOperations,
+        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
         write: ['update', 'patch', 'create'],
     },
     user: {
-        read: allReadOperations,
-        write: allWriteOperations,
+        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
+        write: ['create', 'update', 'delete', 'patch', 'transaction', 'batch'],
     },
-};
+});
 
 const expectedAud = 'api://default';
 const expectedIss = 'https://dev-6460611.okta.com/oauth2/default';
-const authZConfig: SMARTConfig = {
+const baseAuthZConfig = (): SMARTConfig => ({
     version: 1.0,
     scopeKey: 'scp',
-    scopeRule,
+    scopeRule: scopeRule(),
     expectedAudValue: expectedAud,
     expectedIssValue: expectedIss,
     fhirUserClaimKey: 'fhirUser',
     launchContextKeyPrefix: 'launch_response_',
     userInfoEndpoint: `${expectedIss}/userInfo`,
-};
+});
 const apiUrl = 'https://fhir.server.com/dev/';
 const patientId = 'Patient/1234';
 const practitionerId = 'Practitioner/1234';
@@ -237,7 +217,7 @@ describe('constructor', () => {
             // eslint-disable-next-line no-new
             new SMARTHandler(
                 {
-                    ...authZConfig,
+                    ...baseAuthZConfig(),
                     version: 2.0,
                 },
                 apiUrl,
@@ -248,7 +228,7 @@ describe('constructor', () => {
 });
 
 function getExpectedUserIdentity(decodedAccessToken: any): any {
-    const expectedUserIdentity = clone(decodedAccessToken);
+    const expectedUserIdentity = decodedAccessToken;
     expectedUserIdentity.scopes = getScopes(decodedAccessToken.scp);
     const usableScopes = expectedUserIdentity.scopes.filter(
         (scope: string) => scope.startsWith('user/') || scope.startsWith('patient/'),
@@ -419,6 +399,8 @@ describe('verifyAccessToken', () => {
         ],
     ];
 
+    const authZConfig = baseAuthZConfig();
+
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
         mock.onGet(authZConfig.userInfoEndpoint).reply(200, decodedAccessToken);
@@ -517,6 +499,8 @@ describe('verifyAccessToken; System level export requests', () => {
         ],
     ];
 
+    const authZConfig = baseAuthZConfig();
+
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
         mock.onGet(authZConfig.userInfoEndpoint).reply(200, decodedAccessToken);
@@ -547,6 +531,7 @@ describe("verifyAccessToken; AuthZ's userInfo interactions", () => {
         ['4XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 403, decoded, false],
         ['5XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 500, decoded, false],
     ];
+    const authZConfig = baseAuthZConfig();
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(apiCases)('CASE: %p', async (_firstArg, request, authRespCode, decodedAccessToken, isValid) => {
@@ -840,7 +825,7 @@ describe('authorizeAndFilterReadResponse', () => {
         ],
     ];
 
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid, respBody) => {
         if (!isValid) {
             await expect(
@@ -921,7 +906,7 @@ describe('isWriteRequestAuthorized', () => {
         ],
     ];
 
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
         if (!isValid) {
             await expect(
@@ -936,7 +921,7 @@ describe('isWriteRequestAuthorized', () => {
 });
 
 describe('isAccessBulkDataJobAllowed', () => {
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
 
     const cases: (string | AccessBulkDataJobRequest | boolean)[][] = [
         [
@@ -981,7 +966,7 @@ describe('isAccessBulkDataJobAllowed', () => {
 });
 
 describe('isBundleRequestAuthorized', () => {
-    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    const authZConfigWithSearchTypeScope = baseAuthZConfig();
     authZConfigWithSearchTypeScope.scopeRule.user.write = ['create'];
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '4.0.1');
 
@@ -1075,7 +1060,7 @@ describe('isBundleRequestAuthorized', () => {
 });
 
 describe('getAllowedResourceTypesForOperation', () => {
-    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    const authZConfigWithSearchTypeScope = baseAuthZConfig();
     authZConfigWithSearchTypeScope.scopeRule.user.read = ['search-type'];
     authZConfigWithSearchTypeScope.scopeRule.user.write = [];
 
@@ -1122,7 +1107,7 @@ describe('getAllowedResourceTypesForOperation', () => {
 });
 
 describe('getSearchFilterBasedOnIdentity', () => {
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test('Patient context identity', async () => {
         // BUILD
         const userIdentity = {
@@ -1173,7 +1158,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
     test('User & Patient identity; fhirUser hostname does not match server hostname', async () => {
         // BUILD
         const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
-            authZConfig,
+            baseAuthZConfig(),
             'https://fhir.server-2.com/dev/',
             '4.0.1',
         );

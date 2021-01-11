@@ -1,5 +1,5 @@
 import { UnauthorizedError } from 'fhir-works-on-aws-interface';
-import { authorizeResource, FhirResource, getFhirResource, getFhirUser } from './smartAuthorizationHelper';
+import { hasReferenceToResource, FhirResource, getFhirResource, getFhirUser } from './smartAuthorizationHelper';
 
 describe('getFhirUser', () => {
     test('valid fhirUser', () => {
@@ -29,7 +29,7 @@ describe('getFhirResource', () => {
             resourceType: 'Organization',
         });
     });
-    test('valid fhirResource;; With default hostname', () => {
+    test('valid fhirResource; With default hostname', () => {
         expect(getFhirResource('Practitioner/1234', defaultHostname)).toEqual({
             hostname: defaultHostname,
             id: '1234',
@@ -43,22 +43,25 @@ describe('getFhirResource', () => {
     });
     test('invalid fhirResource', () => {
         expect(() => {
+            getFhirResource('bad.hostname/Practitioner/1234', defaultHostname);
+        }).toThrowError(new UnauthorizedError('Resource is in the incorrect format'));
+        expect(() => {
             getFhirResource('invalidFhirResource', defaultHostname);
-        }).toThrowError(new Error('Resource is in the incorrect format'));
+        }).toThrowError(new UnauthorizedError('Resource is in the incorrect format'));
     });
 });
 
-describe('authorizeResource', () => {
+describe('hasReferenceToResource', () => {
     const fhirUser: FhirResource = {
         hostname: 'https://fhirServer.com/',
         id: '1234',
         resourceType: 'Practitioner',
     };
     test('hostName does not match apiUrl', () => {
-        expect(authorizeResource(fhirUser, {}, 'fakeApiServer')).toEqual(false);
+        expect(hasReferenceToResource(fhirUser, {}, 'fakeApiServer')).toEqual(false);
     });
     test('resourceType is Practitioner', () => {
-        expect(authorizeResource(fhirUser, {}, 'https://fhirServer.com/')).toEqual(true);
+        expect(hasReferenceToResource(fhirUser, {}, 'https://fhirServer.com/')).toEqual(true);
     });
     describe('fhirUser resourceType matches resourceType of resource', () => {
         const patientFhirUser: FhirResource = {
@@ -68,12 +71,16 @@ describe('authorizeResource', () => {
         };
         test('fhirUser id matches resource id', () => {
             expect(
-                authorizeResource(patientFhirUser, { resourceType: 'Patient', id: '1234' }, 'https://fhirServer.com/'),
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1234' },
+                    'https://fhirServer.com/',
+                ),
             ).toEqual(true);
         });
         test('fhirUser referenced in resource', () => {
             expect(
-                authorizeResource(
+                hasReferenceToResource(
                     patientFhirUser,
                     { resourceType: 'Patient', id: '1', reference: 'Patient/1234' },
                     'https://fhirServer.com/',

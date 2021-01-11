@@ -129,7 +129,7 @@ export function isScopeSufficient(
  * - Without the `launch_response_patient` claim the 'patient' scopes cannot be validated
  * - Scopes like profile, launch or fhirUser will be filtered out as well
  */
-export function filterScopes(
+export function filterOutUnusableScope(
     scopes: string[],
     scopeRule: ScopeRule,
     reqOperation: TypeOperation | SystemOperation,
