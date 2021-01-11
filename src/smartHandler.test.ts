@@ -323,8 +323,7 @@ describe('verifyAccessToken; scopes are in an array', () => {
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, isValid) => {
-        // mock.onGet(authZConfig.userInfoEndpoint).reply(200, patientIdentityWithoutScopes);
-        // https://stackoverflow.com/a/60693903/14310364
+        // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(patientIdentityWithoutScopes),
         );

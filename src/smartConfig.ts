@@ -90,10 +90,6 @@ export interface SMARTConfig {
      * Name of the claim found in the access_token that represents the requestors FHIR Id
      */
     fhirUserClaimKey: 'fhirUser' | 'profile';
-    /**
-     * OAuth2 standard URL used to verify the access_token and get all user claims
-     */
-    userInfoEndpoint: string;
 
     /**
      * Json Web Key Set endpoint used to get the key for verifying access_token

@@ -55,7 +55,7 @@ describe('authorizeResource', () => {
 
 describe('verifyJwt', () => {
     const client = jwksClient({
-        jwksUri: 'http://fake-auth-server.com',
+        jwksUri: 'http://exampleAuthServer.com/oauth2',
         getKeysInterceptor: cb => {
             // @ts-ignore
             return cb(null, publicJwks.keys);
