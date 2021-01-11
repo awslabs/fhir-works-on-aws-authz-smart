@@ -463,7 +463,6 @@ describe('verifyAccessToken; scopes are space delimited', () => {
     );
 
     test.each(spaceScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        // mock.onGet(authZConfig.userInfoEndpoint).reply(200, patientIdentityWithoutScopes);
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(patientIdentityWithoutScopes),
         );
