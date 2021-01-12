@@ -65,20 +65,25 @@ export class SMARTHandler implements Authorization {
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<KeyValueMap> {
-        // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
         // Decoding first to determine if it passes scope & claims check first
-        const decoded = decode(request.accessToken, { json: true }) || {};
-        const { aud, iss } = decoded;
-        const audArray = Array.isArray(aud) ? aud : [aud];
-
-        // verify aud & iss
-        if (!audArray.includes(this.config.expectedAudValue) || this.config.expectedIssValue !== iss) {
-            console.error('aud or iss is not matching');
-            throw new UnauthorizedError('Error validating the validity of the access_token');
-        }
+        // const decoded = decode(request.accessToken, { json: true }) || {};
+        const decodedToken: any = await verifyJwtToken(
+            request.accessToken,
+            this.config.expectedAudValue,
+            this.config.expectedIssValue,
+            this.jwksClient,
+        );
+        // const { aud, iss } = decodedToken;
+        // const audArray = Array.isArray(aud) ? aud : [aud];
+        //
+        // // verify aud & iss
+        // if (!audArray.includes(this.config.expectedAudValue) || this.config.expectedIssValue !== iss) {
+        //     console.error('aud or iss is not matching');
+        //     throw new UnauthorizedError('Error validating the validity of the access_token');
+        // }
 
         // verify scope
-        const scopes = getScopes(this.config.scopeValueType, decoded[this.config.scopeKey]);
+        const scopes = getScopes(this.config.scopeValueType, decodedToken[this.config.scopeKey]);
         if (
             !areScopesSufficient(
                 scopes,
@@ -95,8 +100,6 @@ export class SMARTHandler implements Authorization {
             });
             throw new UnauthorizedError('User does not have permission for requested operation');
         }
-
-        const decodedToken: any = await verifyJwtToken(request.accessToken, this.jwksClient);
 
         const { fhirUserClaimKey } = this.config;
 

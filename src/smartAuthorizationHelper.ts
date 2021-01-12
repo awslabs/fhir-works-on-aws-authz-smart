@@ -53,13 +53,29 @@ export function getJwksClient(jwksUri: string): JwksClient {
     });
 }
 
-export async function verifyJwtToken(token: string, client: JwksClient) {
+export async function verifyJwtToken(
+    token: string,
+    expectedAudValue: string,
+    expectedIssValue: string,
+    client: JwksClient,
+) {
     const decodedAccessToken = decode(token, { complete: true });
     if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
         throw new UnauthorizedError('invalid access token');
     }
+    const { kid } = decodedAccessToken.header;
+    if (!kid) {
+        throw new UnauthorizedError('JWT verification failed. JWT "kid" attribute is required in the header');
+    }
+    const { aud, iss } = decodedAccessToken.payload;
+    const audArray = Array.isArray(aud) ? aud : [aud];
+
+    // verify aud & iss
+    if (!audArray.includes(expectedAudValue) || expectedIssValue !== iss) {
+        console.error('aud or iss is not matching');
+        throw new UnauthorizedError('Error validating the validity of the access_token');
+    }
     try {
-        const { kid } = decodedAccessToken.header!;
         const key = await client.getSigningKeyAsync(kid);
         return verify(token, key.getPublicKey());
     } catch (e) {

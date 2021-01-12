@@ -1,7 +1,12 @@
 import { UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient from 'jwks-rsa';
+
+import { sign } from 'jsonwebtoken';
+import { pem2jwk } from 'pem-jwk';
+
 import { authorizeResource, FhirUser, getFhirUser, verifyJwtToken } from './smartAuthorizationHelper';
-import publicJwks from './testData/jwt/publicJwks.json';
+
+const { generateKeyPairSync } = require('crypto');
 
 describe('getFhirUser', () => {
     test('valid fhirUser', () => {
@@ -54,45 +59,82 @@ describe('authorizeResource', () => {
 });
 
 describe('verifyJwt', () => {
+    const { publicKey, privateKey } = generateKeyPairSync('rsa', {
+        modulusLength: 4096,
+        publicKeyEncoding: {
+            type: 'spki',
+            format: 'pem',
+        },
+        privateKeyEncoding: {
+            type: 'pkcs8',
+            format: 'pem',
+        },
+    });
+    console.log('Public Key for JWT');
+    console.log(publicKey);
+
+    const kid = 'abcd1234';
+    const jwk = { ...pem2jwk(publicKey), kid };
+    console.log('jwk', jwk);
+
     const client = jwksClient({
         jwksUri: 'http://exampleAuthServer.com/oauth2',
         getKeysInterceptor: cb => {
             // @ts-ignore
-            return cb(null, publicJwks.keys);
+            return cb(null, [jwk]);
         },
     });
-    test('JWT is valid and verified', async () => {
-        const token =
-            'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFiY2QxMjM0In0.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2V4YW1wbGVBdXRoU2VydmVyLmNvbS9vYXV0aDIiLCJhdWQiOiJhcGk6Ly9kZWZhdWx0IiwiaWF0IjoxNjEwMTQ0MjcyLCJleHAiOjMzMTQ2MTQ0MjcyLCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCJdLCJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZmhpclVzZXIiOiJQcmFjdGl0aW9uZXIvMTIzNCJ9.KsR46wCk63dSzd1rwd1jqnuggxsuv8jgmpIiRA_KzE8kd1Y-dleApctIsHEz9alUUBiwmNWjiLSdO7VAjFYuWEUrlVJ3sJ_GXH0PIBWW2lW_cXPFrnbEw0NoLhWX7qBubYXcU3s5enj_bLXft-GBXOC89ZJudK_za-6-zCBlUkrN8K1oUxvbPg6rTz3IXQifupnwjwXj1PywkCvVDK_kIcBfn1a8TCFHpq-vdE2y91xT0QqUCH87d11IPJ_UIqOY9M5L-JiXC7diY4VTv0cBPUele3Dn3FskwCK76nGyUFDwxsi36dz1xFrRDdHo3KzmbHs0cevAYBANImlJARyD3w';
 
-        const expectedDecodedToken = {
+    function getDefaultPayload(iat: number, exp: number) {
+        return {
             ver: 1,
             jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
             iss: 'https://exampleAuthServer.com/oauth2',
             aud: 'api://default',
-            iat: 1610144272,
-            exp: 33146144272,
+            iat,
+            exp,
             cid: '0oa8muazKSyk9gP5y5d5',
             uid: '00u85ozwjjWRd17PB5d5',
             scp: ['fhirUser', 'openid', 'profile', 'launch/encounter', 'patient/Patient.read'],
             sub: 'test@test.com',
             fhirUser: 'Practitioner/1234',
         };
-        return expect(verifyJwtToken(token, client)).resolves.toEqual(expectedDecodedToken);
+    }
+    test('JWT is valid and verified', async () => {
+        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const jwt = sign(payload, privateKey, {
+            header: {
+                alg: 'RS256',
+                typ: 'JWT',
+                kid,
+            },
+        });
+        return expect(
+            verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
+        ).resolves.toEqual(payload);
     });
 
     test('jwt expired', async () => {
-        const token =
-            'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFiY2QxMjM0In0.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYxMDE0NDU0MywiZXhwIjoxNjEwMTQ0NTQ0LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCIsInVzZXIvKi5yZWFkIl0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUHJhY3RpdGlvbmVyLzEyMzQifQ.fGnPiCByLEmCcGIoZUyr8_KZVcoCF706x1e7Gay4bqMzM1piEc2AIjg6bdgws2BhRbgXFvuOPGm7ob8qe9jSZGhcuVq0FVJiwLlZNHrUMESRlf29BQPzF6UZ8xYjDsXy7kWpdXziitFKVrBKm4WbYsQx8oJ4DKHr42MoQSS5qAkZWjy2GXiTPhl2DHcd5niEpgc9Qz2uuoNmoFMs8qAs0Rh9aYrTBQzGYzOvhspH_dwavTCLwTbqhwkRerFSHqlWcjMGdJIa9_vZgyAQMLF5sNs5Ub48RqdQ41m4z8SFHJk1hbBHUrLC896g1yavipEL_oYxPk9kq4t8IOnSZ0RGzg';
+        const payload = getDefaultPayload(Math.floor(Date.now() / 1000) - 10, Math.floor(Date.now() / 1000) - 1);
 
-        return expect(verifyJwtToken(token, client)).rejects.toThrowError(new UnauthorizedError('jwt expired'));
+        const jwt = sign(payload, privateKey, {
+            header: {
+                alg: 'RS256',
+                typ: 'JWT',
+                kid,
+            },
+        });
+
+        return expect(
+            verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
+        ).rejects.toThrowError(new UnauthorizedError('jwt expired'));
     });
 
     test('invalid jwt', async () => {
         const token = 'abc';
 
-        return expect(verifyJwtToken(token, client)).rejects.toThrowError(
-            new UnauthorizedError('invalid access token'),
-        );
+        return expect(
+            verifyJwtToken(token, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
+        ).rejects.toThrowError(new UnauthorizedError('invalid access token'));
     });
 });

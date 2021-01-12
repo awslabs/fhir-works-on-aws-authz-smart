@@ -395,7 +395,6 @@ describe('verifyAccessToken; System level export requests', () => {
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, isValid) => {
-        // mock.onGet(authZConfig.userInfoEndpoint).reply(200, practitionerIdentityWithoutScopes);
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(practitionerIdentityWithoutScopes),
         );
@@ -479,47 +478,46 @@ describe('verifyAccessToken; scopes are space delimited', () => {
     });
 });
 
-describe('verifyAccessToken; aud is in an array', () => {
-    const arrayAUDCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
-        [
-            'aud_not_in_array',
-            { accessToken: audArrayWrongAccess, operation: 'search-type', resourceType: 'Observation' },
-            false,
-        ],
-        [
-            'aud_in_array',
-            { accessToken: audArrayValidAccess, operation: 'search-type', resourceType: 'Observation' },
-            true,
-        ],
-    ];
-
-    const authZHandler: SMARTHandler = new SMARTHandler(
-        {
-            ...authZConfig,
-            scopeValueType: 'array',
-        },
-        apiUrl,
-        '4.0.1',
-    );
-
-    test.each(arrayAUDCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        // mock.onGet(authZConfig.userInfoEndpoint).reply(200, patientIdentityWithoutScopes);
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(patientIdentityWithoutScopes),
-        );
-        if (!isValid) {
-            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-                UnauthorizedError,
-            );
-        } else {
-            const identity = addScopeToUserIdentity(
-                patientIdentityWithoutScopes,
-                (<VerifyAccessTokenRequest>request).accessToken,
-            );
-            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
-        }
-    });
-});
+// describe('verifyAccessToken; aud is in an array', () => {
+//     const arrayAUDCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
+//         [
+//             'aud_not_in_array',
+//             { accessToken: audArrayWrongAccess, operation: 'search-type', resourceType: 'Observation' },
+//             false,
+//         ],
+//         [
+//             'aud_in_array',
+//             { accessToken: audArrayValidAccess, operation: 'search-type', resourceType: 'Observation' },
+//             true,
+//         ],
+//     ];
+//
+//     const authZHandler: SMARTHandler = new SMARTHandler(
+//         {
+//             ...authZConfig,
+//             scopeValueType: 'array',
+//         },
+//         apiUrl,
+//         '4.0.1',
+//     );
+//
+//     test.each(arrayAUDCases)('CASE: %p', async (_firstArg, request, isValid) => {
+//         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+//             Promise.resolve(patientIdentityWithoutScopes),
+//         );
+//         if (!isValid) {
+//             await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
+//                 UnauthorizedError,
+//             );
+//         } else {
+//             const identity = addScopeToUserIdentity(
+//                 patientIdentityWithoutScopes,
+//                 (<VerifyAccessTokenRequest>request).accessToken,
+//             );
+//             await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
+//         }
+//     });
+// });
 
 function createEntry(resource: any, searchMode = 'match') {
     return {
