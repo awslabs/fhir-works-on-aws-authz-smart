@@ -1,11 +1,15 @@
 import { UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient from 'jwks-rsa';
-import { hasReferenceToResource, FhirResource, getFhirResource, getFhirUser } from './smartAuthorizationHelper';
 
 import { sign } from 'jsonwebtoken';
 import { pem2jwk } from 'pem-jwk';
-
-import { authorizeResource, FhirUser, getFhirUser, verifyJwtToken } from './smartAuthorizationHelper';
+import {
+    hasReferenceToResource,
+    FhirResource,
+    getFhirResource,
+    getFhirUser,
+    verifyJwtToken,
+} from './smartAuthorizationHelper';
 
 const { generateKeyPairSync } = require('crypto');
 
@@ -98,6 +102,7 @@ describe('hasReferenceToResource', () => {
     });
 });
 
+// TODO Add tests to check aud and iss
 describe('verifyJwt', () => {
     const { publicKey, privateKey } = generateKeyPairSync('rsa', {
         modulusLength: 4096,
@@ -115,7 +120,6 @@ describe('verifyJwt', () => {
 
     const kid = 'abcd1234';
     const jwk = { ...pem2jwk(publicKey), kid };
-    console.log('jwk', jwk);
 
     const client = jwksClient({
         jwksUri: 'http://exampleAuthServer.com/oauth2',
@@ -140,41 +144,53 @@ describe('verifyJwt', () => {
             fhirUser: 'Practitioner/1234',
         };
     }
-    test('JWT is valid and verified', async () => {
-        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
-        const jwt = sign(payload, privateKey, {
+    function getSignedJwt(payload: any) {
+        return sign(payload, privateKey, {
             header: {
                 alg: 'RS256',
                 typ: 'JWT',
                 kid,
             },
         });
+    }
+    test('JWT is valid and verified', () => {
+        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const jwt = getSignedJwt(payload);
         return expect(
             verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
         ).resolves.toEqual(payload);
     });
 
-    test('jwt expired', async () => {
+    test('jwt expired', () => {
         const payload = getDefaultPayload(Math.floor(Date.now() / 1000) - 10, Math.floor(Date.now() / 1000) - 1);
-
-        const jwt = sign(payload, privateKey, {
-            header: {
-                alg: 'RS256',
-                typ: 'JWT',
-                kid,
-            },
-        });
+        const jwt = getSignedJwt(payload);
 
         return expect(
             verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
         ).rejects.toThrowError(new UnauthorizedError('jwt expired'));
     });
 
-    test('invalid jwt', async () => {
+    test('invalid jwt', () => {
         const token = 'abc';
 
         return expect(
             verifyJwtToken(token, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
         ).rejects.toThrowError(new UnauthorizedError('invalid access token'));
+    });
+
+    test('aud is incorrect', async () => {
+        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const jwt = getSignedJwt(payload);
+        return expect(
+            verifyJwtToken(jwt, 'fakeAud', 'https://exampleAuthServer.com/oauth2', client),
+        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+    });
+
+    test('iss is incorrect', async () => {
+        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const jwt = getSignedJwt(payload);
+        return expect(verifyJwtToken(jwt, 'api://default', 'fakeIss', client)).rejects.toThrowError(
+            new UnauthorizedError('Error validating the validity of the access_token'),
+        );
     });
 });

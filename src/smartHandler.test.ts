@@ -3,6 +3,8 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+import { JwksClient, SigningKey } from 'jwks-rsa';
 import MockAdapter from 'axios-mock-adapter';
 import {
     VerifyAccessTokenRequest,
@@ -17,7 +19,7 @@ import {
     AuthorizationBundleRequest,
     GetSearchFilterBasedOnIdentityRequest,
 } from 'fhir-works-on-aws-interface';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import * as smartAuthorizationHelper from './smartAuthorizationHelper';
 import { SMARTHandler } from './smartHandler';
 import { SMARTConfig, ScopeRule } from './smartConfig';
@@ -75,8 +77,8 @@ const baseAccessNoScopes: any = {
     jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
     iss: expectedIss,
     aud: expectedAud,
-    iat: 1603118138,
-    exp: 1603121738,
+    iat: Math.floor(Date.now() / 1000) - 1,
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
     cid: '0oa8muazKSyk9gP5y5d5',
     uid: '00u85ozwjjWRd17PB5d5',
     sub,
@@ -402,20 +404,29 @@ describe('verifyAccessToken', () => {
 
     const authZConfig = baseAuthZConfig();
 
+    const client: JwksClient = jest.createMockFromModule('jwks-rsa');
+    client.getSigningKeyAsync = jest.fn().mockImplementation(() => {
+        const signingKey: SigningKey = jest.createMockFromModule('jwks-rsa');
+        signingKey.getPublicKey = jest.fn().mockReturnValue('fakePublicKey');
+
+        return Promise.resolve(signingKey);
+    });
+
+    // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
+    jest.spyOn(smartAuthorizationHelper, 'getJwksClient').mockReturnValue(client);
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
-    test.each(cases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
-        // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(patientIdentityWithoutScopes),
-        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
-        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
-        );
+    test.each(cases)('CASE: %p', async (_firstArg, request, decodedAccessToken, isValid) => {
+        const { decode, verify } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+        decode.mockReturnValue({ header: { kid: 'fakeKid' }, payload: decodedAccessToken });
+        verify.mockReturnValue(decodedAccessToken);
+
         if (!isValid) {
             return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         }
         const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+
         return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
             expectedUserIdentity,
         );
@@ -477,8 +488,6 @@ describe('verifyAccessToken; System level export requests', () => {
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
             { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], fhirUser: externalPractitionerIdentity },
-            Promise.resolve(practitionerIdentityWithoutScopes),
-        );
             false,
         ],
         [
@@ -509,10 +518,16 @@ describe('verifyAccessToken; System level export requests', () => {
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
-        mock.onGet(authZConfig.userInfoEndpoint).reply(200, decodedAccessToken);
+        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+            Promise.resolve(decodedAccessToken),
+        );
         const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
         decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
+        if (!isValid) {
             return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
+                UnauthorizedError,
+            );
+        }
         const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
         expectedUserIdentity.scp = decodedAccessToken.scp;
         return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
@@ -520,28 +535,6 @@ describe('verifyAccessToken; System level export requests', () => {
         );
     });
 });
-// describe('verifyAccessToken; aud is in an array', () => {
-    const decoded = {
-        ...baseAccessNoScopes,
-        scp: ['fhirUser', 'user/Patient.write', 'patient/*.*'],
-        ...patientContext,
-        ...patientFhirUser,
-    };
-//         [
-        ['200; success', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 200, decoded, true],
-        ['202; success', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 202, decoded, true],
-        ['4XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 403, decoded, false],
-        ['5XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 500, decoded, false],
-    const authZConfig = baseAuthZConfig();
-    test.each(apiCases)('CASE: %p', async (_firstArg, request, authRespCode, decodedAccessToken, isValid) => {
-        mock.onGet(authZConfig.userInfoEndpoint).reply(<number>authRespCode, decodedAccessToken);
-        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
-        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
-            return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
-        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
-            expectedUserIdentity,
-        );
 
 function createEntry(resource: any, searchMode = 'match') {
     return {
