@@ -1,17 +1,16 @@
-import { KeyValueMap, UnauthorizedError } from 'fhir-works-on-aws-interface';
+import { UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
-import { IdentityType } from './smartConfig';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_RESOURCE_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
-export interface FhirUser {
+export interface FhirResource {
     hostname: string;
-    resourceType: IdentityType;
+    resourceType: string;
     id: string;
 }
-export function getFhirUser(userIdentity: KeyValueMap, fhirUserClaimKey: string): FhirUser {
-    const fhirUserValue = userIdentity[fhirUserClaimKey];
+export function getFhirUser(fhirUserValue: string): FhirResource {
     const match = fhirUserValue.match(FHIR_USER_REGEX);
     if (match) {
         const { hostname, resourceType, id } = match.groups!;
@@ -19,28 +18,38 @@ export function getFhirUser(userIdentity: KeyValueMap, fhirUserClaimKey: string)
     }
     throw new UnauthorizedError("Requester's identity is in the incorrect format");
 }
+export function getFhirResource(resourceValue: string, defaultHostname: string): FhirResource {
+    const match = resourceValue.match(FHIR_RESOURCE_REGEX);
+    if (match) {
+        const { resourceType, id } = match.groups!;
+        const hostname = match.groups!.hostname ?? defaultHostname;
+        return { hostname, resourceType, id };
+    }
+    throw new UnauthorizedError('Resource is in the incorrect format');
+}
 
-function isLocalUserInJsonAsReference(jsonStr: string, fhirUser: FhirUser) {
+function isLocalResourceInJsonAsReference(jsonStr: string, fhirResource: FhirResource): boolean {
     return (
-        jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`) ||
-        jsonStr.includes(`"reference":"${fhirUser.resourceType}/${fhirUser.id}"`)
+        jsonStr.includes(`"reference":"${fhirResource.hostname}${fhirResource.resourceType}/${fhirResource.id}"`) ||
+        jsonStr.includes(`"reference":"${fhirResource.resourceType}/${fhirResource.id}"`)
     );
 }
 
-export function authorizeResource(fhirUser: FhirUser, resource: any, apiUrl: string): boolean {
+export function hasReferenceToResource(fhirResource: FhirResource, resource: any, apiUrl: string): boolean {
     const jsonStr = JSON.stringify(resource);
-    if (fhirUser.hostname !== apiUrl) {
+    const { hostname, resourceType, id } = fhirResource;
+    if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
-        return jsonStr.includes(`"reference":"${fhirUser.hostname}${fhirUser.resourceType}/${fhirUser.id}"`);
+        return jsonStr.includes(`"reference":"${hostname}${resourceType}/${id}"`);
     }
-    if (fhirUser.resourceType === 'Practitioner') {
+    if (resourceType === 'Practitioner') {
         return true;
     }
-    if (fhirUser.resourceType === resource.resourceType) {
+    if (resourceType === resource.resourceType) {
         // Attempting to look up its own record
-        return fhirUser.id === resource.id || isLocalUserInJsonAsReference(jsonStr, fhirUser);
+        return id === resource.id || isLocalResourceInJsonAsReference(jsonStr, fhirResource);
     }
-    return isLocalUserInJsonAsReference(jsonStr, fhirUser);
+    return isLocalResourceInJsonAsReference(jsonStr, fhirResource);
 }
 export function getJwksClient(jwksUri: string): JwksClient {
     return jwksClient({

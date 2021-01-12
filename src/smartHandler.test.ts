@@ -11,104 +11,76 @@ import {
     TypeOperation,
     UnauthorizedError,
     WriteRequestAuthorizedRequest,
-    clone,
     AccessBulkDataJobRequest,
     AllowedResourceTypesForOperationRequest,
     BASE_R4_RESOURCES,
     AuthorizationBundleRequest,
     GetSearchFilterBasedOnIdentityRequest,
 } from 'fhir-works-on-aws-interface';
-import { decode } from 'jsonwebtoken';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as smartAuthorizationHelper from './smartAuthorizationHelper';
 import { SMARTHandler } from './smartHandler';
 import { SMARTConfig, ScopeRule } from './smartConfig';
+import { getScopes } from './smartScopeHelper';
+import { getFhirResource, getFhirUser } from './smartAuthorizationHelper';
 
-const allReadOperations: (TypeOperation | SystemOperation)[] = [
-    'read',
-    'vread',
-    'search-type',
-    'search-system',
-    'history-instance',
-    'history-type',
-    'history-system',
-];
+jest.mock('jsonwebtoken');
 
-const allWriteOperations: (TypeOperation | SystemOperation)[] = [
-    'create',
-    'update',
-    'delete',
-    'patch',
-    'transaction',
-    'batch',
-];
-
-const scopeRule: ScopeRule = {
+const scopeRule = (): ScopeRule => ({
     patient: {
-        read: allReadOperations,
+        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
         write: ['update', 'patch', 'create'],
     },
     user: {
-        read: allReadOperations,
-        write: [],
+        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
+        write: ['create', 'update', 'delete', 'patch', 'transaction', 'batch'],
     },
-    system: {
-        read: allReadOperations,
-        write: allWriteOperations,
-    },
-    launch: {
-        launch: allReadOperations,
-        patient: allReadOperations,
-        encounter: allReadOperations,
-    },
-};
+});
 
-const noFHIRScopesAccess: string =
-    'eyJraWQiOiJETmJFNVpJalFmR2FJTEY3RlBmZHVZMjdCQ1R0THZ0QTVCTGRlWUFQcFFRIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.wvziVAfCAM3Lmg2xeiZ991fuKtVSIY7uJItBCYfOc_fNceZzCitMTRhbBFBR65C9qPemmJOGgnVIWsy2fWwkWqIS9f4jhYW5VstmxsJpZDpJFi1Junrhb3kFzTQr80yP3unGlQMLv91x4E4RWcmXOr0akh9Z7PuO2M0LUwup4riix4X2do-nqepVp-7PTd-t3AqC8ohK5_vrPbi4YFKOtp7TJEfSm251OMI_TaXr0o83Gr8i25QITo8uZE87mIlWw9Y84mETos2U8fpYfHE1rvTev1zu5Qu38DCZeuppDnftvTvOfZY25TbdjzrUEUNypVGro38UxVoLh9d5rGZZxw';
-const audStringWrongAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdHFxcSIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsInBhdGllbnQvKi4qIl0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUGF0aWVudC8xMjM0In0.7SWjgXwiHdZHH9p3GX6ef994ZdPO3XLC2St-HSIpuCA';
-const audArrayWrongAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjpbImFwaTovL2RlZmF1bHRxcXEiXSwiaWF0IjoxNjAzMTE4MTM4LCJleHAiOjE2MDMxMjE3MzgsImNpZCI6IjBvYThtdWF6S1N5azlnUDV5NWQ1IiwidWlkIjoiMDB1ODVvendqaldSZDE3UEI1ZDUiLCJzY3AiOlsiZmhpclVzZXIiLCJvcGVuaWQiLCJwcm9maWxlIiwicGF0aWVudC8qLioiXSwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.oSOQuWe-hW6SS8rjczDijBsws9sNHNwwK7eiTnfE1Uw';
-const audArrayValidAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjpbImFwaTovL2RlZmF1bHRxcXEiLCJhcGk6Ly9kZWZhdWx0Il0sImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.p9yVl9xYXhin-xMgpxWaWlot1yj0qrMTZxfnqLPv6tA';
-const issWrongAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL2Zha2UvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2MDMxMTgxMzgsImV4cCI6MTYwMzEyMTczOCwiY2lkIjoiMG9hOG11YXpLU3lrOWdQNXk1ZDUiLCJ1aWQiOiIwMHU4NW96d2pqV1JkMTdQQjVkNSIsInNjcCI6WyJmaGlyVXNlciIsIm9wZW5pZCIsInByb2ZpbGUiLCJwYXRpZW50LyouKiJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.KD39_myQqMW5lckO4iS_XAU9Ygs59t5i70EZFFTxe7U';
-const launchAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaCJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.d7bx2yTIVVuqgxclrJe-TOfRuslTKi5np4hM_B6VQ_o';
-const launchPatientAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9wYXRpZW50Il0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUGF0aWVudC8xMjM0In0.0pXNJUUCUyIfCkbMnyA6c68YT1Yk9gdgy_54gCIvwMI';
-const launchEncounterAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiXSwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.Nl6yRFGCFnSXszg9kBHS4sbMQio7YnOUajGWOkaLdUA';
-const manyReadAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.k_uqVL_uXo49ETrhSwaNXw0LYDadvt4LJuwrKh-0FJo';
-const practitionerUserAllAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCIsInVzZXIvKi4qIl0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUHJhY3RpdGlvbmVyLzEyMzQifQ.hUvJkUw108XDDw7n6KrRvKbzMWSfp84kt4-qqKCRXA4';
-const practitionerUserReadAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsImxhdW5jaC9lbmNvdW50ZXIiLCJwYXRpZW50L1BhdGllbnQucmVhZCIsInBhdGllbnQvT2JzZXJ2YXRpb24ucmVhZCIsInVzZXIvKi5yZWFkIl0sInN1YiI6InNtYXlkYTQ0QGdtYWlsLmNvbSIsImZoaXJVc2VyIjoiUHJhY3RpdGlvbmVyLzEyMzQifQ.85sfPi7_PoNS4zhUeoQWv-dvEUQSwga-h77DT6SXH_M';
-const manyWriteAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbImZoaXJVc2VyIiwib3BlbmlkIiwicHJvZmlsZSIsInVzZXIvUGF0aWVudC53cml0ZSIsInN5c3RlbS9PYnNlcnZhdGlvbi53cml0ZSIsInBhdGllbnQvKi53cml0ZSJdLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.tRx8pf60I98vUJI7Q87sZkvI24ii6ADQ_jSw88Q42EY';
-const allSysAccess: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjpbInN5c3RlbS8qLioiXSwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.prsPxDrXt3vg1WpKJCLSHm9bFItL3wItYMb8Hvk6K3I';
-const manyReadAccessScopeSpaces: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjoiZmhpclVzZXIgb3BlbmlkIHByb2ZpbGUgbGF1bmNoL2VuY291bnRlciBwYXRpZW50L1BhdGllbnQucmVhZCBwYXRpZW50L09ic2VydmF0aW9uLnJlYWQiLCJzdWIiOiJzbWF5ZGE0NEBnbWFpbC5jb20iLCJmaGlyVXNlciI6IlBhdGllbnQvMTIzNCJ9.XXzFDtWFUreMDg39xTDlC3cNBc6TVZZ6i4IRD-6RcOA';
-const manyReadAccessScopeSpacesJustLaunch: string =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXIiOjEsImp0aSI6IkFULjZhN2tuY1RDcHUxWDllbzJRaEgxel9XTFVLNFR5VjQzbl85STZrWk53UFkiLCJpc3MiOiJodHRwczovL2Rldi02NDYwNjExLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTYwMzExODEzOCwiZXhwIjoxNjAzMTIxNzM4LCJjaWQiOiIwb2E4bXVhektTeWs5Z1A1eTVkNSIsInVpZCI6IjAwdTg1b3p3ampXUmQxN1BCNWQ1Iiwic2NwIjoiZmhpclVzZXIgb3BlbmlkIHByb2ZpbGUgbGF1bmNoIiwic3ViIjoic21heWRhNDRAZ21haWwuY29tIiwiZmhpclVzZXIiOiJQYXRpZW50LzEyMzQifQ.mExtrUuJhXRaKlpJ72-3CrsX5CezkYC-tVY1dg4frlw';
 const expectedAud = 'api://default';
 const expectedIss = 'https://dev-6460611.okta.com/oauth2/default';
-const authZConfig: SMARTConfig = {
+const baseAuthZConfig = (): SMARTConfig => ({
     version: 1.0,
     scopeKey: 'scp',
-    scopeValueType: 'array',
-    scopeRule,
+    scopeRule: scopeRule(),
     expectedAudValue: expectedAud,
     expectedIssValue: expectedIss,
     fhirUserClaimKey: 'fhirUser',
+    launchContextKeyPrefix: 'launch_response_',
     jwksEndpoint: `${expectedIss}/jwks`,
-};
+});
 const apiUrl = 'https://fhir.server.com/dev/';
 const patientId = 'Patient/1234';
-const patientIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}${patientId}` };
-const practitionerIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}Practitioner/1234` };
-const externalPractitionerIdentityWithoutScopes = { [authZConfig.fhirUserClaimKey]: `${apiUrl}test/Practitioner/1234` };
+const practitionerId = 'Practitioner/1234';
+const patientIdentity = `${apiUrl}${patientId}`;
+const practitionerIdentity = `${apiUrl}${practitionerId}`;
+const externalPractitionerIdentity = `${apiUrl}test/${practitionerId}`;
+const patientFhirResource = getFhirUser(patientIdentity);
+const practitionerFhirResource = getFhirUser(practitionerIdentity);
+const externalPractitionerFhirResource = getFhirUser(externalPractitionerIdentity);
+const sub = 'test@test.com';
+
+const patientContext: any = {
+    launch_response_patient: patientIdentity,
+};
+const patientFhirUser: any = {
+    fhirUser: patientIdentity,
+};
+const practitionerFhirUser: any = {
+    fhirUser: practitionerIdentity,
+};
+
+const baseAccessNoScopes: any = {
+    ver: 1,
+    jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
+    iss: expectedIss,
+    aud: expectedAud,
+    iat: 1603118138,
+    exp: 1603121738,
+    cid: '0oa8muazKSyk9gP5y5d5',
+    uid: '00u85ozwjjWRd17PB5d5',
+    sub,
+};
 
 const validPatient = {
     resourceType: 'Patient',
@@ -148,7 +120,7 @@ const validPatientObservation = {
         ],
     },
     subject: {
-        reference: patientIdentityWithoutScopes[authZConfig.fhirUserClaimKey],
+        reference: patientIdentity,
         display: 'JONNY',
     },
     effectivePeriod: {
@@ -218,7 +190,7 @@ const validPatientEncounter = {
     participant: [
         {
             individual: {
-                reference: externalPractitionerIdentityWithoutScopes[authZConfig.fhirUserClaimKey],
+                reference: externalPractitionerIdentity,
             },
         },
     ],
@@ -239,13 +211,14 @@ beforeEach(() => {
 afterEach(() => {
     mock.reset();
 });
+
 describe('constructor', () => {
     test('ERROR: Attempt to create a handler to support a new config version', async () => {
         expect(() => {
             // eslint-disable-next-line no-new
             new SMARTHandler(
                 {
-                    ...authZConfig,
+                    ...baseAuthZConfig(),
                     version: 2.0,
                 },
                 apiUrl,
@@ -254,270 +227,321 @@ describe('constructor', () => {
         }).toThrow(new Error('Authorization configuration version does not match handler version'));
     });
 });
-function addScopeToUserIdentity(partialIdentity: any, accessToken: string) {
-    const identity = clone(partialIdentity);
-    const decoded: any = decode(accessToken);
-    identity.scopes = Array.isArray(decoded!.scp) ? decoded!.scp : decoded!.scp.split(' ');
-    return identity;
+
+function getExpectedUserIdentity(decodedAccessToken: any): any {
+    const expectedUserIdentity = decodedAccessToken;
+    expectedUserIdentity.scopes = getScopes(decodedAccessToken.scp);
+    const usableScopes = expectedUserIdentity.scopes.filter(
+        (scope: string) => scope.startsWith('user/') || scope.startsWith('patient/'),
+    );
+    if (decodedAccessToken.fhirUser && usableScopes.some((scope: string) => scope.startsWith('user/'))) {
+        expectedUserIdentity.fhirUserObject = getFhirUser(decodedAccessToken.fhirUser);
+    }
+    if (
+        decodedAccessToken.launch_response_patient &&
+        usableScopes.some((scope: string) => scope.startsWith('patient/'))
+    ) {
+        expectedUserIdentity.patientLaunchContext = getFhirResource(decodedAccessToken.launch_response_patient, apiUrl);
+    }
+    return expectedUserIdentity;
 }
 
-describe('verifyAccessToken; scopes are in an array', () => {
-    const arrayScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
-        ['aud_failure', { accessToken: audStringWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
-        ['iss_failure', { accessToken: issWrongAccess, operation: 'create', resourceType: 'Patient' }, false],
-        ['no_fhir_scopes', { accessToken: noFHIRScopesAccess, operation: 'create', resourceType: 'Patient' }, false],
-        ['launch_scope', { accessToken: launchAccess, operation: 'create', resourceType: 'Patient' }, false],
-        ['launch/patient', { accessToken: launchPatientAccess, operation: 'search-system' }, true],
+describe('verifyAccessToken', () => {
+    const cases: (string | boolean | VerifyAccessTokenRequest | any)[][] = [
         [
-            'launch/encounter',
-            { accessToken: launchEncounterAccess, operation: 'read', resourceType: 'Patient', id: '123' },
-            true,
-        ],
-        [
-            'manyRead_Write',
-            { accessToken: manyReadAccess, operation: 'update', resourceType: 'Patient', id: '12' },
+            'aud_failure',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, aud: 'fake', scp: ['patient/*.*'], ...patientContext },
             false,
         ],
         [
-            'manyRead_Read',
-            { accessToken: manyReadAccess, operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
-            true,
-        ],
-        [
-            'manyRead_search',
-            { accessToken: manyReadAccess, operation: 'search-type', resourceType: 'Observation' },
-            true,
-        ],
-        [
-            'manyWrite_Read',
-            { accessToken: manyWriteAccess, operation: 'read', resourceType: 'Patient', id: '12' },
+            'aud_not_in_array',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            { ...baseAccessNoScopes, aud: ['aud1', 'aud2'], scp: ['patient/*.read'], ...patientContext },
             false,
         ],
         [
-            'manyWrite_Write_transaction. system scope does have access to transaction',
-            { accessToken: manyWriteAccess, operation: 'transaction' },
+            'aud_in_array',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            { ...baseAccessNoScopes, aud: ['aud1', expectedAud, 'aud2'], scp: ['patient/*.read'], ...patientContext },
             true,
         ],
         [
-            'manyRead_withSpaceScope',
-            {
-                accessToken: manyReadAccessScopeSpaces,
-                operation: 'vread',
-                resourceType: 'Observation',
-                id: '1',
-                vid: '1',
-            },
+            'iss_failure',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, iss: 'fake', scp: ['patient/*.*'], ...patientContext },
             false,
         ],
         [
-            'manyWrite_Write_create',
-            { accessToken: manyWriteAccess, operation: 'create', resourceType: 'Patient' },
+            'no_fhir_scopes',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            baseAccessNoScopes,
+            false,
+        ],
+        [
+            'launch_scope_create',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: ['launch'] },
+            false,
+        ],
+        [
+            'launch/patient_search',
+            { accessToken: 'fake', operation: 'search-system' },
+            { ...baseAccessNoScopes, scp: ['launch/patient'] },
+            false,
+        ],
+        [
+            'launch/encounter_read',
+            { accessToken: 'fake', operation: 'read', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: ['launch/encounter'] },
+            false,
+        ],
+        [
+            'patient_manyRead_Write',
+            { accessToken: 'fake', operation: 'update', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: ['patient/*.read'], ...patientContext },
+            false,
+        ],
+        [
+            'patient_manyRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: ['patient/*.read'], ...patientContext },
             true,
         ],
-        ['sys_read', { accessToken: allSysAccess, operation: 'read', resourceType: 'Patient', id: '12' }, true],
-        ['sys_transaction', { accessToken: allSysAccess, operation: 'transaction' }, true],
-        ['sys_history', { accessToken: allSysAccess, operation: 'history-system' }, true],
-        ['sys_fakeType', { accessToken: allSysAccess, operation: 'create', resourceType: 'Fake' }, true],
+        [
+            'patient_ObservationRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: 'patient/Observation.read', ...patientContext },
+            true,
+        ],
+        [
+            'patient_manyRead_search',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            { ...baseAccessNoScopes, scp: 'patient/*.read', ...patientContext },
+            true,
+        ],
+        [
+            'patient_manyWrite_Read',
+            { accessToken: 'fake', operation: 'read', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: 'patient/*.write', ...patientContext },
+            false,
+        ],
+        [
+            'patient_PatientWrite_create',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'patient/Patient.write', ...patientContext },
+            true,
+        ],
+        [
+            'patient_manyWrite_no_context',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'patient/*.*' },
+            false,
+        ],
+        [
+            'user_manyRead_Write',
+            { accessToken: 'fake', operation: 'update', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: ['user/*.read'], ...patientFhirUser },
+            false,
+        ],
+        [
+            'user_manyRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: ['user/*.read'], ...patientFhirUser },
+            true,
+        ],
+        [
+            'user_ObservationRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: 'user/Observation.read', ...patientFhirUser },
+            true,
+        ],
+        [
+            'user_manyRead_search',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            { ...baseAccessNoScopes, scp: 'user/*.read', ...patientFhirUser },
+            true,
+        ],
+        [
+            'user_manyWrite_Read',
+            { accessToken: 'fake', operation: 'read', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: 'user/*.write', ...patientFhirUser },
+            false,
+        ],
+        [
+            'user_PatientWrite_create',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'user/Patient.write', ...patientFhirUser },
+            true,
+        ],
+        [
+            'user_manyWrite_no_context',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'user/*.*' },
+            false,
+        ],
+        [
+            'user&patient_manyWrite_Read',
+            { accessToken: 'fake', operation: 'read', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: 'user/*.write patient/*.write', ...patientFhirUser, ...patientContext },
+            false,
+        ],
+        [
+            'user&patient_PatientWrite_create',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'user/Patient.write patient/*.write', ...patientFhirUser, ...patientContext },
+            true,
+        ],
+        [
+            'user&patient_manyWrite_no context or fhirUser',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'user/*.*  patient/*.write' },
+            false,
+        ],
     ];
 
+    const authZConfig = baseAuthZConfig();
+
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
-    test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, isValid) => {
+    test.each(cases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
         // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(patientIdentityWithoutScopes),
+        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
         );
         if (!isValid) {
             return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
         }
-        const identity = addScopeToUserIdentity(
-            patientIdentityWithoutScopes,
-            (<VerifyAccessTokenRequest>request).accessToken,
+        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
+            expectedUserIdentity,
         );
-        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
     });
 });
 
 describe('verifyAccessToken; System level export requests', () => {
-    const arrayScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
+    const arrayScopesCases: (string | boolean | VerifyAccessTokenRequest | any)[][] = [
         [
             'Read and Write Access: initiate-export',
             {
-                accessToken: practitionerUserAllAccess,
+                accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...practitionerFhirUser },
             true,
         ],
         [
             'Read Access: initiate-export',
             {
-                accessToken: practitionerUserReadAccess,
+                accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
+            { ...baseAccessNoScopes, scp: ['user/*.read', 'patient/*.*'], ...practitionerFhirUser },
             true,
         ],
         [
             'Read and Write Access: get-status-export',
             {
-                accessToken: practitionerUserAllAccess,
+                accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
             },
+            { ...baseAccessNoScopes, scp: ['user/*.*'], ...practitionerFhirUser },
             true,
         ],
         [
             'Read and Write Access: cancel-export',
             {
-                accessToken: practitionerUserAllAccess,
+                accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
             },
+            { ...baseAccessNoScopes, scp: ['user/*.*'], ...practitionerFhirUser },
             true,
+        ],
+        [
+            'External practitioner: initiate-export; fail',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], fhirUser: externalPractitionerIdentity },
+            Promise.resolve(practitionerIdentityWithoutScopes),
+        );
+            false,
         ],
         [
             'No User read access: initiate-export',
             {
-                accessToken: manyReadAccess,
+                accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
             },
+            { ...baseAccessNoScopes, scp: ['user/*.write'], ...practitionerFhirUser },
+            false,
+        ],
+        [
+            'No User access; Patient only: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['patient/*.*'], ...patientContext },
             false,
         ],
     ];
+
+    const authZConfig = baseAuthZConfig();
 
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
-    test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, isValid) => {
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(practitionerIdentityWithoutScopes),
-        );
-        if (!isValid) {
+    test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
+        mock.onGet(authZConfig.userInfoEndpoint).reply(200, decodedAccessToken);
+        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
             return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-                UnauthorizedError,
-            );
-        }
-        const identity = addScopeToUserIdentity(
-            practitionerIdentityWithoutScopes,
-            (<VerifyAccessTokenRequest>request).accessToken,
+        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+        expectedUserIdentity.scp = decodedAccessToken.scp;
+        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
+            expectedUserIdentity,
         );
-        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
     });
 });
-
-describe('verifyAccessToken; scopes are space delimited', () => {
-    const spaceScopesCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
-        [
-            'manyRead_Write',
-            { accessToken: manyReadAccessScopeSpaces, operation: 'update', resourceType: 'Patient', id: '12' },
-            false,
-        ],
-        [
-            'manyRead_Read',
-            {
-                accessToken: manyReadAccessScopeSpaces,
-                operation: 'vread',
-                resourceType: 'Observation',
-                id: '1',
-                vid: '1',
-            },
-            true,
-        ],
-        [
-            'manyRead_search',
-            { accessToken: manyReadAccessScopeSpaces, operation: 'search-type', resourceType: 'Observation' },
-            true,
-        ],
-        [
-            'manyRead_launchScopeOnly',
-            {
-                accessToken: manyReadAccessScopeSpacesJustLaunch,
-                operation: 'read',
-                resourceType: 'Observation',
-                id: '1',
-            },
-            true,
-        ],
-        [
-            'manyRead_withArrayScope',
-            { accessToken: manyReadAccess, operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
-            false,
-        ],
-    ];
-
-    const authZHandler: SMARTHandler = new SMARTHandler(
-        {
-            ...authZConfig,
-            scopeValueType: 'space',
-        },
-        apiUrl,
-        '4.0.1',
-    );
-
-    test.each(spaceScopesCases)('CASE: %p', async (_firstArg, request, isValid) => {
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(patientIdentityWithoutScopes),
-        );
-        if (!isValid) {
-            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-                UnauthorizedError,
-            );
-        } else {
-            const identity = addScopeToUserIdentity(
-                patientIdentityWithoutScopes,
-                (<VerifyAccessTokenRequest>request).accessToken,
-            );
-            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
-        }
-    });
-});
-
 // describe('verifyAccessToken; aud is in an array', () => {
-//     const arrayAUDCases: (string | boolean | VerifyAccessTokenRequest)[][] = [
+    const decoded = {
+        ...baseAccessNoScopes,
+        scp: ['fhirUser', 'user/Patient.write', 'patient/*.*'],
+        ...patientContext,
+        ...patientFhirUser,
+    };
 //         [
-//             'aud_not_in_array',
-//             { accessToken: audArrayWrongAccess, operation: 'search-type', resourceType: 'Observation' },
-//             false,
-//         ],
-//         [
-//             'aud_in_array',
-//             { accessToken: audArrayValidAccess, operation: 'search-type', resourceType: 'Observation' },
-//             true,
-//         ],
-//     ];
-//
-//     const authZHandler: SMARTHandler = new SMARTHandler(
-//         {
-//             ...authZConfig,
-//             scopeValueType: 'array',
-//         },
-//         apiUrl,
-//         '4.0.1',
-//     );
-//
-//     test.each(arrayAUDCases)('CASE: %p', async (_firstArg, request, isValid) => {
-//         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-//             Promise.resolve(patientIdentityWithoutScopes),
-//         );
-//         if (!isValid) {
-//             await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-//                 UnauthorizedError,
-//             );
-//         } else {
-//             const identity = addScopeToUserIdentity(
-//                 patientIdentityWithoutScopes,
-//                 (<VerifyAccessTokenRequest>request).accessToken,
-//             );
-//             await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toEqual(identity);
-//         }
-//     });
-// });
+        ['200; success', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 200, decoded, true],
+        ['202; success', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 202, decoded, true],
+        ['4XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 403, decoded, false],
+        ['5XX; failure', { accessToken: 'fake', operation: 'create', resourceType: 'Patient' }, 500, decoded, false],
+    const authZConfig = baseAuthZConfig();
+    test.each(apiCases)('CASE: %p', async (_firstArg, request, authRespCode, decodedAccessToken, isValid) => {
+        mock.onGet(authZConfig.userInfoEndpoint).reply(<number>authRespCode, decodedAccessToken);
+        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
+            return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
+        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
+            expectedUserIdentity,
+        );
 
 function createEntry(resource: any, searchMode = 'match') {
     return {
@@ -572,9 +596,14 @@ describe('authorizeAndFilterReadResponse', () => {
     };
     const cases: (string | ReadResponseAuthorizedRequest | boolean | any)[][] = [
         [
-            'READ: Patient able to read own record',
+            'READ: patient & user scope; Patient able to read own record',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: getFhirUser(`${apiUrl}Patient/345`),
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatient,
             },
@@ -582,9 +611,13 @@ describe('authorizeAndFilterReadResponse', () => {
             validPatient,
         ],
         [
-            'READ: Patient able to vread own Observation (uses absolute url)',
+            'READ: patient scope; Patient able to vread own Observation (uses absolute url)',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['patient/*.read'],
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'vread',
                 readResponse: validPatientObservation,
             },
@@ -592,9 +625,13 @@ describe('authorizeAndFilterReadResponse', () => {
             validPatientObservation,
         ],
         [
-            'READ: Patient able to vread own Encounter (uses short-reference)',
+            'READ: user scope; Patient able to vread own Encounter (uses short-reference)',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: patientFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatientEncounter,
             },
@@ -604,7 +641,12 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Patient unable to vread non-owned Patient record',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'vread',
                 readResponse: { ...validPatient, id: 'not-yours' },
             },
@@ -614,7 +656,12 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Patient unable to read non-direct Observation',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'read',
                 readResponse: { ...validPatientObservation, subject: 'not-you' },
             },
@@ -624,7 +671,11 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Practitioner able to read Encounter',
             {
-                userIdentity: practitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: practitionerFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatientEncounter,
             },
@@ -634,7 +685,11 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: Practitioner able to read unrelated Observation',
             {
-                userIdentity: practitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: practitionerFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatientObservation,
             },
@@ -644,7 +699,11 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: external Practitioner able to read Encounter',
             {
-                userIdentity: externalPractitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatientEncounter,
             },
@@ -654,7 +713,11 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'READ: external Practitioner unable to read Observation',
             {
-                userIdentity: externalPractitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
                 operation: 'read',
                 readResponse: validPatientObservation,
             },
@@ -664,7 +727,12 @@ describe('authorizeAndFilterReadResponse', () => {
         [
             'SEARCH: Patient able to search for empty result',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'search-system',
                 readResponse: emptySearchResult,
             },
@@ -672,9 +740,13 @@ describe('authorizeAndFilterReadResponse', () => {
             emptySearchResult,
         ],
         [
-            'SEARCH: Patient able to search for own Observation & Patient record',
+            'SEARCH: patient scope; Patient able to search for own Observation & Patient record',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['patient/*.read'],
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
@@ -682,9 +754,13 @@ describe('authorizeAndFilterReadResponse', () => {
             searchAllEntitiesMatch,
         ],
         [
-            "SEARCH: Patient's history results are filtered to only contain valid entries",
+            "SEARCH: user scope; Patient's history results are filtered to only contain valid entries",
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'fhirUser'],
+                    fhirUserObject: patientFhirResource,
+                },
                 operation: 'history-type',
                 readResponse: searchSomeEntitiesMatch,
             },
@@ -692,9 +768,14 @@ describe('authorizeAndFilterReadResponse', () => {
             searchAllEntitiesMatch,
         ],
         [
-            "SEARCH: Patient's history results are all filtered out",
+            "SEARCH: both scopes; Patient's history results are all filtered out",
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'history-system',
                 readResponse: searchNoEntitiesMatch,
             },
@@ -702,9 +783,13 @@ describe('authorizeAndFilterReadResponse', () => {
             emptySearchResult,
         ],
         [
-            'SEARCH: external Practitioner able to search and filtered to just the encounter',
+            'SEARCH: user scope; external Practitioner able to search and filtered to just the encounter',
             {
-                userIdentity: externalPractitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
@@ -712,9 +797,13 @@ describe('authorizeAndFilterReadResponse', () => {
             { ...emptySearchResult, entry: [createEntry(validPatientEncounter)] },
         ],
         [
-            'SEARCH: Practitioner able to search and get ALL results',
+            'SEARCH: user scope; Practitioner able to search and get ALL results',
             {
-                userIdentity: practitionerIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read'],
+                    fhirUserObject: practitionerFhirResource,
+                },
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
@@ -723,7 +812,7 @@ describe('authorizeAndFilterReadResponse', () => {
         ],
     ];
 
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid, respBody) => {
         if (!isValid) {
             await expect(
@@ -739,35 +828,72 @@ describe('authorizeAndFilterReadResponse', () => {
 describe('isWriteRequestAuthorized', () => {
     const cases: (string | WriteRequestAuthorizedRequest | boolean)[][] = [
         [
-            'Patient unable to write own Encounter',
+            'CREATE: patient scope; Patient able to write own Encounter',
             {
-                userIdentity: patientIdentityWithoutScopes,
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['patient/*.write'],
+                    patientLaunchContext: patientFhirResource,
+                },
                 operation: 'create',
                 resourceBody: validPatientEncounter,
             },
-            false,
+            true,
         ],
         [
-            'Practitioner able to write Patient',
+            'UPDATE: user scope; Practitioner able to write Patient',
             {
-                userIdentity: practitionerIdentityWithoutScopes,
-                operation: 'vread',
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write'],
+                    fhirUserObject: practitionerFhirResource,
+                },
+                operation: 'update',
                 resourceBody: validPatient,
             },
             true,
         ],
         [
-            'External practitioner unable to write Patient',
+            'PATCH: user scope; External practitioner able to write Patient',
             {
-                userIdentity: externalPractitionerIdentityWithoutScopes,
-                operation: 'vread',
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
+                operation: 'patch',
+                resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
+            },
+            true,
+        ],
+        [
+            'PATCH: missing user/patient context',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write', 'patient/*.write'],
+                },
+                operation: 'patch',
+                resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
+            },
+            false,
+        ],
+        [
+            'UPDATE: user scope; External practitioner unable to write Patient',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
+                operation: 'update',
                 resourceBody: validPatient,
             },
             false,
         ],
     ];
 
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
         if (!isValid) {
             await expect(
@@ -782,16 +908,18 @@ describe('isWriteRequestAuthorized', () => {
 });
 
 describe('isAccessBulkDataJobAllowed', () => {
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
 
     const cases: (string | AccessBulkDataJobRequest | boolean)[][] = [
         [
             'userIdentity and jobOwnerId match',
             {
                 userIdentity: {
-                    sub: 'abc',
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.*'],
+                    fhirUserObject: practitionerFhirResource,
                 },
-                jobOwnerId: 'abc',
+                jobOwnerId: sub,
             },
             true,
         ],
@@ -799,7 +927,9 @@ describe('isAccessBulkDataJobAllowed', () => {
             'userIdentity and jobOwnerId does NOT match',
             {
                 userIdentity: {
-                    sub: 'abc',
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.*'],
+                    fhirUserObject: practitionerFhirResource,
                 },
                 jobOwnerId: 'xyz',
             },
@@ -823,42 +953,85 @@ describe('isAccessBulkDataJobAllowed', () => {
 });
 
 describe('isBundleRequestAuthorized', () => {
-    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    const authZConfigWithSearchTypeScope = baseAuthZConfig();
     authZConfigWithSearchTypeScope.scopeRule.user.write = ['create'];
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '4.0.1');
 
     const cases: any[][] = [
         [
-            'practitioner with user scope to create observation: no error',
-            practitionerIdentityWithoutScopes,
-            ['user/Observation.write'],
+            'practitioner with user scope: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Observation.write', 'user/*.read', 'fhirUser'],
+                fhirUserObject: practitionerFhirResource,
+            },
             true,
         ],
         [
-            'practitioner without user scope to create observation: Unauthorized Error',
-            practitionerIdentityWithoutScopes,
-            ['user/Patient.write'],
+            'patient with patient scope: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['patient/*.*', 'profile'],
+                patientLaunchContext: patientFhirResource,
+            },
+            true,
+        ],
+        [
+            'practitioner with patient&user scope: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Observation.write', 'patient/Patient.*', 'openid'],
+                fhirUserObject: practitionerFhirResource,
+                patientLaunchContext: patientFhirResource,
+            },
+            true,
+        ],
+        [
+            'patient with user scope to create observation but no read perms: Unauthorized Error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Observation.write'],
+                fhirUserObject: patientFhirResource,
+            },
             false,
         ],
         [
-            'patient with user scope to create observation but is not in typesWithWriteAccess: Unauthorized Error',
-            patientIdentityWithoutScopes,
-            ['user/Observation.write'],
+            'practitioner with patient scope but no write perms: Unauthorized Error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['patient/Patient.read'],
+                fhirUserObject: practitionerFhirResource,
+                patientLaunchContext: patientFhirResource,
+            },
+            false,
+        ],
+        [
+            'patient with correct scopes; but does not have write access to resource: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['patient/*.*', 'profile'],
+                patientLaunchContext: externalPractitionerFhirResource,
+            },
             false,
         ],
     ];
-    test.each(cases)('CASE: %p', async (_firstArg, baseIdentity, scopes, isAuthorized) => {
-        const userIdentity = clone(baseIdentity);
-        userIdentity.scopes = scopes;
+    test.each(cases)('CASE: %p', async (_firstArg, userIdentity, isAuthorized) => {
         const request: AuthorizationBundleRequest = {
             userIdentity,
             requests: [
                 {
                     operation: 'create',
-                    resource: {},
+                    resource: validPatientObservation,
                     fullUrl: '',
                     resourceType: 'Observation',
                     id: '160265f7-e8c2-45ca-a1bc-317399e23549',
+                },
+                {
+                    operation: 'read',
+                    resource: patientIdentity,
+                    fullUrl: patientIdentity,
+                    resourceType: 'Patient',
+                    id: '160265f7-e8c2-45ca-a1bc-317399e23548',
                 },
             ],
         };
@@ -871,53 +1044,24 @@ describe('isBundleRequestAuthorized', () => {
             await expect(authZHandler.isBundleRequestAuthorized(request)).resolves.not.toThrow();
         }
     });
-
-    test('Bundle request with first Bundle entry passing and second Bundle entry failing', async () => {
-        const userIdentity = clone(practitionerIdentityWithoutScopes);
-        // Requester has permission to write Observation but no permission to read Observation
-        userIdentity.scopes = ['user/Observation.write'];
-        const request: AuthorizationBundleRequest = {
-            userIdentity,
-            requests: [
-                {
-                    operation: 'create',
-                    resource: {},
-                    fullUrl: '',
-                    resourceType: 'Observation',
-                    id: '160265f7-e8c2-45ca-a1bc-317399e23549',
-                },
-                {
-                    operation: 'read',
-                    resource: {},
-                    fullUrl: '',
-                    resourceType: 'Observation',
-                    id: 'fcfe413c-c62d-4097-9e31-02ff6ff523ad',
-                },
-            ],
-        };
-
-        await expect(authZHandler.isBundleRequestAuthorized(request)).rejects.toThrowError(
-            new UnauthorizedError('An entry within the Bundle is not authorized'),
-        );
-    });
 });
 
 describe('getAllowedResourceTypesForOperation', () => {
-    const authZConfigWithSearchTypeScope = clone(authZConfig);
+    const authZConfigWithSearchTypeScope = baseAuthZConfig();
     authZConfigWithSearchTypeScope.scopeRule.user.read = ['search-type'];
     authZConfigWithSearchTypeScope.scopeRule.user.write = [];
 
     const cases: (string | string[])[][] = [
         [
             'search-type operation: read scope: returns [Patient, Observation]',
-            ['user/Patient.read', 'user/Observation.read'],
+            ['user/Patient.read', 'user/Observation.read', 'fhirUser'],
             'search-type',
             ['Patient', 'Observation'],
         ],
         // if there are duplicated scopeResourceType we return an array with the duplicates removed
         [
             'search-type operation: read scope: duplicated Observation scopeResourceType still returns [Patient, Observation]',
-            ['user/Patient.read', 'patient/Observation.read', 'user/Observation.read'],
+            ['launch/patient', 'user/Patient.read', 'patient/Observation.read', 'user/Observation.read', 'launch'],
             'search-type',
             ['Patient', 'Observation'],
         ],
@@ -950,10 +1094,14 @@ describe('getAllowedResourceTypesForOperation', () => {
 });
 
 describe('getSearchFilterBasedOnIdentity', () => {
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
-    test('Patient identity', async () => {
+    const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
+    test('Patient context identity', async () => {
         // BUILD
-        const userIdentity = clone(patientIdentityWithoutScopes);
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.read', 'fhirUser'],
+            patientLaunchContext: getFhirResource(patientId, apiUrl),
+        };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
@@ -965,21 +1113,49 @@ describe('getSearchFilterBasedOnIdentity', () => {
                 key: '_reference',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
-                value: [patientId, `${apiUrl}${patientId}`],
+                value: [patientIdentity, patientId],
+            },
+        ];
+        await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+    test('User identity', async () => {
+        // BUILD
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.*', 'fhirUser'],
+            fhirUserObject: patientFhirResource,
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_reference',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [patientIdentity, patientId],
             },
         ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
 
-    test('Patient identity; fhirUser hostname does not match server hostname', async () => {
+    test('User & Patient identity; fhirUser hostname does not match server hostname', async () => {
         // BUILD
         const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
-            authZConfig,
+            baseAuthZConfig(),
             'https://fhir.server-2.com/dev/',
             '4.0.1',
         );
 
-        const userIdentity = clone(patientIdentityWithoutScopes);
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.*', 'fhirUser'],
+            patientLaunchContext: patientFhirResource,
+            fhirUserObject: patientFhirResource,
+        };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
@@ -991,7 +1167,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
                 key: '_reference',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
-                value: [`${apiUrl}${patientId}`],
+                value: [patientIdentity, patientIdentity],
             },
         ];
         await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
@@ -1001,7 +1177,11 @@ describe('getSearchFilterBasedOnIdentity', () => {
 
     test('Practitioner identity', async () => {
         // BUILD
-        const userIdentity = clone(practitionerIdentityWithoutScopes);
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['user/*.*', 'fhirUser'],
+            fhirUserObject: practitionerFhirResource,
+        };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
