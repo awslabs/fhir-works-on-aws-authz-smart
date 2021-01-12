@@ -16,7 +16,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['patient', 'FakeResource', 'write'],
         ['patient', '*', 'write'],
     ];
-    test.each(testCases)('CASE: %p/%p.%p; expect: %p', async (scopeType, scopeResourceType, accessType) => {
+    test.each(testCases)('CASE: %p/%p.%p; expect: matches', async (scopeType, scopeResourceType, accessType) => {
         const expectedStr = `${scopeType}/${scopeResourceType}.${accessType}`;
         const actualMatch = expectedStr.match(CLINICAL_SCOPE_REGEX);
         expect(actualMatch).toBeTruthy();
@@ -40,7 +40,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['patient/Patient.'],
         ['system/Patient.read'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
         const actualMatch = scope.match(CLINICAL_SCOPE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
@@ -59,7 +59,7 @@ describe('FHIR_USER_REGEX', () => {
         ['https://fhir.server.com/dev/', 'Person', 'id'],
         ['https://fhir.server.com/dev/', 'Patient', 'idID1234-123.aBc'],
     ];
-    test.each(testCases)('CASE: %p%p/%p; expect: %p', async (hostname, resourceType, id) => {
+    test.each(testCases)('CASE: %p%p/%p; expect: matches', async (hostname, resourceType, id) => {
         const expectedStr = `${hostname}${resourceType}/${id}`;
         const actualMatch = expectedStr.match(FHIR_USER_REGEX);
         expect(actualMatch).toBeTruthy();
@@ -86,7 +86,7 @@ describe('FHIR_USER_REGEX', () => {
         ['https://fhir.server.com/dev/Patient/id '],
         [' https://fhir.server.com/dev/Patient/id'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
         const actualMatch = scope.match(FHIR_USER_REGEX);
         expect(actualMatch).toBeFalsy();
     });
@@ -101,7 +101,7 @@ describe('FHIR_RESOURCE_REGEX', () => {
         ['', 'Patient', 'id'],
         ['', 'Encounter', 'id'],
     ];
-    test.each(testCases)('CASE: %p%p/%p; expect: %p', async (hostname, resourceType, id) => {
+    test.each(testCases)('CASE: %p%p/%p; expect: matches', async (hostname, resourceType, id) => {
         const expectedStr = `${hostname}${resourceType}/${id}`;
         const actualMatch = expectedStr.match(FHIR_RESOURCE_REGEX);
         expect(actualMatch).toBeTruthy();
@@ -123,7 +123,7 @@ describe('FHIR_RESOURCE_REGEX', () => {
         ['Patient'],
         ['https://fhir.server.com/dev/'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: false', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
         const actualMatch = scope.match(FHIR_RESOURCE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
