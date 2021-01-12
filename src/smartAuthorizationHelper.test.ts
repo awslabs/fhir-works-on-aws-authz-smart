@@ -102,8 +102,8 @@ describe('hasReferenceToResource', () => {
     });
 });
 
-// TODO Add tests to check aud and iss
 describe('verifyJwt', () => {
+    // Setup publicKey and privateKey for signing and reading JWT
     const { publicKey, privateKey } = generateKeyPairSync('rsa', {
         modulusLength: 4096,
         publicKeyEncoding: {
@@ -115,8 +115,6 @@ describe('verifyJwt', () => {
             format: 'pem',
         },
     });
-    console.log('Public Key for JWT');
-    console.log(publicKey);
 
     const kid = 'abcd1234';
     const jwk = { ...pem2jwk(publicKey), kid };
