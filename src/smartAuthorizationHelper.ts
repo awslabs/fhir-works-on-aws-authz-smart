@@ -72,10 +72,10 @@ export async function verifyJwtToken(
     expectedIssValue: string,
     client: JwksClient,
 ) {
-    const genericErrorMessage = 'Error validating the validity of the access_token';
+    const genericErrorMessage = 'Invalid access token';
     const decodedAccessToken = decode(token, { complete: true });
     if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
-        console.error('invalid access token');
+        console.error('access_token could not be decoded into an object');
         throw new UnauthorizedError(genericErrorMessage);
     }
     const { kid } = decodedAccessToken.header;

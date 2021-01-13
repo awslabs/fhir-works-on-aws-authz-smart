@@ -148,8 +148,12 @@ describe('verifyJwt', () => {
         };
     }
 
-    async function getSignedJwt(payload: any) {
-        return new SignJWT(payload).setProtectedHeader({ alg: 'RS256', type: 'JWT', kid }).sign(privateKey);
+    async function getSignedJwt(payload: any, headerContainsKidAttribute: boolean = true) {
+        let header: any = { alg: 'RS256', type: 'JWT' };
+        if (headerContainsKidAttribute) {
+            header = { ...header, kid };
+        }
+        return new SignJWT(payload).setProtectedHeader(header).sign(privateKey);
     }
 
     test('JWT is valid and verified', async () => {
@@ -163,6 +167,19 @@ describe('verifyJwt', () => {
         return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).resolves.toEqual(payload);
     });
 
+    test('JWT does not include "kid" attribute in header', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const jwt = await getSignedJwt(payload, false);
+        return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
+            new UnauthorizedError('Invalid access token'),
+        );
+    });
+
     test('jwt expired', async () => {
         const payload = getDefaultPayload(
             Math.floor(Date.now() / 1000) - 10,
@@ -173,7 +190,7 @@ describe('verifyJwt', () => {
         const jwt = await getSignedJwt(payload);
 
         return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
-            new UnauthorizedError('Error validating the validity of the access_token'),
+            new UnauthorizedError('Invalid access token'),
         );
     });
 
@@ -181,13 +198,13 @@ describe('verifyJwt', () => {
         const token = 'abc';
 
         return expect(verifyJwtToken(token, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
-            new UnauthorizedError('Error validating the validity of the access_token'),
+            new UnauthorizedError('Invalid access token'),
         );
     });
 
-    describe('aud is incorrect', async () => {
+    describe('aud is incorrect', () => {
         const cases: (string | string[])[][] = [
-            ['Single incorrect aud value', 'aud1'],
+            ['Single incorrect string aud value', 'aud1'],
             ['Aud array that does not contain expected aud value', ['aud1', 'aud2']],
         ];
         test.each(cases)('CASE: %p', async (testCase, aud) => {
@@ -200,11 +217,11 @@ describe('verifyJwt', () => {
             const jwt = await getSignedJwt(payload);
             return expect(
                 verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
-            ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+            ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
         });
     });
 
-    describe('aud is correct', async () => {
+    describe('aud is correct', () => {
         const cases: (string | string[])[][] = [
             ['Single correct aud value', expectedAudValue],
             ['Aud array contain expected aud value', ['aud1', expectedAudValue]],
@@ -232,7 +249,7 @@ describe('verifyJwt', () => {
         );
         const jwt = await getSignedJwt(payload);
         return expect(verifyJwtToken(jwt, expectedAudValue, 'fakeIss', client)).rejects.toThrowError(
-            new UnauthorizedError('Error validating the validity of the access_token'),
+            new UnauthorizedError('Invalid access token'),
         );
     });
 });
