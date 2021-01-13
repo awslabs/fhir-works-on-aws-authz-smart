@@ -83,17 +83,10 @@ export async function verifyJwtToken(
         console.error('JWT verification failed. JWT "kid" attribute is required in the header');
         throw new UnauthorizedError(genericErrorMessage);
     }
-    const { aud, iss } = decodedAccessToken.payload;
-    const audArray = Array.isArray(aud) ? aud : [aud];
 
-    // verify aud & iss
-    if (!audArray.includes(expectedAudValue) || expectedIssValue !== iss) {
-        console.error('aud or iss is not matching');
-        throw new UnauthorizedError(genericErrorMessage);
-    }
     try {
         const key = await client.getSigningKeyAsync(kid);
-        return verify(token, key.getPublicKey());
+        return verify(token, key.getPublicKey(), { audience: expectedAudValue, issuer: expectedIssValue });
     } catch (e) {
         console.error(e.message);
         throw new UnauthorizedError(genericErrorMessage);

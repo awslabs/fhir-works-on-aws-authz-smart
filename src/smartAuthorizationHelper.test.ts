@@ -12,7 +12,6 @@ import fromKeyLike from 'jose/jwk/from_key_like';
 import SignJWT from 'jose/jwt/sign';
 // eslint-disable-next-line import/no-unresolved
 import generateKeyPair from 'jose/util/generate_key_pair';
-
 import {
     hasReferenceToResource,
     FhirResource,
@@ -130,12 +129,15 @@ describe('verifyJwt', () => {
         });
     });
 
-    function getDefaultPayload(iat: number, exp: number) {
+    const expectedAudValue = 'api://default';
+    const expectedIssValue = 'https://exampleAuthServer.com/oauth2';
+
+    function getDefaultPayload(iat: number, exp: number, aud: string | string[], iss: string | string[]) {
         return {
             ver: 1,
             jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
-            iss: 'https://exampleAuthServer.com/oauth2',
-            aud: 'api://default',
+            iss,
+            aud,
             iat,
             exp,
             cid: '0oa8muazKSyk9gP5y5d5',
@@ -151,42 +153,85 @@ describe('verifyJwt', () => {
     }
 
     test('JWT is valid and verified', async () => {
-        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
         const jwt = await getSignedJwt(payload);
-        return expect(
-            verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
-        ).resolves.toEqual(payload);
+        return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).resolves.toEqual(payload);
     });
 
     test('jwt expired', async () => {
-        const payload = getDefaultPayload(Math.floor(Date.now() / 1000) - 10, Math.floor(Date.now() / 1000) - 1);
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000) - 10,
+            Math.floor(Date.now() / 1000) - 1,
+            expectedAudValue,
+            expectedIssValue,
+        );
         const jwt = await getSignedJwt(payload);
 
-        return expect(
-            verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
-        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+        return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
+            new UnauthorizedError('Error validating the validity of the access_token'),
+        );
     });
 
     test('invalid jwt', () => {
         const token = 'abc';
 
-        return expect(
-            verifyJwtToken(token, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
-        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+        return expect(verifyJwtToken(token, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
+            new UnauthorizedError('Error validating the validity of the access_token'),
+        );
     });
 
-    test('aud is incorrect', async () => {
-        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
-        const jwt = await getSignedJwt(payload);
-        return expect(
-            verifyJwtToken(jwt, 'fakeAud', 'https://exampleAuthServer.com/oauth2', client),
-        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+    describe('aud is incorrect', async () => {
+        const cases: (string | string[])[][] = [
+            ['Single incorrect aud value', 'aud1'],
+            ['Aud array that does not contain expected aud value', ['aud1', 'aud2']],
+        ];
+        test.each(cases)('CASE: %p', async (testCase, aud) => {
+            const payload = getDefaultPayload(
+                Math.floor(Date.now() / 1000),
+                Math.floor(Date.now() / 1000) + 10,
+                aud,
+                expectedIssValue,
+            );
+            const jwt = await getSignedJwt(payload);
+            return expect(
+                verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
+            ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
+        });
+    });
+
+    describe('aud is correct', async () => {
+        const cases: (string | string[])[][] = [
+            ['Single correct aud value', expectedAudValue],
+            ['Aud array contain expected aud value', ['aud1', expectedAudValue]],
+        ];
+        test.each(cases)('CASE: %p', async (testCase, aud) => {
+            const payload = getDefaultPayload(
+                Math.floor(Date.now() / 1000),
+                Math.floor(Date.now() / 1000) + 10,
+                aud,
+                expectedIssValue,
+            );
+            const jwt = await getSignedJwt(payload);
+            return expect(
+                verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
+            ).resolves.toEqual(payload);
+        });
     });
 
     test('iss is incorrect', async () => {
-        const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
         const jwt = await getSignedJwt(payload);
-        return expect(verifyJwtToken(jwt, 'api://default', 'fakeIss', client)).rejects.toThrowError(
+        return expect(verifyJwtToken(jwt, expectedAudValue, 'fakeIss', client)).rejects.toThrowError(
             new UnauthorizedError('Error validating the validity of the access_token'),
         );
     });

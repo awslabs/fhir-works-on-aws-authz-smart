@@ -4,7 +4,6 @@
  */
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { JwksClient, SigningKey } from 'jwks-rsa';
 import MockAdapter from 'axios-mock-adapter';
 import {
     VerifyAccessTokenRequest,
@@ -251,30 +250,6 @@ function getExpectedUserIdentity(decodedAccessToken: any): any {
 describe('verifyAccessToken', () => {
     const cases: (string | boolean | VerifyAccessTokenRequest | any)[][] = [
         [
-            'aud_failure',
-            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
-            { ...baseAccessNoScopes, aud: 'fake', scp: ['patient/*.*'], ...patientContext },
-            false,
-        ],
-        [
-            'aud_not_in_array',
-            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
-            { ...baseAccessNoScopes, aud: ['aud1', 'aud2'], scp: ['patient/*.read'], ...patientContext },
-            false,
-        ],
-        [
-            'aud_in_array',
-            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
-            { ...baseAccessNoScopes, aud: ['aud1', expectedAud, 'aud2'], scp: ['patient/*.read'], ...patientContext },
-            true,
-        ],
-        [
-            'iss_failure',
-            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
-            { ...baseAccessNoScopes, iss: 'fake', scp: ['patient/*.*'], ...patientContext },
-            false,
-        ],
-        [
             'no_fhir_scopes',
             { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
             baseAccessNoScopes,
@@ -403,23 +378,12 @@ describe('verifyAccessToken', () => {
     ];
 
     const authZConfig = baseAuthZConfig();
-
-    const client: JwksClient = jest.createMockFromModule('jwks-rsa');
-    client.getSigningKeyAsync = jest.fn().mockImplementation(() => {
-        const signingKey: SigningKey = jest.createMockFromModule('jwks-rsa');
-        signingKey.getPublicKey = jest.fn().mockReturnValue('fakePublicKey');
-
-        return Promise.resolve(signingKey);
-    });
-
-    // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
-    jest.spyOn(smartAuthorizationHelper, 'getJwksClient').mockReturnValue(client);
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, decodedAccessToken, isValid) => {
-        const { decode, verify } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
-        decode.mockReturnValue({ header: { kid: 'fakeKid' }, payload: decodedAccessToken });
-        verify.mockReturnValue(decodedAccessToken);
-
+        // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
+        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+            Promise.resolve(decodedAccessToken),
+        );
         if (!isValid) {
             return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
