@@ -3,10 +3,16 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 import { UnauthorizedError } from 'fhir-works-on-aws-interface';
-import jwksClient from 'jwks-rsa';
+import jwksClient, { JwksClient } from 'jwks-rsa';
 
-import { sign } from 'jsonwebtoken';
-import { pem2jwk } from 'pem-jwk';
+import { KeyObject } from 'crypto';
+// eslint-disable-next-line import/no-unresolved
+import fromKeyLike from 'jose/jwk/from_key_like';
+// eslint-disable-next-line import/no-unresolved
+import SignJWT from 'jose/jwt/sign';
+// eslint-disable-next-line import/no-unresolved
+import generateKeyPair from 'jose/util/generate_key_pair';
+
 import {
     hasReferenceToResource,
     FhirResource,
@@ -14,8 +20,6 @@ import {
     getFhirUser,
     verifyJwtToken,
 } from './smartAuthorizationHelper';
-
-const { generateKeyPairSync } = require('crypto');
 
 describe('getFhirUser', () => {
     test('valid fhirUser', () => {
@@ -107,28 +111,23 @@ describe('hasReferenceToResource', () => {
 });
 
 describe('verifyJwt', () => {
-    // Setup publicKey and privateKey for signing and reading JWT
-    const { publicKey, privateKey } = generateKeyPairSync('rsa', {
-        modulusLength: 4096,
-        publicKeyEncoding: {
-            type: 'spki',
-            format: 'pem',
-        },
-        privateKeyEncoding: {
-            type: 'pkcs8',
-            format: 'pem',
-        },
-    });
-
     const kid = 'abcd1234';
-    const jwk = { ...pem2jwk(publicKey), kid };
 
-    const client = jwksClient({
-        jwksUri: 'http://exampleAuthServer.com/oauth2',
-        getKeysInterceptor: cb => {
-            // @ts-ignore
-            return cb(null, [jwk]);
-        },
+    let privateKey: KeyObject;
+    let client: JwksClient;
+
+    beforeAll(async () => {
+        const keyPair = await generateKeyPair('RS256');
+        const { publicKey } = keyPair;
+        privateKey = <KeyObject>keyPair.privateKey;
+        const jwk = { ...(await fromKeyLike(publicKey)), kid };
+        client = jwksClient({
+            jwksUri: 'http://exampleAuthServer.com/oauth2',
+            getKeysInterceptor: cb => {
+                // @ts-ignore
+                return cb(null, [jwk]);
+            },
+        });
     });
 
     function getDefaultPayload(iat: number, exp: number) {
@@ -146,30 +145,26 @@ describe('verifyJwt', () => {
             fhirUser: 'Practitioner/1234',
         };
     }
-    function getSignedJwt(payload: any) {
-        return sign(payload, privateKey, {
-            header: {
-                alg: 'RS256',
-                typ: 'JWT',
-                kid,
-            },
-        });
+
+    async function getSignedJwt(payload: any) {
+        return new SignJWT(payload).setProtectedHeader({ alg: 'RS256', type: 'JWT', kid }).sign(privateKey);
     }
-    test('JWT is valid and verified', () => {
+
+    test('JWT is valid and verified', async () => {
         const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
-        const jwt = getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload);
         return expect(
             verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
         ).resolves.toEqual(payload);
     });
 
-    test('jwt expired', () => {
+    test('jwt expired', async () => {
         const payload = getDefaultPayload(Math.floor(Date.now() / 1000) - 10, Math.floor(Date.now() / 1000) - 1);
-        const jwt = getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload);
 
         return expect(
             verifyJwtToken(jwt, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
-        ).rejects.toThrowError(new UnauthorizedError('jwt expired'));
+        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
     });
 
     test('invalid jwt', () => {
@@ -177,12 +172,12 @@ describe('verifyJwt', () => {
 
         return expect(
             verifyJwtToken(token, 'api://default', 'https://exampleAuthServer.com/oauth2', client),
-        ).rejects.toThrowError(new UnauthorizedError('invalid access token'));
+        ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
     });
 
     test('aud is incorrect', async () => {
         const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
-        const jwt = getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload);
         return expect(
             verifyJwtToken(jwt, 'fakeAud', 'https://exampleAuthServer.com/oauth2', client),
         ).rejects.toThrowError(new UnauthorizedError('Error validating the validity of the access_token'));
@@ -190,7 +185,7 @@ describe('verifyJwt', () => {
 
     test('iss is incorrect', async () => {
         const payload = getDefaultPayload(Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000) + 10);
-        const jwt = getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload);
         return expect(verifyJwtToken(jwt, 'api://default', 'fakeIss', client)).rejects.toThrowError(
             new UnauthorizedError('Error validating the validity of the access_token'),
         );

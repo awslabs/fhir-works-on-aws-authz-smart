@@ -72,13 +72,16 @@ export async function verifyJwtToken(
     expectedIssValue: string,
     client: JwksClient,
 ) {
+    const genericErrorMessage = 'Error validating the validity of the access_token';
     const decodedAccessToken = decode(token, { complete: true });
     if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
-        throw new UnauthorizedError('invalid access token');
+        console.error('invalid access token');
+        throw new UnauthorizedError(genericErrorMessage);
     }
     const { kid } = decodedAccessToken.header;
     if (!kid) {
-        throw new UnauthorizedError('JWT verification failed. JWT "kid" attribute is required in the header');
+        console.error('JWT verification failed. JWT "kid" attribute is required in the header');
+        throw new UnauthorizedError(genericErrorMessage);
     }
     const { aud, iss } = decodedAccessToken.payload;
     const audArray = Array.isArray(aud) ? aud : [aud];
@@ -86,12 +89,13 @@ export async function verifyJwtToken(
     // verify aud & iss
     if (!audArray.includes(expectedAudValue) || expectedIssValue !== iss) {
         console.error('aud or iss is not matching');
-        throw new UnauthorizedError('Error validating the validity of the access_token');
+        throw new UnauthorizedError(genericErrorMessage);
     }
     try {
         const key = await client.getSigningKeyAsync(kid);
         return verify(token, key.getPublicKey());
     } catch (e) {
-        throw new UnauthorizedError(e.message);
+        console.error(e.message);
+        throw new UnauthorizedError(genericErrorMessage);
     }
 }

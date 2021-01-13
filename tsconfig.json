@@ -12,7 +12,8 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
-    }
+    },
+    "lib": [ "DOM"]
   },
   "exclude": ["src/**/*.test.ts", "src/**/__mocks__/*.ts"],
   "include": ["src/**/*"]
