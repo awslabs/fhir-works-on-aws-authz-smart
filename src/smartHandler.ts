@@ -2,7 +2,6 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { decode } from 'jsonwebtoken';
 import {
     Authorization,
     VerifyAccessTokenRequest,
@@ -12,15 +11,15 @@ import {
     ReadResponseAuthorizedRequest,
     WriteRequestAuthorizedRequest,
     AccessBulkDataJobRequest,
-    clone,
     BatchReadWriteRequest,
     BASE_R4_RESOURCES,
     FhirVersion,
     BASE_STU3_RESOURCES,
     GetSearchFilterBasedOnIdentityRequest,
     SearchFilter,
+    clone,
 } from 'fhir-works-on-aws-interface';
-import axios from 'axios';
+import { JwksClient } from 'jwks-rsa';
 import { SMARTConfig, UserIdentity } from './smartConfig';
 import {
     convertScopeToSmartScope,
@@ -30,7 +29,13 @@ import {
     isScopeSufficient,
     SEARCH_OPERATIONS,
 } from './smartScopeHelper';
-import { hasReferenceToResource, getFhirResource, getFhirUser } from './smartAuthorizationHelper';
+import {
+    hasReferenceToResource,
+    getFhirResource,
+    getFhirUser,
+    getJwksClient,
+    verifyJwtToken,
+} from './smartAuthorizationHelper';
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -44,6 +49,8 @@ export class SMARTHandler implements Authorization {
 
     private readonly fhirVersion: FhirVersion;
 
+    private readonly jwksClient: JwksClient;
+
     constructor(config: SMARTConfig, apiUrl: string, fhirVersion: FhirVersion) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
@@ -51,25 +58,22 @@ export class SMARTHandler implements Authorization {
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
+        this.jwksClient = getJwksClient(this.config.jwksEndpoint);
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<UserIdentity> {
-        // The access_token will be verified by hitting the authZUserInfoUrl (token introspection)
-        // Decoding first to determine if it passes scope & claims check first
-        const decoded = decode(request.accessToken, { json: true }) || {};
-        const { aud, iss } = decoded;
-        const audArray = Array.isArray(aud) ? aud : [aud];
-        const fhirUserClaim = decoded[this.config.fhirUserClaimKey];
-        const patientContextClaim = decoded[`${this.config.launchContextKeyPrefix}patient`];
+        const decodedToken: any = await verifyJwtToken(
+            request.accessToken,
+            this.config.expectedAudValue,
+            this.config.expectedIssValue,
+            this.jwksClient,
+        );
 
-        // verify aud & iss
-        if (!audArray.includes(this.config.expectedAudValue) || this.config.expectedIssValue !== iss) {
-            console.error('aud or iss is not matching');
-            throw new UnauthorizedError('Error validating the validity of the access_token');
-        }
+        const fhirUserClaim = decodedToken[this.config.fhirUserClaimKey];
+        const patientContextClaim = decodedToken[`${this.config.launchContextKeyPrefix}patient`];
 
         // get just the scopes that apply to this request
-        const scopes = getScopes(decoded[this.config.scopeKey]);
+        const scopes = getScopes(decodedToken[this.config.scopeKey]);
         const usableScopes = filterOutUnusableScope(
             scopes,
             this.config.scopeRule,
@@ -88,29 +92,17 @@ export class SMARTHandler implements Authorization {
             throw new UnauthorizedError('access_token does not have permission for requested operation');
         }
 
-        // verify token
-        let response: any;
-        try {
-            response = await axios.get(this.config.userInfoEndpoint, {
-                headers: { Authorization: `Bearer ${request.accessToken}` },
-            });
-        } catch (e) {
-            console.error('Post to authZUserInfoUrl failed', e);
-        }
-
-        if (!response) {
-            throw new UnauthorizedError('access_token cannot be verified');
-        } else if (request.bulkDataAuth) {
-            if (!response.data[this.config.fhirUserClaimKey]) {
+        if (request.bulkDataAuth) {
+            if (!decodedToken[this.config.fhirUserClaimKey]) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
-            const fhirUser = getFhirUser(response.data[this.config.fhirUserClaimKey]);
+            const fhirUser = getFhirUser(decodedToken[this.config.fhirUserClaimKey]);
             if (fhirUser.hostname !== this.apiUrl || !this.adminAccessTypes.includes(fhirUser.resourceType)) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
         }
 
-        const userIdentity: UserIdentity = clone(response.data);
+        const userIdentity: UserIdentity = clone(decodedToken);
         if (fhirUserClaim && usableScopes.some(scope => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }

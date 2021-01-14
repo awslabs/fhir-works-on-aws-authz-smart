@@ -85,7 +85,7 @@ export interface SMARTConfig {
      */
     launchContextKeyPrefix: string;
     /**
-     * OAuth2 standard URL used to verify the access_token and get all user claims
+     * Json Web Key Set endpoint used to get the key for verifying access_token
      */
-    userInfoEndpoint: string;
+    jwksEndpoint: string;
 }

@@ -1,3 +1,7 @@
+/*
+ *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *  SPDX-License-Identifier: Apache-2.0
+ */
 import { BulkDataAuth } from 'fhir-works-on-aws-interface';
 import { ScopeRule, ScopeType } from './smartConfig';
 import {
