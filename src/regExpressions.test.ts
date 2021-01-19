@@ -48,19 +48,19 @@ describe('CLINICAL_SCOPE_REGEX', () => {
 
 describe('FHIR_USER_REGEX', () => {
     const testCases = [
-        ['https://fhir.server.com/dev/', 'Patient', 'id'],
-        ['http://fhir.server.com/dev/', 'Patient', 'id'],
-        ['http://fhir.server.com/dev-.:/%/$/2/', 'Patient', 'id'],
-        ['http://localhost/projectname/', 'Patient', 'id'],
-        ['http://127.0.0.1/project_name/', 'Patient', 'id'],
-        ['https://127.0.0.1:8080/project_name/', 'Patient', 'id'],
-        ['https://fhir.server.com/dev/', 'Practitioner', 'id'],
-        ['https://fhir.server.com/dev/', 'RelatedPerson', 'id'],
-        ['https://fhir.server.com/dev/', 'Person', 'id'],
-        ['https://fhir.server.com/dev/', 'Patient', 'idID1234-123.aBc'],
+        ['https://fhir.server.com/dev', 'Patient', 'id'],
+        ['http://fhir.server.com/dev', 'Patient', 'id'],
+        ['http://fhir.server.com/dev-.:/%/$/2', 'Patient', 'id'],
+        ['http://localhost/projectname', 'Patient', 'id'],
+        ['http://127.0.0.1/project_name', 'Patient', 'id'],
+        ['https://127.0.0.1:8080/project_name', 'Patient', 'id'],
+        ['https://fhir.server.com/dev', 'Practitioner', 'id'],
+        ['https://fhir.server.com/dev', 'RelatedPerson', 'id'],
+        ['https://fhir.server.com/dev', 'Person', 'id'],
+        ['https://fhir.server.com/dev', 'Patient', 'idID1234-123.aBc'],
     ];
-    test.each(testCases)('CASE: %p%p/%p; expect: matches', async (hostname, resourceType, id) => {
-        const expectedStr = `${hostname}${resourceType}/${id}`;
+    test.each(testCases)('CASE: %p/%p/%p; expect: matches', async (hostname, resourceType, id) => {
+        const expectedStr = `${hostname}/${resourceType}/${id}`;
         const actualMatch = expectedStr.match(FHIR_USER_REGEX);
         expect(actualMatch).toBeTruthy();
         expect(actualMatch!.groups).toBeTruthy();
@@ -93,16 +93,17 @@ describe('FHIR_USER_REGEX', () => {
 });
 describe('FHIR_RESOURCE_REGEX', () => {
     const testCases = [
-        ['https://fhir.server.com/dev/', 'Patient', 'id'],
-        ['http://fhir.server.com/dev-.:/%/$/2/', 'Observation', 'id'],
-        ['http://localhost/projectname/', 'Encounter', 'id'],
-        ['https://127.0.0.1:8080/project_name/', 'Patient', 'id'],
-        ['https://fhir.server.com/dev/', 'Patient', 'idID1234-123.aBc'],
+        ['https://fhir.server.com/dev', 'Patient', 'id'],
+        ['http://fhir.server.com/dev-.:/%/$/2', 'Observation', 'id'],
+        ['http://localhost/projectname', 'Encounter', 'id'],
+        ['https://127.0.0.1:8080/project_name', 'Patient', 'id'],
+        ['https://fhir.server.com/dev', 'Patient', 'idID1234-123.aBc'],
         ['', 'Patient', 'id'],
         ['', 'Encounter', 'id'],
     ];
-    test.each(testCases)('CASE: %p%p/%p; expect: matches', async (hostname, resourceType, id) => {
-        const expectedStr = `${hostname}${resourceType}/${id}`;
+    test.each(testCases)('CASE: %p/%p/%p; expect: matches', async (hostname, resourceType, id) => {
+        let expectedStr = `${resourceType}/${id}`;
+        if (hostname) expectedStr = `${hostname}/${expectedStr}`;
         const actualMatch = expectedStr.match(FHIR_RESOURCE_REGEX);
         expect(actualMatch).toBeTruthy();
         expect(actualMatch!.groups).toBeTruthy();

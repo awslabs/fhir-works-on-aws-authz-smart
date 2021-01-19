@@ -6,8 +6,8 @@ import { UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
 
-export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
-export const FHIR_RESOURCE_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_]*\/)+)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
 export interface FhirResource {
     hostname: string;
@@ -34,7 +34,7 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
 
 function isLocalResourceInJsonAsReference(jsonStr: string, fhirResource: FhirResource): boolean {
     return (
-        jsonStr.includes(`"reference":"${fhirResource.hostname}${fhirResource.resourceType}/${fhirResource.id}"`) ||
+        jsonStr.includes(`"reference":"${fhirResource.hostname}/${fhirResource.resourceType}/${fhirResource.id}"`) ||
         jsonStr.includes(`"reference":"${fhirResource.resourceType}/${fhirResource.id}"`)
     );
 }
@@ -44,7 +44,7 @@ export function hasReferenceToResource(fhirResource: FhirResource, resource: any
     const { hostname, resourceType, id } = fhirResource;
     if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
-        return jsonStr.includes(`"reference":"${hostname}${resourceType}/${id}"`);
+        return jsonStr.includes(`"reference":"${hostname}/${resourceType}/${id}"`);
     }
     if (resourceType === 'Practitioner') {
         return true;
