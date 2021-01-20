@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.1](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v0.1.0...v0.1.1) (2021-01-20)
 
-#### Fixes:
+#### Fixes
 
-*  chore: change REGEX hostname not to include `/`
+* chore: change REGEX hostname not to include `/`
 
 ### 0.1.0 (2021-01-14)
 
