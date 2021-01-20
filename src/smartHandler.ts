@@ -129,7 +129,7 @@ export class SMARTHandler implements Authorization {
             if (resourceType === 'Practitioner') {
                 return [];
             }
-            values.push(`${hostname}${resourceType}/${id}`);
+            values.push(`${hostname}/${resourceType}/${id}`);
             if (hostname === this.apiUrl) {
                 values.push(`${resourceType}/${id}`);
             }
@@ -137,7 +137,7 @@ export class SMARTHandler implements Authorization {
 
         if (patientLaunchContext) {
             const { hostname, resourceType, id } = patientLaunchContext;
-            values.push(`${hostname}${resourceType}/${id}`);
+            values.push(`${hostname}/${resourceType}/${id}`);
             if (hostname === this.apiUrl) {
                 values.push(`${resourceType}/${id}`);
             }

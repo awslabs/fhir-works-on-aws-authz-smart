@@ -50,12 +50,12 @@ const baseAuthZConfig = (): SMARTConfig => ({
     launchContextKeyPrefix: 'launch_response_',
     jwksEndpoint: `${expectedIss}/jwks`,
 });
-const apiUrl = 'https://fhir.server.com/dev/';
+const apiUrl = 'https://fhir.server.com/dev';
 const patientId = 'Patient/1234';
 const practitionerId = 'Practitioner/1234';
-const patientIdentity = `${apiUrl}${patientId}`;
-const practitionerIdentity = `${apiUrl}${practitionerId}`;
-const externalPractitionerIdentity = `${apiUrl}test/${practitionerId}`;
+const patientIdentity = `${apiUrl}/${patientId}`;
+const practitionerIdentity = `${apiUrl}/${practitionerId}`;
+const externalPractitionerIdentity = `${apiUrl}/test/${practitionerId}`;
 const patientFhirResource = getFhirUser(patientIdentity);
 const practitionerFhirResource = getFhirUser(practitionerIdentity);
 const externalPractitionerFhirResource = getFhirUser(externalPractitionerIdentity);
@@ -558,7 +558,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
-                    fhirUserObject: getFhirUser(`${apiUrl}Patient/345`),
+                    fhirUserObject: getFhirUser(`${apiUrl}/Patient/345`),
                     patientLaunchContext: patientFhirResource,
                 },
                 operation: 'read',
@@ -1103,7 +1103,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         // BUILD
         const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
             baseAuthZConfig(),
-            'https://fhir.server-2.com/dev/',
+            'https://fhir.server-2.com/dev',
             '4.0.1',
         );
 
