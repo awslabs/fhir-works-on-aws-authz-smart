@@ -1067,7 +1067,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         // OPERATE, CHECK
         const expectedFilter = [
             {
-                key: '_reference',
+                key: '_references',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
                 value: [patientIdentity, patientId],
@@ -1090,7 +1090,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         // OPERATE, CHECK
         const expectedFilter = [
             {
-                key: '_reference',
+                key: '_references',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
                 value: [patientIdentity, patientId],
@@ -1121,7 +1121,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         // OPERATE, CHECK
         const expectedFilter = [
             {
-                key: '_reference',
+                key: '_references',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
                 value: [patientIdentity, patientIdentity],

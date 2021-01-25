@@ -146,7 +146,7 @@ export class SMARTHandler implements Authorization {
         // Create a SearchFilter to limit access to only resources that are referring to the requesting user and/or context
         return [
             {
-                key: '_reference',
+                key: '_references',
                 value: values,
                 comparisonOperator: '==',
                 logicalOperator: 'OR', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
