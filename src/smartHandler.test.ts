@@ -51,8 +51,9 @@ const baseAuthZConfig = (): SMARTConfig => ({
     jwksEndpoint: `${expectedIss}/jwks`,
 });
 const apiUrl = 'https://fhir.server.com/dev';
-const patientId = 'Patient/1234';
-const practitionerId = 'Practitioner/1234';
+const id = 'id';
+const patientId = `Patient/${id}`;
+const practitionerId = `Practitioner/${id}`;
 const patientIdentity = `${apiUrl}/${patientId}`;
 const practitionerIdentity = `${apiUrl}/${practitionerId}`;
 const externalPractitionerIdentity = `${apiUrl}/test/${practitionerId}`;
@@ -85,7 +86,7 @@ const baseAccessNoScopes: any = {
 
 const validPatient = {
     resourceType: 'Patient',
-    id: '1234',
+    id,
     meta: {
         versionId: '1',
         lastUpdated: '2020-06-28T12:03:29.421+00:00',
@@ -1062,6 +1063,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
             operation: 'search-type',
+            resourceType: 'Encounter',
         };
 
         // OPERATE, CHECK
@@ -1084,7 +1086,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
-            operation: 'search-type',
+            operation: 'search-system',
         };
 
         // OPERATE, CHECK
@@ -1115,7 +1117,9 @@ describe('getSearchFilterBasedOnIdentity', () => {
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
-            operation: 'search-type',
+            operation: 'history-instance',
+            resourceType: 'Patient',
+            id: '1324',
         };
 
         // OPERATE, CHECK
@@ -1124,7 +1128,13 @@ describe('getSearchFilterBasedOnIdentity', () => {
                 key: '_references',
                 logicalOperator: 'OR',
                 comparisonOperator: '==',
-                value: [patientIdentity, patientIdentity],
+                value: [patientIdentity],
+            },
+            {
+                key: 'id',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [id],
             },
         ];
         await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
@@ -1141,11 +1151,35 @@ describe('getSearchFilterBasedOnIdentity', () => {
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
             userIdentity,
-            operation: 'search-type',
+            operation: 'search-system',
         };
 
         // OPERATE, CHECK
         const expectedFilter: [] = [];
+        await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+    test('External Practitioner identity', async () => {
+        // BUILD
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['user/*.*', 'fhirUser'],
+            fhirUserObject: externalPractitionerFhirResource,
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+            resourceType: 'Patient',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_references',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [externalPractitionerIdentity],
+            },
+        ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
 });
