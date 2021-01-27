@@ -121,37 +121,55 @@ export class SMARTHandler implements Authorization {
     }
 
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
-        const values: string[] = [];
+        const references: Set<string> = new Set();
+        const ids: Set<string> = new Set();
         const { fhirUserObject, patientLaunchContext } = request.userIdentity;
 
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
-            if (resourceType === 'Practitioner') {
+            if (hostname === this.apiUrl && resourceType === 'Practitioner') {
                 return [];
             }
-            values.push(`${hostname}/${resourceType}/${id}`);
+            references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === this.apiUrl) {
-                values.push(`${resourceType}/${id}`);
+                references.add(`${resourceType}/${id}`);
+            }
+            if (request.resourceType && request.resourceType === resourceType) {
+                ids.add(id);
             }
         }
 
         if (patientLaunchContext) {
             const { hostname, resourceType, id } = patientLaunchContext;
-            values.push(`${hostname}/${resourceType}/${id}`);
+            references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === this.apiUrl) {
-                values.push(`${resourceType}/${id}`);
+                references.add(`${resourceType}/${id}`);
+            }
+            if (request.resourceType && request.resourceType === resourceType) {
+                ids.add(id);
             }
         }
 
         // Create a SearchFilter to limit access to only resources that are referring to the requesting user and/or context
-        return [
-            {
+        const filters: SearchFilter[] = [];
+        if (references.size > 0) {
+            filters.push({
                 key: '_references',
-                value: values,
+                value: [...references],
                 comparisonOperator: '==',
-                logicalOperator: 'OR', // logicalOperator can be either 'AND' or 'OR' since value is an array of one string
-            },
-        ];
+                logicalOperator: 'OR',
+            });
+        }
+        if (ids.size > 0) {
+            filters.push({
+                key: 'id',
+                value: [...ids],
+                comparisonOperator: '==',
+                logicalOperator: 'OR',
+            });
+        }
+
+        return filters;
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
