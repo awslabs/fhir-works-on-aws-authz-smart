@@ -4,10 +4,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.1](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v0.1.0...v0.1.1) (2021-01-20)
 
+<<<<<<< HEAD
+### 0.1.0 (2021-01-14)
+=======
+#### Fixes
+>>>>>>> 8564ff2529c9fff9091b375c9c15e0df4ddfefcf
+
+* chore: change REGEX hostname not to include `/`
+
 ### 0.1.0 (2021-01-14)
 
-
-### Features
+#### Features
 
 * Begin implementation of SMART on FHIR ([#1](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/1)) ([4f07589](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/4f075893da0b6a49a96acb054ea5fd21401c6046))
 * Support string array in OAuth aud claim and add new test cases ([#2](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/2)) ([8273f16](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/8273f1624531488cf47c470b6918d6e58b2bbdec))
@@ -16,8 +23,8 @@ All notable changes to this project will be documented in this file. See [standa
 * Implement patient scope; remove system & launch scopes ([#13](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/13)) ([cc9cbb2](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/cc9cbb24304e88dd777d1610c7da32cf389e42bf))
 * Validate JWT token using public jwks ([#14](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/14)) ([8e577a8](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/8e577a83d0da907c8eb7401113283162b7525900))
 
-## [0.0.1] - 2020-11-06
+### [0.0.1] - 2020-11-06
 
-### Added
+#### Added
 
 - Initial launch! :rocket:
