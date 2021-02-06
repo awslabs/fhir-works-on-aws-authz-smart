@@ -2,7 +2,7 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { UnauthorizedError } from 'fhir-works-on-aws-interface';
+import { FhirVersion, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient } from 'jwks-rsa';
 
 import { KeyObject } from 'crypto';
@@ -20,11 +20,14 @@ import {
     verifyJwtToken,
 } from './smartAuthorizationHelper';
 
+const apiUrl = 'https://fhirServer.com';
+const id = '1234';
+
 describe('getFhirUser', () => {
     test('valid fhirUser', () => {
-        expect(getFhirUser('https://fhirServer.com/Practitioner/1234')).toEqual({
-            hostname: 'https://fhirServer.com',
-            id: '1234',
+        expect(getFhirUser(`${apiUrl}/Practitioner/${id}`)).toEqual({
+            hostname: apiUrl,
+            id,
             resourceType: 'Practitioner',
         });
     });
@@ -37,32 +40,32 @@ describe('getFhirUser', () => {
 describe('getFhirResource', () => {
     const defaultHostname = 'http://default.com';
     test('valid fhirResource', () => {
-        expect(getFhirResource('https://fhirServer.com/Practitioner/1234', defaultHostname)).toEqual({
-            hostname: 'https://fhirServer.com',
-            id: '1234',
+        expect(getFhirResource(`${apiUrl}/Practitioner/${id}`, defaultHostname)).toEqual({
+            hostname: apiUrl,
+            id,
             resourceType: 'Practitioner',
         });
-        expect(getFhirResource('https://fhirServer1234.com/Organization/1234', defaultHostname)).toEqual({
+        expect(getFhirResource(`https://fhirServer1234.com/Organization/${id}`, defaultHostname)).toEqual({
             hostname: 'https://fhirServer1234.com',
-            id: '1234',
+            id,
             resourceType: 'Organization',
         });
     });
     test('valid fhirResource; With default hostname', () => {
-        expect(getFhirResource('Practitioner/1234', defaultHostname)).toEqual({
+        expect(getFhirResource(`Practitioner/${id}`, defaultHostname)).toEqual({
             hostname: defaultHostname,
-            id: '1234',
+            id,
             resourceType: 'Practitioner',
         });
-        expect(getFhirResource('Organization/1234', defaultHostname)).toEqual({
+        expect(getFhirResource(`Organization/${id}`, defaultHostname)).toEqual({
             hostname: defaultHostname,
-            id: '1234',
+            id,
             resourceType: 'Organization',
         });
     });
     test('invalid fhirResource', () => {
         expect(() => {
-            getFhirResource('bad.hostname/Practitioner/1234', defaultHostname);
+            getFhirResource(`bad.hostname/Practitioner/${id}`, defaultHostname);
         }).toThrowError(new UnauthorizedError('Resource is in the incorrect format'));
         expect(() => {
             getFhirResource('invalidFhirResource', defaultHostname);
@@ -71,40 +74,238 @@ describe('getFhirResource', () => {
 });
 
 describe('hasReferenceToResource', () => {
-    const fhirUser: FhirResource = {
-        hostname: 'https://fhirServer.com',
-        id: '1234',
+    const practitionerFhirUser: FhirResource = {
+        hostname: apiUrl,
+        id,
         resourceType: 'Practitioner',
     };
-    test('hostName does not match apiUrl', () => {
-        expect(hasReferenceToResource(fhirUser, {}, 'fakeApiServer')).toEqual(false);
+    const patientFhirUser: FhirResource = {
+        hostname: apiUrl,
+        id,
+        resourceType: 'Patient',
+    };
+    const r4Version: FhirVersion = '4.0.1';
+    test('requester is a Practitioner', () => {
+        expect(hasReferenceToResource(practitionerFhirUser, {}, apiUrl, r4Version)).toEqual(true);
     });
-    test('resourceType is Practitioner', () => {
-        expect(hasReferenceToResource(fhirUser, {}, 'https://fhirServer.com')).toEqual(true);
+    test('requester is a External Practitioner', () => {
+        expect(hasReferenceToResource(practitionerFhirUser, {}, 'different.ApiServer.com', r4Version)).toEqual(false);
+        expect(
+            hasReferenceToResource(
+                practitionerFhirUser,
+                {
+                    resourceType: 'Patient',
+                    id: '1',
+                    generalPractitioner: { reference: `${apiUrl}/Practitioner/${id}` },
+                },
+                'different.ApiServer.com',
+                r4Version,
+            ),
+        ).toEqual(true);
     });
-    describe('fhirUser resourceType matches resourceType of resource', () => {
-        const patientFhirUser: FhirResource = {
-            hostname: 'https://fhirServer.com',
-            id: '1234',
-            resourceType: 'Patient',
+    test('Bad fhir version', () => {
+        expect(() => {
+            hasReferenceToResource(practitionerFhirUser, {}, 'different.ApiServer.com', <FhirVersion>'2.0.0');
+        }).toThrowError(new Error('Unsupported FHIR version detected'));
+    });
+
+    const cases: (string | any | boolean)[] = [
+        [
+            'single potential path first nested arrays',
+            {
+                contact: [
+                    { organization: { reference: `${apiUrl}/Organization/${id}432` } },
+                    { organization: { reference: `${apiUrl}/Organization/${id}` } },
+                    { organization: { reference: `${apiUrl}/Organization/${id}5234` } },
+                ],
+            },
+            true,
+        ],
+        [
+            'single potential path last nested arrays',
+            {
+                contact: {
+                    organization: [
+                        { uri: `Organization/${id}4321` },
+                        { reference: `Organization/${id}1234` },
+                        { reference: `Organization/${id}` },
+                    ],
+                },
+            },
+            true,
+        ],
+        [
+            'single potential path 2 nested arrays',
+            {
+                contact: [
+                    {
+                        organization: [
+                            { uri: `Organization/${id}4321` },
+                            { reference: `Organization/${id}1234` },
+                            { code: `Organization/${id}` },
+                        ],
+                    },
+                    { organization: { reference: `${apiUrl}/Organization/${id}1234` } },
+                    { organization: { reference: `${apiUrl}/Organization/${id}` } },
+                ],
+            },
+            true,
+        ],
+        [
+            '2 potential paths',
+            {
+                contact: [
+                    { organization: [{ uri: `Organization/${id}4321` }, { reference: `Organization/${id}1234` }] },
+                ],
+                generalPractitioner: { reference: `Organization/${id}` },
+            },
+            true,
+        ],
+        [
+            'all potential paths',
+            {
+                contact: [
+                    { organization: [{ uri: `Organization/${id}4321` }, { reference: `Organization/${id}1234` }] },
+                ],
+                generalPractitioner: { reference: `Practitioner/${id}` },
+                managingOrganization: [
+                    { reference: `Organization/${id}1234` },
+                    { reference: `${apiUrl}/Organization/${id}` },
+                ],
+            },
+            true,
+        ],
+        [
+            'all potential paths; no references',
+            {
+                contact: [
+                    { organization: [{ uri: `Organization/${id}4321` }, { reference: `Organization/${id}1234` }] },
+                ],
+                generalPractitioner: { reference: `Practitioner/${id}` },
+                managingOrganization: [
+                    { reference: `Organization/${id}1234` },
+                    { reference: `Organization/${id}none` },
+                ],
+            },
+            false,
+        ],
+    ];
+
+    test.each(cases)('references in arrays; %p', (_message: string, refObject: any, expectedValue: boolean) => {
+        // potential paths: "Organization":["contact.organization","generalPractitioner","managingOrganization"]
+        const organizationFhirUser: FhirResource = {
+            hostname: apiUrl,
+            id,
+            resourceType: 'Organization',
         };
+        expect(
+            hasReferenceToResource(
+                organizationFhirUser,
+                { ...{ resourceType: 'Patient', id: '1' }, ...refObject },
+                apiUrl,
+                r4Version,
+            ),
+        ).toEqual(expectedValue);
+    });
+
+    const versions: FhirVersion[] = ['4.0.1', '3.0.1'];
+    describe.each(versions)('requestor is a Patient; Resources are single layer; FHIR Version %p', fhirVersion => {
         test('fhirUser id matches resource id', () => {
             expect(
-                hasReferenceToResource(
-                    patientFhirUser,
-                    { resourceType: 'Patient', id: '1234' },
-                    'https://fhirServer.com',
-                ),
+                hasReferenceToResource(patientFhirUser, { resourceType: 'Patient', id }, apiUrl, fhirVersion),
             ).toEqual(true);
-        });
-        test('fhirUser referenced in resource', () => {
             expect(
                 hasReferenceToResource(
                     patientFhirUser,
-                    { resourceType: 'Patient', id: '1', reference: 'Patient/1234' },
-                    'https://fhirServer.com',
+                    { resourceType: 'Patient', id },
+                    'different.ApiServer.com',
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+        });
+        test('local fhirUser referenced in resource', () => {
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', link: { other: { reference: `Patient/${id}` } } },
+                    apiUrl,
+                    fhirVersion,
                 ),
             ).toEqual(true);
+
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', link: { other: { reference: `${apiUrl}/Patient/${id}` } } },
+                    apiUrl,
+                    fhirVersion,
+                ),
+            ).toEqual(true);
+
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', generalPractitioner: { reference: `Patient/${id}` } },
+                    apiUrl,
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+        });
+        test('external fhirUser referenced in resource', () => {
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', link: { other: { reference: `Patient/${id}` } } },
+                    'different.ApiServer.com',
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', link: { other: { reference: `${apiUrl}/Patient/${id}` } } },
+                    'different.ApiServer.com',
+                    fhirVersion,
+                ),
+            ).toEqual(true);
+
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Patient', id: '1', generalPractitioner: { reference: `Patient/${id}` } },
+                    'different.ApiServer.com',
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+        });
+
+        test('fhirUser referenced in text', () => {
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Observation', id: '1', text: '"reference":"Patient/1234"' },
+                    apiUrl,
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    { resourceType: 'Observation', id: '1', text: "'reference':'Patient/1234'" },
+                    apiUrl,
+                    fhirVersion,
+                ),
+            ).toEqual(false);
+            expect(
+                hasReferenceToResource(
+                    patientFhirUser,
+                    // eslint-disable-next-line prettier/prettier, no-useless-escape
+                    { resourceType: 'Observation', id: '1', text: '"reference":"Patient/1234"' },
+                    apiUrl,
+                    fhirVersion,
+                ),
+            ).toEqual(false);
         });
     });
 });

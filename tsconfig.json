@@ -13,7 +13,7 @@
     "paths": {
       "*": ["node_modules/*"]
     },
-    "lib": [ "DOM"]
+    "lib": ["ES2019", "DOM"]
   },
   "exclude": ["src/**/*.test.ts", "src/**/__mocks__/*.ts"],
   "include": ["src/**/*"]
