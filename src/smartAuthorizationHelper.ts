@@ -54,9 +54,10 @@ function isReqestorReferenced(
     if (matrix[sourceResourceType] && matrix[sourceResourceType][requestorResourceType]) {
         possiblePaths = matrix[sourceResourceType][requestorResourceType];
     }
-    // There are no explict param indicating if a property is an array or object
+
+    // The paths within the FHIR resources may contain arrays so we must check if array at every level
     return possiblePaths.some(path => {
-        const pathComponents: string[] = path.split('.'); // ['subject']
+        const pathComponents: string[] = path.split('.');
         let tempResource = sourceResource;
         let rootQueue = [];
         let nextQueue = [tempResource[pathComponents[0]]];
@@ -66,17 +67,15 @@ function isReqestorReferenced(
 
             while (rootQueue.length > 0) {
                 tempResource = rootQueue.shift();
-                if (!tempResource) {
-                    // eslint-disable-next-line no-continue
-                    continue;
-                }
-                if (Array.isArray(tempResource)) {
-                    // eslint-disable-next-line no-loop-func
-                    tempResource.forEach(x => {
-                        nextQueue.push(x[pathComponents[i]]);
-                    });
-                } else {
-                    nextQueue.push(tempResource[pathComponents[i]]);
+                if (tempResource) {
+                    if (Array.isArray(tempResource)) {
+                        // eslint-disable-next-line no-loop-func
+                        tempResource.forEach(x => {
+                            nextQueue.push(x[pathComponents[i]]);
+                        });
+                    } else {
+                        nextQueue.push(tempResource[pathComponents[i]]);
+                    }
                 }
             }
         }

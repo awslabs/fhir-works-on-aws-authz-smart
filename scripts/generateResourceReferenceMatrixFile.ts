@@ -29,7 +29,7 @@ interface Element {
 }
 
 interface Result {
-    [key: string]: { [key: string]: string[] };
+    [sourceResourceType: string]: { [requestorResourceType: string]: string[] };
 }
 
 const readProfileFile = (path: string): any[] => {
@@ -42,7 +42,7 @@ const compile = (resources: any[], fhirVersion: string) => {
         resource => resource.baseDefinition === 'http://hl7.org/fhir/StructureDefinition/DomainResource',
     );
 
-    const results: Result = {};
+    const result: Result = {};
     if (fhirVersion.startsWith('4')) {
         filter.forEach(resource => {
             return resource.snapshot.element
@@ -50,22 +50,20 @@ const compile = (resources: any[], fhirVersion: string) => {
                 .forEach((element: Element) =>
                     element.type[0].targetProfile.forEach((target: string) => {
                         const sourceType = resource.type;
-                        const targetType = target.replace('http://hl7.org/fhir/StructureDefinition/', '');
+                        const requestorType = target.replace('http://hl7.org/fhir/StructureDefinition/', '');
                         const path = element.id.replace(`${resource.type}.`, '').replace('[x]', '');
 
-                        if (!results[sourceType]) {
-                            results[sourceType] = {};
+                        if (!result[sourceType]) {
+                            result[sourceType] = {};
                         }
-                        if (!results[sourceType][targetType]) {
-                            results[sourceType][targetType] = [];
+                        if (!result[sourceType][requestorType]) {
+                            result[sourceType][requestorType] = [];
                         }
-                        results[sourceType][targetType].push(path);
+                        result[sourceType][requestorType].push(path);
                     }),
                 );
         });
-    }
-
-    if (fhirVersion.startsWith('3')) {
+    } else if (fhirVersion.startsWith('3')) {
         filter.forEach(resource => {
             return resource.snapshot.element
                 .filter((element: Element) => !!element.type)
@@ -75,23 +73,23 @@ const compile = (resources: any[], fhirVersion: string) => {
                         .forEach((type: Type) => {
                             const sourceType = resource.type;
                             const path = element.id.replace(`${resource.type}.`, '').replace('[x]', '');
-                            const targetType = String(type.targetProfile).replace(
+                            const requestorType = String(type.targetProfile).replace(
                                 'http://hl7.org/fhir/StructureDefinition/',
                                 '',
                             );
 
-                            if (!results[sourceType]) {
-                                results[sourceType] = {};
+                            if (!result[sourceType]) {
+                                result[sourceType] = {};
                             }
-                            if (!results[sourceType][targetType]) {
-                                results[sourceType][targetType] = [];
+                            if (!result[sourceType][requestorType]) {
+                                result[sourceType][requestorType] = [];
                             }
-                            results[sourceType][targetType].push(path);
+                            result[sourceType][requestorType].push(path);
                         });
                 });
         });
     }
-    return results;
+    return result;
 };
 
 const run = async () => {
