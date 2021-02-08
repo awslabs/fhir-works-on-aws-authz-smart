@@ -2,9 +2,11 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { UnauthorizedError } from 'fhir-works-on-aws-interface';
+import { FhirVersion, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
+import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
+import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
@@ -14,6 +16,7 @@ export interface FhirResource {
     resourceType: string;
     id: string;
 }
+
 export function getFhirUser(fhirUserValue: string): FhirResource {
     const match = fhirUserValue.match(FHIR_USER_REGEX);
     if (match) {
@@ -32,29 +35,90 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
     throw new UnauthorizedError('Resource is in the incorrect format');
 }
 
-function isLocalResourceInJsonAsReference(jsonStr: string, fhirResource: FhirResource): boolean {
-    return (
-        jsonStr.includes(`"reference":"${fhirResource.hostname}/${fhirResource.resourceType}/${fhirResource.id}"`) ||
-        jsonStr.includes(`"reference":"${fhirResource.resourceType}/${fhirResource.id}"`)
-    );
+function isRequestorReferenced(
+    requestorIds: string[],
+    requestorResourceType: string,
+    sourceResource: any,
+    fhirVersion: FhirVersion,
+): boolean {
+    const sourceResourceType = sourceResource.resourceType;
+    let matrix: any;
+    if (fhirVersion === '4.0.1') {
+        matrix = resourceReferencesMatrixV4;
+    } else if (fhirVersion === '3.0.1') {
+        matrix = resourceReferencesMatrixV3;
+    } else {
+        throw new Error('Unsupported FHIR version detected');
+    }
+    let possiblePaths: string[] = [];
+    if (matrix[sourceResourceType] && matrix[sourceResourceType][requestorResourceType]) {
+        possiblePaths = matrix[sourceResourceType][requestorResourceType];
+    }
+
+    // The paths within the FHIR resources may contain arrays so we must check if array at every level
+    return possiblePaths.some(path => {
+        const pathComponents: string[] = path.split('.');
+        let tempResource = sourceResource;
+        let rootQueue = [];
+        let nextQueue = [tempResource[pathComponents[0]]];
+        for (let i = 1; i < pathComponents.length; i += 1) {
+            rootQueue = nextQueue;
+            nextQueue = [];
+
+            while (rootQueue.length > 0) {
+                tempResource = rootQueue.shift();
+                if (tempResource) {
+                    if (Array.isArray(tempResource)) {
+                        // eslint-disable-next-line no-loop-func
+                        tempResource.forEach(x => {
+                            nextQueue.push(x[pathComponents[i]]);
+                        });
+                    } else {
+                        nextQueue.push(tempResource[pathComponents[i]]);
+                    }
+                }
+            }
+        }
+        return nextQueue.flat().some(x => {
+            return x && x.reference && requestorIds.includes(x.reference);
+        });
+    });
 }
 
-export function hasReferenceToResource(fhirResource: FhirResource, resource: any, apiUrl: string): boolean {
-    const jsonStr = JSON.stringify(resource);
-    const { hostname, resourceType, id } = fhirResource;
+export function hasReferenceToResource(
+    requestorId: FhirResource,
+    sourceResource: any,
+    apiUrl: string,
+    fhirVersion: FhirVersion,
+): boolean {
+    const { hostname, resourceType, id } = requestorId;
     if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
-        return jsonStr.includes(`"reference":"${hostname}/${resourceType}/${id}"`);
+        return isRequestorReferenced([`${hostname}/${resourceType}/${id}`], resourceType, sourceResource, fhirVersion);
     }
     if (resourceType === 'Practitioner') {
         return true;
     }
-    if (resourceType === resource.resourceType) {
+    if (resourceType === sourceResource.resourceType) {
         // Attempting to look up its own record
-        return id === resource.id || isLocalResourceInJsonAsReference(jsonStr, fhirResource);
+        return (
+            id === sourceResource.id ||
+            isRequestorReferenced(
+                [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
+                resourceType,
+                sourceResource,
+                fhirVersion,
+            )
+        );
     }
-    return isLocalResourceInJsonAsReference(jsonStr, fhirResource);
+    return isRequestorReferenced(
+        [`${hostname}/${resourceType}/${id}`, `${resourceType}/${id}`],
+        resourceType,
+        sourceResource,
+        fhirVersion,
+    );
 }
+
 export function getJwksClient(jwksUri: string): JwksClient {
     return jwksClient({
         cache: true,

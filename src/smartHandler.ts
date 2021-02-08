@@ -252,15 +252,18 @@ export class SMARTHandler implements Authorization {
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries = (readResponse.entry ?? []).filter(
                 (entry: { resource: any }) =>
-                    (fhirUserObject && hasReferenceToResource(fhirUserObject, entry.resource, this.apiUrl)) ||
-                    (patientLaunchContext && hasReferenceToResource(patientLaunchContext, entry.resource, this.apiUrl)),
+                    (fhirUserObject &&
+                        hasReferenceToResource(fhirUserObject, entry.resource, this.apiUrl, this.fhirVersion)) ||
+                    (patientLaunchContext &&
+                        hasReferenceToResource(patientLaunchContext, entry.resource, this.apiUrl, this.fhirVersion)),
             );
             return { ...readResponse, entry: entries };
         }
         // If request is != search treat the readResponse as just a resource
         if (
-            (fhirUserObject && hasReferenceToResource(fhirUserObject, readResponse, this.apiUrl)) ||
-            (patientLaunchContext && hasReferenceToResource(patientLaunchContext, readResponse, this.apiUrl))
+            (fhirUserObject && hasReferenceToResource(fhirUserObject, readResponse, this.apiUrl, this.fhirVersion)) ||
+            (patientLaunchContext &&
+                hasReferenceToResource(patientLaunchContext, readResponse, this.apiUrl, this.fhirVersion))
         ) {
             return readResponse;
         }
@@ -274,12 +277,15 @@ export class SMARTHandler implements Authorization {
         if (
             fhirUserObject &&
             ((fhirUserObject.hostname === this.apiUrl && this.adminAccessTypes.includes(fhirUserObject.resourceType)) ||
-                hasReferenceToResource(fhirUserObject, request.resourceBody, this.apiUrl))
+                hasReferenceToResource(fhirUserObject, request.resourceBody, this.apiUrl, this.fhirVersion))
         ) {
             return;
         }
         // If patientLaunchContext has reference to object in request
-        if (patientLaunchContext && hasReferenceToResource(patientLaunchContext, request.resourceBody, this.apiUrl)) {
+        if (
+            patientLaunchContext &&
+            hasReferenceToResource(patientLaunchContext, request.resourceBody, this.apiUrl, this.fhirVersion)
+        ) {
             return;
         }
 

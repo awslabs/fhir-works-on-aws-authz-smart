@@ -3,6 +3,7 @@
 !/.gitignore
 /build
 /node_modules
+/scripts/*.json
 # Ignore any zip files
 *.zip
 
