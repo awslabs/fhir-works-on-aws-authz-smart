@@ -28,7 +28,7 @@ interface Element {
     type: Type[];
 }
 
-interface Result {
+interface PathMap {
     [sourceResourceType: string]: { [requestorResourceType: string]: string[] };
 }
 
@@ -37,59 +37,41 @@ const readProfileFile = (path: string): any[] => {
     return data.entry.map((x: any) => x.resource);
 };
 
-const compile = (resources: any[], fhirVersion: string) => {
+const compile = (resources: any[]) => {
     const filter = resources.filter(
         resource => resource.baseDefinition === 'http://hl7.org/fhir/StructureDefinition/DomainResource',
     );
 
-    const result: Result = {};
-    if (fhirVersion.startsWith('4')) {
-        filter.forEach(resource => {
-            return resource.snapshot.element
-                .filter((element: Element) => element.type && element.type[0].code === 'Reference')
-                .forEach((element: Element) =>
-                    element.type[0].targetProfile.forEach((target: string) => {
+    const pathMap: PathMap = {};
+    filter.forEach(resource => {
+        return resource.snapshot.element
+            .filter((element: Element) => !!element.type)
+            .forEach((element: Element) => {
+                return element.type
+                    .filter((type: Type) => type.code === 'Reference' && !!type.targetProfile)
+                    .forEach((type: Type) => {
                         const sourceType = resource.type;
-                        const requestorType = target.replace('http://hl7.org/fhir/StructureDefinition/', '');
-                        const path = element.id.replace(`${resource.type}.`, '').replace('[x]', '');
-
-                        if (!result[sourceType]) {
-                            result[sourceType] = {};
+                        const path = element.id.replace(`${resource.type}.`, '').replace('[x]', 'Reference');
+                        // R3; targetProfile == string / R4; targetProfile == array
+                        let profiles = type.targetProfile;
+                        if (!Array.isArray(profiles)) {
+                            profiles = [profiles];
                         }
-                        if (!result[sourceType][requestorType]) {
-                            result[sourceType][requestorType] = [];
-                        }
-                        result[sourceType][requestorType].push(path);
-                    }),
-                );
-        });
-    } else if (fhirVersion.startsWith('3')) {
-        filter.forEach(resource => {
-            return resource.snapshot.element
-                .filter((element: Element) => !!element.type)
-                .forEach((element: Element) => {
-                    return element.type
-                        .filter((type: Type) => type.code === 'Reference' && !!type.targetProfile)
-                        .forEach((type: Type) => {
-                            const sourceType = resource.type;
-                            const path = element.id.replace(`${resource.type}.`, '').replace('[x]', '');
-                            const requestorType = String(type.targetProfile).replace(
-                                'http://hl7.org/fhir/StructureDefinition/',
-                                '',
-                            );
-
-                            if (!result[sourceType]) {
-                                result[sourceType] = {};
+                        profiles.forEach((target: string) => {
+                            const requestorType = target.replace('http://hl7.org/fhir/StructureDefinition/', '');
+                            if (!pathMap[sourceType]) {
+                                pathMap[sourceType] = {};
                             }
-                            if (!result[sourceType][requestorType]) {
-                                result[sourceType][requestorType] = [];
+                            if (!pathMap[sourceType][requestorType]) {
+                                pathMap[sourceType][requestorType] = [];
                             }
-                            result[sourceType][requestorType].push(path);
+                            pathMap[sourceType][requestorType].push(path);
                         });
-                });
-        });
-    }
-    return result;
+                    });
+            });
+    });
+
+    return pathMap;
 };
 
 const run = async () => {
@@ -99,15 +81,18 @@ const run = async () => {
         console.log('Usage: ts-node run.ts <fhirVersion>');
     }
     const fhirVersion = args[0];
+    if (!fhirVersion.startsWith('4') || fhirVersion.startsWith('3')) {
+        console.error('*******************************');
+        console.error('this script was only tested with base STU3 & R4 profiles');
+        console.error(`you are attempting to use ${fhirVersion} proceed with caution`);
+        console.error('*******************************');
+    }
     console.log('reading file');
     const resources = readProfileFile(`${fhirVersion}-profiles-resources.json`);
     console.log('compiling file');
-    const compiledReferences = compile(resources, fhirVersion);
+    const pathMap = compile(resources);
     console.log('writing compiled output');
-    fs.writeFileSync(
-        `../src/schema/fhirResourceReferencesMatrix.v${fhirVersion}.json`,
-        JSON.stringify(compiledReferences),
-    );
+    fs.writeFileSync(`../src/schema/fhirResourceReferencesMatrix.v${fhirVersion}.json`, JSON.stringify(pathMap));
 };
 
 run()

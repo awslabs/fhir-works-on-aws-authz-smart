@@ -35,7 +35,7 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
     throw new UnauthorizedError('Resource is in the incorrect format');
 }
 
-function isReqestorReferenced(
+function isRequestorReferenced(
     requestorIds: string[],
     requestorResourceType: string,
     sourceResource: any,
@@ -94,7 +94,7 @@ export function hasReferenceToResource(
     const { hostname, resourceType, id } = requestorId;
     if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
-        return isReqestorReferenced([`${hostname}/${resourceType}/${id}`], resourceType, sourceResource, fhirVersion);
+        return isRequestorReferenced([`${hostname}/${resourceType}/${id}`], resourceType, sourceResource, fhirVersion);
     }
     if (resourceType === 'Practitioner') {
         return true;
@@ -103,7 +103,7 @@ export function hasReferenceToResource(
         // Attempting to look up its own record
         return (
             id === sourceResource.id ||
-            isReqestorReferenced(
+            isRequestorReferenced(
                 [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
                 resourceType,
                 sourceResource,
@@ -111,7 +111,7 @@ export function hasReferenceToResource(
             )
         );
     }
-    return isReqestorReferenced(
+    return isRequestorReferenced(
         [`${hostname}/${resourceType}/${id}`, `${resourceType}/${id}`],
         resourceType,
         sourceResource,
