@@ -223,6 +223,28 @@ describe('hasReferenceToResource', () => {
                 ),
             ).toEqual(false);
         });
+
+        test('fhirUser referenced in resource; Resources uses [x] properties', () => {
+            const groupFhirUser: FhirResource = {
+                hostname: apiUrl,
+                id,
+                resourceType: 'Medication',
+            };
+            expect(
+                hasReferenceToResource(
+                    groupFhirUser,
+                    {
+                        resourceType: 'ActivityDefinition',
+                        id: '1',
+                        status: 'active',
+                        productReference: { reference: `${apiUrl}/Medication/${id}` },
+                    },
+                    'Difference.api',
+                    fhirVersion,
+                ),
+            ).toEqual(true);
+        });
+
         test('local fhirUser referenced in resource', () => {
             expect(
                 hasReferenceToResource(
