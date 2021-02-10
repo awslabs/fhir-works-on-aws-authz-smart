@@ -38,9 +38,9 @@ This resource server supports [SMART's clinical scopes](http://www.hl7.org/fhir/
 
 This implementation of the SMART on FHIR specification uses attribute based access control. Access to a resource is given if any of the following are true:
 
-- is the fhirUser making the request considered an Admin (default configuration makes a Practitioner an admin)
-- is the fhirUser making the request or the patient in context looking up their own resource (verified via the `resourceType` and `id`)
-- is the fhirUser making the request or the patient in context referenced in the resource they are taking action on
+- The fhirUser making the request considered an Admin (default configuration makes a Practitioner an admin)
+- The fhirUser making the request or the patient in context looking up their own resource (verified via the `resourceType` and `id`)
+- The fhirUser making the request or the patient in context referenced in the resource they are taking action on
 
 What we mean by 'referenced in the resource' is the `reference` fields found in resources. As an illustrative example see the below resource. We can say that the below Patient resource is accessible by:
 
