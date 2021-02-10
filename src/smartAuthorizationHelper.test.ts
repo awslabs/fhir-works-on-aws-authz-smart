@@ -12,13 +12,8 @@ import fromKeyLike from 'jose/jwk/from_key_like';
 import SignJWT from 'jose/jwt/sign';
 // eslint-disable-next-line import/no-unresolved
 import generateKeyPair from 'jose/util/generate_key_pair';
-import {
-    hasReferenceToResource,
-    FhirResource,
-    getFhirResource,
-    getFhirUser,
-    verifyJwtToken,
-} from './smartAuthorizationHelper';
+import { hasReferenceToResource, getFhirResource, getFhirUser, verifyJwtToken } from './smartAuthorizationHelper';
+import { FhirResource } from './smartConfig';
 
 const apiUrl = 'https://fhirServer.com';
 const id = '1234';
@@ -85,8 +80,8 @@ describe('hasReferenceToResource', () => {
         resourceType: 'Patient',
     };
     const r4Version: FhirVersion = '4.0.1';
-    test('requester is a Practitioner', () => {
-        expect(hasReferenceToResource(practitionerFhirUser, {}, apiUrl, r4Version)).toEqual(true);
+    test('requester is a Practitioner; does not have access', () => {
+        expect(hasReferenceToResource(practitionerFhirUser, {}, apiUrl, r4Version)).toEqual(false);
     });
     test('requester is a External Practitioner', () => {
         expect(hasReferenceToResource(practitionerFhirUser, {}, 'different.ApiServer.com', r4Version)).toEqual(false);
