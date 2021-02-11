@@ -98,11 +98,11 @@ Add this package to your `package.json` file and install as a dependency. For us
 
 ### Configuration
 
-The SMART specification gives a lot of room for interpretation between the resource and authorization server relationship. With this in mind we developed our SMART implementation to be flexible. The configurations currently avaibile can be viewed in the [SMARTConfig](./src/smartConfig.ts).
+The SMART specification gives a lot of room for interpretation between the resource and authorization server relationship. With this in mind we developed our SMART implementation to be flexible. The configurations currently available can be viewed in the [SMARTConfig](./src/smartConfig.ts).
 
 ### SMART on FHIR scope rules
 
-Within the [SMARTConfig](./src/smartConfig.ts) you can see an example implementation of a ScopeRule. The ScopeRule lays what operations a scope gives access to. For example for the `user/*.write` scope may provide 'create' resource access but not 'update' resource.
+Within the [SMARTConfig](./src/smartConfig.ts) you can see an example implementation of a ScopeRule. The ScopeRule lays what operations a scope gives access to. For example, the `user/*.write` scope provides 'create' resource access but not 'update' resource.
 
 For an example usage of the SMARTConfig, please see [authZConfig.ts](https://github.com/awslabs/fhir-works-on-aws-deployment/blob/smart-mainline/src/authZConfig.ts) in the deployment package
 
