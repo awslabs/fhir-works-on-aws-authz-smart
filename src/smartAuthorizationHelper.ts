@@ -7,15 +7,10 @@ import jwksClient, { JwksClient } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
 import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
+import { FhirResource } from './smartConfig';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
-
-export interface FhirResource {
-    hostname: string;
-    resourceType: string;
-    id: string;
-}
 
 export function getFhirUser(fhirUserValue: string): FhirResource {
     const match = fhirUserValue.match(FHIR_USER_REGEX);
@@ -96,26 +91,15 @@ export function hasReferenceToResource(
         // If requester is not from this FHIR Server they must be a fully qualified reference
         return isRequestorReferenced([`${hostname}/${resourceType}/${id}`], resourceType, sourceResource, fhirVersion);
     }
-    if (resourceType === 'Practitioner') {
-        return true;
-    }
-    if (resourceType === sourceResource.resourceType) {
-        // Attempting to look up its own record
-        return (
-            id === sourceResource.id ||
-            isRequestorReferenced(
-                [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
-                resourceType,
-                sourceResource,
-                fhirVersion,
-            )
-        );
-    }
-    return isRequestorReferenced(
-        [`${hostname}/${resourceType}/${id}`, `${resourceType}/${id}`],
-        resourceType,
-        sourceResource,
-        fhirVersion,
+
+    return (
+        (resourceType === sourceResource.resourceType && id === sourceResource.id) ||
+        isRequestorReferenced(
+            [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
+            resourceType,
+            sourceResource,
+            fhirVersion,
+        )
     );
 }
 

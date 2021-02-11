@@ -20,7 +20,7 @@ import {
     clone,
 } from 'fhir-works-on-aws-interface';
 import { JwksClient } from 'jwks-rsa';
-import { SMARTConfig, UserIdentity } from './smartConfig';
+import { FhirResource, SMARTConfig, UserIdentity } from './smartConfig';
 import {
     convertScopeToSmartScope,
     filterOutUnusableScope,
@@ -39,7 +39,15 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
-    private readonly adminAccessTypes: string[] = ['Practitioner'];
+    /**
+     * If a fhirUser is of these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
+     */
+    private readonly adminAccessTypes: string[];
+
+    /**
+     * If a fhirUser is of these resourceTypes they will be able to do bulk data operations
+     */
+    private readonly bulkDataAccessTypes: string[];
 
     private readonly version: number = 1.0;
 
@@ -51,7 +59,18 @@ export class SMARTHandler implements Authorization {
 
     private readonly jwksClient: JwksClient;
 
-    constructor(config: SMARTConfig, apiUrl: string, fhirVersion: FhirVersion) {
+    /**
+     * @param apiUrl URL of this FHIR service. Will be used to determine if a requestor is from this FHIR server or not
+     * @param adminAccessTypes a fhirUser from these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
+     * @param bulkDataAccessTypes a fhirUser from these resourceTypes they will be able to do bulk data operations
+     */
+    constructor(
+        config: SMARTConfig,
+        apiUrl: string,
+        fhirVersion: FhirVersion,
+        adminAccessTypes = ['Practitioner'],
+        bulkDataAccessTypes = ['Practitioner'],
+    ) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
@@ -59,6 +78,8 @@ export class SMARTHandler implements Authorization {
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
         this.jwksClient = getJwksClient(this.config.jwksEndpoint);
+        this.adminAccessTypes = adminAccessTypes;
+        this.bulkDataAccessTypes = bulkDataAccessTypes;
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<UserIdentity> {
@@ -97,7 +118,7 @@ export class SMARTHandler implements Authorization {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
             const fhirUser = getFhirUser(decodedToken[this.config.fhirUserClaimKey]);
-            if (fhirUser.hostname !== this.apiUrl || !this.adminAccessTypes.includes(fhirUser.resourceType)) {
+            if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
         }
@@ -127,7 +148,8 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
-            if (hostname === this.apiUrl && resourceType === 'Practitioner') {
+            if (this.isFhirUserAdmin(fhirUserObject)) {
+                // if an admin do not add limiting search filters
                 return [];
             }
             references.add(`${hostname}/${resourceType}/${id}`);
@@ -247,13 +269,15 @@ export class SMARTHandler implements Authorization {
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         const { fhirUserObject, patientLaunchContext } = request.userIdentity;
+
         const { operation, readResponse } = request;
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries = (readResponse.entry ?? []).filter(
                 (entry: { resource: any }) =>
                     (fhirUserObject &&
-                        hasReferenceToResource(fhirUserObject, entry.resource, this.apiUrl, this.fhirVersion)) ||
+                        (this.isFhirUserAdmin(fhirUserObject) ||
+                            hasReferenceToResource(fhirUserObject, entry.resource, this.apiUrl, this.fhirVersion))) ||
                     (patientLaunchContext &&
                         hasReferenceToResource(patientLaunchContext, entry.resource, this.apiUrl, this.fhirVersion)),
             );
@@ -261,7 +285,9 @@ export class SMARTHandler implements Authorization {
         }
         // If request is != search treat the readResponse as just a resource
         if (
-            (fhirUserObject && hasReferenceToResource(fhirUserObject, readResponse, this.apiUrl, this.fhirVersion)) ||
+            (fhirUserObject &&
+                (this.isFhirUserAdmin(fhirUserObject) ||
+                    hasReferenceToResource(fhirUserObject, readResponse, this.apiUrl, this.fhirVersion))) ||
             (patientLaunchContext &&
                 hasReferenceToResource(patientLaunchContext, readResponse, this.apiUrl, this.fhirVersion))
         ) {
@@ -276,7 +302,7 @@ export class SMARTHandler implements Authorization {
         // If fhirUser is Admin or has reference to object in request
         if (
             fhirUserObject &&
-            ((fhirUserObject.hostname === this.apiUrl && this.adminAccessTypes.includes(fhirUserObject.resourceType)) ||
+            (this.isFhirUserAdmin(fhirUserObject) ||
                 hasReferenceToResource(fhirUserObject, request.resourceBody, this.apiUrl, this.fhirVersion))
         ) {
             return;
@@ -290,5 +316,9 @@ export class SMARTHandler implements Authorization {
         }
 
         throw new UnauthorizedError('User does not have permission for requested operation');
+    }
+
+    isFhirUserAdmin(fhirUser: FhirResource): boolean {
+        return this.apiUrl === fhirUser.hostname && this.adminAccessTypes.includes(fhirUser.resourceType);
     }
 }
