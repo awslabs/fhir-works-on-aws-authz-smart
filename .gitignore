@@ -13,6 +13,7 @@ lib
 .build
 .idea
 yarn-error.log
+*.tgz
 
 coverage
 ##############################
