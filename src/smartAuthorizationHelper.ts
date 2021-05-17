@@ -8,6 +8,7 @@ import { decode, verify } from 'jsonwebtoken';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
 import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
 import { FhirResource } from './smartConfig';
+import getComponentLogger from './loggerBuilder';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
@@ -29,7 +30,6 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
     }
     throw new UnauthorizedError('Resource is in the incorrect format');
 }
-import getComponentLogger from './loggerBuilder';
 
 const logger = getComponentLogger();
 
