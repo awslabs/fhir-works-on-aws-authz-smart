@@ -29,6 +29,9 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
     }
     throw new UnauthorizedError('Resource is in the incorrect format');
 }
+import getComponentLogger from './loggerBuilder';
+
+const logger = getComponentLogger();
 
 function isRequestorReferenced(
     requestorIds: string[],
@@ -123,12 +126,12 @@ export async function verifyJwtToken(
     const genericErrorMessage = 'Invalid access token';
     const decodedAccessToken = decode(token, { complete: true });
     if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
-        console.error('access_token could not be decoded into an object');
+        logger.error('access_token could not be decoded into an object');
         throw new UnauthorizedError(genericErrorMessage);
     }
     const { kid } = decodedAccessToken.header;
     if (!kid) {
-        console.error('JWT verification failed. JWT "kid" attribute is required in the header');
+        logger.error('JWT verification failed. JWT "kid" attribute is required in the header');
         throw new UnauthorizedError(genericErrorMessage);
     }
 
@@ -136,7 +139,7 @@ export async function verifyJwtToken(
         const key = await client.getSigningKeyAsync(kid);
         return verify(token, key.getPublicKey(), { audience: expectedAudValue, issuer: expectedIssValue });
     } catch (e) {
-        console.error(e.message);
+        logger.error(e.message);
         throw new UnauthorizedError(genericErrorMessage);
     }
 }
