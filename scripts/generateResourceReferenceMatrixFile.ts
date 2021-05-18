@@ -18,6 +18,9 @@ Run the script:
 */
 
 import * as fs from 'fs';
+import getComponentLogger from '../src/loggerBuilder';
+
+const logger = getComponentLogger();
 
 interface Type {
     code: string;
@@ -77,24 +80,24 @@ const compile = (resources: any[]) => {
 const run = async () => {
     const args = process.argv.slice(2);
     if (!args[0]) {
-        console.log('Error. Missing fhirVersion parameter');
-        console.log('Usage: ts-node run.ts <fhirVersion>');
+        logger.error('Error. Missing fhirVersion parameter');
+        logger.error('Usage: ts-node run.ts <fhirVersion>');
     }
     const fhirVersion = args[0];
     if (!fhirVersion.startsWith('4') || fhirVersion.startsWith('3')) {
-        console.error('*******************************');
-        console.error('this script was only tested with base STU3 & R4 profiles');
-        console.error(`you are attempting to use ${fhirVersion} proceed with caution`);
-        console.error('*******************************');
+        logger.error('*******************************');
+        logger.error('this script was only tested with base STU3 & R4 profiles');
+        logger.error(`you are attempting to use ${fhirVersion} proceed with caution`);
+        logger.error('*******************************');
     }
-    console.log('reading file');
+    logger.info('reading file');
     const resources = readProfileFile(`${fhirVersion}-profiles-resources.json`);
-    console.log('compiling file');
+    logger.info('compiling file');
     const pathMap = compile(resources);
-    console.log('writing compiled output');
+    logger.info('writing compiled output');
     fs.writeFileSync(`../src/schema/fhirResourceReferencesMatrix.v${fhirVersion}.json`, JSON.stringify(pathMap));
 };
 
 run()
-    .then(console.log)
-    .catch(console.error);
+    .then(logger.info)
+    .catch(logger.error);
