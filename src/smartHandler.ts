@@ -36,6 +36,9 @@ import {
     getJwksClient,
     verifyJwtToken,
 } from './smartAuthorizationHelper';
+import getComponentLogger from './loggerBuilder';
+
+const logger = getComponentLogger();
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
@@ -105,7 +108,7 @@ export class SMARTHandler implements Authorization {
             fhirUserClaim,
         );
         if (!usableScopes.length) {
-            console.error('User supplied scopes are insufficient', {
+            logger.error('User supplied scopes are insufficient', {
                 usableScopes,
                 operation: request.operation,
                 resourceType: request.resourceType,
@@ -209,7 +212,7 @@ export class SMARTHandler implements Authorization {
                     isScopeSufficient(scope, this.config.scopeRule, req.operation, req.resourceType),
                 )
             ) {
-                console.error('User supplied scopes are insufficient', {
+                logger.error('User supplied scopes are insufficient', {
                     usableScopes,
                     operation: req.operation,
                     resourceType: req.resourceType,
