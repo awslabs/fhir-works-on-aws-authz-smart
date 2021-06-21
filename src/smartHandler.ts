@@ -19,6 +19,7 @@ import {
     SearchFilter,
     clone,
 } from 'fhir-works-on-aws-interface';
+import get from 'lodash/get';
 import { JwksClient } from 'jwks-rsa';
 import { FhirResource, SMARTConfig, UserIdentity } from './smartConfig';
 import {
@@ -93,8 +94,8 @@ export class SMARTHandler implements Authorization {
             this.jwksClient,
         );
 
-        const fhirUserClaim = decodedToken[this.config.fhirUserClaimKey];
-        const patientContextClaim = decodedToken[`${this.config.launchContextKeyPrefix}patient`];
+        const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
+        const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
 
         // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
@@ -117,10 +118,10 @@ export class SMARTHandler implements Authorization {
         }
 
         if (request.bulkDataAuth) {
-            if (!decodedToken[this.config.fhirUserClaimKey]) {
+            if (!fhirUserClaim) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
-            const fhirUser = getFhirUser(decodedToken[this.config.fhirUserClaimKey]);
+            const fhirUser = getFhirUser(fhirUserClaim);
             if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }

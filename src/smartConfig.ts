@@ -76,14 +76,17 @@ export interface SMARTConfig {
      */
     expectedIssValue: string;
     /**
-     * Name of the claim found in the access_token that represents the requestors FHIR Id
+     * Path of the claim found in the access_token that represents the requestors FHIR Id. SMART compliant AuthZ servers should use the `fhirUser` claim, but can use a path if needed.
+     * @example fhirUser
+     * @example ext.addedClaims.fhirUser
      */
-    fhirUserClaimKey: 'fhirUser' | 'profile';
+    fhirUserClaimPath: 'fhirUser' | 'profile' | string;
     /**
-     * Prefix of the claim found in the access_token that represents the requestors launch context. The remaining part of the claim will identify the resource type i.e. `launch_response_patient`
+     * Prefix of the path found in the access_token that represents the requestors launch context. The remaining part of the claim will identify the resource type i.e. `launch_response_patient`
      * @example launch_response_
+     * @example ext.launch_response_
      */
-    launchContextKeyPrefix: string;
+    launchContextPathPrefix: string;
     /**
      * Json Web Key Set endpoint used to get the key for verifying access_token
      */
