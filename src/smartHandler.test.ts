@@ -46,8 +46,8 @@ const baseAuthZConfig = (): SMARTConfig => ({
     scopeRule: scopeRule(),
     expectedAudValue: expectedAud,
     expectedIssValue: expectedIss,
-    fhirUserClaimKey: 'fhirUser',
-    launchContextKeyPrefix: 'launch_response_',
+    fhirUserClaimPath: 'fhirUser',
+    launchContextPathPrefix: 'ext.launch_response_',
     jwksEndpoint: `${expectedIss}/jwks`,
 });
 const apiUrl = 'https://fhir.server.com/dev';
@@ -63,7 +63,7 @@ const externalPractitionerFhirResource = getFhirUser(externalPractitionerIdentit
 const sub = 'test@test.com';
 
 const patientContext: any = {
-    launch_response_patient: patientIdentity,
+    ext: { launch_response_patient: patientIdentity },
 };
 const patientFhirUser: any = {
     fhirUser: patientIdentity,
@@ -240,10 +240,13 @@ function getExpectedUserIdentity(decodedAccessToken: any): any {
         expectedUserIdentity.fhirUserObject = getFhirUser(decodedAccessToken.fhirUser);
     }
     if (
-        decodedAccessToken.launch_response_patient &&
+        decodedAccessToken?.ext?.launch_response_patient &&
         usableScopes.some((scope: string) => scope.startsWith('patient/'))
     ) {
-        expectedUserIdentity.patientLaunchContext = getFhirResource(decodedAccessToken.launch_response_patient, apiUrl);
+        expectedUserIdentity.patientLaunchContext = getFhirResource(
+            decodedAccessToken.ext.launch_response_patient,
+            apiUrl,
+        );
     }
     return expectedUserIdentity;
 }
