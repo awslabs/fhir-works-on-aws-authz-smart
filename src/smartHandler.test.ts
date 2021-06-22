@@ -240,8 +240,7 @@ function getExpectedUserIdentity(decodedAccessToken: any): any {
         expectedUserIdentity.fhirUserObject = getFhirUser(decodedAccessToken.fhirUser);
     }
     if (
-        decodedAccessToken.ext &&
-        decodedAccessToken.ext.launch_response_patient &&
+        decodedAccessToken?.ext?.launch_response_patient &&
         usableScopes.some((scope: string) => scope.startsWith('patient/'))
     ) {
         expectedUserIdentity.patientLaunchContext = getFhirResource(
