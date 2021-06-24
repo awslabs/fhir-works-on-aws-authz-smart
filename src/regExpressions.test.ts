@@ -15,6 +15,8 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['patient', 'Observation', 'read'],
         ['patient', 'FakeResource', 'write'],
         ['patient', '*', 'write'],
+        ['system', '*', 'write'],
+        ['system', 'Patient', 'read'],
     ];
     test.each(testCases)('CASE: %p/%p.%p; expect: matches', async (scopeType, scopeResourceType, accessType) => {
         const expectedStr = `${scopeType}/${scopeResourceType}.${accessType}`;
@@ -38,7 +40,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['/Patient.read'],
         ['patient/.read'],
         ['patient/Patient.'],
-        ['system/Patient.read'],
+        ['system'],
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
         const actualMatch = scope.match(CLINICAL_SCOPE_REGEX);

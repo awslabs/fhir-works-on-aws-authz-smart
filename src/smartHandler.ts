@@ -43,6 +43,8 @@ const logger = getComponentLogger();
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
+    private static defaultSystemId = '__system__';
+
     /**
      * If a fhirUser is of these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
      */
@@ -109,25 +111,32 @@ export class SMARTHandler implements Authorization {
             fhirUserClaim,
         );
         if (!usableScopes.length) {
-            logger.error('User supplied scopes are insufficient', {
+            logger.warn('User supplied scopes are insufficient', {
                 usableScopes,
                 operation: request.operation,
                 resourceType: request.resourceType,
             });
             throw new UnauthorizedError('access_token does not have permission for requested operation');
         }
+        const userIdentity: UserIdentity = clone(decodedToken);
 
         if (request.bulkDataAuth) {
-            if (!fhirUserClaim) {
-                throw new UnauthorizedError('User does not have permission for requested operation');
-            }
-            const fhirUser = getFhirUser(fhirUserClaim);
-            if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
-                throw new UnauthorizedError('User does not have permission for requested operation');
+            if (
+                !usableScopes.some((scope: string) => {
+                    return scope.startsWith('system');
+                })
+            ) {
+                // if requrestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
+                const fhirUser = getFhirUser(fhirUserClaim);
+                if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
+                    throw new UnauthorizedError('User does not have permission for requested operation');
+                }
+            } else if (!userIdentity.sub) {
+                // if there is a system scope and there is no sub set it to system
+                userIdentity.sub = SMARTHandler.defaultSystemId;
             }
         }
 
-        const userIdentity: UserIdentity = clone(decodedToken);
         if (fhirUserClaim && usableScopes.some(scope => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }

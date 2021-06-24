@@ -21,8 +21,12 @@ const emptyScopeRule = (): ScopeRule => ({
         read: [],
         write: [],
     },
+    system: {
+        read: [],
+        write: [],
+    },
 });
-const isScopeSufficientCases: ScopeType[][] = [['user'], ['patient']];
+const isScopeSufficientCases: ScopeType[][] = [['user'], ['patient'], ['system']];
 describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: ScopeType) => {
     test('scope is sufficient to read Observation: Scope with resourceType "Observation" should be able to read "Observation" resources', () => {
         const clonedScopeRule = emptyScopeRule();
@@ -58,14 +62,14 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         );
     });
 
-    test('scope is sufficient for bulk data access with "user" scopeType but not "patient" scopeType', () => {
+    test('scope is sufficient for bulk data access with "user" || "system" scopeType but not "patient" scopeType', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
 
         // Only scopeType of user has bulkDataAccess
         expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
-            scopeType === 'user',
+            scopeType !== 'patient',
         );
     });
 
@@ -107,13 +111,19 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
 
 describe('getScopes', () => {
     test('scope type delimited by space', () => {
-        expect(getScopes('launch/encounter user/*.read fake')).toEqual(['launch/encounter', 'user/*.read', 'fake']);
-    });
-    test('scope type as array', () => {
-        expect(getScopes(['launch/encounter', 'user/*.read', 'fake'])).toEqual([
+        expect(getScopes('launch/encounter user/*.read fake system/*.*')).toEqual([
             'launch/encounter',
             'user/*.read',
             'fake',
+            'system/*.*',
+        ]);
+    });
+    test('scope type as array', () => {
+        expect(getScopes(['launch/encounter', 'user/*.read', 'fake', 'system/*.*'])).toEqual([
+            'launch/encounter',
+            'user/*.read',
+            'fake',
+            'system/*.*',
         ]);
     });
 });
@@ -199,6 +209,25 @@ describe('filterOutUnusableScope', () => {
                 'Patient',
                 undefined,
                 'launchPatient',
+                'fhirUser',
+            ),
+        ).toEqual([expectedScopes[0], expectedScopes[2]]);
+    });
+
+    test('filter system; due to scope being insufficient', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        clonedScopeRule.system.read = ['read'];
+        const expectedScopes = ['user/Patient.read', 'system/Obersvation.*', 'system/*.read'];
+        expect(
+            filterOutUnusableScope(
+                expectedScopes,
+                clonedScopeRule,
+                'read',
+                'Patient',
+                undefined,
+                undefined,
                 'fhirUser',
             ),
         ).toEqual([expectedScopes[0], expectedScopes[2]]);
