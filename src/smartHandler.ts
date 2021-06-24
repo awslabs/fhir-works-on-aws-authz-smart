@@ -43,8 +43,6 @@ const logger = getComponentLogger();
 
 // eslint-disable-next-line import/prefer-default-export
 export class SMARTHandler implements Authorization {
-    private static defaultSystemId = '__system__';
-
     /**
      * If a fhirUser is of these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
      */
@@ -121,6 +119,11 @@ export class SMARTHandler implements Authorization {
         const userIdentity: UserIdentity = clone(decodedToken);
 
         if (request.bulkDataAuth) {
+            if (!userIdentity.sub) {
+                logger.error('A JWT token is without a `sub` claim; we cannot process the bulk action without one.');
+                // if there is a system scope and there is no sub set it to system
+                throw new UnauthorizedError('User does not have permission for requested operation');
+            }
             if (
                 !usableScopes.some((scope: string) => {
                     return scope.startsWith('system');
@@ -131,9 +134,6 @@ export class SMARTHandler implements Authorization {
                 if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
                     throw new UnauthorizedError('User does not have permission for requested operation');
                 }
-            } else if (!userIdentity.sub) {
-                // if there is a system scope and there is no sub set it to system
-                userIdentity.sub = SMARTHandler.defaultSystemId;
             }
         }
 

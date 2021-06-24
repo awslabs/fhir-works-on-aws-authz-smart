@@ -626,8 +626,8 @@ describe('verifyAccessToken; System level export requests', () => {
         );
     });
 
-    test('System scope with no sub set', () => {
-        const decodedAccessToken = { ...baseAccessNoScopes, scp: ['system/*.read'], sub: '' };
+    test.each([['user'], ['system']])('CASE: %p scope with no sub set', baseScope => {
+        const decodedAccessToken = { ...baseAccessNoScopes, scp: [`${baseScope}/*.read`], sub: '' };
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(decodedAccessToken),
         );
@@ -641,12 +641,9 @@ describe('verifyAccessToken; System level export requests', () => {
                 accessToken: 'fake',
                 operation: 'read',
                 resourceType: '',
-                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             }),
-        ).resolves.toMatchObject({
-            ...decodedAccessToken,
-            sub: '__system__',
-        });
+        ).rejects.toThrowError(UnauthorizedError);
     });
 });
 
