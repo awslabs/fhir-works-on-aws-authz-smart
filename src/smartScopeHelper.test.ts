@@ -149,69 +149,37 @@ describe('filterOutUnusableScope', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.user.read = ['read'];
         clonedScopeRule.patient.read = ['read'];
-        const expectedScopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
+        const scopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
         expect(
-            filterOutUnusableScope(
-                expectedScopes,
-                clonedScopeRule,
-                'read',
-                'Patient',
-                undefined,
-                'launchPatient',
-                undefined,
-            ),
-        ).toEqual([expectedScopes[2]]);
+            filterOutUnusableScope(scopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', undefined),
+        ).toEqual(['patient/*.*']);
     });
     test('filter user; due to scope being insufficient', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.user.read = ['read'];
         clonedScopeRule.patient.read = ['read'];
-        const expectedScopes = ['user/*.write', 'user/Patient.read', 'patient/*.*'];
+        const scopes = ['user/*.write', 'user/Patient.read', 'patient/*.*'];
         expect(
-            filterOutUnusableScope(
-                expectedScopes,
-                clonedScopeRule,
-                'read',
-                'Patient',
-                undefined,
-                'launchPatient',
-                'fhirUser',
-            ),
-        ).toEqual([expectedScopes[1], expectedScopes[2]]);
+            filterOutUnusableScope(scopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', 'fhirUser'),
+        ).toEqual(['user/Patient.read', 'patient/*.*']);
     });
     test('filter patient; due to no launch context', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.user.read = ['read'];
         clonedScopeRule.patient.read = ['read'];
-        const expectedScopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
+        const scopes = ['user/*.read', 'user/Patient.read', 'patient/*.*'];
         expect(
-            filterOutUnusableScope(
-                expectedScopes,
-                clonedScopeRule,
-                'read',
-                'Patient',
-                undefined,
-                undefined,
-                'fhirUser',
-            ),
-        ).toEqual([expectedScopes[0], expectedScopes[1]]);
+            filterOutUnusableScope(scopes, clonedScopeRule, 'read', 'Patient', undefined, undefined, 'fhirUser'),
+        ).toEqual(['user/*.read', 'user/Patient.read']);
     });
     test('filter patient; due to scope being insufficient', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.user.read = ['read'];
         clonedScopeRule.patient.read = ['read'];
-        const expectedScopes = ['user/Patient.read', 'patient/Obersvation.*', 'patient/*.read'];
+        const scopes = ['user/Patient.read', 'patient/Obersvation.*', 'patient/*.read'];
         expect(
-            filterOutUnusableScope(
-                expectedScopes,
-                clonedScopeRule,
-                'read',
-                'Patient',
-                undefined,
-                'launchPatient',
-                'fhirUser',
-            ),
-        ).toEqual([expectedScopes[0], expectedScopes[2]]);
+            filterOutUnusableScope(scopes, clonedScopeRule, 'read', 'Patient', undefined, 'launchPatient', 'fhirUser'),
+        ).toEqual(['user/Patient.read', 'patient/*.read']);
     });
 
     test('filter system; due to scope being insufficient', () => {
@@ -219,18 +187,10 @@ describe('filterOutUnusableScope', () => {
         clonedScopeRule.user.read = ['read'];
         clonedScopeRule.patient.read = ['read'];
         clonedScopeRule.system.read = ['read'];
-        const expectedScopes = ['user/Patient.read', 'system/Obersvation.*', 'system/*.read'];
+        const scopes = ['user/Patient.read', 'system/Obersvation.*', 'system/*.read'];
         expect(
-            filterOutUnusableScope(
-                expectedScopes,
-                clonedScopeRule,
-                'read',
-                'Patient',
-                undefined,
-                undefined,
-                'fhirUser',
-            ),
-        ).toEqual([expectedScopes[0], expectedScopes[2]]);
+            filterOutUnusableScope(scopes, clonedScopeRule, 'read', 'Patient', undefined, undefined, 'fhirUser'),
+        ).toEqual(['user/Patient.read', 'system/*.read']);
     });
 
     test('filter user & patient', () => {

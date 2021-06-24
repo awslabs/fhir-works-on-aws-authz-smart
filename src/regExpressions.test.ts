@@ -3,7 +3,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-import { CLINICAL_SCOPE_REGEX } from './smartScopeHelper';
+import { FHIR_SCOPE_REGEX } from './smartScopeHelper';
 import { FHIR_USER_REGEX, FHIR_RESOURCE_REGEX } from './smartAuthorizationHelper';
 
 describe('CLINICAL_SCOPE_REGEX', () => {
@@ -20,7 +20,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
     ];
     test.each(testCases)('CASE: %p/%p.%p; expect: matches', async (scopeType, scopeResourceType, accessType) => {
         const expectedStr = `${scopeType}/${scopeResourceType}.${accessType}`;
-        const actualMatch = expectedStr.match(CLINICAL_SCOPE_REGEX);
+        const actualMatch = expectedStr.match(FHIR_SCOPE_REGEX);
         expect(actualMatch).toBeTruthy();
         expect(actualMatch!.groups).toBeTruthy();
         expect(actualMatch!.groups!.scopeType).toEqual(scopeType);
@@ -43,7 +43,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['system'],
     ];
     test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
-        const actualMatch = scope.match(CLINICAL_SCOPE_REGEX);
+        const actualMatch = scope.match(FHIR_SCOPE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
 });

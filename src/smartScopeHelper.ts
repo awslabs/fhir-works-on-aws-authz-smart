@@ -13,10 +13,10 @@ export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
     'history-system',
 ];
 
-export const CLINICAL_SCOPE_REGEX = /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+export const FHIR_SCOPE_REGEX = /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
 
 export function convertScopeToSmartScope(scope: string): ClinicalSmartScope {
-    const matchClinicalScope = scope.match(CLINICAL_SCOPE_REGEX);
+    const matchClinicalScope = scope.match(FHIR_SCOPE_REGEX);
     if (matchClinicalScope) {
         const { scopeType, scopeResourceType, accessType } = matchClinicalScope.groups!;
 
