@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v1.0.1...v2.0.0) (2021-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Allow paths for fhirUser and launch claims (#40)
+
+### Features
+
+* Add support for `system` scope ([#41](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/41)) ([2229ce8](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/2229ce8a7c3cc4398756628e8cff68c488db6a5c))
+* Allow paths for fhirUser and launch claims ([#40](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/40)) ([332806d](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/332806dbeff80c929f36b01c699cf0dac65cea01))
+
 ### [1.0.1](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v1.0.0...v1.0.1) (2021-05-18)
 
 ## [1.0.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v0.1.3...v1.0.0) (2021-02-12)
