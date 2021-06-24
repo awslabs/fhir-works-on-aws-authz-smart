@@ -32,6 +32,8 @@ This resource server supports [SMART's clinical scopes](http://www.hl7.org/fhir/
 - For `user` scopes, there must be a `fhirUser` claim in the access token.
 - The access modifiers `read` and `write` will give permissions as defined in the incoming [SMARTConfig](./src/smartConfig.ts).
 
+// TODO
+
 ### Attribute Based Access Control (ABAC)
 
 This implementation of the SMART on FHIR specification uses attribute based access control. Access to a resource is given if one of the following statements is true:

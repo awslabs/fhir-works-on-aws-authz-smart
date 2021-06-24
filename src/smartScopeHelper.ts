@@ -128,7 +128,6 @@ export function isScopeSufficient(
  * Remove scopes that do not have the required information to be useful or unused scopes. For example:
  * - Without the `fhirUser` claim the 'user' scopes cannot be validated
  * - Without the `launch_response_patient` claim the 'patient' scopes cannot be validated
- * - Without `scopeRule.system` defined the `system` scopes will be filtered out
  * - Scopes like profile, launch or fhirUser will be filtered out as well
  */
 export function filterOutUnusableScope(
