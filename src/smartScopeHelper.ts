@@ -37,10 +37,10 @@ export function getValidOperationsForScopeTypeAndAccessType(
 ): (TypeOperation | SystemOperation)[] {
     let validOperations: (TypeOperation | SystemOperation)[] = [];
     if (accessType === '*' || accessType === 'read') {
-        validOperations = scopeRule[scopeType]?.read || [];
+        validOperations = scopeRule[scopeType].read;
     }
     if (accessType === '*' || accessType === 'write') {
-        validOperations = validOperations.concat(scopeRule[scopeType]?.write || []);
+        validOperations = validOperations.concat(scopeRule[scopeType].write);
     }
     return validOperations;
 }
