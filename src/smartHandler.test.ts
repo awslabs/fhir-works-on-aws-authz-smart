@@ -626,7 +626,7 @@ describe('verifyAccessToken; System level export requests', () => {
         );
     });
 
-    test.each([['user'], ['system']])('CASE: %p scope with no sub set', baseScope => {
+    test.each([['user'], ['system']])('CASE: %p scope; bulk data request; no sub set in JWT', baseScope => {
         const decodedAccessToken = { ...baseAccessNoScopes, scp: [`${baseScope}/*.read`], sub: '' };
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(decodedAccessToken),
