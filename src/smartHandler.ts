@@ -109,25 +109,33 @@ export class SMARTHandler implements Authorization {
             fhirUserClaim,
         );
         if (!usableScopes.length) {
-            logger.error('User supplied scopes are insufficient', {
+            logger.warn('User supplied scopes are insufficient', {
                 usableScopes,
                 operation: request.operation,
                 resourceType: request.resourceType,
             });
             throw new UnauthorizedError('access_token does not have permission for requested operation');
         }
+        const userIdentity: UserIdentity = clone(decodedToken);
 
         if (request.bulkDataAuth) {
-            if (!fhirUserClaim) {
+            if (!userIdentity.sub) {
+                logger.error('A JWT token is without a `sub` claim; we cannot process the bulk action without one.');
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
-            const fhirUser = getFhirUser(fhirUserClaim);
-            if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
-                throw new UnauthorizedError('User does not have permission for requested operation');
+            if (
+                !usableScopes.some((scope: string) => {
+                    return scope.startsWith('system');
+                })
+            ) {
+                // if requestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
+                const fhirUser = getFhirUser(fhirUserClaim);
+                if (fhirUser.hostname !== this.apiUrl || !this.bulkDataAccessTypes.includes(fhirUser.resourceType)) {
+                    throw new UnauthorizedError('User does not have permission for requested operation');
+                }
             }
         }
 
-        const userIdentity: UserIdentity = clone(decodedToken);
         if (fhirUserClaim && usableScopes.some(scope => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }

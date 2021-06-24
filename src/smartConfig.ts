@@ -4,7 +4,7 @@
  */
 import { KeyValueMap } from 'fhir-works-on-aws-interface';
 
-export type ScopeType = 'patient' | 'user';
+export type ScopeType = 'patient' | 'user' | 'system';
 export type AccessModifier = 'read' | 'write' | '*';
 export type IdentityType = 'Patient' | 'Practitioner' | 'Person ' | 'RelatedPerson';
 
@@ -42,11 +42,16 @@ export type AccessRule = {
  *          read: ['read','search-type', 'vread'],
  *          write: ['transaction','update', 'patch', 'create'],
  *      },
+ *      system: {
+ *          read: ['read','search-type', 'vread'],
+ *          write: [],
+ *      },
  *  };
  */
 export interface ScopeRule {
     patient: AccessRule;
     user: AccessRule;
+    system: AccessRule;
 }
 
 export type FhirResource = { hostname: string; resourceType: string; id: string };

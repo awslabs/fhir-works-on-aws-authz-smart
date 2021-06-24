@@ -36,6 +36,10 @@ const scopeRule = (): ScopeRule => ({
         read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
         write: ['create', 'update', 'delete', 'patch', 'transaction', 'batch'],
     },
+    system: {
+        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
+        write: ['create', 'update', 'delete', 'patch', 'transaction', 'batch'],
+    },
 });
 
 const expectedAud = 'api://default';
@@ -379,6 +383,48 @@ describe('verifyAccessToken', () => {
             { ...baseAccessNoScopes, scp: 'user/*.*  patient/*.write' },
             false,
         ],
+        [
+            'system&user&patient_manyWrite_no context or fhirUser',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'user/*.*  patient/*.write system/Patient.write' },
+            true,
+        ],
+        [
+            'system_manyRead_Write',
+            { accessToken: 'fake', operation: 'update', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            false,
+        ],
+        [
+            'system_manyRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'system_ObservationRead_Read',
+            { accessToken: 'fake', operation: 'vread', resourceType: 'Observation', id: '1', vid: '1' },
+            { ...baseAccessNoScopes, scp: 'system/Observation.read' },
+            true,
+        ],
+        [
+            'system_manyRead_search',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            { ...baseAccessNoScopes, scp: 'system/*.read' },
+            true,
+        ],
+        [
+            'system_manyWrite_Read',
+            { accessToken: 'fake', operation: 'read', resourceType: 'Patient', id: patientId },
+            { ...baseAccessNoScopes, scp: 'system/*.write' },
+            false,
+        ],
+        [
+            'system_PatientWrite_create',
+            { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
+            { ...baseAccessNoScopes, scp: 'system/Patient.write' },
+            true,
+        ],
     ];
 
     const authZConfig = baseAuthZConfig();
@@ -459,7 +505,7 @@ describe('verifyAccessToken; System level export requests', () => {
             false,
         ],
         [
-            'No User read access: initiate-export',
+            'No export read access: cancel-export',
             {
                 accessToken: 'fake',
                 operation: 'read',
@@ -470,7 +516,7 @@ describe('verifyAccessToken; System level export requests', () => {
             false,
         ],
         [
-            'No User access; Patient only: initiate-export',
+            'No export read access; Patient only: cancel-export',
             {
                 accessToken: 'fake',
                 operation: 'read',
@@ -479,6 +525,83 @@ describe('verifyAccessToken; System level export requests', () => {
             },
             { ...baseAccessNoScopes, scp: ['patient/*.*'], ...patientContext },
             false,
+        ],
+        [
+            'System all scope: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.*'] },
+            true,
+        ],
+        [
+            'System read scope: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System read scope: cancel-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System read scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System write scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.write'] },
+            false,
+        ],
+        [
+            'System & external practitioner read scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.read', 'system/*.read'], fhirUser: externalPractitionerIdentity },
+            true,
+        ],
+        [
+            'System & internal patient read scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.read', 'system/*.read'], ...patientContext },
+            true,
         ],
     ];
 
@@ -501,6 +624,26 @@ describe('verifyAccessToken; System level export requests', () => {
         return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
             expectedUserIdentity,
         );
+    });
+
+    test.each([['user'], ['system']])('CASE: %p scope; bulk data request; no sub set in JWT', baseScope => {
+        const decodedAccessToken = { ...baseAccessNoScopes, scp: [`${baseScope}/*.read`], sub: '' };
+        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+            Promise.resolve(decodedAccessToken),
+        );
+        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
+
+        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+        expectedUserIdentity.scp = decodedAccessToken.scp;
+        return expect(
+            authZHandler.verifyAccessToken({
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            }),
+        ).rejects.toThrowError(UnauthorizedError);
     });
 });
 

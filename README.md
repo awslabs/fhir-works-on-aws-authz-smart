@@ -32,6 +32,8 @@ This resource server supports [SMART's clinical scopes](http://www.hl7.org/fhir/
 - For `user` scopes, there must be a `fhirUser` claim in the access token.
 - The access modifiers `read` and `write` will give permissions as defined in the incoming [SMARTConfig](./src/smartConfig.ts).
 
+The resource server also supports [SMART's Flat FHIR or Bulk Data `system` scope](https://hl7.org/fhir/uv/bulkdata/authorization/index.html#scopes). `system` scopes have the format `system/(:resourceType|*).(read|write|*)`– which conveys the same access scope as the matching user format `user/(:resourceType|*).(read|write|*)`. 
+
 ### Attribute Based Access Control (ABAC)
 
 This implementation of the SMART on FHIR specification uses attribute based access control. Access to a resource is given if one of the following statements is true:
@@ -43,12 +45,13 @@ This implementation of the SMART on FHIR specification uses attribute based acce
 As an example below, the Patient resource is accessible by:
 
 - Admins of the system
+- Requests with the usage of the `system` scope
 - `Patient/example`: via `resourceType` and `id` check
 - `Patient/diffPatient`: since it is referenced in the `link` field
 - `Practitioner/DrBell`: since it is referenced in the `generalPractitioner` field
 
 ```json
-// Example Patient pesource with references
+// Example Patient resource with references
 {
   "resourceType": "Patient",
   "id": "example",

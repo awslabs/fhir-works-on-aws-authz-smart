@@ -13,10 +13,10 @@ export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
     'history-system',
 ];
 
-export const CLINICAL_SCOPE_REGEX = /^(?<scopeType>patient|user)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+export const FHIR_SCOPE_REGEX = /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
 
 export function convertScopeToSmartScope(scope: string): ClinicalSmartScope {
-    const matchClinicalScope = scope.match(CLINICAL_SCOPE_REGEX);
+    const matchClinicalScope = scope.match(FHIR_SCOPE_REGEX);
     if (matchClinicalScope) {
         const { scopeType, scopeResourceType, accessType } = matchClinicalScope.groups!;
 
@@ -86,7 +86,7 @@ function isSmartScopeSufficientForBulkDataAccess(
 ) {
     const bulkDataRequestHasCorrectScope =
         bulkDataAuth.exportType === 'system' && // As of 2021-01-09 we only support System Level export
-        smartScope.scopeType === 'user' &&
+        ['system', 'user'].includes(smartScope.scopeType) &&
         smartScope.resourceType === '*' &&
         ['*', 'read'].includes(smartScope.accessType) &&
         getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType, scopeRule).includes(
@@ -108,18 +108,15 @@ export function isScopeSufficient(
     try {
         const smartScope = convertScopeToSmartScope(scope);
         if (bulkDataAuth) {
-            if (isSmartScopeSufficientForBulkDataAccess(bulkDataAuth, smartScope, scopeRule)) {
-                return true;
-            }
-        } else {
-            const validOperations: (TypeOperation | SystemOperation)[] = getValidOperationsForScope(
-                smartScope,
-                scopeRule,
-                reqOperation,
-                reqResourceType,
-            );
-            if (validOperations.includes(reqOperation)) return true;
+            return isSmartScopeSufficientForBulkDataAccess(bulkDataAuth, smartScope, scopeRule);
         }
+        const validOperations: (TypeOperation | SystemOperation)[] = getValidOperationsForScope(
+            smartScope,
+            scopeRule,
+            reqOperation,
+            reqResourceType,
+        );
+        return validOperations.includes(reqOperation);
     } catch (e) {
         // Caused by trying to convert non-SmartScope to SmartScope, for example converting non-SMART scope 'openid'
     }
@@ -144,7 +141,9 @@ export function filterOutUnusableScope(
 ): string[] {
     return scopes.filter(
         (scope: string) =>
-            ((patientContext && scope.startsWith('patient/')) || (fhirUser && scope.startsWith('user/'))) &&
+            ((patientContext && scope.startsWith('patient/')) ||
+                (fhirUser && scope.startsWith('user/')) ||
+                scope.startsWith('system/')) &&
             isScopeSufficient(scope, scopeRule, reqOperation, reqResourceType, bulkDataAuth),
     );
 }
