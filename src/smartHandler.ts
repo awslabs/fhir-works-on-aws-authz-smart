@@ -121,7 +121,6 @@ export class SMARTHandler implements Authorization {
         if (request.bulkDataAuth) {
             if (!userIdentity.sub) {
                 logger.error('A JWT token is without a `sub` claim; we cannot process the bulk action without one.');
-                // if there is a system scope and there is no sub set it to system
                 throw new UnauthorizedError('User does not have permission for requested operation');
             }
             if (
