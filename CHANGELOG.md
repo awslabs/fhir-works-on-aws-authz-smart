@@ -6,10 +6,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### ⚠ BREAKING CHANGES
 
-- Allow paths for fhirUser and launch claims (#40)
-  - Renamed `fhirUserClaimKey` to `fhirUserClaimPath` and `launchContextKeyPrefix` to `launchContextPathPrefix` in `SMARTConfig`
-- Add support for `system` scope (#41)
-  - You must now define how you want to handle the `system` scope found in ScopeRule
+* Renamed `fhirUserClaimKey` to `fhirUserClaimPath` and `launchContextKeyPrefix` to `launchContextPathPrefix` in `SMARTConfig`
+* You must now define how you want to handle the `system` scope found in ScopeRule
 
 ### Features
 
