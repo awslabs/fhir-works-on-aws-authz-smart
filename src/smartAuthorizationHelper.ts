@@ -119,7 +119,7 @@ export function getJwksClient(jwksUri: string): JwksClient {
 
 export async function verifyJwtToken(
     token: string,
-    expectedAudValue: string,
+    expectedAudValue: string | RegExp,
     expectedIssValue: string,
     client: JwksClient,
 ) {

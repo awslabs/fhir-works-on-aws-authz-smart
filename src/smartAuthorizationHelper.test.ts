@@ -456,6 +456,20 @@ describe('verifyJwt', () => {
                 verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
             ).resolves.toEqual(payload);
         });
+
+        test('aud provided as RegExp', async () => {
+            const aud = 'api://default';
+            const audRegExp = /api:\/\/([a-z])+/;
+
+            const payload = getDefaultPayload(
+                Math.floor(Date.now() / 1000),
+                Math.floor(Date.now() / 1000) + 10,
+                aud,
+                expectedIssValue,
+            );
+            const jwt = await getSignedJwt(payload);
+            return expect(verifyJwtToken(jwt, audRegExp, expectedIssValue, client)).resolves.toEqual(payload);
+        });
     });
 
     test('iss is incorrect', async () => {

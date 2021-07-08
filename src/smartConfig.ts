@@ -75,7 +75,7 @@ export interface SMARTConfig {
     /**
      * Per SMART spec this is the 'aud' key found in the access_token
      */
-    expectedAudValue: string;
+    expectedAudValue: string | RegExp;
     /**
      * Per SMART spec this is the 'iss' key found in the access_token
      */
