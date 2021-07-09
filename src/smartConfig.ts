@@ -74,6 +74,9 @@ export interface SMARTConfig {
     scopeRule: ScopeRule;
     /**
      * Per SMART spec this is the 'aud' key found in the access_token
+     *
+     * Using the string type is recommended. RegExp can be useful when the audience is not static, such as in multi-tenant setups.
+     * Caution must be taken to avoid overly permissive regular expressions (e.g. avoid using .*). Use regular expressions that are as specific as possible to avoid allowing requests from unexpected audiences.
      */
     expectedAudValue: string | RegExp;
     /**
