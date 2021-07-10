@@ -36,6 +36,7 @@ import {
     getFhirUser,
     getJwksClient,
     verifyJwtToken,
+    introspectJwtToken,
 } from './smartAuthorizationHelper';
 import getComponentLogger from './loggerBuilder';
 
@@ -61,7 +62,7 @@ export class SMARTHandler implements Authorization {
 
     private readonly fhirVersion: FhirVersion;
 
-    private readonly jwksClient: JwksClient;
+    private readonly jwksClient?: JwksClient;
 
     /**
      * @param apiUrl URL of this FHIR service. Will be used to determine if a requestor is from this FHIR server or not
@@ -81,18 +82,32 @@ export class SMARTHandler implements Authorization {
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
-        this.jwksClient = getJwksClient(this.config.jwksEndpoint);
         this.adminAccessTypes = adminAccessTypes;
         this.bulkDataAccessTypes = bulkDataAccessTypes;
+        if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
+            this.jwksClient = getJwksClient(this.config.jwksEndpoint);
+        }
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<UserIdentity> {
-        const decodedToken: any = await verifyJwtToken(
-            request.accessToken,
-            this.config.expectedAudValue,
-            this.config.expectedIssValue,
-            this.jwksClient,
-        );
+        let decodedToken: any;
+        if (this.config.tokenIntrospection) {
+            decodedToken = await introspectJwtToken(
+                request.accessToken,
+                this.config.expectedAudValue,
+                this.config.expectedIssValue,
+                this.config.tokenIntrospection,
+            );
+        } else if (this.jwksClient) {
+            decodedToken = await verifyJwtToken(
+                request.accessToken,
+                this.config.expectedAudValue,
+                this.config.expectedIssValue,
+                this.jwksClient,
+            );
+        } else {
+            throw Error('Authorization configuration not properly set up');
+        }
 
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);

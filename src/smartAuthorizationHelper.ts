@@ -5,13 +5,16 @@
 import { FhirVersion, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
+import axios from 'axios';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
 import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
-import { FhirResource } from './smartConfig';
+import { FhirResource, IntrospectionOptions } from './smartConfig';
 import getComponentLogger from './loggerBuilder';
 
 export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
 export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
+
+const GENERIC_ERR_MESSAGE = 'Invalid access token';
 
 export function getFhirUser(fhirUserValue: string): FhirResource {
     const match = fhirUserValue.match(FHIR_USER_REGEX);
@@ -117,29 +120,110 @@ export function getJwksClient(jwksUri: string): JwksClient {
     });
 }
 
+export function decodeJwtToken(token: string, expectedAudValue: string | RegExp, expectedIssValue: string) {
+    const decodedAccessToken = decode(token, { complete: true });
+    if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
+        logger.warn('access_token could not be decoded into an object');
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
+    }
+
+    const { aud, iss } = decodedAccessToken.payload;
+
+    if (expectedIssValue !== iss) {
+        logger.warn('access_token has unexpected `iss`');
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
+    }
+
+    let audArray: string[] = aud;
+    if (typeof audArray === 'string') {
+        audArray = [aud];
+    }
+    const audMatch: boolean = audArray.some(
+        (audience: string) =>
+            (typeof expectedAudValue === 'string' && expectedAudValue === audience) ||
+            (expectedAudValue instanceof RegExp && expectedAudValue.test(audience)),
+    );
+    if (!audMatch) {
+        logger.warn('access_token has unexpected `aud`');
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
+    }
+
+    return decodedAccessToken;
+}
+
 export async function verifyJwtToken(
     token: string,
     expectedAudValue: string | RegExp,
     expectedIssValue: string,
     client: JwksClient,
 ) {
-    const genericErrorMessage = 'Invalid access token';
-    const decodedAccessToken = decode(token, { complete: true });
-    if (decodedAccessToken === null || typeof decodedAccessToken === 'string') {
-        logger.error('access_token could not be decoded into an object');
-        throw new UnauthorizedError(genericErrorMessage);
-    }
+    const decodedAccessToken = decodeJwtToken(token, expectedAudValue, expectedIssValue);
     const { kid } = decodedAccessToken.header;
     if (!kid) {
-        logger.error('JWT verification failed. JWT "kid" attribute is required in the header');
-        throw new UnauthorizedError(genericErrorMessage);
+        logger.warn('JWT verification failed. JWT "kid" attribute is required in the header');
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
     }
 
     try {
         const key = await client.getSigningKeyAsync(kid);
         return verify(token, key.getPublicKey(), { audience: expectedAudValue, issuer: expectedIssValue });
     } catch (e) {
-        logger.error(e.message);
-        throw new UnauthorizedError(genericErrorMessage);
+        logger.warn(e.message);
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
+    }
+}
+
+export async function introspectJwtToken(
+    token: string,
+    expectedAudValue: string | RegExp,
+    expectedIssValue: string,
+    introspectionOptions: IntrospectionOptions,
+) {
+    const decodedAccessToken = decodeJwtToken(token, expectedAudValue, expectedIssValue);
+    const { introspectUrlSuffix, clientId, clientSecret } = introspectionOptions;
+    let introspectUrl: string = decodedAccessToken.payload.iss;
+    if (introspectUrl.endsWith('/')) {
+        introspectUrl += introspectUrlSuffix;
+    } else {
+        introspectUrl += `/${introspectUrlSuffix}`;
+    }
+
+    // setup basic authentication
+    const username = clientId;
+    const password = clientSecret;
+    const auth = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`;
+
+    try {
+        const response = await axios.post(
+            introspectUrl,
+            { token },
+            {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    accept: 'application/json',
+                    authorization: auth,
+                    'cache-control': 'no-cache',
+                },
+            },
+        );
+        if (!response.data.active) {
+            throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
+        }
+        return response.data;
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+            if (e.response) {
+                // Request made and server responded
+                logger.warn(`Status received from introspection call: ${e.response.status}`);
+                logger.warn(e.response.data);
+            } else if (e.request) {
+                // The request was made but no response was received
+                logger.warn('Never received a response from the introspection endpoint');
+                logger.warn(e.request);
+            }
+        } else {
+            logger.warn(e.message);
+        }
+        throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
     }
 }
