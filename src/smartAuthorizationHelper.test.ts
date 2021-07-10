@@ -334,6 +334,7 @@ describe('hasReferenceToResource', () => {
         });
     });
 });
+
 function getDefaultPayload(iat: number, exp: number, aud: string | string[], iss: string | string[]) {
     return {
         ver: 1,
@@ -361,6 +362,7 @@ async function getSignedJwt(
     }
     return new SignJWT(payload).setProtectedHeader(header).sign(privateKey);
 }
+
 describe('verifyJwt', () => {
     const kid = 'abcd1234';
 
@@ -497,9 +499,6 @@ describe('verifyJwt', () => {
 });
 
 describe('introspectJwtToken', () => {
-    // our mock data is based on the data structure
-    // of the CoinDesk API response
-
     const expectedAudValue = 'api://default';
     const expectedIssValue = 'https://exampleAuthServer.com/oauth2';
     const introspectionSuffix = 'v1/introspect';
@@ -544,7 +543,7 @@ describe('introspectJwtToken', () => {
             Math.floor(Date.now() / 1000),
             Math.floor(Date.now() / 1000) + 10,
             expectedAudValue,
-            expectedIssValue,
+            `${expectedIssValue}/`,
         );
         const mock = new MockAdapter(axios);
         mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(200, {

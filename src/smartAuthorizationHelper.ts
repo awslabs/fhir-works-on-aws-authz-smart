@@ -213,13 +213,8 @@ export async function introspectJwtToken(
     } catch (e) {
         if (axios.isAxiosError(e)) {
             if (e.response) {
-                // Request made and server responded
                 logger.warn(`Status received from introspection call: ${e.response.status}`);
                 logger.warn(e.response.data);
-            } else if (e.request) {
-                // The request was made but no response was received
-                logger.warn('Never received a response from the introspection endpoint');
-                logger.warn(e.request);
             }
         } else {
             logger.warn(e.message);
