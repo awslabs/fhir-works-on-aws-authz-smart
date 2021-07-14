@@ -453,7 +453,7 @@ describe('verifyAccessToken', () => {
             tokenIntrospection: {
                 clientId: '123',
                 clientSecret: '456',
-                introspectUrlSuffix: 'v1/introspect',
+                introspectUrl: `${authZConfig.expectedIssValue}/v1/introspect`,
             },
         };
         const handler: SMARTHandler = new SMARTHandler(config, apiUrl, '4.0.1');

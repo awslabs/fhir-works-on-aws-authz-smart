@@ -106,7 +106,9 @@ export class SMARTHandler implements Authorization {
                 this.jwksClient,
             );
         } else {
-            throw Error('Authorization configuration not properly set up');
+            throw Error(
+                `Authorization configuration not properly set up. Either 'tokenIntrospection' or 'jwksEndpoint' must be present`,
+            );
         }
 
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);

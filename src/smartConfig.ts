@@ -72,10 +72,10 @@ export interface IntrospectionOptions {
      */
     clientSecret: string;
     /**
-     * The introspection url is determined by the incoming access_token's issuer field (`iss`) and this suffix. If the introspection endpoint is `cognito.com/oauth/v1/introspect` and the issuer is `cognito.com/`, you would want to set this suffix to be `oauth/v1/introspect`
-     * @example v1/introspect
+     * The introspection url where we will send the access_token to get verified
+     * @example http://www.authzserver.com/v1/introspect/
      */
-    introspectUrlSuffix: string;
+    introspectUrl: string;
 }
 
 export interface SMARTConfig {

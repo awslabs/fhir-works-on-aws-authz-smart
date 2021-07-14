@@ -179,14 +179,9 @@ export async function introspectJwtToken(
     expectedIssValue: string,
     introspectionOptions: IntrospectionOptions,
 ) {
-    const decodedAccessToken = decodeJwtToken(token, expectedAudValue, expectedIssValue);
-    const { introspectUrlSuffix, clientId, clientSecret } = introspectionOptions;
-    let introspectUrl: string = decodedAccessToken.payload.iss;
-    if (introspectUrl.endsWith('/')) {
-        introspectUrl += introspectUrlSuffix;
-    } else {
-        introspectUrl += `/${introspectUrlSuffix}`;
-    }
+    // used to verify if `iss` or `aud` is valid
+    decodeJwtToken(token, expectedAudValue, expectedIssValue);
+    const { introspectUrl, clientId, clientSecret } = introspectionOptions;
 
     // setup basic authentication
     const username = clientId;

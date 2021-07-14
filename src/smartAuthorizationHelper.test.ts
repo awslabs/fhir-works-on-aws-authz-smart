@@ -501,11 +501,11 @@ describe('verifyJwt', () => {
 describe('introspectJwtToken', () => {
     const expectedAudValue = 'api://default';
     const expectedIssValue = 'https://exampleAuthServer.com/oauth2';
-    const introspectionSuffix = 'v1/introspect';
+    const introspectUrl = `${expectedIssValue}/v1/introspect`;
     const introspectionOptions: IntrospectionOptions = {
         clientId: '123',
         clientSecret: '1234',
-        introspectUrlSuffix: introspectionSuffix,
+        introspectUrl,
     };
     const kid = 'abcd1234';
 
@@ -524,7 +524,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(200, {
+        mock.onPost(introspectUrl).reply(200, {
             ...payload,
             active: true,
         });
@@ -546,7 +546,7 @@ describe('introspectJwtToken', () => {
             `${expectedIssValue}/`,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(200, {
+        mock.onPost(introspectUrl).reply(200, {
             active: false,
         });
 
@@ -564,7 +564,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(400, {
+        mock.onPost(introspectUrl).reply(400, {
             active: false,
         });
 
@@ -581,7 +581,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(401, {
+        mock.onPost(introspectUrl).reply(401, {
             active: false,
         });
 
@@ -598,7 +598,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(403, {
+        mock.onPost(introspectUrl).reply(403, {
             active: false,
         });
 
@@ -615,7 +615,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).reply(500, {
+        mock.onPost(introspectUrl).reply(500, {
             active: false,
         });
 
@@ -632,7 +632,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).networkError();
+        mock.onPost(introspectUrl).networkError();
 
         const jwt = await getSignedJwt(payload, kid, privateKey);
         return expect(
@@ -647,7 +647,7 @@ describe('introspectJwtToken', () => {
             expectedIssValue,
         );
         const mock = new MockAdapter(axios);
-        mock.onPost(`${expectedIssValue}/${introspectionSuffix}`).timeout();
+        mock.onPost(introspectUrl).timeout();
 
         const jwt = await getSignedJwt(payload, kid, privateKey);
         return expect(
