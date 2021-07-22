@@ -445,6 +445,54 @@ describe('verifyAccessToken', () => {
             expectedUserIdentity,
         );
     });
+
+    test('Use introspection', async () => {
+        // BUILD
+        const config: SMARTConfig = {
+            ...authZConfig,
+            tokenIntrospection: {
+                clientId: '123',
+                clientSecret: '456',
+                introspectUrl: `${authZConfig.expectedIssValue}/v1/introspect`,
+            },
+        };
+        const handler: SMARTHandler = new SMARTHandler(config, apiUrl, '4.0.1');
+        const introspectionBody = {
+            ...baseAccessNoScopes,
+            scp: 'patient/Observation.read',
+            ...patientContext,
+            active: true,
+        };
+        jest.spyOn(smartAuthorizationHelper, 'introspectJwtToken').mockImplementation(() =>
+            Promise.resolve(introspectionBody),
+        );
+        const expectedUserIdentity = getExpectedUserIdentity(introspectionBody);
+
+        // CHECK
+        expect(
+            handler.verifyAccessToken({
+                accessToken: 'fake',
+                operation: 'vread',
+                resourceType: 'Observation',
+                id: '1',
+                vid: '1',
+            }),
+        ).resolves.toMatchObject(expectedUserIdentity);
+    });
+    test('Invalid configuration', async () => {
+        // BUILD
+        const config: SMARTConfig = { ...authZConfig, jwksEndpoint: '' };
+        const handler: SMARTHandler = new SMARTHandler(config, apiUrl, '4.0.1');
+
+        // CHECK
+        expect(
+            handler.verifyAccessToken({
+                accessToken: 'fake',
+                operation: 'create',
+                resourceType: 'Patient',
+            }),
+        ).rejects.toThrowError(Error);
+    });
 });
 
 describe('verifyAccessToken; System level export requests', () => {

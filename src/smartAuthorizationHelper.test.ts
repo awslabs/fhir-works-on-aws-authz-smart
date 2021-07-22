@@ -7,13 +7,21 @@ import jwksClient, { JwksClient } from 'jwks-rsa';
 
 import { KeyObject } from 'crypto';
 // eslint-disable-next-line import/no-unresolved
-import fromKeyLike from 'jose/jwk/from_key_like';
+import fromKeyLike, { KeyLike } from 'jose/jwk/from_key_like';
 // eslint-disable-next-line import/no-unresolved
 import SignJWT from 'jose/jwt/sign';
 // eslint-disable-next-line import/no-unresolved
 import generateKeyPair from 'jose/util/generate_key_pair';
-import { hasReferenceToResource, getFhirResource, getFhirUser, verifyJwtToken } from './smartAuthorizationHelper';
-import { FhirResource } from './smartConfig';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import {
+    hasReferenceToResource,
+    getFhirResource,
+    getFhirUser,
+    verifyJwtToken,
+    introspectJwtToken,
+} from './smartAuthorizationHelper';
+import { FhirResource, IntrospectionOptions } from './smartConfig';
 
 const apiUrl = 'https://fhirServer.com';
 const id = '1234';
@@ -327,6 +335,34 @@ describe('hasReferenceToResource', () => {
     });
 });
 
+function getDefaultPayload(iat: number, exp: number, aud: string | string[], iss: string | string[]) {
+    return {
+        ver: 1,
+        jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
+        iss,
+        aud,
+        iat,
+        exp,
+        cid: '0oa8muazKSyk9gP5y5d5',
+        uid: '00u85ozwjjWRd17PB5d5',
+        scp: ['fhirUser', 'openid', 'profile', 'launch/encounter', 'patient/Patient.read'],
+        sub: 'test@test.com',
+        fhirUser: 'Practitioner/1234',
+    };
+}
+async function getSignedJwt(
+    payload: any,
+    kid: string,
+    privateKey: KeyLike,
+    headerContainsKidAttribute: boolean = true,
+) {
+    let header: any = { alg: 'RS256', type: 'JWT' };
+    if (headerContainsKidAttribute) {
+        header = { ...header, kid };
+    }
+    return new SignJWT(payload).setProtectedHeader(header).sign(privateKey);
+}
+
 describe('verifyJwt', () => {
     const kid = 'abcd1234';
 
@@ -350,30 +386,6 @@ describe('verifyJwt', () => {
     const expectedAudValue = 'api://default';
     const expectedIssValue = 'https://exampleAuthServer.com/oauth2';
 
-    function getDefaultPayload(iat: number, exp: number, aud: string | string[], iss: string | string[]) {
-        return {
-            ver: 1,
-            jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
-            iss,
-            aud,
-            iat,
-            exp,
-            cid: '0oa8muazKSyk9gP5y5d5',
-            uid: '00u85ozwjjWRd17PB5d5',
-            scp: ['fhirUser', 'openid', 'profile', 'launch/encounter', 'patient/Patient.read'],
-            sub: 'test@test.com',
-            fhirUser: 'Practitioner/1234',
-        };
-    }
-
-    async function getSignedJwt(payload: any, headerContainsKidAttribute: boolean = true) {
-        let header: any = { alg: 'RS256', type: 'JWT' };
-        if (headerContainsKidAttribute) {
-            header = { ...header, kid };
-        }
-        return new SignJWT(payload).setProtectedHeader(header).sign(privateKey);
-    }
-
     test('JWT is valid and verified', async () => {
         const payload = getDefaultPayload(
             Math.floor(Date.now() / 1000),
@@ -381,7 +393,7 @@ describe('verifyJwt', () => {
             expectedAudValue,
             expectedIssValue,
         );
-        const jwt = await getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload, kid, privateKey);
         return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).resolves.toEqual(payload);
     });
 
@@ -392,7 +404,7 @@ describe('verifyJwt', () => {
             expectedAudValue,
             expectedIssValue,
         );
-        const jwt = await getSignedJwt(payload, false);
+        const jwt = await getSignedJwt(payload, kid, privateKey, false);
         return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
             new UnauthorizedError('Invalid access token'),
         );
@@ -405,7 +417,7 @@ describe('verifyJwt', () => {
             expectedAudValue,
             expectedIssValue,
         );
-        const jwt = await getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload, kid, privateKey);
 
         return expect(verifyJwtToken(jwt, expectedAudValue, expectedIssValue, client)).rejects.toThrowError(
             new UnauthorizedError('Invalid access token'),
@@ -432,7 +444,7 @@ describe('verifyJwt', () => {
                 aud,
                 expectedIssValue,
             );
-            const jwt = await getSignedJwt(payload);
+            const jwt = await getSignedJwt(payload, kid, privateKey);
             return expect(
                 verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
             ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
@@ -451,7 +463,7 @@ describe('verifyJwt', () => {
                 aud,
                 expectedIssValue,
             );
-            const jwt = await getSignedJwt(payload);
+            const jwt = await getSignedJwt(payload, kid, privateKey);
             return expect(
                 verifyJwtToken(jwt, expectedAudValue, 'https://exampleAuthServer.com/oauth2', client),
             ).resolves.toEqual(payload);
@@ -467,7 +479,7 @@ describe('verifyJwt', () => {
                 aud,
                 expectedIssValue,
             );
-            const jwt = await getSignedJwt(payload);
+            const jwt = await getSignedJwt(payload, kid, privateKey);
             return expect(verifyJwtToken(jwt, audRegExp, expectedIssValue, client)).resolves.toEqual(payload);
         });
     });
@@ -479,9 +491,167 @@ describe('verifyJwt', () => {
             expectedAudValue,
             expectedIssValue,
         );
-        const jwt = await getSignedJwt(payload);
+        const jwt = await getSignedJwt(payload, kid, privateKey);
         return expect(verifyJwtToken(jwt, expectedAudValue, 'fakeIss', client)).rejects.toThrowError(
             new UnauthorizedError('Invalid access token'),
         );
+    });
+});
+
+describe('introspectJwtToken', () => {
+    const expectedAudValue = 'api://default';
+    const expectedIssValue = 'https://exampleAuthServer.com/oauth2';
+    const introspectUrl = `${expectedIssValue}/v1/introspect`;
+    const introspectionOptions: IntrospectionOptions = {
+        clientId: '123',
+        clientSecret: '1234',
+        introspectUrl,
+    };
+    const kid = 'abcd1234';
+
+    let privateKey: KeyObject;
+
+    beforeAll(async () => {
+        const keyPair = await generateKeyPair('RS256');
+        privateKey = <KeyObject>keyPair.privateKey;
+    });
+
+    test('valid and verified', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(200, {
+            ...payload,
+            active: true,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).resolves.toEqual({
+            ...payload,
+            active: true,
+        });
+    });
+
+    test('Introspection returns 200 with active set to false', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            `${expectedIssValue}/`,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(200, {
+            active: false,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+
+    test('Introspection returns 400', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(400, {
+            active: false,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+    test('Introspection returns 401', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(401, {
+            active: false,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+    test('Introspection returns 403', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(403, {
+            active: false,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+    test('Introspection returns 500', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).reply(500, {
+            active: false,
+        });
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+    test('Introspection returns network error', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).networkError();
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
+    });
+    test('Introspection returns timeout', async () => {
+        const payload = getDefaultPayload(
+            Math.floor(Date.now() / 1000),
+            Math.floor(Date.now() / 1000) + 10,
+            expectedAudValue,
+            expectedIssValue,
+        );
+        const mock = new MockAdapter(axios);
+        mock.onPost(introspectUrl).timeout();
+
+        const jwt = await getSignedJwt(payload, kid, privateKey);
+        return expect(
+            introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
+        ).rejects.toThrowError(new UnauthorizedError('Invalid access token'));
     });
 });
