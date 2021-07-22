@@ -109,6 +109,38 @@ export function hasReferenceToResource(
     );
 }
 
+export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
+    return apiUrl === fhirUser.hostname && adminAccessTypes.includes(fhirUser.resourceType);
+}
+
+/**
+ * @param usableScopes this should be usableScope set from the `verifyAccessToken` method
+ * @param resourceType the type of the resource we are trying to access
+ * @returns if there is a usable system scope for this request
+ */
+export function hasSystemAccess(usableScopes: string[], resourceType: string): boolean {
+    return usableScopes.some(
+        (scope: string) => scope.startsWith('system/*') || scope.startsWith(`system/${resourceType}`),
+    );
+}
+
+export function hasAccessToResource(
+    fhirUserObject: FhirResource,
+    patientLaunchContext: FhirResource,
+    sourceResource: any,
+    usableScopes: string[],
+    adminAccessTypes: string[],
+    apiUrl: string,
+    fhirVersion: FhirVersion,
+): boolean {
+    return (
+        hasSystemAccess(usableScopes, sourceResource.resourceType) ||
+        (fhirUserObject &&
+            (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
+                hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
+        (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
+    );
+}
 export function getJwksClient(jwksUri: string): JwksClient {
     return jwksClient({
         cache: true,

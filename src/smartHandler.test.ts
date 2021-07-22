@@ -238,7 +238,10 @@ function getExpectedUserIdentity(decodedAccessToken: any): any {
     const expectedUserIdentity = decodedAccessToken;
     expectedUserIdentity.scopes = getScopes(decodedAccessToken.scp);
     const usableScopes = expectedUserIdentity.scopes.filter(
-        (scope: string) => scope.startsWith('user/') || scope.startsWith('patient/'),
+        (scope: string) =>
+            scope.startsWith('system/') ||
+            (decodedAccessToken.fhirUser && scope.startsWith('user/')) ||
+            (decodedAccessToken?.ext?.launch_response_patient && scope.startsWith('patient/')),
     );
     if (decodedAccessToken.fhirUser && usableScopes.some((scope: string) => scope.startsWith('user/'))) {
         expectedUserIdentity.fhirUserObject = getFhirUser(decodedAccessToken.fhirUser);
@@ -252,6 +255,7 @@ function getExpectedUserIdentity(decodedAccessToken: any): any {
             apiUrl,
         );
     }
+    expectedUserIdentity.usableScopes = usableScopes;
     return expectedUserIdentity;
 }
 
@@ -753,6 +757,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
                     fhirUserObject: getFhirUser(`${apiUrl}/Patient/345`),
                     patientLaunchContext: patientFhirResource,
                 },
@@ -768,6 +773,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['patient/*.read'],
+                    usableScopes: ['patient/*.read'],
                     patientLaunchContext: patientFhirResource,
                 },
                 operation: 'vread',
@@ -782,6 +788,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: patientFhirResource,
                 },
                 operation: 'read',
@@ -796,6 +803,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
                     fhirUserObject: patientFhirResource,
                     patientLaunchContext: patientFhirResource,
                 },
@@ -806,11 +814,28 @@ describe('authorizeAndFilterReadResponse', () => {
             {},
         ],
         [
+            'READ: System able to vread non-owned Patient record',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read', 'system/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read', 'system/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
+                operation: 'vread',
+                readResponse: { ...validPatient, id: 'not-yours' },
+            },
+            true,
+            { ...validPatient, id: 'not-yours' },
+        ],
+        [
             'READ: Patient unable to read non-direct Observation',
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
                     fhirUserObject: patientFhirResource,
                     patientLaunchContext: patientFhirResource,
                 },
@@ -826,6 +851,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'read',
@@ -840,6 +866,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'read',
@@ -854,6 +881,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
                 operation: 'read',
@@ -868,6 +896,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
                 operation: 'read',
@@ -882,6 +911,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
                     fhirUserObject: patientFhirResource,
                     patientLaunchContext: patientFhirResource,
                 },
@@ -897,6 +927,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['patient/*.read'],
+                    usableScopes: ['patient/*.read'],
                     patientLaunchContext: patientFhirResource,
                 },
                 operation: 'search-type',
@@ -911,6 +942,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'fhirUser'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: patientFhirResource,
                 },
                 operation: 'history-type',
@@ -925,6 +957,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
                     fhirUserObject: patientFhirResource,
                     patientLaunchContext: patientFhirResource,
                 },
@@ -940,6 +973,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
                 operation: 'search-type',
@@ -954,6 +988,22 @@ describe('authorizeAndFilterReadResponse', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.read'],
+                    usableScopes: ['user/*.read'],
+                    fhirUserObject: practitionerFhirResource,
+                },
+                operation: 'search-type',
+                readResponse: searchAllEntitiesMatch,
+            },
+            true,
+            searchAllEntitiesMatch,
+        ],
+        [
+            'SEARCH: system scope; Practitioner able to search and get ALL results',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['system/*.read'],
+                    usableScopes: ['system/*.read'],
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'search-type',
@@ -985,6 +1035,7 @@ describe('isWriteRequestAuthorized', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['patient/*.write'],
+                    usableScopes: ['patient/*.write'],
                     patientLaunchContext: patientFhirResource,
                 },
                 operation: 'create',
@@ -998,6 +1049,7 @@ describe('isWriteRequestAuthorized', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.write'],
+                    usableScopes: ['user/*.write'],
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'update',
@@ -1011,7 +1063,21 @@ describe('isWriteRequestAuthorized', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.write'],
+                    usableScopes: ['user/*.write'],
                     fhirUserObject: externalPractitionerFhirResource,
+                },
+                operation: 'patch',
+                resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
+            },
+            true,
+        ],
+        [
+            'PATCH: missing user/patient context; but has system scopes',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write', 'patient/*.write', 'system/*.write'],
+                    usableScopes: ['system/*.write'],
                 },
                 operation: 'patch',
                 resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
@@ -1024,6 +1090,7 @@ describe('isWriteRequestAuthorized', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.write', 'patient/*.write'],
+                    usableScopes: [],
                 },
                 operation: 'patch',
                 resourceBody: { ...validPatient, generalPractitioner: { reference: externalPractitionerIdentity } },
@@ -1036,12 +1103,27 @@ describe('isWriteRequestAuthorized', () => {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['user/*.write'],
+                    usableScopes: ['user/*.write'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
                 operation: 'update',
                 resourceBody: validPatient,
             },
             false,
+        ],
+        [
+            'UPDATE: system scope; user scope with External practitioner unable to write Patient; but system scope gives access',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.write', 'system/*.write'],
+                    usableScopes: ['user/*.write', 'system/*.write'],
+                    fhirUserObject: externalPractitionerFhirResource,
+                },
+                operation: 'update',
+                resourceBody: validPatient,
+            },
+            true,
         ],
     ];
 
@@ -1129,6 +1211,14 @@ describe('isBundleRequestAuthorized', () => {
             true,
         ],
         [
+            'system scope: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['system/*.*'],
+            },
+            true,
+        ],
+        [
             'practitioner with patient&user scope: no error',
             {
                 ...baseAccessNoScopes,
@@ -1139,10 +1229,19 @@ describe('isBundleRequestAuthorized', () => {
             true,
         ],
         [
+            'practitioner with system&user scope: no error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Observation.write', 'system/Patient.*', 'openid'],
+                fhirUserObject: practitionerFhirResource,
+            },
+            true,
+        ],
+        [
             'patient with user scope to create observation but no read perms: Unauthorized Error',
             {
                 ...baseAccessNoScopes,
-                scopes: ['user/Observation.write'],
+                scopes: ['user/Observation.write', 'system/*.write'],
                 fhirUserObject: patientFhirResource,
             },
             false,
@@ -1158,13 +1257,23 @@ describe('isBundleRequestAuthorized', () => {
             false,
         ],
         [
-            'patient with correct scopes; but does not have write access to resource: no error',
+            'external patient with correct scopes; but does not have write access to resource: no error',
             {
                 ...baseAccessNoScopes,
                 scopes: ['patient/*.*', 'profile'],
                 patientLaunchContext: externalPractitionerFhirResource,
             },
             false,
+        ],
+        [
+            'practitioner with invalid patient&user scope; but valid system scopes',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Patient.write', 'patient/Observation.read', 'system/*.*', 'openid'],
+                fhirUserObject: practitionerFhirResource,
+                patientLaunchContext: patientFhirResource,
+            },
+            true,
         ],
     ];
     test.each(cases)('CASE: %p', async (_firstArg, userIdentity, isAuthorized) => {
@@ -1206,9 +1315,9 @@ describe('getAllowedResourceTypesForOperation', () => {
     const cases: (string | string[])[][] = [
         [
             'search-type operation: read scope: returns [Patient, Observation]',
-            ['user/Patient.read', 'user/Observation.read', 'fhirUser'],
+            ['user/Patient.read', 'user/Observation.read', 'fhirUser', 'system/Encounter.*'],
             'search-type',
-            ['Patient', 'Observation'],
+            ['Patient', 'Observation', 'Encounter'],
         ],
         // if there are duplicated scopeResourceType we return an array with the duplicates removed
         [
@@ -1218,13 +1327,19 @@ describe('getAllowedResourceTypesForOperation', () => {
             ['Patient', 'Observation'],
         ],
         // getAllowedResourceTypesForOperation returns an empty array because scopeRule user.write does not support any operations
-        ['create operation: write scope: returns []', ['user/Patient.write', 'user/Observation.write'], 'created', []],
+        ['create operation: write scope: returns []', ['user/Patient.write', 'user/Observation.write'], 'create', []],
         // getAllowedResourceTypesForOperation returns an empty array because scopeRule user.read supports 'search-type' operation not 'vread'
         ['vread operation: read scope: returns []', ['user/Patient.read', 'user/Observation.read'], 'vread', []],
         // getAllowedResourceTypesForOperation returns BASE_R4_RESOURCES because resourceScopeType is '*'
         [
-            'create operation: read scope: returns [BASE_R4_RESOURCES]',
+            'search-type operation: read scope: returns [BASE_R4_RESOURCES]',
             ['user/*.read'],
+            'search-type',
+            BASE_R4_RESOURCES,
+        ],
+        [
+            'search-type operation: system scope: returns [BASE_R4_RESOURCES]',
+            ['user/Patient.read', 'system/*.*'],
             'search-type',
             BASE_R4_RESOURCES,
         ],
@@ -1252,6 +1367,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         const userIdentity = {
             ...baseAccessNoScopes,
             scopes: ['patient/*.*', 'user/*.read', 'fhirUser'],
+            usableScopes: ['patient/*.*'],
             patientLaunchContext: getFhirResource(patientId, apiUrl),
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
@@ -1276,6 +1392,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         const userIdentity = {
             ...baseAccessNoScopes,
             scopes: ['patient/*.*', 'user/*.*', 'fhirUser'],
+            usableScopes: ['user/*.*'],
             fhirUserObject: patientFhirResource,
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
@@ -1306,6 +1423,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         const userIdentity = {
             ...baseAccessNoScopes,
             scopes: ['patient/*.*', 'user/*.*', 'fhirUser'],
+            usableScopes: ['patient/*.*', 'user/*.*'],
             patientLaunchContext: patientFhirResource,
             fhirUserObject: patientFhirResource,
         };
@@ -1336,11 +1454,12 @@ describe('getSearchFilterBasedOnIdentity', () => {
         );
     });
 
-    test('Practitioner identity', async () => {
+    test('Practitioner (admin) identity', async () => {
         // BUILD
         const userIdentity = {
             ...baseAccessNoScopes,
             scopes: ['user/*.*', 'fhirUser'],
+            usableScopes: ['user/*.*'],
             fhirUserObject: practitionerFhirResource,
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
@@ -1357,6 +1476,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         const userIdentity = {
             ...baseAccessNoScopes,
             scopes: ['user/*.*', 'fhirUser'],
+            usableScopes: ['user/*.*'],
             fhirUserObject: externalPractitionerFhirResource,
         };
         const request: GetSearchFilterBasedOnIdentityRequest = {
@@ -1375,5 +1495,60 @@ describe('getSearchFilterBasedOnIdentity', () => {
             },
         ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+
+    test('System ALL scope; with patient and user too', async () => {
+        // BUILD
+        const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
+            baseAuthZConfig(),
+            'https://fhir.server-2.com/dev',
+            '4.0.1',
+        );
+
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.*', 'system/*.*', 'fhirUser'],
+            usableScopes: ['patient/*.*', 'user/*.*', 'system/*.*'],
+            patientLaunchContext: patientFhirResource,
+            fhirUserObject: patientFhirResource,
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'history-instance',
+            resourceType: 'Patient',
+            id: '1324',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter: [] = [];
+        await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
+            expectedFilter,
+        );
+    });
+    test('System Patient scope', async () => {
+        // BUILD
+        const authZHandlerWithFakeApiUrl: SMARTHandler = new SMARTHandler(
+            baseAuthZConfig(),
+            'https://fhir.server-2.com/dev',
+            '4.0.1',
+        );
+
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['system/Patient.*', 'fhirUser'],
+            usableScopes: ['system/Patient.*'],
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'history-instance',
+            resourceType: 'Patient',
+            id: '1324',
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter: [] = [];
+        await expect(authZHandlerWithFakeApiUrl.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(
+            expectedFilter,
+        );
     });
 });
