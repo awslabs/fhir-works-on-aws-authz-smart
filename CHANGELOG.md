@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.0.0...v2.1.0) (2021-07-23)
+
+
+### Features
+
+* allow regex in SMARTConfig.expectedAudValue ([#43](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/43)) ([2442856](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/244285606d70d7bed1a37a6bc19d32063af036ec))
+* allow token introspection as an authz option ([#44](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/44)) ([f123621](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/f123621a4f65819f89e161ec3fbba1ac46301f41))
+
+
+### Bug Fixes
+
+* support system scope ([#46](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/46)) ([7ae2f49](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/7ae2f49cd20e933e45d40b9e518b8ec72c3d61b6))
+
 ## [2.0.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v1.0.1...v2.0.0) (2021-06-24)
 
 ### ⚠ BREAKING CHANGES
