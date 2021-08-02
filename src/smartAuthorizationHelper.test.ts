@@ -534,7 +534,6 @@ describe('introspectJwtToken', () => {
             introspectJwtToken(jwt, expectedAudValue, expectedIssValue, introspectionOptions),
         ).resolves.toEqual({
             ...payload,
-            active: true,
         });
     });
 
