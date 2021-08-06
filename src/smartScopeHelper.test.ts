@@ -206,6 +206,20 @@ describe('filterOutUnusableScope', () => {
             ),
         ).toEqual([]);
     });
+
+    test('filter user & patient; transaction use case', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.user.read = ['read'];
+        clonedScopeRule.patient.read = ['read'];
+        clonedScopeRule.system.write = ['transaction'];
+        expect(
+            filterOutUnusableScope(
+                ['fhirUser', 'user/Patient.read', 'patient/Obersvation.*', 'patient/*.read', 'system/*.write'],
+                clonedScopeRule,
+                'transaction',
+            ),
+        ).toEqual(['system/*.write']);
+    });
 });
 
 describe('getValidOperationsForScopeTypeAndAccessType', () => {

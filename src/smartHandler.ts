@@ -21,7 +21,7 @@ import {
 } from 'fhir-works-on-aws-interface';
 import get from 'lodash/get';
 import { JwksClient } from 'jwks-rsa';
-import { FhirResource, SMARTConfig, UserIdentity } from './smartConfig';
+import { SMARTConfig, UserIdentity } from './smartConfig';
 import {
     convertScopeToSmartScope,
     filterOutUnusableScope,
@@ -31,11 +31,14 @@ import {
     SEARCH_OPERATIONS,
 } from './smartScopeHelper';
 import {
-    hasReferenceToResource,
     getFhirResource,
     getFhirUser,
     getJwksClient,
     verifyJwtToken,
+    introspectJwtToken,
+    hasAccessToResource,
+    hasSystemAccess,
+    isFhirUserAdmin,
 } from './smartAuthorizationHelper';
 import getComponentLogger from './loggerBuilder';
 
@@ -61,7 +64,7 @@ export class SMARTHandler implements Authorization {
 
     private readonly fhirVersion: FhirVersion;
 
-    private readonly jwksClient: JwksClient;
+    private readonly jwksClient?: JwksClient;
 
     /**
      * @param apiUrl URL of this FHIR service. Will be used to determine if a requestor is from this FHIR server or not
@@ -82,18 +85,34 @@ export class SMARTHandler implements Authorization {
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
-        this.jwksClient = getJwksClient(this.config.jwksEndpoint);
         this.adminAccessTypes = adminAccessTypes;
         this.bulkDataAccessTypes = bulkDataAccessTypes;
+        if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
+            this.jwksClient = getJwksClient(this.config.jwksEndpoint);
+        }
     }
 
     async verifyAccessToken(request: VerifyAccessTokenRequest): Promise<UserIdentity> {
-        const decodedToken: any = await verifyJwtToken(
-            request.accessToken,
-            this.config.expectedAudValue,
-            this.config.expectedIssValue,
-            this.jwksClient,
-        );
+        let decodedToken: any;
+        if (this.config.tokenIntrospection) {
+            decodedToken = await introspectJwtToken(
+                request.accessToken,
+                this.config.expectedAudValue,
+                this.config.expectedIssValue,
+                this.config.tokenIntrospection,
+            );
+        } else if (this.jwksClient) {
+            decodedToken = await verifyJwtToken(
+                request.accessToken,
+                this.config.expectedAudValue,
+                this.config.expectedIssValue,
+                this.jwksClient,
+            );
+        } else {
+            throw Error(
+                `Authorization configuration not properly set up. Either 'tokenIntrospection' or 'jwksEndpoint' must be present`,
+            );
+        }
 
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
@@ -148,6 +167,7 @@ export class SMARTHandler implements Authorization {
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
         }
         userIdentity.scopes = scopes;
+        userIdentity.usableScopes = usableScopes;
         return userIdentity;
     }
 
@@ -161,12 +181,16 @@ export class SMARTHandler implements Authorization {
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
-        const { fhirUserObject, patientLaunchContext } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
+
+        if (hasSystemAccess(usableScopes, '')) {
+            return [];
+        }
 
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
-            if (this.isFhirUserAdmin(fhirUserObject, fhirServiceBaseUrl)) {
+            if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 // if an admin do not add limiting search filters
                 return [];
             }
@@ -214,13 +238,14 @@ export class SMARTHandler implements Authorization {
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
         const { scopes, fhirUserObject, patientLaunchContext } = request.userIdentity;
-        let usableScopes: string[] = [];
-        if (fhirUserObject) {
-            usableScopes = usableScopes.concat(scopes.filter((scope: string) => scope.startsWith('user/')));
-        }
-        if (patientLaunchContext) {
-            usableScopes = usableScopes.concat(scopes.filter((scope: string) => scope.startsWith('patient/')));
-        }
+        const usableScopes: string[] = scopes.filter(
+            (scope: string) =>
+                (patientLaunchContext && scope.startsWith('patient/')) ||
+                (fhirUserObject && scope.startsWith('user/')) ||
+                scope.startsWith('system/'),
+        );
+
+        // Are the scopes the request have good enough for every entry in the bundle?
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (
                 !usableScopes.some((scope: string) =>
@@ -236,10 +261,11 @@ export class SMARTHandler implements Authorization {
             }
         });
 
+        // Ensure the requestor has access to write this request
         const authWritePromises: Promise<void>[] = request.requests.map(req => {
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
                 return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
-                    userIdentity: request.userIdentity,
+                    userIdentity: { ...request.userIdentity, usableScopes },
                     operation: req.operation,
                     resourceBody: req.resource,
                 });
@@ -256,6 +282,7 @@ export class SMARTHandler implements Authorization {
 
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
         let allowedResources: string[] = [];
+        const allResourceTypes: string[] = this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
         for (let i = 0; i < request.userIdentity.scopes.length; i += 1) {
             const scope = request.userIdentity.scopes[i];
             try {
@@ -267,13 +294,11 @@ export class SMARTHandler implements Authorization {
                     this.config.scopeRule,
                 );
                 if (validOperations.includes(request.operation)) {
-                    const allowedResourcesForScope: string[] =
-                        this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
                     const scopeResourceType = clinicalSmartScope.resourceType;
                     if (scopeResourceType === '*') {
-                        return allowedResourcesForScope;
+                        return allResourceTypes;
                     }
-                    if (allowedResourcesForScope.includes(scopeResourceType)) {
+                    if (allResourceTypes.includes(scopeResourceType)) {
                         allowedResources = allowedResources.concat(scopeResourceType);
                     }
                 }
@@ -286,39 +311,36 @@ export class SMARTHandler implements Authorization {
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
-        const { fhirUserObject, patientLaunchContext } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         const { operation, readResponse } = request;
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
-            const entries = (readResponse.entry ?? []).filter(
-                (entry: { resource: any }) =>
-                    (fhirUserObject &&
-                        (this.isFhirUserAdmin(fhirUserObject, fhirServiceBaseUrl) ||
-                            hasReferenceToResource(
-                                fhirUserObject,
-                                entry.resource,
-                                fhirServiceBaseUrl,
-                                this.fhirVersion,
-                            ))) ||
-                    (patientLaunchContext &&
-                        hasReferenceToResource(
-                            patientLaunchContext,
-                            entry.resource,
-                            fhirServiceBaseUrl,
-                            this.fhirVersion,
-                        )),
+            const entries = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
+                hasAccessToResource(
+                    fhirUserObject,
+                    patientLaunchContext,
+                    entry.resource,
+                    usableScopes,
+                    this.adminAccessTypes,
+                    fhirServiceBaseUrl,
+                    this.fhirVersion,
+                ),
             );
             return { ...readResponse, entry: entries };
         }
         // If request is != search treat the readResponse as just a resource
         if (
-            (fhirUserObject &&
-                (this.isFhirUserAdmin(fhirUserObject, fhirServiceBaseUrl) ||
-                    hasReferenceToResource(fhirUserObject, readResponse, fhirServiceBaseUrl, this.fhirVersion))) ||
-            (patientLaunchContext &&
-                hasReferenceToResource(patientLaunchContext, readResponse, fhirServiceBaseUrl, this.fhirVersion))
+            hasAccessToResource(
+                fhirUserObject,
+                patientLaunchContext,
+                readResponse,
+                usableScopes,
+                this.adminAccessTypes,
+                fhirServiceBaseUrl,
+                this.fhirVersion,
+            )
         ) {
             return readResponse;
         }
@@ -327,28 +349,22 @@ export class SMARTHandler implements Authorization {
     }
 
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
-        const { fhirUserObject, patientLaunchContext } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
-        // If fhirUser is Admin or has reference to object in request
         if (
-            fhirUserObject &&
-            (this.isFhirUserAdmin(fhirUserObject, fhirServiceBaseUrl) ||
-                hasReferenceToResource(fhirUserObject, request.resourceBody, fhirServiceBaseUrl, this.fhirVersion))
-        ) {
-            return;
-        }
-        // If patientLaunchContext has reference to object in request
-        if (
-            patientLaunchContext &&
-            hasReferenceToResource(patientLaunchContext, request.resourceBody, fhirServiceBaseUrl, this.fhirVersion)
+            hasAccessToResource(
+                fhirUserObject,
+                patientLaunchContext,
+                request.resourceBody,
+                usableScopes,
+                this.adminAccessTypes,
+                fhirServiceBaseUrl,
+                this.fhirVersion,
+            )
         ) {
             return;
         }
 
         throw new UnauthorizedError('User does not have permission for requested operation');
-    }
-
-    isFhirUserAdmin(fhirUser: FhirResource, fhirServiceBaseUrl: string): boolean {
-        return fhirServiceBaseUrl === fhirUser.hostname && this.adminAccessTypes.includes(fhirUser.resourceType);
     }
 }
