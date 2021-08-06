@@ -212,7 +212,7 @@ export async function introspectJwtToken(
     introspectionOptions: IntrospectionOptions,
 ) {
     // used to verify if `iss` or `aud` is valid
-    decodeJwtToken(token, expectedAudValue, expectedIssValue);
+    const decodedTokenPayload = decodeJwtToken(token, expectedAudValue, expectedIssValue).payload;
     const { introspectUrl, clientId, clientSecret } = introspectionOptions;
 
     // setup basic authentication
@@ -221,22 +221,18 @@ export async function introspectJwtToken(
     const auth = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`;
 
     try {
-        const response = await axios.post(
-            introspectUrl,
-            { token },
-            {
-                headers: {
-                    'content-type': 'application/x-www-form-urlencoded',
-                    accept: 'application/json',
-                    authorization: auth,
-                    'cache-control': 'no-cache',
-                },
+        const response = await axios.post(introspectUrl, `token=${token}`, {
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                accept: 'application/json',
+                authorization: auth,
+                'cache-control': 'no-cache',
             },
-        );
+        });
         if (!response.data.active) {
             throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
         }
-        return response.data;
+        return decodedTokenPayload;
     } catch (e) {
         if (axios.isAxiosError(e)) {
             if (e.response) {
