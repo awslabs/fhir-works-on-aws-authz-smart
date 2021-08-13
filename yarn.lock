@@ -1981,10 +1981,10 @@ fecha@^4.2.0:
   resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.1.tgz#0a83ad8f86ef62a091e22bb5a039cd03d23eecce"
   integrity sha512-MMMQ0ludy/nBs1/o0zVOiKTpG7qMbonKUzjJgQFEuvq6INZ1OraKPRAWkBq5vlKLOUMpmNYG1JoN3oDPUQ9m3Q==
 
-fhir-works-on-aws-interface@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-interface/-/fhir-works-on-aws-interface-9.0.0.tgz#2e784f7a5c2e476b436558d0954bf3beb2f150de"
-  integrity sha512-qYuWefK54g6RLrXqiyw2wZVEqwR5nesxcD5CmPv9ZWEd6bvAxgzQHV5YIOuHtOI2R0cXRaGqldtJqpT8PX9ISQ==
+fhir-works-on-aws-interface@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/fhir-works-on-aws-interface/-/fhir-works-on-aws-interface-10.0.0.tgz#5ad0599e55b40c7be1f9ef0cf9252d6da1f8d20a"
+  integrity sha512-JQ/eICquJlI5P6s7e1xiuABnPuhh4d7VeyPFc5OFHgpLbyBCTrbyz0gVMc3BdlQVXQ7IAa0HYgjNsLMoeFt2JA==
   dependencies:
     winston "^3.3.3"
     winston-transport "^4.4.0"
