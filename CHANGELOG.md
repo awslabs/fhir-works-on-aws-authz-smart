@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.1.0...v2.1.1) (2021-08-16)
+
+
+### Bug Fixes
+
+* pass params in url for introspect jwt flow ([#48](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/48)) ([d67b693](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/d67b6932f5a1a0bbe6c340bd340bc2351068adbf))
+
 ## [2.1.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.0.0...v2.1.0) (2021-07-23)
 
 
