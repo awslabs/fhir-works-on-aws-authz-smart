@@ -212,7 +212,7 @@ const validPatientEncounter = {
 const mock = new MockAdapter(axios);
 beforeEach(() => {
     jest.restoreAllMocks();
-    expect.assertions(1);
+    expect.hasAssertions();
 });
 afterEach(() => {
     mock.reset();
@@ -434,20 +434,38 @@ describe('verifyAccessToken', () => {
     const authZConfig = baseAuthZConfig();
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, decodedAccessToken, isValid) => {
+        const authZHandlerWithAnotherApiURL: SMARTHandler = new SMARTHandler(
+            authZConfig,
+            'https://some-server.com',
+            '4.0.1',
+        );
+
+        const requestWithFhirServiceBaseUrl = { ...request, fhirServiceBaseUrl: apiUrl };
+
         // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(decodedAccessToken),
         );
         if (!isValid) {
-            return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
+            await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
                 UnauthorizedError,
             );
+            await expect(
+                authZHandlerWithAnotherApiURL.verifyAccessToken(
+                    <VerifyAccessTokenRequest>requestWithFhirServiceBaseUrl,
+                ),
+            ).rejects.toThrowError(UnauthorizedError);
+            return;
         }
         const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
 
-        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
+        await expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
             expectedUserIdentity,
         );
+
+        await expect(
+            authZHandlerWithAnotherApiURL.verifyAccessToken(<VerifyAccessTokenRequest>requestWithFhirServiceBaseUrl),
+        ).resolves.toMatchObject(expectedUserIdentity);
     });
 
     test('Use introspection', async () => {
@@ -1016,13 +1034,30 @@ describe('authorizeAndFilterReadResponse', () => {
 
     const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid, respBody) => {
+        const authZHandlerWithAnotherApiURL: SMARTHandler = new SMARTHandler(
+            baseAuthZConfig(),
+            'https://some-server.com',
+            '4.0.1',
+        );
+        const requestWithFhirServiceBaseUrl = { ...request, fhirServiceBaseUrl: apiUrl };
+
         if (!isValid) {
             await expect(
                 authZHandler.authorizeAndFilterReadResponse(<ReadResponseAuthorizedRequest>request),
             ).rejects.toThrowError(UnauthorizedError);
+            await expect(
+                authZHandlerWithAnotherApiURL.authorizeAndFilterReadResponse(
+                    <ReadResponseAuthorizedRequest>requestWithFhirServiceBaseUrl,
+                ),
+            ).rejects.toThrowError(UnauthorizedError);
         } else {
             await expect(
                 authZHandler.authorizeAndFilterReadResponse(<ReadResponseAuthorizedRequest>request),
+            ).resolves.toEqual(respBody);
+            await expect(
+                authZHandlerWithAnotherApiURL.authorizeAndFilterReadResponse(
+                    <ReadResponseAuthorizedRequest>requestWithFhirServiceBaseUrl,
+                ),
             ).resolves.toEqual(respBody);
         }
     });
@@ -1129,13 +1164,32 @@ describe('isWriteRequestAuthorized', () => {
 
     const authZHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), apiUrl, '4.0.1');
     test.each(cases)('CASE: %p', async (_firstArg, request, isValid) => {
+        const authZHandlerWithAnotherApiURL: SMARTHandler = new SMARTHandler(
+            baseAuthZConfig(),
+            'https://some-server.com',
+            '4.0.1',
+        );
+        const requestWithFhirServiceBaseUrl = {
+            ...(<WriteRequestAuthorizedRequest>request),
+            fhirServiceBaseUrl: apiUrl,
+        };
         if (!isValid) {
             await expect(
                 authZHandler.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>request),
             ).rejects.toThrowError(UnauthorizedError);
+            await expect(
+                authZHandlerWithAnotherApiURL.isWriteRequestAuthorized(
+                    <WriteRequestAuthorizedRequest>requestWithFhirServiceBaseUrl,
+                ),
+            ).rejects.toThrowError(UnauthorizedError);
         } else {
             await expect(
                 authZHandler.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>request),
+            ).resolves.not.toThrow();
+            await expect(
+                authZHandlerWithAnotherApiURL.isWriteRequestAuthorized(
+                    <WriteRequestAuthorizedRequest>requestWithFhirServiceBaseUrl,
+                ),
             ).resolves.not.toThrow();
         }
     });
@@ -1387,6 +1441,34 @@ describe('getSearchFilterBasedOnIdentity', () => {
         ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
+
+    test('Patient context identity; fhirServiceBaseUrl in request', async () => {
+        const smartHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), 'https://some-server.com', '4.0.1');
+        // BUILD
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.read', 'fhirUser'],
+            usableScopes: ['patient/*.*'],
+            patientLaunchContext: getFhirResource(patientId, apiUrl),
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-type',
+            resourceType: 'Encounter',
+            fhirServiceBaseUrl: apiUrl,
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_references',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [patientIdentity, patientId],
+            },
+        ];
+        await expect(smartHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
     test('User identity', async () => {
         // BUILD
         const userIdentity = {
@@ -1410,6 +1492,33 @@ describe('getSearchFilterBasedOnIdentity', () => {
             },
         ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
+    });
+
+    test('User identity; fhirServiceBaseUrl in request', async () => {
+        const smartHandler: SMARTHandler = new SMARTHandler(baseAuthZConfig(), 'https://some-server.com', '4.0.1');
+        // BUILD
+        const userIdentity = {
+            ...baseAccessNoScopes,
+            scopes: ['patient/*.*', 'user/*.*', 'fhirUser'],
+            usableScopes: ['user/*.*'],
+            fhirUserObject: patientFhirResource,
+        };
+        const request: GetSearchFilterBasedOnIdentityRequest = {
+            userIdentity,
+            operation: 'search-system',
+            fhirServiceBaseUrl: apiUrl,
+        };
+
+        // OPERATE, CHECK
+        const expectedFilter = [
+            {
+                key: '_references',
+                logicalOperator: 'OR',
+                comparisonOperator: '==',
+                value: [patientIdentity, patientId],
+            },
+        ];
+        await expect(smartHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
 
     test('User & Patient identity; fhirUser hostname does not match server hostname', async () => {
