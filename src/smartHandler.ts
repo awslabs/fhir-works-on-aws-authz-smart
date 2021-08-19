@@ -268,6 +268,7 @@ export class SMARTHandler implements Authorization {
                     userIdentity: { ...request.userIdentity, usableScopes },
                     operation: req.operation,
                     resourceBody: req.resource,
+                    fhirServiceBaseUrl: request.fhirServiceBaseUrl,
                 });
             }
             return Promise.resolve();
