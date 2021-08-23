@@ -62,7 +62,7 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         );
     });
 
-    test('scope is sufficient for bulk data access with "user" || "system" scopeType but not "patient" scopeType', () => {
+    test('scope is sufficient for system bulk data access with "user" || "system" scopeType but not "patient" scopeType', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
@@ -73,7 +73,7 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         );
     });
 
-    test('scope is NOT sufficient for bulk data access: Scope needs to have resourceType "*"', () => {
+    test('scope is NOT sufficient for system bulk data access: Scope needs to have resourceType "*"', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
 
@@ -82,6 +82,23 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
             isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
         ).toEqual(false);
     });
+
+    test('scope is sufficient for group export with "system" scopeType, not "user" of "patient" scopeType', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule[scopeType].read = ['read'];
+        const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'group' };
+
+        // Only scopeType of system has bulkDataAccess
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
+            scopeType === 'system',
+        );
+
+        // Group export result is filtered on allowed resourceType, scope not having resourceType "*" should be passed
+        expect(
+            isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
+        ).toEqual(scopeType === 'system');
+    });
+
     test('scope is sufficient to do a search-system', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['search-system'];
