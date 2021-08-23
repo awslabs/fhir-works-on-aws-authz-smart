@@ -84,14 +84,27 @@ function isSmartScopeSufficientForBulkDataAccess(
     smartScope: ClinicalSmartScope,
     scopeRule: ScopeRule,
 ) {
-    const bulkDataRequestHasCorrectScope =
-        bulkDataAuth.exportType === 'system' && // As of 2021-01-09 we only support System Level export
-        ['system', 'user'].includes(smartScope.scopeType) &&
-        smartScope.resourceType === '*' &&
-        ['*', 'read'].includes(smartScope.accessType) &&
-        getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType, scopeRule).includes(
-            'read',
-        );
+    let bulkDataRequestHasCorrectScope = false;
+    if (bulkDataAuth.exportType === 'system') {
+        bulkDataRequestHasCorrectScope =
+            ['system', 'user'].includes(smartScope.scopeType) &&
+            smartScope.resourceType === '*' &&
+            ['*', 'read'].includes(smartScope.accessType) &&
+            getValidOperationsForScopeTypeAndAccessType(
+                smartScope.scopeType,
+                smartScope.accessType,
+                scopeRule,
+            ).includes('read');
+    } else if (bulkDataAuth.exportType === 'group') {
+        bulkDataRequestHasCorrectScope =
+            ['system'].includes(smartScope.scopeType) &&
+            ['*', 'read'].includes(smartScope.accessType) &&
+            getValidOperationsForScopeTypeAndAccessType(
+                smartScope.scopeType,
+                smartScope.accessType,
+                scopeRule,
+            ).includes('read');
+    }
     return (
         ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
         bulkDataRequestHasCorrectScope
