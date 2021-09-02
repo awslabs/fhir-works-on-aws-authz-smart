@@ -63,6 +63,7 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
     });
 
     test('scope is sufficient for system bulk data access with "user" || "system" scopeType but not "patient" scopeType', () => {
+        process.env.ALLOW_USER_SCOPE_FOR_SYSTEM_EXPORT = 'true';
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
         const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
@@ -70,6 +71,18 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         // Only scopeType of user has bulkDataAccess
         expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
             scopeType !== 'patient',
+        );
+    });
+
+    test('scope is sufficient for system bulk data access with "user" scopeType but not "patient" and "system" scopeType', () => {
+        process.env.ALLOW_USER_SCOPE_FOR_SYSTEM_EXPORT = 'false';
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule[scopeType].read = ['read'];
+        const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
+
+        // Only scopeType of user has bulkDataAccess
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
+            scopeType === 'system',
         );
     });
 

@@ -86,8 +86,12 @@ function isSmartScopeSufficientForBulkDataAccess(
 ) {
     let bulkDataRequestHasCorrectScope = false;
     if (bulkDataAuth.exportType === 'system') {
+        const isScopeTypeSufficient =
+            process.env.ALLOW_USER_SCOPE_FOR_SYSTEM_EXPORT === 'true'
+                ? ['system', 'user'].includes(smartScope.scopeType)
+                : ['system'].includes(smartScope.scopeType);
         bulkDataRequestHasCorrectScope =
-            ['system', 'user'].includes(smartScope.scopeType) &&
+            isScopeTypeSufficient &&
             smartScope.resourceType === '*' &&
             ['*', 'read'].includes(smartScope.accessType) &&
             getValidOperationsForScopeTypeAndAccessType(
