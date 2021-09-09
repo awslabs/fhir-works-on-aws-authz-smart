@@ -84,30 +84,37 @@ function isSmartScopeSufficientForBulkDataAccess(
     smartScope: ClinicalSmartScope,
     scopeRule: ScopeRule,
 ) {
-    let bulkDataRequestHasCorrectScope = false;
-    if (bulkDataAuth.exportType === 'system') {
-        bulkDataRequestHasCorrectScope =
-            ['system', 'user'].includes(smartScope.scopeType) &&
-            smartScope.resourceType === '*' &&
-            ['*', 'read'].includes(smartScope.accessType) &&
-            getValidOperationsForScopeTypeAndAccessType(
-                smartScope.scopeType,
-                smartScope.accessType,
-                scopeRule,
-            ).includes('read');
-    } else if (bulkDataAuth.exportType === 'group') {
-        bulkDataRequestHasCorrectScope =
-            ['system'].includes(smartScope.scopeType) &&
-            ['*', 'read'].includes(smartScope.accessType) &&
-            getValidOperationsForScopeTypeAndAccessType(
-                smartScope.scopeType,
-                smartScope.accessType,
-                scopeRule,
-            ).includes('read');
+    if (bulkDataAuth.operation === 'initiate-export') {
+        let bulkDataRequestHasCorrectScope = false;
+        if (bulkDataAuth.exportType === 'system') {
+            bulkDataRequestHasCorrectScope =
+                ['system', 'user'].includes(smartScope.scopeType) &&
+                smartScope.resourceType === '*' &&
+                ['*', 'read'].includes(smartScope.accessType) &&
+                getValidOperationsForScopeTypeAndAccessType(
+                    smartScope.scopeType,
+                    smartScope.accessType,
+                    scopeRule,
+                ).includes('read');
+        } else if (bulkDataAuth.exportType === 'group') {
+            bulkDataRequestHasCorrectScope =
+                ['system'].includes(smartScope.scopeType) &&
+                ['*', 'read'].includes(smartScope.accessType) &&
+                getValidOperationsForScopeTypeAndAccessType(
+                    smartScope.scopeType,
+                    smartScope.accessType,
+                    scopeRule,
+                ).includes('read');
+        }
+        return bulkDataRequestHasCorrectScope;
     }
     return (
-        ['initiate-export', 'get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
-        bulkDataRequestHasCorrectScope
+        ['get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
+        ['system', 'user'].includes(smartScope.scopeType) &&
+        ['*', 'read'].includes(smartScope.accessType) &&
+        getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType, scopeRule).includes(
+            'read',
+        )
     );
 }
 

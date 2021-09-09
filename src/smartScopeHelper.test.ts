@@ -2,7 +2,7 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { BulkDataAuth } from 'fhir-works-on-aws-interface';
+import { BulkDataAuth, ExportType } from 'fhir-works-on-aws-interface';
 import { ScopeRule, ScopeType } from './smartConfig';
 import {
     isScopeSufficient,
@@ -27,7 +27,9 @@ const emptyScopeRule = (): ScopeRule => ({
     },
 });
 const isScopeSufficientCases: ScopeType[][] = [['user'], ['patient'], ['system']];
-describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: ScopeType) => {
+const exportTypes: ExportType[][] = [['group'], ['system']];
+const exportOperations: ('cancel-export' | 'get-status-export')[][] = [['cancel-export'], ['get-status-export']];
+describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scopeType: ScopeType) => {
     test('scope is sufficient to read Observation: Scope with resourceType "Observation" should be able to read "Observation" resources', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
@@ -62,43 +64,6 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         );
     });
 
-    test('scope is sufficient for system bulk data access with "user" || "system" scopeType but not "patient" scopeType', () => {
-        const clonedScopeRule = emptyScopeRule();
-        clonedScopeRule[scopeType].read = ['read'];
-        const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
-
-        // Only scopeType of user has bulkDataAccess
-        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
-            scopeType !== 'patient',
-        );
-    });
-
-    test('scope is NOT sufficient for system bulk data access: Scope needs to have resourceType "*"', () => {
-        const clonedScopeRule = emptyScopeRule();
-        clonedScopeRule[scopeType].read = ['read'];
-
-        const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
-        expect(
-            isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
-        ).toEqual(false);
-    });
-
-    test('scope is sufficient for group export with "system" scopeType, not "user" of "patient" scopeType', () => {
-        const clonedScopeRule = emptyScopeRule();
-        clonedScopeRule[scopeType].read = ['read'];
-        const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'group' };
-
-        // Only scopeType of system has bulkDataAccess
-        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
-            scopeType === 'system',
-        );
-
-        // Group export result is filtered on allowed resourceType, scope not having resourceType "*" should be passed
-        expect(
-            isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
-        ).toEqual(scopeType === 'system');
-    });
-
     test('scope is sufficient to do a search-system', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['search-system'];
@@ -123,6 +88,73 @@ describe.each(isScopeSufficientCases)('%s: isScopeSufficient', (scopeType: Scope
         clonedScopeRule[scopeType].read = ['read'];
 
         expect(isScopeSufficient(`fake`, clonedScopeRule, 'read')).toEqual(false);
+    });
+
+    describe('BulkDataAuth', () => {
+        test('scope is sufficient for `system` initiate-export with "user" || "system" scopeType but not "patient" scopeType', () => {
+            const clonedScopeRule = emptyScopeRule();
+            clonedScopeRule[scopeType].read = ['read'];
+            const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
+
+            // Only scopeType of user has bulkDataAccess
+            expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
+                scopeType !== 'patient',
+            );
+        });
+
+        test('scope is NOT sufficient for `system` initiate-export: Scope needs to have resourceType "*"', () => {
+            const clonedScopeRule = emptyScopeRule();
+            clonedScopeRule[scopeType].read = ['read'];
+
+            const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'system' };
+            expect(
+                isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
+            ).toEqual(false);
+        });
+
+        test('scope is sufficient for `group` initiate-export with "system" scopeType, not "user" of "patient" scopeType', () => {
+            const clonedScopeRule = emptyScopeRule();
+            clonedScopeRule[scopeType].read = ['read'];
+            const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export', exportType: 'group' };
+
+            // Only scopeType of system has bulkDataAccess
+            expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth)).toEqual(
+                scopeType === 'system',
+            );
+
+            // Group export result is filtered on allowed resourceType, scope not having resourceType "*" should be passed
+            expect(
+                isScopeSufficient(`${scopeType}/Observation.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
+            ).toEqual(scopeType === 'system');
+        });
+        describe.each(exportTypes)('export type: %s', (exportType: ExportType) => {
+            describe.each(exportOperations)(
+                'export operation: %s',
+                (operation: 'cancel-export' | 'get-status-export') => {
+                    test('scope is sufficient for non "patient" scopeType', () => {
+                        const clonedScopeRule = emptyScopeRule();
+                        clonedScopeRule[scopeType].read = ['read'];
+                        const bulkDataAuth: BulkDataAuth = { operation, exportType };
+
+                        // Only scopeType of system has bulkDataAccess
+                        expect(
+                            isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
+                        ).toEqual(scopeType !== 'patient');
+
+                        // Group export result is filtered on allowed resourceType, scope not having resourceType "*" should be passed
+                        expect(
+                            isScopeSufficient(
+                                `${scopeType}/Observation.read`,
+                                clonedScopeRule,
+                                'read',
+                                undefined,
+                                bulkDataAuth,
+                            ),
+                        ).toEqual(scopeType !== 'patient');
+                    });
+                },
+            );
+        });
     });
 });
 
