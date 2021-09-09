@@ -329,7 +329,8 @@ export class SMARTHandler implements Authorization {
                     this.fhirVersion,
                 ),
             );
-            const totalNumEntriesAfterFilter: number = readResponse.total - (readResponse.entry.length - entries.length);
+            const totalNumEntriesAfterFilter: number =
+                readResponse.total - (readResponse.entry.length - entries.length);
             if (totalNumEntriesAfterFilter < readResponse.total) {
                 readResponse.total = totalNumEntriesAfterFilter;
             }
