@@ -84,37 +84,24 @@ function isSmartScopeSufficientForBulkDataAccess(
     smartScope: ClinicalSmartScope,
     scopeRule: ScopeRule,
 ) {
+    const { scopeType, accessType, resourceType } = smartScope;
+    const hasReadPermissions = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule).includes(
+        'read',
+    );
     if (bulkDataAuth.operation === 'initiate-export') {
         let bulkDataRequestHasCorrectScope = false;
         if (bulkDataAuth.exportType === 'system') {
             bulkDataRequestHasCorrectScope =
-                ['system', 'user'].includes(smartScope.scopeType) &&
-                smartScope.resourceType === '*' &&
-                ['*', 'read'].includes(smartScope.accessType) &&
-                getValidOperationsForScopeTypeAndAccessType(
-                    smartScope.scopeType,
-                    smartScope.accessType,
-                    scopeRule,
-                ).includes('read');
+                ['system', 'user'].includes(scopeType) && resourceType === '*' && hasReadPermissions;
         } else if (bulkDataAuth.exportType === 'group') {
-            bulkDataRequestHasCorrectScope =
-                ['system'].includes(smartScope.scopeType) &&
-                ['*', 'read'].includes(smartScope.accessType) &&
-                getValidOperationsForScopeTypeAndAccessType(
-                    smartScope.scopeType,
-                    smartScope.accessType,
-                    scopeRule,
-                ).includes('read');
+            bulkDataRequestHasCorrectScope = ['system'].includes(scopeType) && hasReadPermissions;
         }
         return bulkDataRequestHasCorrectScope;
     }
     return (
         ['get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
-        ['system', 'user'].includes(smartScope.scopeType) &&
-        ['*', 'read'].includes(smartScope.accessType) &&
-        getValidOperationsForScopeTypeAndAccessType(smartScope.scopeType, smartScope.accessType, scopeRule).includes(
-            'read',
-        )
+        ['system', 'user'].includes(scopeType) &&
+        hasReadPermissions
     );
 }
 

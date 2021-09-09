@@ -136,12 +136,10 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
                         clonedScopeRule[scopeType].read = ['read'];
                         const bulkDataAuth: BulkDataAuth = { operation, exportType };
 
-                        // Only scopeType of system has bulkDataAccess
                         expect(
                             isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', undefined, bulkDataAuth),
                         ).toEqual(scopeType !== 'patient');
 
-                        // Group export result is filtered on allowed resourceType, scope not having resourceType "*" should be passed
                         expect(
                             isScopeSufficient(
                                 `${scopeType}/Observation.read`,
