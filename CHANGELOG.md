@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.2...v2.2.3) (2021-09-10)
+
+
+### Bug Fixes
+
+* scope checking for getting status on an export ([#64](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/64)) ([69f9297](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/69f9297f7721113667f2c8b9ef3c65ac06016c49))
+
 ### [2.2.2](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.1...v2.2.2) (2021-08-23)
 
 

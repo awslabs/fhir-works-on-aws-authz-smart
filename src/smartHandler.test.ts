@@ -527,7 +527,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
-            { ...baseAccessNoScopes, scp: ['patient/*.write', 'system/*.read'], ...practitionerFhirUser },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...practitionerFhirUser },
             true,
         ],
         [
@@ -538,7 +538,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
-            { ...baseAccessNoScopes, scp: ['patient/*.*', 'system/*.read'], ...practitionerFhirUser },
+            { ...baseAccessNoScopes, scp: ['user/*.read', 'patient/*.*'], ...practitionerFhirUser },
             true,
         ],
         [
@@ -549,7 +549,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
             },
-            { ...baseAccessNoScopes, scp: ['system/*.read'], ...practitionerFhirUser },
+            { ...baseAccessNoScopes, scp: ['user/*.*'], ...practitionerFhirUser },
             true,
         ],
         [
@@ -561,7 +561,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
             },
             { ...baseAccessNoScopes, scp: ['user/*.*'], ...practitionerFhirUser },
-            false,
+            true,
         ],
         [
             'External practitioner: initiate-export; fail',
@@ -659,7 +659,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 resourceType: '',
                 bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
             },
-            { ...baseAccessNoScopes, scp: ['system/*.read'], fhirUser: externalPractitionerIdentity },
+            { ...baseAccessNoScopes, scp: ['user/*.read', 'system/*.read'], fhirUser: externalPractitionerIdentity },
             true,
         ],
         [
