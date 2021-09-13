@@ -329,10 +329,13 @@ export class SMARTHandler implements Authorization {
                     this.fhirVersion,
                 ),
             );
-            if (!Number.isNaN(readResponse.total + 1)) {
-                readResponse.total -= readResponse.entry.length - entries.length;
+            let numTotal: number = readResponse.total;
+            if (!numTotal) {
+                numTotal = entries.length;
+            } else {
+                numTotal -= readResponse.entry.length - entries.length;
             }
-            return { ...readResponse, entry: entries };
+            return { ...readResponse, entry: entries, total: numTotal };
         }
         // If request is != search treat the readResponse as just a resource
         if (
