@@ -83,16 +83,19 @@ function isSmartScopeSufficientForBulkDataAccess(
     bulkDataAuth: BulkDataAuth,
     smartScope: ClinicalSmartScope,
     scopeRule: ScopeRule,
+    isUserScopeAllowedForSystemExport: boolean,
 ) {
     const { scopeType, accessType, resourceType } = smartScope;
     const hasReadPermissions = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule).includes(
         'read',
     );
+    const hasSufficientScopeType = isUserScopeAllowedForSystemExport
+        ? ['system', 'user'].includes(scopeType)
+        : ['system'].includes(scopeType);
     if (bulkDataAuth.operation === 'initiate-export') {
         let bulkDataRequestHasCorrectScope = false;
         if (bulkDataAuth.exportType === 'system') {
-            bulkDataRequestHasCorrectScope =
-                ['system', 'user'].includes(scopeType) && resourceType === '*' && hasReadPermissions;
+            bulkDataRequestHasCorrectScope = hasSufficientScopeType && resourceType === '*' && hasReadPermissions;
         } else if (bulkDataAuth.exportType === 'group') {
             bulkDataRequestHasCorrectScope = ['system'].includes(scopeType) && hasReadPermissions;
         }
@@ -100,7 +103,7 @@ function isSmartScopeSufficientForBulkDataAccess(
     }
     return (
         ['get-status-export', 'cancel-export'].includes(bulkDataAuth.operation) &&
-        ['system', 'user'].includes(scopeType) &&
+        hasSufficientScopeType &&
         hasReadPermissions
     );
 }
@@ -109,13 +112,19 @@ export function isScopeSufficient(
     scope: string,
     scopeRule: ScopeRule,
     reqOperation: TypeOperation | SystemOperation,
+    isUserScopeAllowedForSystemExport: boolean,
     reqResourceType?: string,
     bulkDataAuth?: BulkDataAuth,
 ): boolean {
     try {
         const smartScope = convertScopeToSmartScope(scope);
         if (bulkDataAuth) {
-            return isSmartScopeSufficientForBulkDataAccess(bulkDataAuth, smartScope, scopeRule);
+            return isSmartScopeSufficientForBulkDataAccess(
+                bulkDataAuth,
+                smartScope,
+                scopeRule,
+                isUserScopeAllowedForSystemExport,
+            );
         }
         const validOperations: (TypeOperation | SystemOperation)[] = getValidOperationsForScope(
             smartScope,
@@ -141,6 +150,7 @@ export function filterOutUnusableScope(
     scopes: string[],
     scopeRule: ScopeRule,
     reqOperation: TypeOperation | SystemOperation,
+    isUserScopeAllowedForSystemExport: boolean,
     reqResourceType?: string,
     bulkDataAuth?: BulkDataAuth,
     patientContext?: string,
@@ -151,6 +161,13 @@ export function filterOutUnusableScope(
             ((patientContext && scope.startsWith('patient/')) ||
                 (fhirUser && scope.startsWith('user/')) ||
                 scope.startsWith('system/')) &&
-            isScopeSufficient(scope, scopeRule, reqOperation, reqResourceType, bulkDataAuth),
+            isScopeSufficient(
+                scope,
+                scopeRule,
+                reqOperation,
+                isUserScopeAllowedForSystemExport,
+                reqResourceType,
+                bulkDataAuth,
+            ),
     );
 }
