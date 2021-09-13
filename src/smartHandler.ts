@@ -329,7 +329,7 @@ export class SMARTHandler implements Authorization {
         const { operation, readResponse } = request;
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
-            const entries = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
+            const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
                 hasAccessToResource(
                     fhirUserObject,
                     patientLaunchContext,
@@ -340,7 +340,13 @@ export class SMARTHandler implements Authorization {
                     this.fhirVersion,
                 ),
             );
-            return { ...readResponse, entry: entries };
+            let numTotal: number = readResponse.total;
+            if (!numTotal) {
+                numTotal = entries.length;
+            } else {
+                numTotal -= readResponse.entry.length - entries.length;
+            }
+            return { ...readResponse, entry: entries, total: numTotal };
         }
         // If request is != search treat the readResponse as just a resource
         if (

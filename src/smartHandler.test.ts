@@ -916,6 +916,7 @@ describe('authorizeAndFilterReadResponse', () => {
             lastUpdated: '2020-11-20T11:10:48.034+00:00',
         },
         type: 'searchset',
+        total: 0,
         link: [
             {
                 relation: 'self',
@@ -931,6 +932,7 @@ describe('authorizeAndFilterReadResponse', () => {
     const searchAllEntitiesMatch = {
         ...emptySearchResult,
         entry: [createEntry(validPatient), createEntry(validPatientObservation), createEntry(validPatientEncounter)],
+        total: 3,
     };
 
     const searchSomeEntitiesMatch = {
@@ -942,6 +944,7 @@ describe('authorizeAndFilterReadResponse', () => {
             createEntry({ ...validPatientObservation, subject: 'not-you' }),
             createEntry(validPatientEncounter),
         ],
+        total: 5,
     };
     const searchNoEntitiesMatch = {
         ...emptySearchResult,
@@ -949,6 +952,7 @@ describe('authorizeAndFilterReadResponse', () => {
             createEntry({ ...validPatient, id: 'not-yours' }),
             createEntry({ ...validPatientObservation, subject: 'not-you' }),
         ],
+        total: 2,
     };
     const cases: (string | ReadResponseAuthorizedRequest | boolean | any)[][] = [
         [
@@ -1180,7 +1184,7 @@ describe('authorizeAndFilterReadResponse', () => {
                 readResponse: searchAllEntitiesMatch,
             },
             true,
-            { ...emptySearchResult, entry: [createEntry(validPatientEncounter)] },
+            { ...emptySearchResult, entry: [createEntry(validPatientEncounter)], total: 1 },
         ],
         [
             'SEARCH: user scope; Practitioner able to search and get ALL results',
