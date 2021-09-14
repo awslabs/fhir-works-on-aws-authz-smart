@@ -64,6 +64,8 @@ export class SMARTHandler implements Authorization {
 
     private readonly fhirVersion: FhirVersion;
 
+    private readonly isUserScopeAllowedForSystemExport: boolean;
+
     private readonly jwksClient?: JwksClient;
 
     /**
@@ -78,6 +80,7 @@ export class SMARTHandler implements Authorization {
         fhirVersion: FhirVersion,
         adminAccessTypes = ['Practitioner'],
         bulkDataAccessTypes = ['Practitioner'],
+        isUserScopeAllowedForSystemExport = false,
     ) {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
@@ -87,6 +90,7 @@ export class SMARTHandler implements Authorization {
         this.fhirVersion = fhirVersion;
         this.adminAccessTypes = adminAccessTypes;
         this.bulkDataAccessTypes = bulkDataAccessTypes;
+        this.isUserScopeAllowedForSystemExport = isUserScopeAllowedForSystemExport;
         if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
             this.jwksClient = getJwksClient(this.config.jwksEndpoint);
         }
@@ -124,6 +128,7 @@ export class SMARTHandler implements Authorization {
             scopes,
             this.config.scopeRule,
             request.operation,
+            this.isUserScopeAllowedForSystemExport,
             request.resourceType,
             request.bulkDataAuth,
             patientContextClaim,
@@ -249,7 +254,13 @@ export class SMARTHandler implements Authorization {
         request.requests.forEach((req: BatchReadWriteRequest) => {
             if (
                 !usableScopes.some((scope: string) =>
-                    isScopeSufficient(scope, this.config.scopeRule, req.operation, req.resourceType),
+                    isScopeSufficient(
+                        scope,
+                        this.config.scopeRule,
+                        req.operation,
+                        this.isUserScopeAllowedForSystemExport,
+                        req.resourceType,
+                    ),
                 )
             ) {
                 logger.error('User supplied scopes are insufficient', {

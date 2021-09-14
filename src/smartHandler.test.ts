@@ -677,24 +677,206 @@ describe('verifyAccessToken; System level export requests', () => {
 
     const authZConfig = baseAuthZConfig();
 
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
-    test.each(arrayScopesCases)('CASE: %p', (_firstArg, request, decodedAccessToken, isValid) => {
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(decodedAccessToken),
-        );
-        const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
-        decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
-        if (!isValid) {
-            return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
-                UnauthorizedError,
+    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1', undefined, undefined, true);
+    test.each(arrayScopesCases)(
+        'isUserScopeAllowedForSystemExport = true, CASE: %p',
+        (_firstArg, request, decodedAccessToken, isValid) => {
+            jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+                Promise.resolve(decodedAccessToken),
             );
-        }
-        const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
-        expectedUserIdentity.scp = decodedAccessToken.scp;
-        return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
-            expectedUserIdentity,
-        );
-    });
+            const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+            decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
+            if (!isValid) {
+                return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).rejects.toThrowError(
+                    UnauthorizedError,
+                );
+            }
+            const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+            expectedUserIdentity.scp = decodedAccessToken.scp;
+            return expect(authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>request)).resolves.toMatchObject(
+                expectedUserIdentity,
+            );
+        },
+    );
+
+    const arrayScopesCasesNoUserScope: (string | boolean | VerifyAccessTokenRequest | any)[][] = [
+        [
+            'Read and Write Access: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...practitionerFhirUser },
+            false,
+        ],
+        [
+            'Read Access: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read', 'patient/*.*'], ...practitionerFhirUser },
+            true,
+        ],
+        [
+            'Read and Write Access: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.*'], ...practitionerFhirUser },
+            false,
+        ],
+        [
+            'Read and Write Access: cancel-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.*'], ...practitionerFhirUser },
+            true,
+        ],
+        [
+            'External practitioner: initiate-export; fail',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], fhirUser: externalPractitionerIdentity },
+            false,
+        ],
+        [
+            'No export read access: cancel-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.write'], ...practitionerFhirUser },
+            false,
+        ],
+        [
+            'No export read access; Patient only: cancel-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['patient/*.*'], ...patientContext },
+            false,
+        ],
+        [
+            'System all scope: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.*'] },
+            true,
+        ],
+        [
+            'System read scope: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System read scope: cancel-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'cancel-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System read scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'] },
+            true,
+        ],
+        [
+            'System write scope: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.write'] },
+            false,
+        ],
+        [
+            'System read scope, group export: initiate-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['system/*.read'], fhirUser: externalPractitionerIdentity },
+            true,
+        ],
+        [
+            'Internal patient read scope, group export: get-status-export',
+            {
+                accessToken: 'fake',
+                operation: 'read',
+                resourceType: '',
+                bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
+            },
+            { ...baseAccessNoScopes, scp: ['user/*.read'], ...patientContext },
+            false,
+        ],
+    ];
+
+    const authZHandlerNoUserScope: SMARTHandler = new SMARTHandler(authZConfig, apiUrl, '4.0.1');
+    test.each(arrayScopesCasesNoUserScope)(
+        'isUserScopeAllowedForSystemExport = false, CASE: %p',
+        (_firstArg, request, decodedAccessToken, isValid) => {
+            jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
+                Promise.resolve(decodedAccessToken),
+            );
+            const { decode } = jwt as jest.Mocked<typeof import('jsonwebtoken')>;
+            decode.mockReturnValue(<{ [key: string]: any }>decodedAccessToken);
+            if (!isValid) {
+                return expect(
+                    authZHandlerNoUserScope.verifyAccessToken(<VerifyAccessTokenRequest>request),
+                ).rejects.toThrowError(UnauthorizedError);
+            }
+            const expectedUserIdentity = getExpectedUserIdentity(decodedAccessToken);
+            expectedUserIdentity.scp = decodedAccessToken.scp;
+            return expect(
+                authZHandlerNoUserScope.verifyAccessToken(<VerifyAccessTokenRequest>request),
+            ).resolves.toMatchObject(expectedUserIdentity);
+        },
+    );
 
     test.each([['user'], ['system']])('CASE: %p scope; bulk data request; no sub set in JWT', baseScope => {
         const decodedAccessToken = { ...baseAccessNoScopes, scp: [`${baseScope}/*.read`], sub: '' };
