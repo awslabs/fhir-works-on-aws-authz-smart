@@ -18,13 +18,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * remove filtered responses from total count ([#63](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/63)) ([82b6ff3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/82b6ff372b44ca40dc3575e7505695f79747d6de))
 
-### [2.2.4](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.3...v2.2.4) (2021-09-13)
-
-
-### Bug Fixes
-
-* remove filtered responses from total count ([#63](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/63)) ([82b6ff3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/82b6ff372b44ca40dc3575e7505695f79747d6de))
-
 ### [2.2.3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.2...v2.2.3) (2021-09-10)
 
 
