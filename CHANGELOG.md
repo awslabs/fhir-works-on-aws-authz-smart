@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.3...v3.0.0) (2021-09-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* User scope will not be allowed for system export by default. To allow user scope for system export, please update `src/config.ts` in the deployment package to pass in parameter `isUserScopeAllowedForSystemExport`. 
+
+### Features
+
+* update system export to only allow system scope by default ([#60](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/60)) ([45b7960](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/45b796031c36960b8f5be1b765beee839d0d9aa8))
+
+
+### Bug Fixes
+
+* remove filtered responses from total count ([#63](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/63)) ([82b6ff3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/82b6ff372b44ca40dc3575e7505695f79747d6de))
+
 ### [2.2.3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.2...v2.2.3) (2021-09-10)
 
 
