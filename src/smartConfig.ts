@@ -3,6 +3,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 import { KeyValueMap } from 'fhir-works-on-aws-interface';
+import { Headers } from 'jwks-rsa';
 
 export type ScopeType = 'patient' | 'user' | 'system';
 export type AccessModifier = 'read' | 'write' | '*';
@@ -115,6 +116,10 @@ export interface SMARTConfig {
      * Json Web Key Set endpoint used to get the key for verifying access_token
      */
     jwksEndpoint?: string;
+    /**
+     * Headers that will be used for Json Web Key Set endpoint
+     */
+    jwksHeaders?: Headers;
     /**
      * Token introspection settings; if both introspection and jwksEndpoint are provided tokenIntrospection will be defaulted to.
      */

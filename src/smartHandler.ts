@@ -92,7 +92,7 @@ export class SMARTHandler implements Authorization {
         this.bulkDataAccessTypes = bulkDataAccessTypes;
         this.isUserScopeAllowedForSystemExport = isUserScopeAllowedForSystemExport;
         if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
-            this.jwksClient = getJwksClient(this.config.jwksEndpoint);
+            this.jwksClient = getJwksClient(this.config.jwksEndpoint, this.config.jwksHeaders);
         }
     }
 

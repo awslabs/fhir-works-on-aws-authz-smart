@@ -3,7 +3,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 import { FhirVersion, UnauthorizedError } from 'fhir-works-on-aws-interface';
-import jwksClient, { JwksClient } from 'jwks-rsa';
+import jwksClient, { JwksClient, Headers } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
 import axios from 'axios';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
@@ -141,13 +141,14 @@ export function hasAccessToResource(
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
 }
-export function getJwksClient(jwksUri: string): JwksClient {
+export function getJwksClient(jwksUri: string, headers?: Headers): JwksClient {
     return jwksClient({
         cache: true,
         cacheMaxEntries: 5,
         cacheMaxAge: 600000,
         rateLimit: true,
         jwksRequestsPerMinute: 10,
+        requestHeaders: headers,
         jwksUri,
     });
 }
