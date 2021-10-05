@@ -212,7 +212,7 @@ describe('hasReferenceToResource', () => {
     });
 
     const versions: FhirVersion[] = ['4.0.1', '3.0.1'];
-    describe.each(versions)('requestor is a Patient; Resources are single layer; FHIR Version %p', fhirVersion => {
+    describe.each(versions)('requestor is a Patient; Resources are single layer; FHIR Version %p', (fhirVersion) => {
         test('fhirUser id matches resource id', () => {
             expect(
                 hasReferenceToResource(patientFhirUser, { resourceType: 'Patient', id }, apiUrl, fhirVersion),
@@ -376,7 +376,7 @@ describe('verifyJwt', () => {
         const jwk = { ...(await fromKeyLike(publicKey)), kid };
         client = jwksClient({
             jwksUri: 'http://exampleAuthServer.com/oauth2',
-            getKeysInterceptor: cb => {
+            getKeysInterceptor: (cb) => {
                 // @ts-ignore
                 return cb(null, [jwk]);
             },

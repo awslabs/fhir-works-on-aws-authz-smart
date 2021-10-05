@@ -42,11 +42,11 @@ const readProfileFile = (path: string): any[] => {
 
 const compile = (resources: any[]) => {
     const filter = resources.filter(
-        resource => resource.baseDefinition === 'http://hl7.org/fhir/StructureDefinition/DomainResource',
+        (resource) => resource.baseDefinition === 'http://hl7.org/fhir/StructureDefinition/DomainResource',
     );
 
     const pathMap: PathMap = {};
-    filter.forEach(resource => {
+    filter.forEach((resource) => {
         return resource.snapshot.element
             .filter((element: Element) => !!element.type)
             .forEach((element: Element) => {
@@ -98,6 +98,4 @@ const run = async () => {
     fs.writeFileSync(`../src/schema/fhirResourceReferencesMatrix.v${fhirVersion}.json`, JSON.stringify(pathMap));
 };
 
-run()
-    .then(logger.info)
-    .catch(logger.error);
+run().then(logger.info).catch(logger.error);

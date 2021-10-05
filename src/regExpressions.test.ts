@@ -42,7 +42,7 @@ describe('CLINICAL_SCOPE_REGEX', () => {
         ['patient/Patient.'],
         ['system'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async (scope) => {
         const actualMatch = scope.match(FHIR_SCOPE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
@@ -88,7 +88,7 @@ describe('FHIR_USER_REGEX', () => {
         ['https://fhir.server.com/dev/Patient/id '],
         [' https://fhir.server.com/dev/Patient/id'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async (scope) => {
         const actualMatch = scope.match(FHIR_USER_REGEX);
         expect(actualMatch).toBeFalsy();
     });
@@ -126,7 +126,7 @@ describe('FHIR_RESOURCE_REGEX', () => {
         ['Patient'],
         ['https://fhir.server.com/dev/'],
     ];
-    test.each(uniqueTestCases)('CASE: %p; expect: no match', async scope => {
+    test.each(uniqueTestCases)('CASE: %p; expect: no match', async (scope) => {
         const actualMatch = scope.match(FHIR_RESOURCE_REGEX);
         expect(actualMatch).toBeFalsy();
     });
