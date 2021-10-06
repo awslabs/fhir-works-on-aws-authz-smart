@@ -11,8 +11,10 @@ import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3
 import { FhirResource, IntrospectionOptions } from './smartConfig';
 import getComponentLogger from './loggerBuilder';
 
-export const FHIR_USER_REGEX = /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
-export const FHIR_RESOURCE_REGEX = /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_USER_REGEX =
+    /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
+export const FHIR_RESOURCE_REGEX =
+    /^((?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/)?(?<resourceType>[A-Z][a-zA-Z]+)\/(?<id>[A-Za-z0-9\-.]+)$/;
 
 const GENERIC_ERR_MESSAGE = 'Invalid access token';
 
@@ -57,7 +59,7 @@ function isRequestorReferenced(
     }
 
     // The paths within the FHIR resources may contain arrays so we must check if array at every level
-    return possiblePaths.some(path => {
+    return possiblePaths.some((path) => {
         const pathComponents: string[] = path.split('.');
         let tempResource = sourceResource;
         let rootQueue = [];
@@ -71,7 +73,7 @@ function isRequestorReferenced(
                 if (tempResource) {
                     if (Array.isArray(tempResource)) {
                         // eslint-disable-next-line no-loop-func
-                        tempResource.forEach(x => {
+                        tempResource.forEach((x) => {
                             nextQueue.push(x[pathComponents[i]]);
                         });
                     } else {
@@ -80,7 +82,7 @@ function isRequestorReferenced(
                 }
             }
         }
-        return nextQueue.flat().some(x => {
+        return nextQueue.flat().some((x) => {
             return x && x.reference && requestorIds.includes(x.reference);
         });
     });
@@ -167,9 +169,13 @@ export function decodeJwtToken(token: string, expectedAudValue: string | RegExp,
         throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
     }
 
-    let audArray: string[] = aud;
-    if (typeof audArray === 'string') {
-        audArray = [aud];
+    let audArray: string[] = [];
+    if (aud) {
+        if (typeof aud === 'string') {
+            audArray = [aud];
+        } else {
+            audArray = aud;
+        }
     }
     const audMatch: boolean = audArray.some(
         (audience: string) =>
@@ -201,7 +207,7 @@ export async function verifyJwtToken(
         const key = await client.getSigningKeyAsync(kid);
         return verify(token, key.getPublicKey(), { audience: expectedAudValue, issuer: expectedIssValue });
     } catch (e) {
-        logger.warn(e.message);
+        logger.warn((e as any).message);
         throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
     }
 }
@@ -241,7 +247,7 @@ export async function introspectJwtToken(
                 logger.warn(e.response.data);
             }
         } else {
-            logger.warn(e.message);
+            logger.warn((e as any).message);
         }
         throw new UnauthorizedError(GENERIC_ERR_MESSAGE);
     }

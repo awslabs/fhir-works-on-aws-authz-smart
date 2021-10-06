@@ -165,10 +165,10 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        if (fhirUserClaim && usableScopes.some(scope => scope.startsWith('user/'))) {
+        if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }
-        if (patientContextClaim && usableScopes.some(scope => scope.startsWith('patient/'))) {
+        if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
         }
         userIdentity.scopes = scopes;
@@ -273,7 +273,7 @@ export class SMARTHandler implements Authorization {
         });
 
         // Ensure the requestor has access to write this request
-        const authWritePromises: Promise<void>[] = request.requests.map(req => {
+        const authWritePromises: Promise<void>[] = request.requests.map((req) => {
             if (['create', 'update', 'patch', 'delete'].includes(req.operation)) {
                 return this.isWriteRequestAuthorized(<WriteRequestAuthorizedRequest>{
                     userIdentity: { ...request.userIdentity, usableScopes },
