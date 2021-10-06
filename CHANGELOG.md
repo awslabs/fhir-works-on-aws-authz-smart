@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v3.0.0...v3.1.0) (2021-10-06)
+
+
+### Features
+
+* add optional headers for JWKS client ([#59](https://github.com/awslabs/fhir-works-on-aws-authz-smart/issues/59)) ([43e1439](https://github.com/awslabs/fhir-works-on-aws-authz-smart/commit/43e14391200a775fd11078cc1de4d23c244074d5))
+
 ## [3.0.0](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v2.2.3...v3.0.0) (2021-09-15)
 
 
