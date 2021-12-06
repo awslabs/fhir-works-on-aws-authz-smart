@@ -78,8 +78,12 @@ export class SMARTHandler implements Authorization {
         config: SMARTConfig,
         apiUrl: string,
         fhirVersion: FhirVersion,
+
+// ________________________________________________________________
         adminAccessTypes = ['Practitioner'],
         bulkDataAccessTypes = ['Practitioner'],
+// ____________________________________________________________________
+
         isUserScopeAllowedForSystemExport = false,
     ) {
         if (config.version !== this.version) {
@@ -117,13 +121,23 @@ export class SMARTHandler implements Authorization {
                 `Authorization configuration not properly set up. Either 'tokenIntrospection' or 'jwksEndpoint' must be present`,
             );
         }
-
+        // fhirUserClaimPath = fhirUser
+        // eg: fhirUserClaim = https://9s7u3jogkd.execute-api.us-west-2.amazonaws.com/dev/Practitioner/d1852df2-c99c-47ce-8484-4dc392ddcae9
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
+
+        // fhirUserClaimPath = launch_response_ + patient= launch_response_patient
+        // eg: patientContextClaim = Patient/5029401c-ad99-437c-9b50-291656783e36
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
+
+        // patientOrgs
+        const patientOrgsClaim = get(decodedToken, `patientOrgs`);
+
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
+
+        // Remove scopes that do not have the required information to be useful or unused scopes
         const usableScopes = filterOutUnusableScope(
             scopes,
             this.config.scopeRule,
@@ -133,7 +147,10 @@ export class SMARTHandler implements Authorization {
             request.bulkDataAuth,
             patientContextClaim,
             fhirUserClaim,
+            patientOrgsClaim,
         );
+
+        // if usableScopes = '' then no access
         if (!usableScopes.length) {
             logger.warn('User supplied scopes are insufficient', {
                 usableScopes,
@@ -155,6 +172,8 @@ export class SMARTHandler implements Authorization {
                 })
             ) {
                 // if requestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
+                // returns hostname, resourceType, id
+                // resourceType = Person|Practitioner|RelatedPerson|Patient
                 const fhirUser = getFhirUser(fhirUserClaim);
                 if (
                     fhirUser.hostname !== fhirServiceBaseUrl ||
@@ -165,10 +184,20 @@ export class SMARTHandler implements Authorization {
             }
         }
 
+        // this is when there is fhiruser claim and scope starts with user/
+        // thus add userIdentity for patientOrgsClaim
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
+            // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
+            if (patientOrgsClaim) {
+                userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+            }
         }
+
+        // get the value of launch_response_patient claim
+        // add the launch_response_patient in userIdentity 
         if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
+            // getFhirResource returns hostname, resourceType, id
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
         }
         userIdentity.scopes = scopes;
@@ -186,7 +215,8 @@ export class SMARTHandler implements Authorization {
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
-        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+
+        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         if (hasSystemAccess(usableScopes, '')) {
@@ -195,10 +225,22 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
+            // if scope.startsWith('system/*')
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 // if an admin do not add limiting search filters
                 return [];
             }
+            references.add(`${hostname}/${resourceType}/${id}`);
+            if (hostname === fhirServiceBaseUrl) {
+                references.add(`${resourceType}/${id}`);
+            }
+            if (request.resourceType && request.resourceType === resourceType) {
+                ids.add(id);
+            }
+        }
+
+        if (patientOrgsClaim) {
+            const { hostname, resourceType, id } = patientOrgsClaim;
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
                 references.add(`${resourceType}/${id}`);
@@ -242,10 +284,11 @@ export class SMARTHandler implements Authorization {
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
-        const { scopes, fhirUserObject, patientLaunchContext } = request.userIdentity;
+        const { scopes, fhirUserObject, patientLaunchContext, patientOrgsClaim } = request.userIdentity;
         const usableScopes: string[] = scopes.filter(
             (scope: string) =>
                 (patientLaunchContext && scope.startsWith('patient/')) ||
+                (patientOrgsClaim && scope.startsWith('user/')) ||
                 (fhirUserObject && scope.startsWith('user/')) ||
                 scope.startsWith('system/'),
         );
