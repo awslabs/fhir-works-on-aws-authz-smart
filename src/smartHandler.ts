@@ -79,10 +79,10 @@ export class SMARTHandler implements Authorization {
         apiUrl: string,
         fhirVersion: FhirVersion,
 
-// ________________________________________________________________
+        // ________________________________________________________________
         adminAccessTypes = ['Practitioner'],
         bulkDataAccessTypes = ['Practitioner'],
-// ____________________________________________________________________
+        // ____________________________________________________________________
 
         isUserScopeAllowedForSystemExport = false,
     ) {
@@ -195,7 +195,7 @@ export class SMARTHandler implements Authorization {
         }
 
         // get the value of launch_response_patient claim
-        // add the launch_response_patient in userIdentity 
+        // add the launch_response_patient in userIdentity
         if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
             // getFhirResource returns hostname, resourceType, id
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
