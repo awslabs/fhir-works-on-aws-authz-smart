@@ -312,6 +312,8 @@ export class SMARTHandler implements Authorization {
             });
         }
 
+        console.log('filters: ', filters);
+
         return filters;
     }
 
@@ -368,18 +370,36 @@ export class SMARTHandler implements Authorization {
     }
 
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
+        console.log('inside getAllowedResourceTypesForOperation function.');
         let allowedResources: string[] = [];
         const allResourceTypes: string[] = this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
+
+        console.log('allResourceTypes: ', allResourceTypes);
+
         for (let i = 0; i < request.userIdentity.scopes.length; i += 1) {
             const scope = request.userIdentity.scopes[i];
+            console.log('inside for loop.');
+            console.log('scope: ', scope);
+
             try {
                 // We only get allowedResourceTypes for ClinicalSmartScope
+                // returns scopeType, scopeResourceType, accessType
+                // scopeType: patient| user
+                // scopeResourceType: Patient | DetectedIssue | *
+                // accessType: read write
                 const clinicalSmartScope = convertScopeToSmartScope(scope);
+
+                console.log('clinicalSmartScope: ', clinicalSmartScope);
+
+                // scopeRule: system user patient
+                // validOperations: (TypeOperation | SystemOperation)
                 const validOperations = getValidOperationsForScopeTypeAndAccessType(
                     clinicalSmartScope.scopeType,
                     clinicalSmartScope.accessType,
                     this.config.scopeRule,
                 );
+                console.log('validOperations: ', validOperations);
+
                 if (validOperations.includes(request.operation)) {
                     const scopeResourceType = clinicalSmartScope.resourceType;
                     if (scopeResourceType === '*') {
@@ -394,14 +414,22 @@ export class SMARTHandler implements Authorization {
             }
         }
         allowedResources = [...new Set(allowedResources)];
+
+        console.log('allowedResources: ', allowedResources);
         return allowedResources;
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
+        console.log('inside authorizeAndFilterReadResponse function.');
+        // const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+
+        console.log('request.userIdentity: ', request.userIdentity);
         const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         const { operation, readResponse } = request;
+
+        console.log('operation, readResponse :', operation, readResponse);
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
@@ -421,6 +449,8 @@ export class SMARTHandler implements Authorization {
             } else {
                 numTotal -= readResponse.entry.length - entries.length;
             }
+
+            console.log('readResponse, entries, numTotal = ', readResponse, entries, numTotal);
             return { ...readResponse, entry: entries, total: numTotal };
         }
         // If request is != search treat the readResponse as just a resource
@@ -435,6 +465,7 @@ export class SMARTHandler implements Authorization {
                 this.fhirVersion,
             )
         ) {
+            console.log('readResponse: ', readResponse);
             return readResponse;
         }
 
