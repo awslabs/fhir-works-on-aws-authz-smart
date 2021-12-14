@@ -124,18 +124,23 @@ export class SMARTHandler implements Authorization {
         // fhirUserClaimPath = fhirUser
         // eg: fhirUserClaim = https://9s7u3jogkd.execute-api.us-west-2.amazonaws.com/dev/Practitioner/d1852df2-c99c-47ce-8484-4dc392ddcae9
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
+        console.log('fhirUserClaim: ', fhirUserClaim);
 
         // fhirUserClaimPath = launch_response_ + patient= launch_response_patient
         // eg: patientContextClaim = Patient/5029401c-ad99-437c-9b50-291656783e36
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
+        console.log('patientContextClaim: ', patientContextClaim);
 
         // patientOrgs
         const patientOrgsClaim = get(decodedToken, `patientOrgs`);
+        console.log('patientOrgsClaim: ', patientOrgsClaim);
 
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
+        console.log('fhirServiceBaseUrl: ', fhirServiceBaseUrl);
 
         // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
+        console.log('scopes: ', scopes);
 
         // Remove scopes that do not have the required information to be useful or unused scopes
         const usableScopes = filterOutUnusableScope(
@@ -149,6 +154,7 @@ export class SMARTHandler implements Authorization {
             fhirUserClaim,
             patientOrgsClaim,
         );
+        console.log('usableScopes: ', usableScopes);
 
         // if usableScopes = '' then no access
         if (!usableScopes.length) {
