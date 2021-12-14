@@ -80,7 +80,8 @@ export class SMARTHandler implements Authorization {
         fhirVersion: FhirVersion,
 
         // ________________________________________________________________
-        adminAccessTypes = ['Practitioner'],
+        // adminAccessTypes = ['Practitioner'],
+        adminAccessTypes = [],
         bulkDataAccessTypes = ['Practitioner'],
         // ____________________________________________________________________
 
@@ -165,6 +166,8 @@ export class SMARTHandler implements Authorization {
             });
             throw new UnauthorizedError('access_token does not have permission for requested operation');
         }
+
+        // added patientOrgsClaim to UserIdentity interface
         const userIdentity: UserIdentity = clone(decodedToken);
 
         if (request.bulkDataAuth) {
@@ -179,8 +182,12 @@ export class SMARTHandler implements Authorization {
             ) {
                 // if requestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
                 // returns hostname, resourceType, id
+                // hostname: fhirapi url (fhirServiceBaseUrl)
                 // resourceType = Person|Practitioner|RelatedPerson|Patient
+                // id: resource id (practitioner ID or Patient ID)
                 const fhirUser = getFhirUser(fhirUserClaim);
+
+                // bulkDataAccessTypes = ['Practitioner']
                 if (
                     fhirUser.hostname !== fhirServiceBaseUrl ||
                     !this.bulkDataAccessTypes.includes(fhirUser.resourceType)
@@ -197,17 +204,21 @@ export class SMARTHandler implements Authorization {
             // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
             if (patientOrgsClaim) {
                 userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+                console.log('userIdentity.patientOrgsClaim: ', userIdentity.patientOrgsClaim);
             }
         }
 
         // get the value of launch_response_patient claim
         // add the launch_response_patient in userIdentity
+        // patientContextClaim:  Patient/72374444-8e7e-427b-9979-24a8bbab0cd6
         if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
             // getFhirResource returns hostname, resourceType, id
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
+            console.log('userIdentity.patientLaunchContext: ', userIdentity.patientLaunchContext);
         }
         userIdentity.scopes = scopes;
         userIdentity.usableScopes = usableScopes;
+        console.log('userIdentity: ', userIdentity);
         return userIdentity;
     }
 
@@ -219,19 +230,24 @@ export class SMARTHandler implements Authorization {
     }
 
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
+        console.log('inside getSearchFilterBasedOnIdentity function.');
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
 
         const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
+        // check if scope.startsWith system/
         if (hasSystemAccess(usableScopes, '')) {
             return [];
         }
 
+        // this exist if the scope starts with user i.e., practitioner or patient
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
             // if scope.startsWith('system/*')
+            // adminAccessTypes = ['Practitioner']
+            // returns true or false if the fhiruserobject is in the adminsAccesstypes list
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 // if an admin do not add limiting search filters
                 return [];
@@ -245,6 +261,8 @@ export class SMARTHandler implements Authorization {
             }
         }
 
+        console.log('references: ', references);
+        console.log('ids: ', ids);
         if (patientOrgsClaim) {
             const { hostname, resourceType, id } = patientOrgsClaim;
             references.add(`${hostname}/${resourceType}/${id}`);
@@ -256,6 +274,10 @@ export class SMARTHandler implements Authorization {
             }
         }
 
+        console.log('After patientOrgsClaim check condition.');
+        console.log('references: ', references);
+        console.log('ids: ', ids);
+
         if (patientLaunchContext) {
             const { hostname, resourceType, id } = patientLaunchContext;
             references.add(`${hostname}/${resourceType}/${id}`);
@@ -266,6 +288,10 @@ export class SMARTHandler implements Authorization {
                 ids.add(id);
             }
         }
+
+        console.log('After patientLaunchContext check condition.');
+        console.log('references: ', references);
+        console.log('ids: ', ids);
 
         // Create a SearchFilter to limit access to only resources that are referring to the requesting user and/or context
         const filters: SearchFilter[] = [];
