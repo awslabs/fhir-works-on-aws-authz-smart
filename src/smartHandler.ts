@@ -207,11 +207,11 @@ export class SMARTHandler implements Authorization {
         // thus add userIdentity for patientOrgsClaim
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
-            if (patientOrgsClaim) {
-                userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
-                console.log('userIdentity.patientOrgsClaim: ', userIdentity.patientOrgsClaim);
-            }
+            // // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
+            // if (patientOrgsClaim) {
+            //     userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+            //     console.log('userIdentity.patientOrgsClaim: ', userIdentity.patientOrgsClaim);
+            // }
         }
 
         // get the value of launch_response_patient claim
@@ -240,7 +240,9 @@ export class SMARTHandler implements Authorization {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
 
-        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
+        // const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         // check if scope.startsWith system/
@@ -256,6 +258,8 @@ export class SMARTHandler implements Authorization {
             // returns true or false if the fhiruserobject is in the adminsAccesstypes list
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 // if an admin do not add limiting search filters
+
+                console.log('Yes FhirUserAdmin.');
                 return [];
             }
             references.add(`${hostname}/${resourceType}/${id}`);
@@ -269,20 +273,20 @@ export class SMARTHandler implements Authorization {
 
         console.log('references: ', references);
         console.log('ids: ', ids);
-        if (patientOrgsClaim) {
-            console.log('inside patientOrgsClaim');
-            console.log('request.resourceType: ', request.resourceType);
-            // resourceType = Organization
-            const { hostname, resourceType, id } = patientOrgsClaim;
-            references.add(`${hostname}/${resourceType}/${id}`);
-            if (hostname === fhirServiceBaseUrl) {
-                references.add(`${resourceType}/${id}`);
-            }
-            console.log('inside patientOrgsClaim');
-            if (request.resourceType && request.resourceType === resourceType) {
-                ids.add(id);
-            }
-        }
+        // if (patientOrgsClaim) {
+        //     console.log('inside patientOrgsClaim');
+        //     console.log('request.resourceType: ', request.resourceType);
+        //     // resourceType = Organization
+        //     const { hostname, resourceType, id } = patientOrgsClaim;
+        //     references.add(`${hostname}/${resourceType}/${id}`);
+        //     if (hostname === fhirServiceBaseUrl) {
+        //         references.add(`${resourceType}/${id}`);
+        //     }
+        //     console.log('inside patientOrgsClaim');
+        //     if (request.resourceType && request.resourceType === resourceType) {
+        //         ids.add(id);
+        //     }
+        // }
 
         console.log('After patientOrgsClaim check condition.');
         console.log('references: ', references);
