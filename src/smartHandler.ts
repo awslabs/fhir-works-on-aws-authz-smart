@@ -80,8 +80,8 @@ export class SMARTHandler implements Authorization {
         fhirVersion: FhirVersion,
 
         // ________________________________________________________________
-        // adminAccessTypes = ['Practitioner'],
-        adminAccessTypes = [],
+        adminAccessTypes = ['Practitioner'],
+        // adminAccessTypes = [],
         bulkDataAccessTypes = ['Practitioner'],
         // ____________________________________________________________________
 
@@ -90,6 +90,9 @@ export class SMARTHandler implements Authorization {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
+        console.log('inside the constructor of SMARTHandler.');
+        console.log('config: ', config, 'apiUrl: ', apiUrl, 'fhirVersion: ', fhirVersion);
+
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
@@ -122,6 +125,9 @@ export class SMARTHandler implements Authorization {
                 `Authorization configuration not properly set up. Either 'tokenIntrospection' or 'jwksEndpoint' must be present`,
             );
         }
+
+        console.log('inside verifyAccessToken function.');
+
         // fhirUserClaimPath = fhirUser
         // eg: fhirUserClaim = https://9s7u3jogkd.execute-api.us-west-2.amazonaws.com/dev/Practitioner/d1852df2-c99c-47ce-8484-4dc392ddcae9
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
@@ -153,7 +159,7 @@ export class SMARTHandler implements Authorization {
             request.bulkDataAuth,
             patientContextClaim,
             fhirUserClaim,
-            patientOrgsClaim,
+            // patientOrgsClaim,
         );
         console.log('usableScopes: ', usableScopes);
 
@@ -264,11 +270,15 @@ export class SMARTHandler implements Authorization {
         console.log('references: ', references);
         console.log('ids: ', ids);
         if (patientOrgsClaim) {
+            console.log('inside patientOrgsClaim');
+            console.log('request.resourceType: ', request.resourceType);
+            // resourceType = Organization
             const { hostname, resourceType, id } = patientOrgsClaim;
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
                 references.add(`${resourceType}/${id}`);
             }
+            console.log('inside patientOrgsClaim');
             if (request.resourceType && request.resourceType === resourceType) {
                 ids.add(id);
             }
@@ -279,6 +289,8 @@ export class SMARTHandler implements Authorization {
         console.log('ids: ', ids);
 
         if (patientLaunchContext) {
+            console.log('inside patientLaunchContext');
+            console.log('request.resourceType: ', request.resourceType);
             const { hostname, resourceType, id } = patientLaunchContext;
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
@@ -318,14 +330,19 @@ export class SMARTHandler implements Authorization {
     }
 
     async isBundleRequestAuthorized(request: AuthorizationBundleRequest): Promise<void> {
-        const { scopes, fhirUserObject, patientLaunchContext, patientOrgsClaim } = request.userIdentity;
+        console.log('inside isBundleRequestAuthorized function.');
+        // const { scopes, fhirUserObject, patientLaunchContext, patientOrgsClaim } = request.userIdentity;
+        const { scopes, fhirUserObject, patientLaunchContext } = request.userIdentity;
+
         const usableScopes: string[] = scopes.filter(
             (scope: string) =>
                 (patientLaunchContext && scope.startsWith('patient/')) ||
-                (patientOrgsClaim && scope.startsWith('user/')) ||
+                // (patientOrgsClaim && scope.startsWith('user/')) ||
                 (fhirUserObject && scope.startsWith('user/')) ||
                 scope.startsWith('system/'),
         );
+
+        console.log('usableScopes inside isBundleRequestAuthorized: ', usableScopes);
 
         // Are the scopes the request have good enough for every entry in the bundle?
         request.requests.forEach((req: BatchReadWriteRequest) => {
@@ -429,15 +446,23 @@ export class SMARTHandler implements Authorization {
 
         console.log('fhirServiceBaseUrl: ', fhirServiceBaseUrl);
 
+        // operation: TypeOperation | SystemOperation;
         const { operation, readResponse } = request;
 
         console.log('operation: ', operation, 'readResponse :', readResponse);
         // If request is a search treat the readResponse as a bundle
+
+        // if patientLaunchContext:
+
+        // if patientOrgsClaim:
+
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
                 hasAccessToResource(
                     fhirUserObject,
+
                     patientLaunchContext,
+
                     entry.resource,
                     usableScopes,
                     this.adminAccessTypes,

@@ -135,12 +135,25 @@ export function hasAccessToResource(
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
+    console.log('inside hasAccessToResource function.');
+    console.log(
+        'fhirUserObject: ',
+        fhirUserObject,
+        'sourceResource: ',
+        sourceResource,
+        'apiUrl: ',
+        apiUrl,
+        'fhirVersion: ',
+        fhirVersion,
+    );
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
         (fhirUserObject &&
             (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
                 hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
+
+        // or may be add (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
     );
 }
 export function getJwksClient(jwksUri: string, headers?: Headers): JwksClient {
