@@ -80,9 +80,10 @@ export class SMARTHandler implements Authorization {
         fhirVersion: FhirVersion,
 
         // ________________________________________________________________
-        adminAccessTypes = ['Practitioner'],
-        // adminAccessTypes = [],
-        bulkDataAccessTypes = ['Practitioner'],
+        // adminAccessTypes = ['Practitioner'],
+        adminAccessTypes = [],
+        // bulkDataAccessTypes = ['Practitioner'],
+        bulkDataAccessTypes = [],
         // ____________________________________________________________________
 
         isUserScopeAllowedForSystemExport = false,

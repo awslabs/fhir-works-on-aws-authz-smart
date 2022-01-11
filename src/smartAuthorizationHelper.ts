@@ -190,7 +190,7 @@ export function hasAccessToResource(
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
         (patientOrgsClaim &&
-            isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
+            // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
             hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject &&
             (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
