@@ -138,6 +138,7 @@ export function hasReferenceToResource(
 }
 
 export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
+    console.log('inside isFhirUserAdmin function.');
     return apiUrl === fhirUser.hostname && adminAccessTypes.includes(fhirUser.resourceType);
 }
 
@@ -147,6 +148,7 @@ export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string
  * @returns if there is a usable system scope for this request
  */
 export function hasSystemAccess(usableScopes: string[], resourceType: string): boolean {
+    console.log('inside hasSystemAccess function.');
     return usableScopes.some(
         (scope: string) => scope.startsWith('system/*') || scope.startsWith(`system/${resourceType}`),
     );
@@ -176,6 +178,10 @@ export function hasAccessToResource(
 
         'sourceResource: ',
         sourceResource,
+        'usableScopes: ',
+        usableScopes,
+        'adminAccessTypes: ',
+        adminAccessTypes,
         'apiUrl: ',
         apiUrl,
         'fhirVersion: ',
@@ -183,11 +189,14 @@ export function hasAccessToResource(
     );
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
+        (patientOrgsClaim &&
+            isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
+            hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject &&
             (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
                 hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
-        (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion)) ||
-        (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
+        (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
+
         // or may be add (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
     );
 }
