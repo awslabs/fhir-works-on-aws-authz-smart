@@ -38,12 +38,31 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
 
 const logger = getComponentLogger();
 
+// isRequestorReferenced(
+// practitioner id
+//     [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
+// practitioner
+//     resourceType,
+//     sourceResource,
+//     fhirVersion,
+// )
 function isRequestorReferenced(
     requestorIds: string[],
     requestorResourceType: string,
     sourceResource: any,
     fhirVersion: FhirVersion,
 ): boolean {
+    console.log('inside isRequestorReferenced function.');
+    console.log(
+        'requestorIds: ',
+        requestorIds,
+        'requestorResourceType: ',
+        requestorResourceType,
+        'sourceResource: ',
+        sourceResource,
+        'fhirVersion: ',
+        fhirVersion,
+    );
     const sourceResourceType = sourceResource.resourceType;
     let matrix: any;
     if (fhirVersion === '4.0.1') {
@@ -88,12 +107,18 @@ function isRequestorReferenced(
     });
 }
 
+// export function isPatientOrgClaimReferencedInDetectedIssue
+
+// hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion)
 export function hasReferenceToResource(
     requestorId: FhirResource,
     sourceResource: any,
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
+    // add some logs to display.
+    console.log('inside hasReferenceToResource function.');
+    console.log('requestorId: ', requestorId, 'sourceResource: ', sourceResource);
     const { hostname, resourceType, id } = requestorId;
     if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
@@ -101,6 +126,7 @@ export function hasReferenceToResource(
     }
 
     return (
+        // checking if the practiotioner id is equal to particular deletedIssue resource id
         (resourceType === sourceResource.resourceType && id === sourceResource.id) ||
         isRequestorReferenced(
             [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
@@ -129,6 +155,9 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
+
+    patientOrgsClaim: FhirResource,
+
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -139,6 +168,12 @@ export function hasAccessToResource(
     console.log(
         'fhirUserObject: ',
         fhirUserObject,
+
+        'patientLaunchContext: ',
+        patientLaunchContext,
+        'patientOrgsClaim: ',
+        patientOrgsClaim,
+
         'sourceResource: ',
         sourceResource,
         'apiUrl: ',
@@ -151,8 +186,8 @@ export function hasAccessToResource(
         (fhirUserObject &&
             (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
                 hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
-        (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
-
+        (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
         // or may be add (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
     );
 }

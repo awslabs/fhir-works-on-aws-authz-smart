@@ -100,6 +100,9 @@ export class SMARTHandler implements Authorization {
         this.bulkDataAccessTypes = bulkDataAccessTypes;
         this.isUserScopeAllowedForSystemExport = isUserScopeAllowedForSystemExport;
         if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
+            console.log('config.jwksEndpoint: ', config.jwksEndpoint);
+            console.log('config.jwksHeaders: ', config.jwksHeaders);
+
             this.jwksClient = getJwksClient(this.config.jwksEndpoint, this.config.jwksHeaders);
         }
     }
@@ -207,11 +210,12 @@ export class SMARTHandler implements Authorization {
         // thus add userIdentity for patientOrgsClaim
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            // // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
-            // if (patientOrgsClaim) {
-            //     userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
-            //     console.log('userIdentity.patientOrgsClaim: ', userIdentity.patientOrgsClaim);
-            // }
+            console.log('userIdentity.fhirUserObject: ', userIdentity.fhirUserObject);
+            // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
+            if (patientOrgsClaim) {
+                userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+                console.log('userIdentity.patientOrgsClaim: ', userIdentity.patientOrgsClaim);
+            }
         }
 
         // get the value of launch_response_patient claim
@@ -442,12 +446,11 @@ export class SMARTHandler implements Authorization {
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         console.log('inside authorizeAndFilterReadResponse function.');
-        // const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+        // const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
 
         console.log('request.userIdentity: ', request.userIdentity);
-        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
-
         console.log('fhirServiceBaseUrl: ', fhirServiceBaseUrl);
 
         // operation: TypeOperation | SystemOperation;
@@ -467,6 +470,8 @@ export class SMARTHandler implements Authorization {
 
                     patientLaunchContext,
 
+                    patientOrgsClaim,
+
                     entry.resource,
                     usableScopes,
                     this.adminAccessTypes,
@@ -481,6 +486,7 @@ export class SMARTHandler implements Authorization {
                 numTotal -= readResponse.entry.length - entries.length;
             }
 
+            console.log('inside the condition - SEARCH_OPERATIONS.includes(operation).');
             console.log('readResponse: ', readResponse, 'entries: ', entries, 'numTotal = ', numTotal);
             return { ...readResponse, entry: entries, total: numTotal };
         }
@@ -489,6 +495,9 @@ export class SMARTHandler implements Authorization {
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
+
+                patientOrgsClaim,
+
                 readResponse,
                 usableScopes,
                 this.adminAccessTypes,
@@ -504,12 +513,18 @@ export class SMARTHandler implements Authorization {
     }
 
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
-        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+        // const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+
+        const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
         if (
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
+
+                patientOrgsClaim,
+
                 request.resourceBody,
                 usableScopes,
                 this.adminAccessTypes,
