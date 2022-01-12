@@ -73,9 +73,16 @@ function isRequestorReferenced(
         throw new Error('Unsupported FHIR version detected');
     }
     let possiblePaths: string[] = [];
+    //  detectedIssue resource and Patient resource
     if (matrix[sourceResourceType] && matrix[sourceResourceType][requestorResourceType]) {
+        // ["patient"]
         possiblePaths = matrix[sourceResourceType][requestorResourceType];
     }
+
+    console.log('possiblePaths: ', possiblePaths);
+    console.log('sourceResource.extension: ', sourceResource.extension);
+    console.log('sourceResource.extension[1]: ', sourceResource.extension[1]);
+    console.log('sourceResource.extension[1].valueReference: ', sourceResource.extension[1].valueReference);
 
     // The paths within the FHIR resources may contain arrays so we must check if array at every level
     return possiblePaths.some((path) => {
@@ -101,7 +108,11 @@ function isRequestorReferenced(
                 }
             }
         }
+        console.log('rootQueue: ', rootQueue);
+        console.log('nextQueue: ', nextQueue);
+
         return nextQueue.flat().some((x) => {
+            // x=patient, x.reference =  , requestorIds would be patientOrgsClaim or patientLaunchContext
             return x && x.reference && requestorIds.includes(x.reference);
         });
     });

@@ -251,6 +251,7 @@ export class SMARTHandler implements Authorization {
 
         // check if scope.startsWith system/
         if (hasSystemAccess(usableScopes, '')) {
+            console.log('Yes hasSystemAccess.');
             return [];
         }
 
