@@ -80,10 +80,9 @@ export class SMARTHandler implements Authorization {
         fhirVersion: FhirVersion,
 
         // ________________________________________________________________
-        // adminAccessTypes = ['Practitioner'],
-        adminAccessTypes = [],
-        // bulkDataAccessTypes = ['Practitioner'],
-        bulkDataAccessTypes = [],
+        adminAccessTypes = ['Practitioner'],
+        // adminAccessTypes = [],
+        bulkDataAccessTypes = ['Practitioner'],
         // ____________________________________________________________________
 
         isUserScopeAllowedForSystemExport = false,
@@ -261,12 +260,18 @@ export class SMARTHandler implements Authorization {
             // if scope.startsWith('system/*')
             // adminAccessTypes = ['Practitioner']
             // returns true or false if the fhiruserobject is in the adminsAccesstypes list
-            if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
-                // if an admin do not add limiting search filters
 
-                console.log('Yes FhirUserAdmin.');
-                return [];
-            }
+            
+            
+            // // commenting this out to avoid FhirUserAdminAccess
+            // if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
+            //     // if an admin do not add limiting search filters
+
+            //     console.log('Yes FhirUserAdmin.');
+            //     return [];
+            // }
+
+
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
                 references.add(`${resourceType}/${id}`);
