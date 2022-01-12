@@ -38,7 +38,7 @@ import {
     introspectJwtToken,
     hasAccessToResource,
     hasSystemAccess,
-    isFhirUserAdmin,
+    // isFhirUserAdmin,
 } from './smartAuthorizationHelper';
 import getComponentLogger from './loggerBuilder';
 
@@ -261,8 +261,6 @@ export class SMARTHandler implements Authorization {
             // adminAccessTypes = ['Practitioner']
             // returns true or false if the fhiruserobject is in the adminsAccesstypes list
 
-            
-            
             // // commenting this out to avoid FhirUserAdminAccess
             // if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
             //     // if an admin do not add limiting search filters
@@ -270,7 +268,6 @@ export class SMARTHandler implements Authorization {
             //     console.log('Yes FhirUserAdmin.');
             //     return [];
             // }
-
 
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
