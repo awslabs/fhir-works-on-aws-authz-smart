@@ -244,8 +244,8 @@ export class SMARTHandler implements Authorization {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
 
-        // const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
-        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
+        // const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
 
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
@@ -280,20 +280,20 @@ export class SMARTHandler implements Authorization {
 
         console.log('references: ', references);
         console.log('ids: ', ids);
-        // if (patientOrgsClaim) {
-        //     console.log('inside patientOrgsClaim');
-        //     console.log('request.resourceType: ', request.resourceType);
-        //     // resourceType = Organization
-        //     const { hostname, resourceType, id } = patientOrgsClaim;
-        //     references.add(`${hostname}/${resourceType}/${id}`);
-        //     if (hostname === fhirServiceBaseUrl) {
-        //         references.add(`${resourceType}/${id}`);
-        //     }
-        //     console.log('inside patientOrgsClaim');
-        //     if (request.resourceType && request.resourceType === resourceType) {
-        //         ids.add(id);
-        //     }
-        // }
+        if (patientOrgsClaim) {
+            console.log('inside patientOrgsClaim');
+            console.log('request.resourceType: ', request.resourceType);
+            // resourceType = Organization
+            const { hostname, resourceType, id } = patientOrgsClaim;
+            references.add(`${hostname}/${resourceType}/${id}`);
+            if (hostname === fhirServiceBaseUrl) {
+                references.add(`${resourceType}/${id}`);
+            }
+            console.log('inside patientOrgsClaim');
+            if (request.resourceType && request.resourceType === resourceType) {
+                ids.add(id);
+            }
+        }
 
         console.log('After patientOrgsClaim check condition.');
         console.log('references: ', references);
