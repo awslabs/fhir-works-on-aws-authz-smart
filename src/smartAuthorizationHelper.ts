@@ -76,7 +76,7 @@ function isRequestorReferenced(
             return obj.url === 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization';
         });
 
-        if (result.length !==0 && requestorIds.includes(result[0].valueReference.reference)) {
+        if (result.length !== 0 && requestorIds.includes(result[0].valueReference.reference)) {
             console.log('result: ', result);
             return true;
         }
@@ -98,9 +98,6 @@ function isRequestorReferenced(
     }
 
     console.log('possiblePaths: ', possiblePaths);
-    console.log('sourceResource.extension: ', sourceResource.extension);
-    console.log('sourceResource.extension[1]: ', sourceResource.extension[1]);
-    console.log('sourceResource.extension[1].valueReference: ', sourceResource.extension[1].valueReference);
 
     // The paths within the FHIR resources may contain arrays so we must check if array at every level
     return possiblePaths.some((path) => {
