@@ -156,12 +156,8 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (patientOrgsClaim &&
-            // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
-            hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
-        (fhirUserObject &&
-            // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
-            hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
+        (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
 }
