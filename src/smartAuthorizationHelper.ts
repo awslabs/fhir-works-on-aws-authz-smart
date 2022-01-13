@@ -64,6 +64,24 @@ function isRequestorReferenced(
         fhirVersion,
     );
     const sourceResourceType = sourceResource.resourceType;
+
+    // if patientOrgclaim exist : it is already checked in hasAccessToResource function
+    // if sourceResourceType == 'DetectedIssue' and extention exist? and url = 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization' then select the valueReference
+    // if valueReference.reference in requestorIds list
+    // then return true
+
+    if (sourceResourceType === 'DetectedIssue' && 'extension' in sourceResource) {
+        console.log('DetectedIssue resource consist of extension');
+        const result = sourceResource.extension.filter((obj: { url: string }) => {
+            return obj.url === 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization';
+        });
+
+        if (result && requestorIds.includes(result.valueReference.reference)) {
+            console.log('result: ', result);
+            return true;
+        }
+    }
+
     let matrix: any;
     if (fhirVersion === '4.0.1') {
         matrix = resourceReferencesMatrixV4;
@@ -118,6 +136,7 @@ function isRequestorReferenced(
     });
 }
 
+// patientOrgsClaim, sourceResource, apiUrl, fhirVersion
 // export function isPatientOrgClaimReferencedInDetectedIssue
 
 // hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion)
@@ -200,6 +219,7 @@ export function hasAccessToResource(
     );
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
+        // (patientOrgsClaim && isPatientOrgClaimReferencedInDetectedIssue
         (patientOrgsClaim &&
             // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
             hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
