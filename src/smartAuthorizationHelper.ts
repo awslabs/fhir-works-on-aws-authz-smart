@@ -76,7 +76,7 @@ function isRequestorReferenced(
             return obj.url === 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization';
         });
 
-        if (result && requestorIds.includes(result.valueReference.reference)) {
+        if (result.length !==0 && requestorIds.includes(result[0].valueReference.reference)) {
             console.log('result: ', result);
             return true;
         }
