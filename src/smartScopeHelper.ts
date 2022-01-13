@@ -156,12 +156,10 @@ export function filterOutUnusableScope(
     bulkDataAuth?: BulkDataAuth,
     patientContext?: string,
     fhirUser?: string,
-    // patientOrgsClaim?: string,
 ): string[] {
     return scopes.filter(
         (scope: string) =>
             ((patientContext && scope.startsWith('patient/')) ||
-                // (patientOrgsClaim && scope.startsWith('user/')) ||
                 (fhirUser && scope.startsWith('user/')) ||
                 scope.startsWith('system/')) &&
             isScopeSufficient(

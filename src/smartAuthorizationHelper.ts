@@ -38,38 +38,14 @@ export function getFhirResource(resourceValue: string, defaultHostname: string):
 
 const logger = getComponentLogger();
 
-// isRequestorReferenced(
-// practitioner id
-//     [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
-// practitioner
-//     resourceType,
-//     sourceResource,
-//     fhirVersion,
-// )
 function isRequestorReferenced(
     requestorIds: string[],
     requestorResourceType: string,
     sourceResource: any,
     fhirVersion: FhirVersion,
 ): boolean {
-    console.log('inside isRequestorReferenced function.');
-    console.log(
-        'requestorIds: ',
-        requestorIds,
-        'requestorResourceType: ',
-        requestorResourceType,
-        'sourceResource: ',
-        sourceResource,
-        'fhirVersion: ',
-        fhirVersion,
-    );
     const sourceResourceType = sourceResource.resourceType;
-
-    // if patientOrgclaim exist : it is already checked in hasAccessToResource function
-    // if sourceResourceType == 'DetectedIssue' and extention exist? and url = 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization' then select the valueReference
-    // if valueReference.reference in requestorIds list
-    // then return true
-
+    // this particularly for only detectedIssue resource because our matrix doesn't include cases for extension
     if (sourceResourceType === 'DetectedIssue' && 'extension' in sourceResource) {
         console.log('DetectedIssue resource consist of extension');
         const result = sourceResource.extension.filter((obj: { url: string }) => {
@@ -91,13 +67,9 @@ function isRequestorReferenced(
         throw new Error('Unsupported FHIR version detected');
     }
     let possiblePaths: string[] = [];
-    //  detectedIssue resource and Patient resource
     if (matrix[sourceResourceType] && matrix[sourceResourceType][requestorResourceType]) {
-        // ["patient"]
         possiblePaths = matrix[sourceResourceType][requestorResourceType];
     }
-
-    console.log('possiblePaths: ', possiblePaths);
 
     // The paths within the FHIR resources may contain arrays so we must check if array at every level
     return possiblePaths.some((path) => {
@@ -133,19 +105,12 @@ function isRequestorReferenced(
     });
 }
 
-// patientOrgsClaim, sourceResource, apiUrl, fhirVersion
-// export function isPatientOrgClaimReferencedInDetectedIssue
-
-// hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion)
 export function hasReferenceToResource(
     requestorId: FhirResource,
     sourceResource: any,
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
-    // add some logs to display.
-    console.log('inside hasReferenceToResource function.');
-    console.log('requestorId: ', requestorId, 'sourceResource: ', sourceResource);
     const { hostname, resourceType, id } = requestorId;
     if (hostname !== apiUrl) {
         // If requester is not from this FHIR Server they must be a fully qualified reference
@@ -153,7 +118,6 @@ export function hasReferenceToResource(
     }
 
     return (
-        // checking if the practiotioner id is equal to particular deletedIssue resource id
         (resourceType === sourceResource.resourceType && id === sourceResource.id) ||
         isRequestorReferenced(
             [`${resourceType}/${id}`, `${hostname}/${resourceType}/${id}`],
@@ -165,7 +129,6 @@ export function hasReferenceToResource(
 }
 
 export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
-    console.log('inside isFhirUserAdmin function.');
     return apiUrl === fhirUser.hostname && adminAccessTypes.includes(fhirUser.resourceType);
 }
 
@@ -184,48 +147,22 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
-
     patientOrgsClaim: FhirResource,
-
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
-    console.log('inside hasAccessToResource function.');
-    console.log(
-        'fhirUserObject: ',
-        fhirUserObject,
-
-        'patientLaunchContext: ',
-        patientLaunchContext,
-        'patientOrgsClaim: ',
-        patientOrgsClaim,
-
-        'sourceResource: ',
-        sourceResource,
-        'usableScopes: ',
-        usableScopes,
-        'adminAccessTypes: ',
-        adminAccessTypes,
-        'apiUrl: ',
-        apiUrl,
-        'fhirVersion: ',
-        fhirVersion,
-    );
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        // (patientOrgsClaim && isPatientOrgClaimReferencedInDetectedIssue
         (patientOrgsClaim &&
             // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) &&
             hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject &&
-            (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
-                hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
+            // isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
+            hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
-
-        // or may be add (patientOrgsClaim && hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion))
     );
 }
 export function getJwksClient(jwksUri: string, headers?: Headers): JwksClient {
