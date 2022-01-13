@@ -53,7 +53,6 @@ function isRequestorReferenced(
         });
 
         if (result.length !== 0 && requestorIds.includes(result[0].valueReference.reference)) {
-            console.log('result: ', result);
             return true;
         }
     }

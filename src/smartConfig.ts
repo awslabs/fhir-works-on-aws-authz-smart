@@ -61,7 +61,6 @@ export interface UserIdentity extends KeyValueMap {
     scopes: string[];
     fhirUserObject?: FhirResource;
     patientLaunchContext?: FhirResource;
-    // added patientOrgsClaim to UserIdentity interface
     patientOrgsClaim?: FhirResource;
 }
 

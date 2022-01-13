@@ -191,7 +191,6 @@ export class SMARTHandler implements Authorization {
     }
 
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
-        console.log('inside getSearchFilterBasedOnIdentity function.');
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
         const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
@@ -201,7 +200,6 @@ export class SMARTHandler implements Authorization {
             return [];
         }
 
-        // this exist if the scope starts with user i.e., practitioner or patient
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
 
