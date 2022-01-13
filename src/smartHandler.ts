@@ -121,6 +121,8 @@ export class SMARTHandler implements Authorization {
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
         const patientOrgsClaim = get(decodedToken, `patientOrgs`);
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
+
+        // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
 
         // Remove scopes that do not have the required information to be useful or unused scopes
@@ -154,6 +156,7 @@ export class SMARTHandler implements Authorization {
                     return scope.startsWith('system');
                 })
             ) {
+                // if requestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
                 const fhirUser = getFhirUser(fhirUserClaim);
                 if (
                     fhirUser.hostname !== fhirServiceBaseUrl ||
@@ -203,6 +206,7 @@ export class SMARTHandler implements Authorization {
             const { hostname, resourceType, id } = fhirUserObject;
 
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
+                // if an admin do not add limiting search filters
                 return [];
             }
 
@@ -317,6 +321,7 @@ export class SMARTHandler implements Authorization {
             const scope = request.userIdentity.scopes[i];
 
             try {
+                // We only get allowedResourceTypes for ClinicalSmartScope
                 const clinicalSmartScope = convertScopeToSmartScope(scope);
                 const validOperations = getValidOperationsForScopeTypeAndAccessType(
                     clinicalSmartScope.scopeType,
@@ -346,6 +351,7 @@ export class SMARTHandler implements Authorization {
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
         const { operation, readResponse } = request;
 
+        // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
                 hasAccessToResource(
@@ -368,7 +374,7 @@ export class SMARTHandler implements Authorization {
 
             return { ...readResponse, entry: entries, total: numTotal };
         }
-
+        // If request is != search treat the readResponse as just a resource
         if (
             hasAccessToResource(
                 fhirUserObject,

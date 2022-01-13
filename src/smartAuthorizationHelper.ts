@@ -47,8 +47,8 @@ function isRequestorReferenced(
     const sourceResourceType = sourceResource.resourceType;
     // this particularly for only detectedIssue resource because our matrix doesn't include cases for extension
     if (sourceResourceType === 'DetectedIssue' && 'extension' in sourceResource) {
-        console.log('DetectedIssue resource consist of extension');
         const result = sourceResource.extension.filter((obj: { url: string }) => {
+            // hardcode this value check
             return obj.url === 'http://resmed.com/fhir/core/StructureDefinition/PatientOrganization';
         });
 
