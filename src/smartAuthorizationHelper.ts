@@ -95,11 +95,8 @@ function isRequestorReferenced(
                 }
             }
         }
-        console.log('rootQueue: ', rootQueue);
-        console.log('nextQueue: ', nextQueue);
 
         return nextQueue.flat().some((x) => {
-            // x=patient, x.reference =  , requestorIds would be patientOrgsClaim or patientLaunchContext
             return x && x.reference && requestorIds.includes(x.reference);
         });
     });
@@ -138,7 +135,6 @@ export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string
  * @returns if there is a usable system scope for this request
  */
 export function hasSystemAccess(usableScopes: string[], resourceType: string): boolean {
-    console.log('inside hasSystemAccess function.');
     return usableScopes.some(
         (scope: string) => scope.startsWith('system/*') || scope.startsWith(`system/${resourceType}`),
     );

@@ -85,9 +85,6 @@ export class SMARTHandler implements Authorization {
         if (config.version !== this.version) {
             throw Error('Authorization configuration version does not match handler version');
         }
-        console.log('inside the constructor of SMARTHandler.');
-        console.log('config: ', config, 'apiUrl: ', apiUrl, 'fhirVersion: ', fhirVersion);
-
         this.config = config;
         this.apiUrl = apiUrl;
         this.fhirVersion = fhirVersion;
@@ -95,8 +92,6 @@ export class SMARTHandler implements Authorization {
         this.bulkDataAccessTypes = bulkDataAccessTypes;
         this.isUserScopeAllowedForSystemExport = isUserScopeAllowedForSystemExport;
         if (this.config.jwksEndpoint && !this.config.tokenIntrospection) {
-            console.log('config.jwksEndpoint: ', config.jwksEndpoint);
-            console.log('config.jwksHeaders: ', config.jwksHeaders);
             this.jwksClient = getJwksClient(this.config.jwksEndpoint, this.config.jwksHeaders);
         }
     }
@@ -179,7 +174,6 @@ export class SMARTHandler implements Authorization {
 
         if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
-            console.log('userIdentity.patientLaunchContext: ', userIdentity.patientLaunchContext);
         }
         userIdentity.scopes = scopes;
         userIdentity.usableScopes = usableScopes;
@@ -208,7 +202,6 @@ export class SMARTHandler implements Authorization {
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
 
-            // commenting this out to avoid FhirUserAdminAccess
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 return [];
             }
