@@ -79,7 +79,7 @@ export class SMARTHandler implements Authorization {
         apiUrl: string,
         fhirVersion: FhirVersion,
         adminAccessTypes = [],
-        bulkDataAccessTypes = [],
+        bulkDataAccessTypes = ['Practitioner'],
         isUserScopeAllowedForSystemExport = false,
     ) {
         if (config.version !== this.version) {
