@@ -124,8 +124,6 @@ export class SMARTHandler implements Authorization {
 
         // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
-
-        // Remove scopes that do not have the required information to be useful or unused scopes
         const usableScopes = filterOutUnusableScope(
             scopes,
             this.config.scopeRule,
@@ -169,9 +167,8 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            // add patientOrgsClaim to userIdentity when scope starts with "user/" and patientOrgsClaim not null
             if (patientOrgsClaim) {
-                userIdentity.patientOrgsClaim = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+                userIdentity.patientOrgs = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
             }
         }
 
@@ -193,7 +190,7 @@ export class SMARTHandler implements Authorization {
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
-        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgsClaim } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgs } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         if (hasSystemAccess(usableScopes, '')) {
@@ -202,12 +199,10 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserObject) {
             const { hostname, resourceType, id } = fhirUserObject;
-
             if (isFhirUserAdmin(fhirUserObject, this.adminAccessTypes, fhirServiceBaseUrl)) {
                 // if an admin do not add limiting search filters
                 return [];
             }
-
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
                 references.add(`${resourceType}/${id}`);
@@ -217,8 +212,8 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        if (patientOrgsClaim) {
-            const { hostname, resourceType, id } = patientOrgsClaim;
+        if (patientOrgs) {
+            const { hostname, resourceType, id } = patientOrgs;
             references.add(`${hostname}/${resourceType}/${id}`);
             if (hostname === fhirServiceBaseUrl) {
                 references.add(`${resourceType}/${id}`);
@@ -239,6 +234,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
+        // Create a SearchFilter to limit access to only resources that are referring to the requesting user and/or context
         const filters: SearchFilter[] = [];
         if (references.size > 0) {
             filters.push({
@@ -314,10 +310,8 @@ export class SMARTHandler implements Authorization {
     async getAllowedResourceTypesForOperation(request: AllowedResourceTypesForOperationRequest): Promise<string[]> {
         let allowedResources: string[] = [];
         const allResourceTypes: string[] = this.fhirVersion === '4.0.1' ? BASE_R4_RESOURCES : BASE_STU3_RESOURCES;
-
         for (let i = 0; i < request.userIdentity.scopes.length; i += 1) {
             const scope = request.userIdentity.scopes[i];
-
             try {
                 // We only get allowedResourceTypes for ClinicalSmartScope
                 const clinicalSmartScope = convertScopeToSmartScope(scope);
@@ -345,17 +339,17 @@ export class SMARTHandler implements Authorization {
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
-        const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
-        const { operation, readResponse } = request;
 
+        const { operation, readResponse } = request;
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
                 hasAccessToResource(
                     fhirUserObject,
                     patientLaunchContext,
-                    patientOrgsClaim,
+                    patientOrgs,
                     entry.resource,
                     usableScopes,
                     this.adminAccessTypes,
@@ -377,7 +371,7 @@ export class SMARTHandler implements Authorization {
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
-                patientOrgsClaim,
+                patientOrgs,
                 readResponse,
                 usableScopes,
                 this.adminAccessTypes,
@@ -392,13 +386,13 @@ export class SMARTHandler implements Authorization {
     }
 
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
-        const { fhirUserObject, patientLaunchContext, patientOrgsClaim, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
         if (
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
-                patientOrgsClaim,
+                patientOrgs,
                 request.resourceBody,
                 usableScopes,
                 this.adminAccessTypes,
@@ -408,6 +402,7 @@ export class SMARTHandler implements Authorization {
         ) {
             return;
         }
+
         throw new UnauthorizedError('User does not have permission for requested operation');
     }
 }

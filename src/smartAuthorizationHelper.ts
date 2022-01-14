@@ -142,7 +142,7 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
-    patientOrgsClaim: FhirResource,
+    patientOrgs: FhirResource,
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -151,9 +151,7 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (fhirUserObject &&
-            patientOrgsClaim &&
-            hasReferenceToResource(patientOrgsClaim, sourceResource, apiUrl, fhirVersion)) ||
+        (fhirUserObject && patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
