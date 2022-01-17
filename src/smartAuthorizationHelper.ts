@@ -139,7 +139,7 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (fhirUserObject && patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
