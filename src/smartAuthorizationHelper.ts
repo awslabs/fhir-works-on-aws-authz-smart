@@ -82,6 +82,7 @@ function isRequestorReferenced(
                 }
             }
         }
+
         return nextQueue.flat().some((x) => {
             return x && x.reference && requestorIds.includes(x.reference);
         });
@@ -129,6 +130,7 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
+    patientOrgs: FhirResource,
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -137,9 +139,8 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (fhirUserObject &&
-            (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
-                hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
+        (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
 }
