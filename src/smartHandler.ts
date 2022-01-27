@@ -120,6 +120,11 @@ export class SMARTHandler implements Authorization {
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
         const patientOrgsClaim = get(decodedToken, `patientOrgs`);
+        console.log('patientOrgsClaim: ', patientOrgsClaim);
+
+        const orgsListClaim = get(decodedToken, `orgsListClaim`);
+        console.log('orgsListClaim: ', orgsListClaim);
+
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         // get just the scopes that apply to this request
@@ -177,6 +182,10 @@ export class SMARTHandler implements Authorization {
         }
         userIdentity.scopes = scopes;
         userIdentity.usableScopes = usableScopes;
+
+        console.log('usableScopes: ', usableScopes);
+
+        console.log('userIdentity: ', userIdentity);
         return userIdentity;
     }
 
@@ -212,6 +221,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
+        // need to add all the resources from patientOrg list (orgsListClaim) in getSearchFilterBasedOnIdentity
         if (patientOrgs) {
             const { hostname, resourceType, id } = patientOrgs;
             references.add(`${hostname}/${resourceType}/${id}`);
@@ -253,6 +263,7 @@ export class SMARTHandler implements Authorization {
             });
         }
 
+        console.log('filters: ', filters);
         return filters;
     }
 
@@ -343,6 +354,10 @@ export class SMARTHandler implements Authorization {
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         const { operation, readResponse } = request;
+
+        console.log('operation: ', operation);
+        console.log('readResponse: ', readResponse);
+
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
@@ -363,7 +378,9 @@ export class SMARTHandler implements Authorization {
             } else {
                 numTotal -= readResponse.entry.length - entries.length;
             }
-
+            console.log('readResponse: ', readResponse);
+            console.log('entries: ', entries);
+            console.log('numTotal: ', numTotal);
             return { ...readResponse, entry: entries, total: numTotal };
         }
         // If request is != search treat the readResponse as just a resource

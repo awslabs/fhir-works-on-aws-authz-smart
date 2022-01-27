@@ -27,7 +27,10 @@ export function getFhirUser(fhirUserValue: string): FhirResource {
     throw new UnauthorizedError("Requester's identity is in the incorrect format");
 }
 export function getFhirResource(resourceValue: string, defaultHostname: string): FhirResource {
+    console.log('Inside getFhirResource function.');
     const match = resourceValue.match(FHIR_RESOURCE_REGEX);
+    console.log('match: ', match);
+
     if (match) {
         const { resourceType, id } = match.groups!;
         const hostname = match.groups!.hostname ?? defaultHostname;
@@ -89,6 +92,7 @@ function isRequestorReferenced(
     });
 }
 
+// hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)
 export function hasReferenceToResource(
     requestorId: FhirResource,
     sourceResource: any,
