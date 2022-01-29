@@ -47,6 +47,11 @@ function isRequestorReferenced(
     sourceResource: any,
     fhirVersion: FhirVersion,
 ): boolean {
+    //     // [
+    //     'Organization/7a0e6833-e3b9-48a3-a11a-83e62ae5bb67',
+    //     'Organization/0fb61d39-1c9f-4da1-ba0c-dd9984063dca'
+    //   ]
+    // iterate through the list and split on '/' for each sourceResourceType and requestorIds
     const sourceResourceType = sourceResource.resourceType;
     let matrix: any;
     if (fhirVersion === '4.0.1') {
@@ -116,6 +121,24 @@ export function hasReferenceToResource(
     );
 }
 
+export function hasReferenceToOrgsList(
+    orgsList: FhirResource[],
+    sourceResource: any,
+    apiUrl: string,
+    fhirVersion: FhirVersion,
+): boolean {
+    let isPresent: boolean = false;
+    /* eslint-disable-next-line */
+    for (const eachOrg of orgsList) {
+        if (isPresent === false) {
+            isPresent = hasReferenceToResource(eachOrg, sourceResource, apiUrl, fhirVersion);
+        } else {
+            return isPresent;
+        }
+    }
+    return isPresent;
+}
+
 export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
     return apiUrl === fhirUser.hostname && adminAccessTypes.includes(fhirUser.resourceType);
 }
@@ -134,7 +157,8 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
-    patientOrgs: FhirResource,
+    // patientOrgs: FhirResource,
+    orgsList: FhirResource[],
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -143,7 +167,8 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        // (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        (orgsList && orgsList.length && hasReferenceToOrgsList(orgsList, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
