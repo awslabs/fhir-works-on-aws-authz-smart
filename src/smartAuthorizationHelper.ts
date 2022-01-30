@@ -90,7 +90,6 @@ function isRequestorReferenced(
     });
 }
 
-// hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)
 export function hasReferenceToResource(
     requestorId: FhirResource,
     sourceResource: any,

@@ -168,10 +168,10 @@ export class SMARTHandler implements Authorization {
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
             if (patientOrgsClaim && patientOrgsClaim.length) {
-                userIdentity.orgsList = [];
+                userIdentity.patientOrgs = [];
                 /* eslint-disable-next-line */
                 for (const eachOrg of patientOrgsClaim) {
-                    userIdentity.orgsList.push(getFhirResource(eachOrg, fhirServiceBaseUrl));
+                    userIdentity.patientOrgs.push(getFhirResource(eachOrg, fhirServiceBaseUrl));
                 }
             }
         }
