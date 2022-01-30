@@ -119,12 +119,7 @@ export class SMARTHandler implements Authorization {
         }
         const fhirUserClaim = get(decodedToken, this.config.fhirUserClaimPath);
         const patientContextClaim = get(decodedToken, `${this.config.launchContextPathPrefix}patient`);
-        // const patientOrgsClaim = get(decodedToken, `patientOrgs`);
-        // console.log('patientOrgsClaim: ', patientOrgsClaim);
-
-        const orgsListClaim = get(decodedToken, `orgsList`);
-        console.log('orgsListClaim: ', orgsListClaim);
-
+        const patientOrgsClaim = get(decodedToken, `patientOrgs`);
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         // get just the scopes that apply to this request
@@ -172,16 +167,13 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            if (orgsListClaim && orgsListClaim.length) {
+            if (patientOrgsClaim && patientOrgsClaim.length) {
                 userIdentity.orgsList = [];
                 /* eslint-disable-next-line */
-                for (const eachOrg of orgsListClaim) {
+                for (const eachOrg of patientOrgsClaim) {
                     userIdentity.orgsList.push(getFhirResource(eachOrg, fhirServiceBaseUrl));
                 }
             }
-            // if (patientOrgsClaim) {
-            //     userIdentity.patientOrgs = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
-            // }
         }
 
         if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
@@ -190,9 +182,6 @@ export class SMARTHandler implements Authorization {
         userIdentity.scopes = scopes;
         userIdentity.usableScopes = usableScopes;
 
-        console.log('usableScopes: ', usableScopes);
-
-        console.log('userIdentity: ', userIdentity);
         return userIdentity;
     }
 
@@ -206,9 +195,7 @@ export class SMARTHandler implements Authorization {
     async getSearchFilterBasedOnIdentity(request: GetSearchFilterBasedOnIdentityRequest): Promise<SearchFilter[]> {
         const references: Set<string> = new Set();
         const ids: Set<string> = new Set();
-        // const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgs } = request.userIdentity;
-        const { fhirUserObject, patientLaunchContext, usableScopes, orgsList } = request.userIdentity;
-
+        const { fhirUserObject, patientLaunchContext, usableScopes, patientOrgs } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         if (hasSystemAccess(usableScopes, '')) {
@@ -230,21 +217,9 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        // // need to add all the resources from patientOrg list (orgsListClaim) in getSearchFilterBasedOnIdentity
-        // if (patientOrgs) {
-        //     const { hostname, resourceType, id } = patientOrgs;
-        //     references.add(`${hostname}/${resourceType}/${id}`);
-        //     if (hostname === fhirServiceBaseUrl) {
-        //         references.add(`${resourceType}/${id}`);
-        //     }
-        //     if (request.resourceType && request.resourceType === resourceType) {
-        //         ids.add(id);
-        //     }
-        // }
-
-        if (orgsList && orgsList.length) {
+        if (patientOrgs && patientOrgs.length) {
             /* eslint-disable-next-line */
-            for (const eachOrg of orgsList) {
+            for (const eachOrg of patientOrgs) {
                 const { hostname, resourceType, id } = eachOrg;
                 references.add(`${hostname}/${resourceType}/${id}`);
                 if (hostname === fhirServiceBaseUrl) {
@@ -286,7 +261,6 @@ export class SMARTHandler implements Authorization {
             });
         }
 
-        console.log('filters: ', filters);
         return filters;
     }
 
@@ -373,15 +347,9 @@ export class SMARTHandler implements Authorization {
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
-        // const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
-        const { fhirUserObject, patientLaunchContext, orgsList, usableScopes } = request.userIdentity;
-
+        const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
-
         const { operation, readResponse } = request;
-
-        console.log('operation: ', operation);
-        console.log('readResponse: ', readResponse);
 
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
@@ -389,8 +357,7 @@ export class SMARTHandler implements Authorization {
                 hasAccessToResource(
                     fhirUserObject,
                     patientLaunchContext,
-                    // patientOrgs,
-                    orgsList,
+                    patientOrgs,
                     entry.resource,
                     usableScopes,
                     this.adminAccessTypes,
@@ -404,9 +371,7 @@ export class SMARTHandler implements Authorization {
             } else {
                 numTotal -= readResponse.entry.length - entries.length;
             }
-            console.log('readResponse: ', readResponse);
-            console.log('entries: ', entries);
-            console.log('numTotal: ', numTotal);
+
             return { ...readResponse, entry: entries, total: numTotal };
         }
         // If request is != search treat the readResponse as just a resource
@@ -414,8 +379,7 @@ export class SMARTHandler implements Authorization {
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
-                // patientOrgs,
-                orgsList,
+                patientOrgs,
                 readResponse,
                 usableScopes,
                 this.adminAccessTypes,
@@ -430,15 +394,13 @@ export class SMARTHandler implements Authorization {
     }
 
     async isWriteRequestAuthorized(request: WriteRequestAuthorizedRequest): Promise<void> {
-        // const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
-        const { fhirUserObject, patientLaunchContext, orgsList, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
         if (
             hasAccessToResource(
                 fhirUserObject,
                 patientLaunchContext,
-                // patientOrgs,
-                orgsList,
+                patientOrgs,
                 request.resourceBody,
                 usableScopes,
                 this.adminAccessTypes,

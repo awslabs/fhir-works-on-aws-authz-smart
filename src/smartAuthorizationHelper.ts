@@ -27,9 +27,7 @@ export function getFhirUser(fhirUserValue: string): FhirResource {
     throw new UnauthorizedError("Requester's identity is in the incorrect format");
 }
 export function getFhirResource(resourceValue: string, defaultHostname: string): FhirResource {
-    console.log('Inside getFhirResource function.');
     const match = resourceValue.match(FHIR_RESOURCE_REGEX);
-    console.log('match: ', match);
 
     if (match) {
         const { resourceType, id } = match.groups!;
@@ -47,11 +45,6 @@ function isRequestorReferenced(
     sourceResource: any,
     fhirVersion: FhirVersion,
 ): boolean {
-    //     // [
-    //     'Organization/7a0e6833-e3b9-48a3-a11a-83e62ae5bb67',
-    //     'Organization/0fb61d39-1c9f-4da1-ba0c-dd9984063dca'
-    //   ]
-    // iterate through the list and split on '/' for each sourceResourceType and requestorIds
     const sourceResourceType = sourceResource.resourceType;
     let matrix: any;
     if (fhirVersion === '4.0.1') {
@@ -121,15 +114,15 @@ export function hasReferenceToResource(
     );
 }
 
-export function hasReferenceToOrgsList(
-    orgsList: FhirResource[],
+export function hasReferenceToPatientOrgs(
+    patientOrgs: FhirResource[],
     sourceResource: any,
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
     let isPresent: boolean = false;
     /* eslint-disable-next-line */
-    for (const eachOrg of orgsList) {
+    for (const eachOrg of patientOrgs) {
         if (isPresent === false) {
             isPresent = hasReferenceToResource(eachOrg, sourceResource, apiUrl, fhirVersion);
         } else {
@@ -157,8 +150,7 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
-    // patientOrgs: FhirResource,
-    orgsList: FhirResource[],
+    patientOrgs: FhirResource[],
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -167,8 +159,9 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        // (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
-        (orgsList && orgsList.length && hasReferenceToOrgsList(orgsList, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgs &&
+            patientOrgs.length &&
+            hasReferenceToPatientOrgs(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
