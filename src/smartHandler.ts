@@ -168,7 +168,7 @@ export class SMARTHandler implements Authorization {
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
             userIdentity.patientOrgs = [];
-            if (Array.isArray(patientOrgsClaim)) {
+            if (patientOrgsClaim && Array.isArray(patientOrgsClaim)) {
                 userIdentity.patientOrgs = patientOrgsClaim.map((eachOrg: string) =>
                     getFhirResource(eachOrg, fhirServiceBaseUrl),
                 );
