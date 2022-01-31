@@ -28,7 +28,6 @@ export function getFhirUser(fhirUserValue: string): FhirResource {
 }
 export function getFhirResource(resourceValue: string, defaultHostname: string): FhirResource {
     const match = resourceValue.match(FHIR_RESOURCE_REGEX);
-
     if (match) {
         const { resourceType, id } = match.groups!;
         const hostname = match.groups!.hostname ?? defaultHostname;
@@ -113,22 +112,15 @@ export function hasReferenceToResource(
     );
 }
 
-export function hasReferenceToPatientOrgs(
+function hasReferenceToPatientOrgs(
     patientOrgs: FhirResource[],
     sourceResource: any,
     apiUrl: string,
     fhirVersion: FhirVersion,
 ): boolean {
-    let isPresent: boolean = false;
-    /* eslint-disable-next-line */
-    for (const eachOrg of patientOrgs) {
-        if (isPresent === false) {
-            isPresent = hasReferenceToResource(eachOrg, sourceResource, apiUrl, fhirVersion);
-        } else {
-            return isPresent;
-        }
-    }
-    return isPresent;
+    return patientOrgs.some((eachOrg: FhirResource) =>
+        hasReferenceToResource(eachOrg, sourceResource, apiUrl, fhirVersion),
+    );
 }
 
 export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
@@ -158,9 +150,7 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (patientOrgs &&
-            patientOrgs.length &&
-            hasReferenceToPatientOrgs(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgs.length && hasReferenceToPatientOrgs(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );

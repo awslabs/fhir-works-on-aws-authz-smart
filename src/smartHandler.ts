@@ -167,12 +167,13 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            if (patientOrgsClaim && patientOrgsClaim.length) {
-                userIdentity.patientOrgs = [];
-                /* eslint-disable-next-line */
-                for (const eachOrg of patientOrgsClaim) {
-                    userIdentity.patientOrgs.push(getFhirResource(eachOrg, fhirServiceBaseUrl));
-                }
+            userIdentity.patientOrgs = [];
+            if (Array.isArray(patientOrgsClaim)) {
+                userIdentity.patientOrgs = patientOrgsClaim.map((eachOrg: string) =>
+                    getFhirResource(eachOrg, fhirServiceBaseUrl),
+                );
+            } else {
+                throw new UnauthorizedError('patientOrgs claim contains incorrect data type value');
             }
         }
 
@@ -181,7 +182,6 @@ export class SMARTHandler implements Authorization {
         }
         userIdentity.scopes = scopes;
         userIdentity.usableScopes = usableScopes;
-
         return userIdentity;
     }
 
@@ -217,7 +217,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        if (patientOrgs && patientOrgs.length) {
+        if (patientOrgs.length) {
             /* eslint-disable-next-line */
             for (const eachOrg of patientOrgs) {
                 const { hostname, resourceType, id } = eachOrg;
@@ -349,8 +349,8 @@ export class SMARTHandler implements Authorization {
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
         const { fhirUserObject, patientLaunchContext, patientOrgs, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
-        const { operation, readResponse } = request;
 
+        const { operation, readResponse } = request;
         // If request is a search treat the readResponse as a bundle
         if (SEARCH_OPERATIONS.includes(operation)) {
             const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
