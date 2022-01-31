@@ -217,7 +217,7 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        if (patientOrgs.length) {
+        if (patientOrgs) {
             /* eslint-disable-next-line */
             for (const eachOrg of patientOrgs) {
                 const { hostname, resourceType, id } = eachOrg;
