@@ -167,8 +167,13 @@ export class SMARTHandler implements Authorization {
 
         if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
-            if (patientOrgsClaim) {
-                userIdentity.patientOrgs = getFhirResource(patientOrgsClaim, fhirServiceBaseUrl);
+            userIdentity.patientOrgs = [];
+            if (patientOrgsClaim && Array.isArray(patientOrgsClaim)) {
+                userIdentity.patientOrgs = patientOrgsClaim.map((eachOrg: string) =>
+                    getFhirResource(eachOrg, fhirServiceBaseUrl),
+                );
+            } else {
+                throw new UnauthorizedError('patientOrgs claim contains incorrect data type value');
             }
         }
 
@@ -213,13 +218,16 @@ export class SMARTHandler implements Authorization {
         }
 
         if (patientOrgs) {
-            const { hostname, resourceType, id } = patientOrgs;
-            references.add(`${hostname}/${resourceType}/${id}`);
-            if (hostname === fhirServiceBaseUrl) {
-                references.add(`${resourceType}/${id}`);
-            }
-            if (request.resourceType && request.resourceType === resourceType) {
-                ids.add(id);
+            /* eslint-disable-next-line */
+            for (const eachOrg of patientOrgs) {
+                const { hostname, resourceType, id } = eachOrg;
+                references.add(`${hostname}/${resourceType}/${id}`);
+                if (hostname === fhirServiceBaseUrl) {
+                    references.add(`${resourceType}/${id}`);
+                }
+                if (request.resourceType && request.resourceType === resourceType) {
+                    ids.add(id);
+                }
             }
         }
 

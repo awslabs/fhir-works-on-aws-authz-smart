@@ -112,6 +112,17 @@ export function hasReferenceToResource(
     );
 }
 
+function hasReferenceToPatientOrgs(
+    patientOrgs: FhirResource[],
+    sourceResource: any,
+    apiUrl: string,
+    fhirVersion: FhirVersion,
+): boolean {
+    return patientOrgs.some((eachOrg: FhirResource) =>
+        hasReferenceToResource(eachOrg, sourceResource, apiUrl, fhirVersion),
+    );
+}
+
 export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string[], apiUrl: string): boolean {
     return apiUrl === fhirUser.hostname && adminAccessTypes.includes(fhirUser.resourceType);
 }
@@ -130,7 +141,7 @@ export function hasSystemAccess(usableScopes: string[], resourceType: string): b
 export function hasAccessToResource(
     fhirUserObject: FhirResource,
     patientLaunchContext: FhirResource,
-    patientOrgs: FhirResource,
+    patientOrgs: FhirResource[],
     sourceResource: any,
     usableScopes: string[],
     adminAccessTypes: string[],
@@ -139,7 +150,9 @@ export function hasAccessToResource(
 ): boolean {
     return (
         hasSystemAccess(usableScopes, sourceResource.resourceType) ||
-        (patientOrgs && hasReferenceToResource(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
+        (patientOrgs &&
+            patientOrgs.length &&
+            hasReferenceToPatientOrgs(patientOrgs, sourceResource, apiUrl, fhirVersion)) ||
         (fhirUserObject && hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion)) ||
         (patientLaunchContext && hasReferenceToResource(patientLaunchContext, sourceResource, apiUrl, fhirVersion))
     );
