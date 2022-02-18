@@ -18,6 +18,7 @@ import {
     AuthorizationBundleRequest,
     GetSearchFilterBasedOnIdentityRequest,
 } from 'fhir-works-on-aws-interface';
+import cloneDeep from 'lodash/cloneDeep';
 
 import * as smartAuthorizationHelper from './smartAuthorizationHelper';
 import { SMARTHandler } from './smartHandler';
@@ -108,6 +109,9 @@ const validPatient = {
         },
     ],
 };
+const patientWithPractitioner = Object.assign(cloneDeep(validPatient), {
+    generalPractitioner: [{ reference: practitionerIdentity }],
+});
 const validPatientObservation = {
     resourceType: 'Observation',
     id: '1274045',
@@ -167,6 +171,9 @@ const validPatientObservation = {
         },
     ],
 };
+const patientObservationWithPractitioner = Object.assign(cloneDeep(validPatientObservation), {
+    performer: [{ reference: practitionerIdentity }],
+});
 const validPatientEncounter = {
     resourceType: 'Encounter',
     id: '1339909',
@@ -208,7 +215,8 @@ const validPatientEncounter = {
         reference: 'Organization/1339537',
     },
 };
-
+const patientEncounterWithPractitioner = cloneDeep(validPatientEncounter);
+patientEncounterWithPractitioner.participant[0].individual.reference = practitionerIdentity;
 const mock = new MockAdapter(axios);
 beforeEach(() => {
     jest.restoreAllMocks();
@@ -934,7 +942,15 @@ describe('authorizeAndFilterReadResponse', () => {
         entry: [createEntry(validPatient), createEntry(validPatientObservation), createEntry(validPatientEncounter)],
         total: 3,
     };
-
+    const searchAllEntitiesWithPractitionerMatch = {
+        ...emptySearchResult,
+        entry: [
+            createEntry(patientWithPractitioner),
+            createEntry(patientObservationWithPractitioner),
+            createEntry(patientEncounterWithPractitioner),
+        ],
+        total: 3,
+    };
     const searchSomeEntitiesMatch = {
         ...emptySearchResult,
         entry: [
@@ -1059,10 +1075,10 @@ describe('authorizeAndFilterReadResponse', () => {
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'read',
-                readResponse: validPatientEncounter,
+                readResponse: patientEncounterWithPractitioner,
             },
             true,
-            validPatientEncounter,
+            patientEncounterWithPractitioner,
         ],
         [
             'READ: Practitioner able to read unrelated Observation',
@@ -1074,10 +1090,10 @@ describe('authorizeAndFilterReadResponse', () => {
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'read',
-                readResponse: validPatientObservation,
+                readResponse: patientObservationWithPractitioner,
             },
             true,
-            validPatientObservation,
+            patientObservationWithPractitioner,
         ],
         [
             'READ: external Practitioner able to read Encounter',
@@ -1196,10 +1212,10 @@ describe('authorizeAndFilterReadResponse', () => {
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'search-type',
-                readResponse: searchAllEntitiesMatch,
+                readResponse: searchAllEntitiesWithPractitionerMatch,
             },
             true,
-            searchAllEntitiesMatch,
+            searchAllEntitiesWithPractitionerMatch,
         ],
         [
             'SEARCH: system scope; Practitioner able to search and get ALL results',
@@ -1274,7 +1290,7 @@ describe('isWriteRequestAuthorized', () => {
                     fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'update',
-                resourceBody: validPatient,
+                resourceBody: patientWithPractitioner,
             },
             true,
         ],
@@ -1522,7 +1538,7 @@ describe('isBundleRequestAuthorized', () => {
             requests: [
                 {
                     operation: 'create',
-                    resource: validPatientObservation,
+                    resource: patientObservationWithPractitioner,
                     fullUrl: '',
                     resourceType: 'Observation',
                     id: '160265f7-e8c2-45ca-a1bc-317399e23549',
@@ -1749,7 +1765,7 @@ describe('getSearchFilterBasedOnIdentity', () => {
         );
     });
 
-    test('Practitioner (admin) identity', async () => {
+    test('Practitioner identity', async () => {
         // BUILD
         const userIdentity = {
             ...baseAccessNoScopes,
@@ -1763,7 +1779,14 @@ describe('getSearchFilterBasedOnIdentity', () => {
         };
 
         // OPERATE, CHECK
-        const expectedFilter: [] = [];
+        const expectedFilter = [
+            {
+                comparisonOperator: '==',
+                key: '_references',
+                logicalOperator: 'OR',
+                value: ['https://fhir.server.com/dev/Practitioner/id', 'Practitioner/id'],
+            },
+        ];
         await expect(authZHandler.getSearchFilterBasedOnIdentity(request)).resolves.toEqual(expectedFilter);
     });
     test('External Practitioner identity', async () => {
