@@ -62,7 +62,7 @@ function getValidOperationsForScope(
     // 'search-system' and 'history-system' request operation requires '*' for scopeResourceType
     else if (
         (['search-system', 'history-system'].includes(reqOperation) && resourceType === '*') ||
-        ['transaction', 'batch'].includes(reqOperation)
+        ['transaction', 'batch', 'search-type'].includes(reqOperation)
     ) {
         validOperations = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule);
     }

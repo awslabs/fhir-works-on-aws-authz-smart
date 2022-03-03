@@ -395,6 +395,19 @@ describe('filterOutUnusableScope', () => {
             ),
         ).toEqual(['system/*.write']);
     });
+    
+    test('filter patient in search use case', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.system.read = ['search-type'];
+        expect(
+            filterOutUnusableScope(
+                ['system/DocumentReference.read', 'system/Patient.read'],
+                clonedScopeRule,
+                'search-type',
+                false,
+            ),
+        ).toEqual(['system/DocumentReference.read', 'system/Patient.read']);
+    });
 });
 
 describe('getValidOperationsForScopeTypeAndAccessType', () => {
