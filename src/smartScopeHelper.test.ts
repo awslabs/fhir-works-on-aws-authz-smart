@@ -395,7 +395,7 @@ describe('filterOutUnusableScope', () => {
             ),
         ).toEqual(['system/*.write']);
     });
-    
+
     test('filter patient in search use case', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.system.read = ['search-type'];
