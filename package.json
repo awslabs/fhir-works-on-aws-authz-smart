@@ -29,6 +29,7 @@
     "standard-version": "standard-version --skip.tag=true"
   },
   "dependencies": {
+    "aws-xray-sdk-core": "^3.3.4",
     "axios": "^0.21.4",
     "fhir-works-on-aws-interface": "^11.1.0",
     "jsonwebtoken": "^8.5.1",

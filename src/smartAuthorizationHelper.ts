@@ -5,11 +5,16 @@
 import { FhirVersion, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import jwksClient, { JwksClient, Headers } from 'jwks-rsa';
 import { decode, verify } from 'jsonwebtoken';
-import axios from 'axios';
+import AWSXRay from 'aws-xray-sdk-core';
+import https from 'https';
+import { AxiosStatic } from 'axios';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
 import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
 import { FhirResource, IntrospectionOptions } from './smartConfig';
 import getComponentLogger from './loggerBuilder';
+
+AWSXRay.captureHTTPsGlobal(https);
+const axios: AxiosStatic = require('axios');
 
 export const FHIR_USER_REGEX =
     /^(?<hostname>(http|https):\/\/([A-Za-z0-9\-\\.:%$_/])+)\/(?<resourceType>Person|Practitioner|RelatedPerson|Patient)\/(?<id>[A-Za-z0-9\-.]+)$/;
