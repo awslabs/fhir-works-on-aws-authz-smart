@@ -405,7 +405,7 @@ describe('filterOutUnusableScope', () => {
                 clonedScopeRule,
                 'search-type',
                 false,
-                'DocumentReference'
+                'DocumentReference',
             ),
         ).toEqual(['system/DocumentReference.read', 'system/Patient.read']);
     });
