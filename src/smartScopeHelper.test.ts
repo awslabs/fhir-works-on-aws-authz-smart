@@ -396,7 +396,7 @@ describe('filterOutUnusableScope', () => {
         ).toEqual(['system/*.write']);
     });
 
-    test('filter patient in search use case', () => {
+    test('do not filter patient scope out in type-search use case', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.system.read = ['search-type'];
         expect(
@@ -405,6 +405,7 @@ describe('filterOutUnusableScope', () => {
                 clonedScopeRule,
                 'search-type',
                 false,
+                'DocumentReference'
             ),
         ).toEqual(['system/DocumentReference.read', 'system/Patient.read']);
     });

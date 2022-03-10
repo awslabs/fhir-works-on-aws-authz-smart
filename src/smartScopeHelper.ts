@@ -55,14 +55,14 @@ function getValidOperationsForScope(
     let validOperations: (TypeOperation | SystemOperation)[] = [];
     const { scopeType, resourceType, accessType } = smartScope;
     if (reqResourceType) {
-        if (resourceType === '*' || resourceType === reqResourceType) {
+        if (resourceType === '*' || resourceType === reqResourceType || reqOperation === 'search-type') {
             validOperations = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule);
         }
     }
     // 'search-system' and 'history-system' request operation requires '*' for scopeResourceType
     else if (
         (['search-system', 'history-system'].includes(reqOperation) && resourceType === '*') ||
-        ['transaction', 'batch', 'search-type'].includes(reqOperation)
+        ['transaction', 'batch'].includes(reqOperation)
     ) {
         validOperations = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule);
     }
