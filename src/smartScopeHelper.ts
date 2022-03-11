@@ -55,7 +55,7 @@ function getValidOperationsForScope(
     let validOperations: (TypeOperation | SystemOperation)[] = [];
     const { scopeType, resourceType, accessType } = smartScope;
     if (reqResourceType) {
-        if (resourceType === '*' || resourceType === reqResourceType) {
+        if (resourceType === '*' || resourceType === reqResourceType || reqOperation === 'search-type') {
             validOperations = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule);
         }
     }
