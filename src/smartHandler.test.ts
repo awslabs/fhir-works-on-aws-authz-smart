@@ -429,6 +429,16 @@ describe('verifyAccessToken', () => {
             { ...baseAccessNoScopes, scp: 'system/Patient.write' },
             true,
         ],
+        [
+            'patientUserSystem_specificRead_search',
+            { accessToken: 'fake', operation: 'search-type', resourceType: 'Observation' },
+            {
+                ...baseAccessNoScopes,
+                scp: 'user/Patient.read system/Patient.read patient/Patient.read',
+                ...patientFhirUser,
+            },
+            false,
+        ],
     ];
 
     const authZConfig = baseAuthZConfig();
