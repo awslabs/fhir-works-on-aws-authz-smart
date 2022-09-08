@@ -396,6 +396,46 @@ describe('filterOutUnusableScope', () => {
         ).toEqual(['system/*.write']);
     });
 
+    test('filter out all system scope out in type-search use case when resource type does not match scopes', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.system.read = ['search-type'];
+        clonedScopeRule.system.write = ['create'];
+        expect(
+            filterOutUnusableScope(
+                ['system/DocumentReference.read', 'system/Patient.read', 'system/Practitioner.write'],
+                clonedScopeRule,
+                'search-type',
+                false,
+                'Practitioner',
+            ),
+        ).toEqual([]);
+    });
+    test('filter out all user scope out in type-search use case when resource type does not match scopes', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.user.read = ['search-type'];
+        expect(
+            filterOutUnusableScope(
+                ['user/DocumentReference.read', 'user/Patient.read'],
+                clonedScopeRule,
+                'search-type',
+                false,
+                'Practitioner',
+            ),
+        ).toEqual([]);
+    });
+    test('filter out all patient scope out in type-search use case when resource type does not match scopes', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.user.read = ['search-type'];
+        expect(
+            filterOutUnusableScope(
+                ['patient/DocumentReference.read', 'patient/Patient.read'],
+                clonedScopeRule,
+                'search-type',
+                false,
+                'Practitioner',
+            ),
+        ).toEqual([]);
+    });
     test('do not filter patient scope out in type-search use case', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.system.read = ['search-type'];

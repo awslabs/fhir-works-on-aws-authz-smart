@@ -157,7 +157,7 @@ export function filterOutUnusableScope(
     patientContext?: string,
     fhirUser?: string,
 ): string[] {
-    return scopes.filter(
+    const filteredScopes: string[] = scopes.filter(
         (scope: string) =>
             ((patientContext && scope.startsWith('patient/')) ||
                 (fhirUser && scope.startsWith('user/')) ||
@@ -171,4 +171,17 @@ export function filterOutUnusableScope(
                 bulkDataAuth,
             ),
     );
+
+    // We should only return the scopes iff there is at least 1 valid scope for the given resourceType
+    if (
+        reqOperation === 'search-type' &&
+        !filteredScopes.some((scope: string) => {
+            const smartScope = convertScopeToSmartScope(scope);
+            return smartScope.resourceType === '*' || smartScope.resourceType === reqResourceType;
+        })
+    ) {
+        return [];
+    }
+
+    return filteredScopes;
 }
