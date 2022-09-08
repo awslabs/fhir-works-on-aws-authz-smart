@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package is an implementation of the authorization interface from the [FHIR Works interface](https://github.com/awslabs/fhir-works-on-aws-interface/blob/mainline/src/authorization.ts). It uses the [Substitutable Medical Applications, Reusable Technologies (SMART on FHIR) specification](https://docs.smarthealthit.org/) to authorize users. Requests are authorized by if the requestor or the patient in context is [**referenced**](https://www.hl7.org/fhir/references.html) in the resource in question.
+This package is an implementation of the authorization interface from the [FHIR Works interface](https://github.com/awslabs/fhir-works-on-aws-interface/blob/mainline/src/authorization.ts). It uses the [Substitutable Medical Applications, Reusable Technologies (SMART on FHIR) specification v1.0.0](http://www.hl7.org/fhir/smart-app-launch/1.0.0) to authorize users. Requests are authorized by if the requestor or the patient in context is [**referenced**](https://www.hl7.org/fhir/references.html) in the resource in question.
 
 To use and deploy this component please follow the overall [`smart-mainline` branch README](https://github.com/awslabs/fhir-works-on-aws-deployment/tree/smart-mainline)
 
@@ -16,7 +16,7 @@ The following assumptions have been made while creating this package:
 - The identity provider has a user claim (either `fhirUser` or `profile`) representing who this user is in context to this FHIR server. This user must be represented by a fully qualified URL in the claim.
   - As an example the `fhirUser` claim should look like: `https://www.fhir.com/Patient/1234`
   - When using `user` scopes it is assumed that the `fhirUser` will be in the access token to determine who the requestor is
-- [`launch` scopes and contextual request](http://www.hl7.org/fhir/smart-app-launch/scopes-and-launch-context/#scopes-for-requesting-context-data) will be handled by the authorization server.
+- [`launch` scopes and contextual request](http://www.hl7.org/fhir/smart-app-launch/1.0.0/scopes-and-launch-context/#scopes-for-requesting-context-data) will be handled by the authorization server.
 - Once launch context is given to the authorization server it will be included with a `patient` scope and the Patient's resourceType and id in the `launch_response_patient` claim within the access token.
   - As an example the `launch_response_patient` claim should look like: `Patient/id`
 
@@ -26,7 +26,7 @@ This packages uses SMART scopes and the references found in the resources as a w
 
 ### Scopes
 
-This resource server supports [SMART's clinical scopes](http://www.hl7.org/fhir/smart-app-launch/scopes-and-launch-context/#clinical-scope-syntax). There are some assumptions made on the authorization and resource server relationship:
+This resource server supports [SMART' v1.0.0 clinical scopes](http://www.hl7.org/fhir/smart-app-launch/1.0.0/scopes-and-launch-context/#scopes-for-requesting-clinical-data). There are some assumptions made on the authorization and resource server relationship:
 
 - For `patient` scopes, there must be a `launch_response_patient` claim in the access token.
 - For `user` scopes, there must be a `fhirUser` claim in the access token.
