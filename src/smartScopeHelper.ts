@@ -4,6 +4,9 @@
  */
 import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { AccessModifier, ClinicalSmartScope, ScopeRule, ScopeType } from './smartConfig';
+import getComponentLogger from './loggerBuilder';
+
+const logger = getComponentLogger();
 
 export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
     'search-type',
@@ -55,7 +58,7 @@ function getValidOperationsForScope(
     let validOperations: (TypeOperation | SystemOperation)[] = [];
     const { scopeType, resourceType, accessType } = smartScope;
     if (reqResourceType) {
-        if (resourceType === '*' || resourceType === reqResourceType || reqOperation === 'search-type') {
+        if (resourceType === '*' || resourceType === reqResourceType) {
             validOperations = getValidOperationsForScopeTypeAndAccessType(scopeType, accessType, scopeRule);
         }
     }
@@ -136,6 +139,7 @@ export function isScopeSufficient(
         return validOperations.includes(reqOperation);
     } catch (e) {
         // Caused by trying to convert non-SmartScope to SmartScope, for example converting non-SMART scope 'openid'
+        logger.debug((e as any).message);
     }
 
     return false;
@@ -171,17 +175,6 @@ export function filterOutUnusableScope(
                 bulkDataAuth,
             ),
     );
-
-    // We should only return the scopes iff there is at least 1 valid scope for the given resourceType
-    if (
-        reqOperation === 'search-type' &&
-        !filteredScopes.some((scope: string) => {
-            const smartScope = convertScopeToSmartScope(scope);
-            return smartScope.resourceType === '*' || smartScope.resourceType === reqResourceType;
-        })
-    ) {
-        return [];
-    }
 
     return filteredScopes;
 }

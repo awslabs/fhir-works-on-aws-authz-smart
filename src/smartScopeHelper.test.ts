@@ -118,11 +118,23 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
 
         expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'search-system', false)).toEqual(true);
     });
+    test('scope is sufficient to do a history-system', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule[scopeType].read = ['history-system'];
+
+        expect(isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'history-system', false)).toEqual(true);
+    });
     test('scope is sufficient to do a transaction', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].write = ['transaction'];
 
         expect(isScopeSufficient(`${scopeType}/*.write`, clonedScopeRule, 'transaction', false)).toEqual(true);
+    });
+    test('scope is sufficient to do a batch', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule[scopeType].write = ['batch'];
+
+        expect(isScopeSufficient(`${scopeType}/*.write`, clonedScopeRule, 'batch', false)).toEqual(true);
     });
     test('scope is insufficient to do a transaction', () => {
         const clonedScopeRule = emptyScopeRule();
@@ -131,11 +143,11 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
 
         expect(isScopeSufficient(`${scopeType}/*.*`, clonedScopeRule, 'transaction', false)).toEqual(false);
     });
-    test('invalid scope', () => {
+    test('invalid; `read` scope with no resourceType', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
 
-        expect(isScopeSufficient(`fake`, clonedScopeRule, 'read', false)).toEqual(false);
+        expect(isScopeSufficient(`${scopeType}/Patient.*`, clonedScopeRule, 'read', false)).toEqual(false);
     });
 
     describe('BulkDataAuth', () => {
@@ -148,6 +160,16 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
             expect(
                 isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', true, undefined, bulkDataAuth),
             ).toEqual(scopeType !== 'patient');
+        });
+        test('initiate-export: exportType is undefined; should fail', () => {
+            const clonedScopeRule = emptyScopeRule();
+            clonedScopeRule[scopeType].read = ['read'];
+            const bulkDataAuth: BulkDataAuth = { operation: 'initiate-export' };
+
+            // Only scopeType of user has bulkDataAccess
+            expect(
+                isScopeSufficient(`${scopeType}/*.read`, clonedScopeRule, 'read', true, undefined, bulkDataAuth),
+            ).toEqual(false);
         });
 
         test('scope is NOT sufficient for `system` initiate-export: Scope needs to have resourceType "*"', () => {
@@ -252,6 +274,12 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
             );
         });
     });
+});
+test('isScopeSufficient: invalid scope non-smart', () => {
+    const clonedScopeRule = emptyScopeRule();
+    clonedScopeRule.system.read = ['read'];
+
+    expect(isScopeSufficient(`fhirUser`, clonedScopeRule, 'read', false)).toEqual(false);
 });
 
 describe('getScopes', () => {
@@ -420,6 +448,9 @@ describe('filterOutUnusableScope', () => {
                 'search-type',
                 false,
                 'Practitioner',
+                undefined,
+                undefined,
+                'fhirUser',
             ),
         ).toEqual([]);
     });
@@ -433,10 +464,12 @@ describe('filterOutUnusableScope', () => {
                 'search-type',
                 false,
                 'Practitioner',
+                undefined,
+                'patient',
             ),
         ).toEqual([]);
     });
-    test('do not filter patient scope out in type-search use case', () => {
+    test('SYSTEM Scope: do filter Patient resourceType scope out in type-search use case', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule.system.read = ['search-type'];
         expect(
@@ -447,7 +480,38 @@ describe('filterOutUnusableScope', () => {
                 false,
                 'DocumentReference',
             ),
-        ).toEqual(['system/DocumentReference.read', 'system/Patient.read']);
+        ).toEqual(['system/DocumentReference.read']);
+    });
+    test('USER Scope: do filter Patient resourceType scope out in type-search use case', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.user.read = ['search-type'];
+        expect(
+            filterOutUnusableScope(
+                ['user/DocumentReference.read', 'user/Patient.read'],
+                clonedScopeRule,
+                'search-type',
+                false,
+                'DocumentReference',
+                undefined,
+                undefined,
+                'fhirUser',
+            ),
+        ).toEqual(['user/DocumentReference.read']);
+    });
+    test('PATIENT Scope: do filter Patient resourceType scope out in type-search use case', () => {
+        const clonedScopeRule = emptyScopeRule();
+        clonedScopeRule.patient.read = ['search-type'];
+        expect(
+            filterOutUnusableScope(
+                ['patient/DocumentReference.read', 'patient/Patient.read'],
+                clonedScopeRule,
+                'search-type',
+                false,
+                'DocumentReference',
+                undefined,
+                'patient',
+            ),
+        ).toEqual(['patient/DocumentReference.read']);
     });
 });
 

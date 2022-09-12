@@ -8,7 +8,9 @@ import { decode, verify } from 'jsonwebtoken';
 import axios from 'axios';
 import resourceReferencesMatrixV4 from './schema/fhirResourceReferencesMatrix.v4.0.1.json';
 import resourceReferencesMatrixV3 from './schema/fhirResourceReferencesMatrix.v3.0.1.json';
-import { FhirResource, IntrospectionOptions } from './smartConfig';
+import { AccessModifier, FhirResource, IntrospectionOptions } from './smartConfig';
+import { convertScopeToSmartScope } from './smartScopeHelper';
+
 import getComponentLogger from './loggerBuilder';
 
 export const FHIR_USER_REGEX =
@@ -116,14 +118,27 @@ export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string
 }
 
 /**
- * @param usableScopes this should be usableScope set from the `verifyAccessToken` method
- * @param resourceType the type of the resource we are trying to access
+ * @param scopes: this should be scope set from the `verifyAccessToken` method
+ * @param resourceType: the type of the resource the request is trying to access
+ * @param accessModifier: the type of access the request is asking for
  * @returns if there is a usable system scope for this request
  */
-export function hasSystemAccess(usableScopes: string[], resourceType: string): boolean {
-    return usableScopes.some(
-        (scope: string) => scope.startsWith('system/*') || scope.startsWith(`system/${resourceType}`),
-    );
+export function hasSystemAccess(scopes: string[], resourceType: string, accessModifier: AccessModifier): boolean {
+    return scopes.some((scope: string) => {
+        try {
+            const clinicalSmartScope = convertScopeToSmartScope(scope);
+
+            return (
+                clinicalSmartScope.scopeType === 'system' &&
+                (clinicalSmartScope.resourceType === '*' || clinicalSmartScope.resourceType === resourceType) &&
+                (clinicalSmartScope.accessType === '*' || clinicalSmartScope.accessType === accessModifier)
+            );
+        } catch (e) {
+            // Error occurs from `convertScopeToSmartScope` if scope was invalid
+            logger.debug((e as any).message);
+            return false;
+        }
+    });
 }
 
 export function hasAccessToResource(
@@ -134,9 +149,10 @@ export function hasAccessToResource(
     adminAccessTypes: string[],
     apiUrl: string,
     fhirVersion: FhirVersion,
+    accessModifier: AccessModifier,
 ): boolean {
     return (
-        hasSystemAccess(usableScopes, sourceResource.resourceType) ||
+        hasSystemAccess(usableScopes, sourceResource.resourceType, accessModifier) ||
         (fhirUserObject &&
             (isFhirUserAdmin(fhirUserObject, adminAccessTypes, apiUrl) ||
                 hasReferenceToResource(fhirUserObject, sourceResource, apiUrl, fhirVersion))) ||
