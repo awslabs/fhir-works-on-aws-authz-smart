@@ -1331,7 +1331,6 @@ describe('isWriteRequestAuthorized', () => {
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['patient/*.write'],
                     usableScopes: ['patient/*.write'],
                     patientLaunchContext: patientFhirResource,
                 },
@@ -1345,7 +1344,6 @@ describe('isWriteRequestAuthorized', () => {
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write'],
                     usableScopes: ['user/*.write'],
                     fhirUserObject: practitionerFhirResource,
                 },
@@ -1359,7 +1357,6 @@ describe('isWriteRequestAuthorized', () => {
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write'],
                     usableScopes: ['user/*.write'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
@@ -1369,11 +1366,10 @@ describe('isWriteRequestAuthorized', () => {
             true,
         ],
         [
-            'PATCH: missing user/patient context; but has system scopes',
+            'PATCH: has system scopes',
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write', 'patient/*.write', 'system/*.write'],
                     usableScopes: ['system/*.write'],
                 },
                 operation: 'patch',
@@ -1382,11 +1378,10 @@ describe('isWriteRequestAuthorized', () => {
             true,
         ],
         [
-            'PATCH: missing user/patient context',
+            'PATCH: no usable scope',
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write', 'patient/*.write'],
                     usableScopes: [],
                 },
                 operation: 'patch',
@@ -1399,7 +1394,6 @@ describe('isWriteRequestAuthorized', () => {
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write'],
                     usableScopes: ['user/*.write'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
@@ -1413,12 +1407,49 @@ describe('isWriteRequestAuthorized', () => {
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
-                    scopes: ['user/*.write', 'system/*.write'],
                     usableScopes: ['user/*.write', 'system/*.write'],
                     fhirUserObject: externalPractitionerFhirResource,
                 },
                 operation: 'update',
                 resourceBody: validPatient,
+            },
+            true,
+        ],
+        [
+            'UPDATE: specific scope',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    usableScopes: ['system/Patient.write'],
+                },
+                operation: 'update',
+                resourceBody: validPatient,
+            },
+            true,
+        ],
+        [
+            'CREATE: specific scope',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    usableScopes: ['user/Patient.write'],
+                    fhirUserObject: practitionerFhirResource,
+                },
+                operation: 'create',
+                resourceBody: validPatient,
+            },
+            true,
+        ],
+        [
+            'PATCH: specific scope',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    usableScopes: ['patient/Encounter.write'],
+                    patientLaunchContext: patientFhirResource,
+                },
+                operation: 'patch',
+                resourceBody: validPatientEncounter,
             },
             true,
         ],
@@ -1502,7 +1533,7 @@ describe('isAccessBulkDataJobAllowed', () => {
     });
 });
 
-describe('isBundleRequestAuthorized', () => {
+describe('isBundleRequestAuthorized; write an Observation; read a Patient; search-type Encounter', () => {
     const authZConfigWithSearchTypeScope = baseAuthZConfig();
     authZConfigWithSearchTypeScope.scopeRule.user.write = ['create'];
     const authZHandler: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '4.0.1');
@@ -1538,7 +1569,7 @@ describe('isBundleRequestAuthorized', () => {
             'practitioner with patient&user scope: no error',
             {
                 ...baseAccessNoScopes,
-                scopes: ['user/Observation.write', 'patient/Patient.*', 'openid'],
+                scopes: ['user/Observation.write', 'patient/Patient.*', 'patient/Encounter.read', 'openid'],
                 fhirUserObject: practitionerFhirResource,
                 patientLaunchContext: patientFhirResource,
             },
@@ -1548,10 +1579,19 @@ describe('isBundleRequestAuthorized', () => {
             'practitioner with system&user scope: no error',
             {
                 ...baseAccessNoScopes,
-                scopes: ['user/Observation.write', 'system/Patient.*', 'openid'],
+                scopes: ['user/Observation.write', 'system/Patient.*', 'user/Encounter.read', 'openid'],
                 fhirUserObject: practitionerFhirResource,
             },
             true,
+        ],
+        [
+            'practitioner with system&user scope; but no Encounter scope: Unauthorized Error',
+            {
+                ...baseAccessNoScopes,
+                scopes: ['user/Observation.write', 'system/Patient.*', 'openid'],
+                fhirUserObject: practitionerFhirResource,
+            },
+            false,
         ],
         [
             'patient with user scope to create observation but no read perms: Unauthorized Error',
@@ -1609,6 +1649,13 @@ describe('isBundleRequestAuthorized', () => {
                     fullUrl: patientIdentity,
                     resourceType: 'Patient',
                     id: '160265f7-e8c2-45ca-a1bc-317399e23548',
+                },
+                {
+                    operation: 'search-type',
+                    resource: '/Encounter?_include=Patient',
+                    fullUrl: '/Encounter?_include=Patient',
+                    resourceType: 'Encounter',
+                    id: '',
                 },
             ],
         };

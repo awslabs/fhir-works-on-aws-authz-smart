@@ -118,9 +118,9 @@ export function isFhirUserAdmin(fhirUser: FhirResource, adminAccessTypes: string
 }
 
 /**
- * @param scopes this should be scope set from the `verifyAccessToken` method
- * @param resourceType the type of the resource the request is trying to access
- * @param accessModifier the type of access the request is asking for
+ * @param scopes: this should be scope set from the `verifyAccessToken` method
+ * @param resourceType: the type of the resource the request is trying to access
+ * @param accessModifier: the type of access the request is asking for
  * @returns if there is a usable system scope for this request
  */
 export function hasSystemAccess(scopes: string[], resourceType: string, accessModifier: AccessModifier): boolean {
@@ -135,6 +135,7 @@ export function hasSystemAccess(scopes: string[], resourceType: string, accessMo
             );
         } catch (e) {
             // Error occurs from `convertScopeToSmartScope` if scope was invalid
+            logger.debug((e as any).message);
             return false;
         }
     });

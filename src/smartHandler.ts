@@ -69,10 +69,10 @@ export class SMARTHandler implements Authorization {
     private readonly jwksClient?: JwksClient;
 
     /**
-     * @param apiUrl URL of this FHIR service. Will be used to determine if a requestor is from this FHIR server or not
+     * @param apiUrl: URL of this FHIR service. Will be used to determine if a requestor is from this FHIR server or not
      * when the request does not include a fhirServiceBaseUrl
-     * @param adminAccessTypes a fhirUser from these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
-     * @param bulkDataAccessTypes a fhirUser from these resourceTypes they will be able to do bulk data operations
+     * @param adminAccessTypes: a fhirUser from these resourceTypes they will be able to READ & WRITE without having to meet the reference criteria
+     * @param bulkDataAccessTypes: a fhirUser from these resourceTypes they will be able to do bulk data operations
      */
     constructor(
         config: SMARTConfig,
@@ -316,6 +316,7 @@ export class SMARTHandler implements Authorization {
                 }
             } catch (e) {
                 // Caused by trying to convert non-SmartScope to SmartScope, for example converting scope 'openid' or 'profile'
+                logger.debug((e as any).message);
             }
         }
         allowedResources = [...new Set(allowedResources)];

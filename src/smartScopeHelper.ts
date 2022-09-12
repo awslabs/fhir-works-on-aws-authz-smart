@@ -4,6 +4,9 @@
  */
 import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { AccessModifier, ClinicalSmartScope, ScopeRule, ScopeType } from './smartConfig';
+import getComponentLogger from './loggerBuilder';
+
+const logger = getComponentLogger();
 
 export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
     'search-type',
@@ -136,6 +139,7 @@ export function isScopeSufficient(
         return validOperations.includes(reqOperation);
     } catch (e) {
         // Caused by trying to convert non-SmartScope to SmartScope, for example converting non-SMART scope 'openid'
+        logger.debug((e as any).message);
     }
 
     return false;

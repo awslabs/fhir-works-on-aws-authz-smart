@@ -143,7 +143,7 @@ describe.each(isScopeSufficientCases)('ScopeType: %s: isScopeSufficient', (scope
 
         expect(isScopeSufficient(`${scopeType}/*.*`, clonedScopeRule, 'transaction', false)).toEqual(false);
     });
-    test('invalid; `read` scope with no resourcType', () => {
+    test('invalid; `read` scope with no resourceType', () => {
         const clonedScopeRule = emptyScopeRule();
         clonedScopeRule[scopeType].read = ['read'];
 
