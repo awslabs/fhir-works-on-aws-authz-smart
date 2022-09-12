@@ -542,7 +542,7 @@ describe('introspectJwtToken', () => {
             Math.floor(Date.now() / 1000),
             Math.floor(Date.now() / 1000) + 10,
             expectedAudValue,
-            `${expectedIssValue}/`,
+            `${expectedIssValue}`,
         );
         const mock = new MockAdapter(axios);
         mock.onPost(introspectUrl).reply(200, {

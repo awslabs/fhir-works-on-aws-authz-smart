@@ -17,6 +17,7 @@ import {
     BASE_R4_RESOURCES,
     AuthorizationBundleRequest,
     GetSearchFilterBasedOnIdentityRequest,
+    BASE_STU3_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 
 import * as smartAuthorizationHelper from './smartAuthorizationHelper';
@@ -945,6 +946,12 @@ describe('authorizeAndFilterReadResponse', () => {
         total: 3,
     };
 
+    const searchFilteredEntitiesMatch = {
+        ...emptySearchResult,
+        entry: [createEntry(validPatientObservation), createEntry(validPatientEncounter)],
+        total: 2,
+    };
+
     const searchSomeEntitiesMatch = {
         ...emptySearchResult,
         entry: [
@@ -1212,19 +1219,78 @@ describe('authorizeAndFilterReadResponse', () => {
             searchAllEntitiesMatch,
         ],
         [
-            'SEARCH: system scope; Practitioner able to search and get ALL results',
+            'SEARCH: system scope; System able to search and get ALL results',
             {
                 userIdentity: {
                     ...baseAccessNoScopes,
                     scopes: ['system/*.read'],
                     usableScopes: ['system/*.read'],
-                    fhirUserObject: practitionerFhirResource,
                 },
                 operation: 'search-type',
                 readResponse: searchAllEntitiesMatch,
             },
             true,
             searchAllEntitiesMatch,
+        ],
+        [
+            'SEARCH: user scope; filter Patient Resource based on scopes; /Observation? search',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/Observation.read', 'user/Encounter.read'],
+                    usableScopes: ['user/Observation.read'],
+                    fhirUserObject: practitionerFhirResource,
+                },
+                operation: 'search-type',
+                readResponse: searchAllEntitiesMatch,
+            },
+            true,
+            searchFilteredEntitiesMatch,
+        ],
+        [
+            'SEARCH: patient scope; filter Patient Resource based on scopes; /Observation? search',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['patient/Observation.read', 'patient/Encounter.read'],
+                    usableScopes: ['patient/Observation.read'],
+                    patientLaunchContext: patientFhirResource,
+                },
+                operation: 'search-type',
+                readResponse: searchAllEntitiesMatch,
+            },
+            true,
+            searchFilteredEntitiesMatch,
+        ],
+        [
+            'SEARCH: system scope; filter Patient Resource based on scopes; /Observation? search',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['system/Observation.read', 'system/Encounter.read'],
+                    usableScopes: ['system/Observation.read'],
+                },
+                operation: 'search-type',
+                readResponse: searchAllEntitiesMatch,
+            },
+            true,
+            searchFilteredEntitiesMatch,
+        ],
+        [
+            'SEARCH: Invalid search result',
+            {
+                userIdentity: {
+                    ...baseAccessNoScopes,
+                    scopes: ['user/*.read', 'patient/*.read'],
+                    usableScopes: ['user/*.read', 'patient/*.read'],
+                    fhirUserObject: patientFhirResource,
+                    patientLaunchContext: patientFhirResource,
+                },
+                operation: 'search-system',
+                readResponse: {},
+            },
+            true,
+            { entry: [], total: 0 },
         ],
     ];
 
@@ -1564,8 +1630,8 @@ describe('getAllowedResourceTypesForOperation', () => {
 
     const cases: (string | string[])[][] = [
         [
-            'search-type operation: read scope: returns [Patient, Observation]',
-            ['user/Patient.read', 'user/Observation.read', 'fhirUser', 'system/Encounter.*'],
+            'search-type operation: read scope: returns [Patient, Observation, Encounter] not Fake though',
+            ['user/Patient.read', 'user/Observation.read', 'fhirUser', 'system/Encounter.*', 'system/Fake.*'],
             'search-type',
             ['Patient', 'Observation', 'Encounter'],
         ],
@@ -1606,6 +1672,20 @@ describe('getAllowedResourceTypesForOperation', () => {
 
         await expect(authZHandler.getAllowedResourceTypesForOperation(request)).resolves.toEqual(
             expectedAllowedResources,
+        );
+    });
+    test('ver3_CASE: search-type operation: read scope: returns [BASE_R3_RESOURCES]', async () => {
+        const authZHandlerVer3: SMARTHandler = new SMARTHandler(authZConfigWithSearchTypeScope, apiUrl, '3.0.1');
+
+        const request: AllowedResourceTypesForOperationRequest = {
+            userIdentity: {
+                scopes: ['user/*.read'],
+            },
+            operation: 'search-type',
+        };
+
+        await expect(authZHandlerVer3.getAllowedResourceTypesForOperation(request)).resolves.toEqual(
+            BASE_STU3_RESOURCES,
         );
     });
 });

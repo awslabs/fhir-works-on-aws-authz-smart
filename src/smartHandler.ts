@@ -189,7 +189,7 @@ export class SMARTHandler implements Authorization {
         const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
-        if (hasSystemAccess(usableScopes, '')) {
+        if (hasSystemAccess(usableScopes, '', 'read')) {
             return [];
         }
 
@@ -323,22 +323,35 @@ export class SMARTHandler implements Authorization {
     }
 
     async authorizeAndFilterReadResponse(request: ReadResponseAuthorizedRequest): Promise<any> {
-        const { fhirUserObject, patientLaunchContext, usableScopes } = request.userIdentity;
+        const { fhirUserObject, patientLaunchContext, usableScopes, scopes } = request.userIdentity;
         const fhirServiceBaseUrl = request.fhirServiceBaseUrl ?? this.apiUrl;
 
         const { operation, readResponse } = request;
-        // If request is a search treat the readResponse as a bundle
+        // If request is a search iterate over every response object
+        // Must use all scopes, since a search may return more resourceTypes than just found in usableScopes
         if (SEARCH_OPERATIONS.includes(operation)) {
-            const entries: any[] = (readResponse.entry ?? []).filter((entry: { resource: any }) =>
-                hasAccessToResource(
-                    fhirUserObject,
-                    patientLaunchContext,
-                    entry.resource,
-                    usableScopes,
-                    this.adminAccessTypes,
-                    fhirServiceBaseUrl,
-                    this.fhirVersion,
-                ),
+            const entries: any[] = (readResponse.entry ?? []).filter(
+                (entry: { resource: any }) =>
+                    // Are the scopes the request have good enough for this entry?
+                    scopes.some((scope: string) =>
+                        isScopeSufficient(
+                            scope,
+                            this.config.scopeRule,
+                            operation,
+                            this.isUserScopeAllowedForSystemExport,
+                            entry.resource.resourceType,
+                        ),
+                    ) && // Does the user have permissions for this entry?
+                    hasAccessToResource(
+                        fhirUserObject,
+                        patientLaunchContext,
+                        entry.resource,
+                        scopes,
+                        this.adminAccessTypes,
+                        fhirServiceBaseUrl,
+                        this.fhirVersion,
+                        'read',
+                    ),
             );
             let numTotal: number = readResponse.total;
             if (!numTotal) {
@@ -358,6 +371,7 @@ export class SMARTHandler implements Authorization {
                 this.adminAccessTypes,
                 fhirServiceBaseUrl,
                 this.fhirVersion,
+                'read',
             )
         ) {
             return readResponse;
@@ -378,6 +392,7 @@ export class SMARTHandler implements Authorization {
                 this.adminAccessTypes,
                 fhirServiceBaseUrl,
                 this.fhirVersion,
+                'write',
             )
         ) {
             return;
