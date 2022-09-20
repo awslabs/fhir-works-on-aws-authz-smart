@@ -1,5 +1,10 @@
 # fhir-works-on-aws-authz-smart
 
+## Upgrade notice
+
+Versions 3.1.1 and 3.1.2 of the `fhir-works-on-aws-authz-smart` package have been deprecated for necessary security updates. Please upgrade to version 3.1.3 or higher. For more information, see [the fhir-works-on-aws-authz-smart security advisory](https://github.com/awslabs/fhir-works-on-aws-authz-smart/security/advisories/GHSA-vv7x-7w4m-q72f).
+
+
 ## Purpose
 
 This package is an implementation of the authorization interface from the [FHIR Works interface](https://github.com/awslabs/fhir-works-on-aws-interface/blob/mainline/src/authorization.ts). It uses the [Substitutable Medical Applications, Reusable Technologies (SMART on FHIR) specification v1.0.0](http://www.hl7.org/fhir/smart-app-launch/1.0.0) to authorize users. Requests are authorized by if the requestor or the patient in context is [**referenced**](https://www.hl7.org/fhir/references.html) in the resource in question.
