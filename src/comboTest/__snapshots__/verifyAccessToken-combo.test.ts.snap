@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668482781,
+  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
+  "fhirUserObject": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Practitioner",
+  },
+  "iat": 1668479180,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/*.*",
+    "patient/*.write",
+  ],
+  "scp": Array [
+    "user/*.*",
+    "patient/*.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "user/*.*",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 2`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668482781,
+  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
+  "fhirUserObject": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Practitioner",
+  },
+  "iat": 1668479180,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/*.*",
+    "patient/*.write",
+  ],
+  "scp": Array [
+    "user/*.*",
+    "patient/*.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "user/*.*",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 3`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: User does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 4`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: User does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 5`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[Error: No usable scope][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 6`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[Error: No usable scope][39m]
+`;
