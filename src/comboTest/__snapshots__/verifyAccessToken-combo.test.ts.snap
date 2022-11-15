@@ -1,91 +1,1529 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 1`] = `
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 0",
+  "request": {
+    "accessToken": "fake",
+    "operation": "create",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 1668482781,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "iat": 1668479180,
+  "iat": 1668535867,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
   "scopes": Array [
-    "user/*.*",
-    "patient/*.write",
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
   ],
   "scp": Array [
-    "user/*.*",
-    "patient/*.write",
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "user/*.*",
+    "patient/Patient.write",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 2`] = `
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 0",
+  "request": {
+    "accessToken": "fake",
+    "operation": "create",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 1668482781,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "iat": 1668479180,
+  "iat": 1668535867,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
   "scopes": Array [
-    "user/*.*",
-    "patient/*.write",
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
   ],
   "scp": Array [
-    "user/*.*",
-    "patient/*.write",
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "user/*.*",
+    "patient/Patient.write",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 3`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: User does not have permission for requested operation][39m]
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 1",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "MedicationRequest"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/MedicationRequest.read",
+  ],
+  "ver": 1,
+}
 `;
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 4`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: User does not have permission for requested operation][39m]
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 1",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "MedicationRequest"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/MedicationRequest.read",
+  ],
+  "ver": 1,
+}
 `;
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 5`] = `
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 2",
+  "request": {
+    "accessToken": "fake",
+    "operation": "vread",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
 [Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
 
 Received promise rejected instead of resolved
-Rejected to value: [31m[Error: No usable scope][39m]
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: "Read and Write Access: initiate-export" 6`] = `
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 2",
+  "request": {
+    "accessToken": "fake",
+    "operation": "vread",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
 [Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
 
 Received promise rejected instead of resolved
-Rejected to value: [31m[Error: No usable scope][39m]
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 3",
+  "request": {
+    "accessToken": "fake",
+    "operation": "update",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 3",
+  "request": {
+    "accessToken": "fake",
+    "operation": "update",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.write",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 4",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 4",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 5",
+  "request": {
+    "accessToken": "fake",
+    "operation": "patch",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 5",
+  "request": {
+    "accessToken": "fake",
+    "operation": "patch",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 6",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-type",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 6",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-type",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 7",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-instance",
+    "resourceType": "MedicationRequest"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "patient/MedicationRequest.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 7",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-instance",
+    "resourceType": "MedicationRequest"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.read",
+      "patient/MedicationRequest.write",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/MedicationRequest.write",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "patient/MedicationRequest.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 8",
+  "request": {
+    "accessToken": "fake",
+    "operation": "search-type",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.read",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "patient/Binary.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 8",
+  "request": {
+    "accessToken": "fake",
+    "operation": "search-type",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/MedicationRequest.read",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 1668539468,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668535867,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "patientLaunchContext": Object {
+    "hostname": "https://fhir.server.com/dev",
+    "id": "id",
+    "resourceType": "Patient",
+  },
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/MedicationRequest.read",
+    "patient/Binary.read",
+    "patient/Binary.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/MedicationRequest.read",
+    "user/MedicationRequest.write",
+    "user/Binary.read",
+    "user/Binary.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/MedicationRequest.read",
+    "system/MedicationRequest.write",
+    "system/Binary.read",
+    "system/Binary.write",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "patient/Binary.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 9",
+  "request": {
+    "accessToken": "fake",
+    "operation": "transaction",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Binary.read",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 9",
+  "request": {
+    "accessToken": "fake",
+    "operation": "transaction",
+    "resourceType": "Patient"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Binary.read",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 10",
+  "request": {
+    "accessToken": "fake",
+    "operation": "batch",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 10",
+  "request": {
+    "accessToken": "fake",
+    "operation": "batch",
+    "resourceType": "Binary"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 11",
+  "request": {
+    "accessToken": "fake",
+    "operation": "search-system",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 11",
+  "request": {
+    "accessToken": "fake",
+    "operation": "search-system",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Patient.write",
+      "patient/Binary.read",
+      "patient/Binary.write",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 12",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-system",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Binary.read",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 1`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+`;
+
+exports[`verifyAccessToken-combo CASE: {
+  "testName": "Combo Test Row 12",
+  "request": {
+    "accessToken": "fake",
+    "operation": "history-system",
+    "resourceType": "Invalid and N/A"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668535867,
+    "exp": 1668539468,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/Binary.read",
+      "user/Patient.read",
+      "user/Patient.write",
+      "user/MedicationRequest.read",
+      "user/MedicationRequest.write",
+      "user/Binary.read",
+      "user/Binary.write",
+      "system/Patient.read",
+      "system/Patient.write",
+      "system/MedicationRequest.read",
+      "system/MedicationRequest.write",
+      "system/Binary.read",
+      "system/Binary.write"
+    ]
+  }
+} 2`] = `
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;

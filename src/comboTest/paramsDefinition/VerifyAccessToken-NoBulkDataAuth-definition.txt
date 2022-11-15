@@ -3,7 +3,7 @@ Name: VerifyAccessToken-NoBulkDataAuth
 
 [Parameter]
 patientContext(enum): patientIdentity,N/A
-fhirUser(enum): fhirUser,N/A
+fhirUser(enum): practitionerFhirUser,patientFhirUser,N/A
 operation(enum): create,read,vread,update,delete,patch,history-type,history-instance,search-type,transaction,batch,search-system,history-system
 resourceType(enum): Patient,MedicationRequest,Binary,Invalid and N/A
 id(enum): fake-patient-id-12345,fake-medication-id-12345,fake-medication-id-no-access-12345
