@@ -45,13 +45,16 @@ export const practitionerFhirUser: any = {
     fhirUser: practitionerIdentity,
 };
 
+// TODO: update iat, exp timestamps
+// iat: Math.floor(Date.now() / 1000) - 1,
+// exp: Math.floor(Date.now() / 1000) + 60 * 60,
 export const baseAccessNoScopes: any = {
     ver: 1,
     jti: 'AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY',
     iss: expectedIss,
     aud: expectedAud,
-    iat: Math.floor(Date.now() / 1000) - 1,
-    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+    iat: 1668546607,
+    exp: 2668546607,
     cid: '0oa8muazKSyk9gP5y5d5',
     uid: '00u85ozwjjWRd17PB5d5',
     sub,

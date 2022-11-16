@@ -5,10 +5,10 @@ Name: VerifyAccessToken-NoBulkDataAuth
 patientContext(enum): patientIdentity,N/A
 fhirUser(enum): practitionerFhirUser,patientFhirUser,N/A
 operation(enum): create,read,vread,update,delete,patch,history-type,history-instance,search-type,transaction,batch,search-system,history-system
-resourceType(enum): Patient,MedicationRequest,Binary,Invalid and N/A
+resourceType(enum): Patient,MedicationRequest,Binary,Invalid,N/A
 id(enum): fake-patient-id-12345,fake-medication-id-12345,fake-medication-id-no-access-12345
 vid(enum): 0,1
-fhirServiceBaseUrl(enum): https
+fhirServiceBaseUrl(enum): https://fhir.server.com/dev,https://random.server.com/dev,N/A
 patient/Patient.read(enum): patient/Patient.read,N/A
 patient/Patient.write(enum): patient/Patient.write,N/A
 patient/MedicationRequest.read(enum): patient/MedicationRequest.read,N/A

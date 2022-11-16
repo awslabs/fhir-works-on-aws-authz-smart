@@ -1,15 +1,13 @@
 // import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 // import * as fs from 'fs';
 // import { filterOutUnusableScope } from './smartScopeHelper';
-import * as path from 'path';
 import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
+import CsvUtil from './csvUtil';
 
 // const sync = require('csv-parse/lib/sync');
-
-const { load } = require('csv-load-sync');
 
 interface CsvRow {
     patientContext: object | undefined;
@@ -50,14 +48,12 @@ const getScopesFromResult = (result: any) => {
 };
 
 // TODO : use path to get the right path
-const csv: CsvRow[] = load(path.resolve(__dirname, './params/VerifyAccessToken-NoBulkDataAuth-params.csv'), {
-    convert: {
-        isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
-        resourceType: (s: string) => (s === 'N/A') ? undefined : s,
-        fhirUser: (s: string) => testStubs.getFhirUserType(s),
-        patientContext: (s: string) => (s === 'N/A') ? undefined : testStubs.patientContext,
-    },
+const csvUtil = new CsvUtil<CsvRow>('./params/VerifyAccessToken-NoBulkDataAuth-params.csv');
+const csv = csvUtil.loadCsv({
+    isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
+    fhirServiceBaseUrl: (s: string) => (s === 'N/A') ? undefined : s,
 });
+
 const clonedScopeRule = testStubs.scopeRule();
 const testCasesFromCSV: any[] = [];
 // [
@@ -80,6 +76,7 @@ csv.forEach((row, index) => {
         operation: row.operation,
         resourceType: row.resourceType || '',
         bulkDataAuth: undefined,
+        fhirServiceBaseUrl: row.fhirServiceBaseUrl,
     };
     result.decodedAccessToken = {
         ...testStubs.baseAccessNoScopes,
@@ -134,19 +131,16 @@ describe('verifyAccessToken-combo', () => {
     // ];
 
     const authZConfig = testStubs.baseAuthZConfig();
-    const authZHandler: SMARTHandler = new SMARTHandler(authZConfig, testStubs.apiUrl, '4.0.1', undefined, undefined, true);
+    const authZHandler: SMARTHandler = new SMARTHandler(
+        authZConfig,
+        testStubs.apiUrl,
+        '4.0.1',
+        undefined,
+        undefined,
+        true,
+    );
+
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
-        const authZHandlerWithAnotherApiURL: SMARTHandler = new SMARTHandler(
-            authZConfig,
-            'https://some-server.com',
-            '4.0.1',
-            undefined,
-            undefined,
-            true,
-        );
-
-        const requestWithFhirServiceBaseUrl = { ...testCase.request, fhirServiceBaseUrl: testStubs.apiUrl };
-
         // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(testCase.decodedAccessToken),
@@ -158,15 +152,6 @@ describe('verifyAccessToken-combo', () => {
         } catch (e) {
             expect(e).toMatchSnapshot();
         }
-
-        try {
-            await expect(
-                authZHandlerWithAnotherApiURL.verifyAccessToken(
-                    <VerifyAccessTokenRequest>requestWithFhirServiceBaseUrl,
-                ),
-            ).resolves.toMatchSnapshot();
-        } catch (e) {
-            expect(e).toMatchSnapshot();
-        }
     });
+
 });
