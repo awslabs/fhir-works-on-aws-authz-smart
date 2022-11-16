@@ -1,22 +1,16 @@
-// import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
-// import * as fs from 'fs';
-// import { filterOutUnusableScope } from './smartScopeHelper';
-import * as path from 'path';
 import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
-import { json2csvAsync } from 'json-2-csv';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
 import CsvUtil from './csvUtil';
-const fs = require('fs');
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-// const sync = require('csv-parse/lib/sync');
 
 interface CsvRow {
     patientContext: object | undefined;
     fhirUser: string | undefined;
     operation: string;
+    'BulkDataAuth.operation': string;
+    'BulkDataAuth.exportType': string;
     resourceType: string | undefined;
     id: string;
     vid: string;
@@ -39,7 +33,21 @@ interface CsvRow {
     'system/MedicationRequest.write': string;
     'system/Binary.read': string;
     'system/Binary.write': string;
+    isUserScopeAllowedForSystemExport: boolean;
 }
+
+export interface BulkDataAuth {
+    operation:
+    | 'initiate-export'
+    | 'initiate-import'
+    | 'get-status-export'
+    | 'get-status-import'
+    | 'cancel-export'
+    | 'cancel-import';
+    exportType?: 'system' | 'group' | 'patient';
+    importResources?: string[];
+}
+
 
 const getScopesFromResult = (result: any) => {
     const scopes: string[] = [];
@@ -52,7 +60,7 @@ const getScopesFromResult = (result: any) => {
 };
 
 // TODO : use path to get the right path
-const csvUtil = new CsvUtil<CsvRow>('./params/VerifyAccessToken-NoBulkDataAuth-params.csv');
+const csvUtil = new CsvUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv');
 const csv = csvUtil.loadCsv({
     isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
     fhirServiceBaseUrl: (s: string) => (s === 'N/A') ? undefined : s,
@@ -60,27 +68,21 @@ const csv = csvUtil.loadCsv({
 
 const clonedScopeRule = testStubs.scopeRule();
 const testCasesFromCSV: any[] = [];
-// [
-//     'Read and Write Access: initiate-export',
-//     {
-//         accessToken: 'fake',
-//         operation: 'read',
-//         resourceType: '',
-//         bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
-//     },
-//     { ...baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...practitionerFhirUser },
-// ]
+
 
 const testCases: any[] = [];
 csv.forEach((row, index) => {
     const result: any = {};
-
+    const bulkDataAuth: any = {
+        operation: row['BulkDataAuth.operation'],
+        exportType: row['BulkDataAuth.exportType'],
+    };
     result.testName = `Combo Test Row ${index}`;
     result.request = {
         accessToken: 'fake',
         operation: row.operation,
         resourceType: row.resourceType || '',
-        bulkDataAuth: undefined,
+        bulkDataAuth,
         fhirServiceBaseUrl: row.fhirServiceBaseUrl,
     };
     result.decodedAccessToken = {
@@ -88,6 +90,7 @@ csv.forEach((row, index) => {
         scp: getScopesFromResult(row),
         fhirUser: row.fhirUser,
     };
+    result.isUserScopeAllowedForSystemExport = row.isUserScopeAllowedForSystemExport;
     if (row.patientContext) {
         result.decodedAccessToken = {
             ...result.decodedAccessToken,
@@ -97,52 +100,23 @@ csv.forEach((row, index) => {
     testCases.push([JSON.stringify(result, null, 2), result]);
 });
 
-// End TODO
-
 describe('verifyAccessToken-combo', () => {
-    // Example array of test cases
-    // TODO: next step is to convert csv file loaded to follow the same format
-    // const cases: (string | boolean | VerifyAccessTokenRequest | any)[][] = [
-    //     [
-    //         'Read and Write Access: initiate-export',
-    //         {
-    //             accessToken: 'fake',
-    //             operation: 'read',
-    //             resourceType: '',
-    //             bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
-    //         },
-    //         { ...testStubs.baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...testStubs.practitionerFhirUser },
-    //     ],
-    //     [
-    //         'Read and Write Access: initiate-export',
-    //         {
-    //             accessToken: 'fake',
-    //             operation: 'read',
-    //             resourceType: '',
-    //             bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
-    //         },
-    //         { ...testStubs.baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...testStubs.patientFhirUser },
-    //     ],
-    //     [
-    //         'Read and Write Access: initiate-export',
-    //         {
-    //             accessToken: 'fake',
-    //             operation: 'read',
-    //             resourceType: '',
-    //             bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
-    //         },
-    //         { ...testStubs.baseAccessNoScopes, scp: ['user/*.*', 'patient/*.write'], ...testStubs.patientContext },
-    //     ],
-    // ];
-
     const authZConfig = testStubs.baseAuthZConfig();
-    const authZHandler: SMARTHandler = new SMARTHandler(
+    const authZHandlerUserScope: SMARTHandler = new SMARTHandler(
         authZConfig,
         testStubs.apiUrl,
         '4.0.1',
         undefined,
         undefined,
         true,
+    );
+    const authZHandlerNoUserScope: SMARTHandler = new SMARTHandler(
+        authZConfig,
+        testStubs.apiUrl,
+        '4.0.1',
+        undefined,
+        undefined,
+        false,
     );
 
 
@@ -152,6 +126,9 @@ describe('verifyAccessToken-combo', () => {
             Promise.resolve(testCase.decodedAccessToken),
         );
 
+        const authZHandler = testCase.isUserScopeAllowedForSystemExport
+            ? authZHandlerUserScope
+            : authZHandlerNoUserScope;
         // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
             await expect(

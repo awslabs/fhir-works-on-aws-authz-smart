@@ -239,12 +239,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 3",
@@ -480,12 +475,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 6",
@@ -825,12 +815,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 10",
@@ -869,12 +854,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 11",
@@ -913,12 +893,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 12",
@@ -959,12 +934,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 13",
@@ -1004,12 +974,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 14",
@@ -1049,12 +1014,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 15",
@@ -1962,12 +1922,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 25",
@@ -2005,12 +1960,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 26",
@@ -2052,12 +2002,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 27",
@@ -2095,12 +2040,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 28",
@@ -2144,12 +2084,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 29",
@@ -2187,12 +2122,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 30",
@@ -2422,12 +2352,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 33",
@@ -2959,12 +2884,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 39",
@@ -3003,12 +2923,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 40",
@@ -3051,12 +2966,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 41",
@@ -3092,12 +3002,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 42",
@@ -3140,12 +3045,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 43",
@@ -3183,12 +3083,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 44",
@@ -3226,12 +3121,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 45",
@@ -3466,12 +3356,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 48",
@@ -3701,12 +3586,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 51",
@@ -3939,12 +3819,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 54",
@@ -3987,12 +3862,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 55",
@@ -4030,12 +3900,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 56",
@@ -4076,12 +3941,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 57",
@@ -4121,12 +3981,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 58",
@@ -4167,12 +4022,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 59",
@@ -4214,12 +4064,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 60",
@@ -4452,12 +4297,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 63",
@@ -4691,12 +4531,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 66",
@@ -4927,12 +4762,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 69",
@@ -4976,12 +4806,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 70",
@@ -5018,12 +4843,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 71",
@@ -5062,12 +4882,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 72",
@@ -5108,12 +4923,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 73",
@@ -5153,12 +4963,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 74",
@@ -5195,12 +5000,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 75",
@@ -5435,12 +5235,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 78",
@@ -5672,12 +5467,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 81",
@@ -5914,12 +5704,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 84",
@@ -5956,12 +5741,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 85",
@@ -6005,12 +5785,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 86",
@@ -6051,12 +5826,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 87",
@@ -6095,12 +5865,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 88",
@@ -6142,12 +5907,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 89",
@@ -6186,12 +5946,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 90",
@@ -6430,12 +6185,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 93",
@@ -6954,12 +6704,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 99",
@@ -7002,12 +6747,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 100",
@@ -7045,12 +6785,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 101",
@@ -7091,12 +6826,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 102",
@@ -7137,12 +6867,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 103",
@@ -7182,12 +6907,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 104",
@@ -7225,12 +6945,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 105",
@@ -7766,12 +7481,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 111",
@@ -8100,12 +7810,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 115",
@@ -8149,12 +7854,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 116",
@@ -8194,12 +7894,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 117",
@@ -8238,12 +7933,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 118",
@@ -8285,12 +7975,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 119",
@@ -8332,12 +8017,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 120",
@@ -8576,12 +8256,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 123",
@@ -9101,12 +8776,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 129",
@@ -9149,12 +8819,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 130",
@@ -9192,12 +8857,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 131",
@@ -9239,12 +8899,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 132",
@@ -9285,12 +8940,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 133",
@@ -9330,12 +8980,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 134",
@@ -9371,12 +9016,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 135",
@@ -9900,12 +9540,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 141",
@@ -10240,12 +9875,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 145",
@@ -10289,12 +9919,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 146",
@@ -10332,12 +9957,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 147",
@@ -10579,12 +10199,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 150",
@@ -10623,12 +10238,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 151",
@@ -10670,12 +10280,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 152",
@@ -10714,12 +10319,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 153",
@@ -10760,12 +10360,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 154",
@@ -10805,12 +10400,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 155",
@@ -10850,12 +10440,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 156",
@@ -10896,12 +10481,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 157",
@@ -10941,12 +10521,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 158",
@@ -10983,12 +10558,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 159",
@@ -11031,12 +10601,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 160",
@@ -11074,12 +10639,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 161",
@@ -11121,12 +10681,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 162",
@@ -11167,12 +10722,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 163",
@@ -11212,12 +10762,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 164",
@@ -11254,12 +10799,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 165",
@@ -11795,12 +11335,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 171",
@@ -12135,12 +11670,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 175",
@@ -12184,12 +11714,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 176",
@@ -12228,12 +11753,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 177",
@@ -12272,12 +11792,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 178",
@@ -12319,12 +11834,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 179",
@@ -12362,12 +11872,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 180",
@@ -12606,12 +12111,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 183",
@@ -13131,12 +12631,7 @@ exports[`verifyAccessToken-combo CASE: {
       "system/Binary.write"
     ]
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 189",
@@ -13179,12 +12674,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 190",
@@ -13222,12 +12712,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 191",
@@ -13271,12 +12756,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 192",
@@ -13317,12 +12797,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 193",
@@ -13362,12 +12837,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 194",
@@ -13409,12 +12879,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 195",
@@ -13563,12 +13028,7 @@ exports[`verifyAccessToken-combo CASE: {
     ],
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 197",
@@ -14113,12 +13573,7 @@ exports[`verifyAccessToken-combo CASE: {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   }
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-combo CASE: {
   "testName": "Combo Test Row 203",
