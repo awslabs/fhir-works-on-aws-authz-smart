@@ -1,4 +1,5 @@
-import { ScopeRule, SMARTConfig } from '../smartConfig';
+import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
+import { getFhirUser } from '../smartAuthorizationHelper';
 
 export const scopeRule = (): ScopeRule => ({
     patient: {
@@ -63,8 +64,19 @@ export const baseAccessNoScopes: any = {
 export const getFhirUserType = (fhirUser: string): string | undefined => {
     if (fhirUser === 'practitionerFhirUser') {
         return practitionerIdentity;
-    } else if (fhirUser === 'patientFhirUser') {
+    }
+    if (fhirUser === 'patientFhirUser') {
         return patientIdentity;
     }
     return undefined;
-}
+};
+
+export const getFhirUserObject = (fhirUser: string): FhirResource | undefined => {
+    if (fhirUser === 'practitionerFhirUser') {
+        return getFhirUser(practitionerIdentity);
+    }
+    if (fhirUser === 'patientFhirUser' || fhirUser === 'patientIdentity') {
+        return getFhirUser(patientIdentity);
+    }
+    return undefined;
+};

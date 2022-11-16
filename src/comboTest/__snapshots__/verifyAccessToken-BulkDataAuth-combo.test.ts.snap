@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 0",
   "request": {
     "accessToken": "fake",
@@ -71,7 +71,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 1",
   "request": {
     "accessToken": "fake",
@@ -93,50 +93,20 @@ exports[`verifyAccessToken-combo CASE: {
     "cid": "0oa8muazKSyk9gP5y5d5",
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
-    "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
-    ],
+    "scp": [],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 2",
   "request": {
     "accessToken": "fake",
@@ -160,9 +130,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -177,16 +145,12 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
@@ -198,7 +162,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 3",
   "request": {
     "accessToken": "fake",
@@ -223,44 +187,18 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 4",
   "request": {
     "accessToken": "fake",
@@ -285,8 +223,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
@@ -309,16 +245,12 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -332,7 +264,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 5",
   "request": {
     "accessToken": "fake",
@@ -356,9 +288,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -366,39 +296,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 6",
   "request": {
     "accessToken": "fake",
@@ -422,46 +326,18 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 7",
   "request": {
     "accessToken": "fake",
@@ -485,7 +361,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -502,14 +377,12 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -524,7 +397,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 8",
   "request": {
     "accessToken": "fake",
@@ -547,10 +420,8 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -564,7 +435,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 9",
   "request": {
     "accessToken": "fake",
@@ -590,8 +461,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -606,7 +475,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 10",
   "request": {
     "accessToken": "fake",
@@ -631,9 +500,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -644,7 +511,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 11",
   "request": {
     "accessToken": "fake",
@@ -668,8 +535,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -682,7 +547,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 12",
   "request": {
     "accessToken": "fake",
@@ -707,7 +572,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
@@ -730,14 +594,12 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -751,7 +613,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 13",
   "request": {
     "accessToken": "fake",
@@ -775,10 +637,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -786,41 +645,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 14",
   "request": {
     "accessToken": "fake",
@@ -843,9 +674,6 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -859,28 +687,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 15",
   "request": {
     "accessToken": "fake",
@@ -907,8 +728,7 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -926,7 +746,6 @@ Object {
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
@@ -934,19 +753,17 @@ Object {
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 16",
   "request": {
     "accessToken": "fake",
@@ -969,11 +786,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -981,41 +794,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 17",
   "request": {
     "accessToken": "fake",
@@ -1084,7 +869,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 18",
   "request": {
     "accessToken": "fake",
@@ -1108,9 +893,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -1124,27 +907,22 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 19",
   "request": {
     "accessToken": "fake",
@@ -1169,9 +947,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -1187,30 +963,25 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 20",
   "request": {
     "accessToken": "fake",
@@ -1233,11 +1004,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -1245,41 +1012,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 21",
   "request": {
     "accessToken": "fake",
@@ -1348,7 +1087,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 22",
   "request": {
     "accessToken": "fake",
@@ -1375,7 +1114,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -1393,7 +1131,6 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
@@ -1401,20 +1138,18 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 23",
   "request": {
     "accessToken": "fake",
@@ -1437,10 +1172,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -1453,28 +1185,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 24",
   "request": {
     "accessToken": "fake",
@@ -1498,11 +1223,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -1510,43 +1231,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 25",
   "request": {
     "accessToken": "fake",
@@ -1612,7 +1303,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 26",
   "request": {
     "accessToken": "fake",
@@ -1637,45 +1328,18 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 27",
   "request": {
     "accessToken": "fake",
@@ -1699,8 +1363,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -1716,15 +1378,11 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -1738,7 +1396,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 28",
   "request": {
     "accessToken": "fake",
@@ -1765,7 +1423,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -1789,7 +1446,6 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
@@ -1797,20 +1453,18 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 29",
   "request": {
     "accessToken": "fake",
@@ -1833,10 +1487,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -1855,28 +1506,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 30",
   "request": {
     "accessToken": "fake",
@@ -1900,10 +1544,8 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -1917,29 +1559,24 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 31",
   "request": {
     "accessToken": "fake",
@@ -1964,8 +1601,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -1981,28 +1616,23 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 32",
   "request": {
     "accessToken": "fake",
@@ -2026,8 +1656,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -2048,27 +1676,22 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 33",
   "request": {
     "accessToken": "fake",
@@ -2093,10 +1716,8 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -2117,30 +1738,25 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 34",
   "request": {
     "accessToken": "fake",
@@ -2164,9 +1780,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -2181,29 +1795,24 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 35",
   "request": {
     "accessToken": "fake",
@@ -2228,9 +1837,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -2245,28 +1852,23 @@ Object {
   "scopes": Array [
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 36",
   "request": {
     "accessToken": "fake",
@@ -2291,7 +1893,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -2313,13 +1914,11 @@ Object {
   "scopes": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
@@ -2331,7 +1930,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 37",
   "request": {
     "accessToken": "fake",
@@ -2354,8 +1953,6 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
@@ -2376,14 +1973,10 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -2397,7 +1990,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 38",
   "request": {
     "accessToken": "fake",
@@ -2422,10 +2015,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -2439,7 +2029,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 39",
   "request": {
     "accessToken": "fake",
@@ -2464,45 +2054,18 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 40",
   "request": {
     "accessToken": "fake",
@@ -2527,48 +2090,18 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 41",
   "request": {
     "accessToken": "fake",
@@ -2592,7 +2125,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -2609,14 +2141,12 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -2631,7 +2161,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 42",
   "request": {
     "accessToken": "fake",
@@ -2655,9 +2185,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -2671,27 +2199,22 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 43",
   "request": {
     "accessToken": "fake",
@@ -2760,7 +2283,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 44",
   "request": {
     "accessToken": "fake",
@@ -2785,9 +2308,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -2803,30 +2323,23 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 45",
   "request": {
     "accessToken": "fake",
@@ -2850,10 +2363,8 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -2861,40 +2372,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
   "request": {
     "accessToken": "fake",
@@ -2920,9 +2404,7 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -2930,43 +2412,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 47",
   "request": {
     "accessToken": "fake",
@@ -2991,7 +2443,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -3006,7 +2457,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 48",
   "request": {
     "accessToken": "fake",
@@ -3030,8 +2481,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -3047,15 +2496,11 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -3069,7 +2514,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 49",
   "request": {
     "accessToken": "fake",
@@ -3094,7 +2539,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -3110,26 +2554,23 @@ Object {
   "scopes": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 50",
   "request": {
     "accessToken": "fake",
@@ -3154,10 +2595,8 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -3172,30 +2611,25 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 51",
   "request": {
     "accessToken": "fake",
@@ -3219,46 +2653,18 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 52",
   "request": {
     "accessToken": "fake",
@@ -3281,11 +2687,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -3293,41 +2695,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 53",
   "request": {
     "accessToken": "fake",
@@ -3352,8 +2726,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -3375,25 +2748,22 @@ Object {
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 54",
   "request": {
     "accessToken": "fake",
@@ -3418,9 +2788,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -3428,40 +2796,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 55",
   "request": {
     "accessToken": "fake",
@@ -3486,9 +2827,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -3504,17 +2843,13 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
@@ -3526,7 +2861,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 56",
   "request": {
     "accessToken": "fake",
@@ -3549,10 +2884,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -3563,7 +2895,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 57",
   "request": {
     "accessToken": "fake",
@@ -3588,7 +2920,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -3612,7 +2943,6 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -3620,7 +2950,6 @@ Object {
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -3635,7 +2964,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 58",
   "request": {
     "accessToken": "fake",
@@ -3660,7 +2989,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -3682,26 +3010,23 @@ Object {
   "scopes": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 59",
   "request": {
     "accessToken": "fake",
@@ -3724,10 +3049,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -3735,39 +3057,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 60",
   "request": {
     "accessToken": "fake",
@@ -3793,7 +3089,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -3811,7 +3106,6 @@ Object {
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -3819,7 +3113,6 @@ Object {
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -3833,7 +3126,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 61",
   "request": {
     "accessToken": "fake",
@@ -3858,9 +3151,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -3882,30 +3173,25 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 62",
   "request": {
     "accessToken": "fake",
@@ -3930,9 +3216,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -3947,28 +3231,23 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 63",
   "request": {
     "accessToken": "fake",
@@ -3993,9 +3272,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -4010,7 +3287,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 64",
   "request": {
     "accessToken": "fake",
@@ -4034,8 +3311,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -4051,15 +3326,11 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -4073,7 +3344,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 65",
   "request": {
     "accessToken": "fake",
@@ -4097,10 +3368,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -4108,41 +3376,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 66",
   "request": {
     "accessToken": "fake",
@@ -4166,10 +3406,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -4183,29 +3420,22 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 67",
   "request": {
     "accessToken": "fake",
@@ -4231,7 +3461,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -4248,27 +3477,24 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 68",
   "request": {
     "accessToken": "fake",
@@ -4294,9 +3520,7 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -4304,43 +3528,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 69",
   "request": {
     "accessToken": "fake",
@@ -4363,8 +3557,6 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
@@ -4385,14 +3577,10 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -4406,7 +3594,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 70",
   "request": {
     "accessToken": "fake",
@@ -4429,9 +3617,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -4451,28 +3637,23 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 71",
   "request": {
     "accessToken": "fake",
@@ -4497,7 +3678,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -4514,14 +3694,12 @@ Object {
   "scopes": Array [
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -4534,7 +3712,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 72",
   "request": {
     "accessToken": "fake",
@@ -4558,10 +3736,8 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -4581,29 +3757,24 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 73",
   "request": {
     "accessToken": "fake",
@@ -4629,9 +3800,7 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -4653,29 +3822,24 @@ Object {
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 74",
   "request": {
     "accessToken": "fake",
@@ -4717,7 +3881,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 75",
   "request": {
     "accessToken": "fake",
@@ -4740,11 +3904,7 @@ exports[`verifyAccessToken-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -4755,7 +3915,7 @@ Received promise rejected instead of resolved
 Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 76",
   "request": {
     "accessToken": "fake",
@@ -4779,9 +3939,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -4802,29 +3959,22 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 77",
   "request": {
     "accessToken": "fake",
@@ -4850,7 +4000,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -4868,7 +4017,6 @@ Object {
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -4876,7 +4024,6 @@ Object {
     "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -4890,7 +4037,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 78",
   "request": {
     "accessToken": "fake",
@@ -4915,7 +4062,6 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -4933,7 +4079,6 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -4941,7 +4086,6 @@ Object {
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -4956,7 +4100,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 79",
   "request": {
     "accessToken": "fake",
@@ -4980,10 +4124,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -4991,41 +4132,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 80",
   "request": {
     "accessToken": "fake",
@@ -5049,46 +4162,18 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 81",
   "request": {
     "accessToken": "fake",
@@ -5148,7 +4233,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 82",
   "request": {
     "accessToken": "fake",
@@ -5172,10 +4257,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -5183,40 +4265,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 83",
   "request": {
     "accessToken": "fake",
@@ -5240,7 +4295,6 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -5263,14 +4317,12 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
-    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -5285,7 +4337,7 @@ Object {
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 84",
   "request": {
     "accessToken": "fake",
@@ -5310,9 +4362,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -5320,41 +4370,13 @@ exports[`verifyAccessToken-combo CASE: {
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 85",
   "request": {
     "accessToken": "fake",
@@ -5380,7 +4402,6 @@ exports[`verifyAccessToken-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -5403,27 +4424,24 @@ Object {
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 86",
   "request": {
     "accessToken": "fake",
@@ -5448,9 +4466,7 @@ exports[`verifyAccessToken-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -5465,28 +4481,23 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "user/Patient.read",
-    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
 `;
 
-exports[`verifyAccessToken-combo CASE: {
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 87",
   "request": {
     "accessToken": "fake",
@@ -5510,9 +4521,7 @@ exports[`verifyAccessToken-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -5533,22 +4542,17 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
