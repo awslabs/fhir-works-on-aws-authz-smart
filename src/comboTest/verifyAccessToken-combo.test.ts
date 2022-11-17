@@ -1,9 +1,13 @@
 import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
+import { json2csv, json2csvAsync } from 'json-2-csv';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
 import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
 import { convertNAtoUndefined } from './testStubs';
+let converter = require('json-2-csv');
 
 interface CsvRow extends BaseCsvRow {
     id: string;
@@ -69,8 +73,19 @@ const loadAndPrepareTestCases = (): any[] => {
 
 describe('verifyAccessToken-combo', () => {
     const testResults: any[] = [];
-    afterAll(() => {
-        testCaseUtil.writeTestResultsToCsv(testResults);
+    const keysToOutput: any[] = [
+        { field: 'testName', title: 'Test Number' },
+        { field: 'request.operation', title: 'Operation' },
+        { field: 'request.resourceType', title: ' Resource' },
+        { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
+        { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
+        { field: 'message', title: 'Error' },
+        { field: 'usableScopes', title: 'Usable Scopes' },
+        { field: 'decodedAccessToken.scp', title: 'Scopes' },
+    ];
+
+    afterAll(async () => {
+        await testCaseUtil.writeTestResultsToCsv(testResults, 'verifyAccessToken', keysToOutput);
     });
     const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();
@@ -92,12 +107,13 @@ describe('verifyAccessToken-combo', () => {
         // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
             testResult = await authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request);
+
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             // TODO: append errors to output file
-            testResult = e;
+            testResult = { message: (e as Error).message};
             expect(e).toMatchSnapshot();
         }
-        testResults.push({ testCase, testResult });
+        testResults.push({ ...testCase, ...testResult });
     });
 });

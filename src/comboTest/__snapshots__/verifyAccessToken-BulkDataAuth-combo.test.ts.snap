@@ -36,12 +36,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 1",
@@ -71,12 +66,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 2",
@@ -108,12 +98,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 3",
@@ -144,12 +129,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 4",
@@ -250,12 +230,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 6",
@@ -286,12 +261,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 7",
@@ -385,12 +355,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 9",
@@ -425,12 +390,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 10",
@@ -462,12 +422,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 11",
@@ -498,12 +453,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 12",
@@ -604,12 +554,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 14",
@@ -756,12 +701,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 17",
@@ -861,12 +801,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 19",
@@ -958,12 +893,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 21",
@@ -1066,12 +996,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 23",
@@ -1155,12 +1080,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 25",
@@ -1258,12 +1178,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 27",
@@ -1357,12 +1272,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 29",
@@ -1450,12 +1360,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 31",
@@ -1545,12 +1450,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 33",
@@ -1647,12 +1547,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 35",
@@ -1869,12 +1764,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 39",
@@ -1906,12 +1796,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 40",
@@ -1943,12 +1828,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 41",
@@ -2041,12 +1921,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 43",
@@ -2209,12 +2084,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
@@ -2249,12 +2119,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 47",
@@ -2288,12 +2153,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 48",
@@ -2495,12 +2355,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 52",
@@ -2532,12 +2387,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 53",
@@ -2633,12 +2483,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 55",
@@ -2726,12 +2571,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 57",
@@ -2837,12 +2677,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 59",
@@ -2874,12 +2709,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 60",
@@ -3100,12 +2930,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 64",
@@ -3195,12 +3020,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 66",
@@ -3349,12 +3169,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 69",
@@ -3450,12 +3265,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 71",
@@ -3551,12 +3361,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 73",
@@ -3661,12 +3466,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 75",
@@ -3695,12 +3495,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 76",
@@ -3921,12 +3716,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 80",
@@ -3956,12 +3746,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 81",
@@ -4057,12 +3842,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 83",
@@ -4165,12 +3945,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
-
-Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
-`;
+} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 85",

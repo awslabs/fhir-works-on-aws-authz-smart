@@ -6,6 +6,7 @@
 /scripts/*.json
 # Ignore any zip files
 *.zip
+*output.csv
 
 Info_Output.yml
 dist

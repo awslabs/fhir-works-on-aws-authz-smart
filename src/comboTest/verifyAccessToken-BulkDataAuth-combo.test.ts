@@ -19,11 +19,11 @@ interface CsvRow extends BaseCsvRow {
     'system/*.read': string;
     isUserScopeAllowedForSystemExport: boolean;
 }
-const testcaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv');
+const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv');
 
 const loadAndPrepareTestCases = () => {
     const testCases: any[] = [];
-    const csv = testcaseUtil.loadTestCase({
+    const csv = testCaseUtil.loadTestCase({
         isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
         fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
     });
@@ -45,7 +45,7 @@ const loadAndPrepareTestCases = () => {
         };
         testCase.decodedAccessToken = {
             ...testStubs.baseAccessNoScopes,
-            scp: testcaseUtil.getScopesFromResult(row),
+            scp: testCaseUtil.getScopesFromResult(row),
             fhirUser: row.fhirUser,
         };
         testCase.isUserScopeAllowedForSystemExport = row.isUserScopeAllowedForSystemExport;
@@ -61,7 +61,23 @@ const loadAndPrepareTestCases = () => {
 };
 
 describe('verifyAccessToken-BulkDataAuth-combo', () => {
-    const testCases: any[] = loadAndPrepareTestCases();
+    
+    const testResults: any[] = [];
+    // TODO: Update for bulk
+    const keysToOutput: any[] = [
+        { field: 'testName', title: 'Test Number' },
+        { field: 'request.operation', title: 'Operation' },
+        { field: 'request.resourceType', title: ' Resource' },
+        { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
+        { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
+        { field: 'message', title: 'Error' },
+        { field: 'usableScopes', title: 'Usable Scopes' },
+        { field: 'decodedAccessToken.scp', title: 'Scopes' },
+    ];
+    afterAll(async () => {
+        await testCaseUtil.writeTestResultsToCsv(testResults, 'verifyAccessToken-BulkDataAuth', keysToOutput);
+    });
+    const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();
     const authZHandlerUserScope: SMARTHandler = new SMARTHandler(
         authZConfig,
@@ -79,23 +95,25 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
         undefined,
         false,
     );
-
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
         // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
         jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
             Promise.resolve(testCase.decodedAccessToken),
         );
+        let testResult: any;
         const authZHandler = testCase.isUserScopeAllowedForSystemExport
             ? authZHandlerUserScope
             : authZHandlerNoUserScope;
         // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
-            await expect(
-                authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request),
-            ).resolves.toMatchSnapshot();
+            testResult = await authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request);
+
+            expect(testResult).toMatchSnapshot();
         } catch (e) {
             // TODO: append errors to output file
+            testResult = { message: (e as Error).message};
             expect(e).toMatchSnapshot();
         }
+        testResults.push({ ...testCase, ...testResult });
     });
 });
