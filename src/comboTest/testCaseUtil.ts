@@ -3,7 +3,7 @@ import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { writeFileSync } from 'fs';
 import { json2csvAsync } from 'json-2-csv';
 import { UserIdentity } from '../smartConfig';
-import { convertNAtoUndefined, getFhirUserObject, scopeRule } from './testStubs';
+import { convertNAtoUndefined, getFhirUserObject, getFhirUserType, scopeRule } from './testStubs';
 import { filterOutUnusableScope } from '../smartScopeHelper';
 
 // TODO: Change name of the file to include .test, then exlucd it from running in project.json
@@ -43,7 +43,7 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
                 scopes,
             };
 
-            const fhirUserClaim = row.fhirUser;
+            const fhirUserClaim = getFhirUserType(row.fhirUser);
             const patientContextClaim = row.patientContext;
 
             const usableScopes = filterOutUnusableScope(

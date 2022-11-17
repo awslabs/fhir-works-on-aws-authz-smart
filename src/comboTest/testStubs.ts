@@ -61,11 +61,11 @@ export const baseAccessNoScopes: any = {
     sub,
 };
 
-export const getFhirUserType = (fhirUser: string): string | undefined => {
+export const getFhirUserType = (fhirUser: string | undefined): string | undefined => {
     if (fhirUser === 'practitionerFhirUser') {
         return practitionerIdentity;
     }
-    if (fhirUser === 'patientFhirUser') {
+    if (fhirUser === 'patientFhirUser' || fhirUser === 'patientIdentity') {
         return patientIdentity;
     }
     return undefined;

@@ -44,8 +44,6 @@ const loadAndPrepareTestCases = (): any[] => {
     csv.forEach((inputRow, index) => {
         const result: any = {};
 
-        console.log(inputRow.userIdentity);
-
         const row = inputRow.csvRow;
         result.testName = `Combo Test Row ${index}`;
         result.request = {
@@ -58,7 +56,7 @@ const loadAndPrepareTestCases = (): any[] => {
         result.decodedAccessToken = {
             ...testStubs.baseAccessNoScopes,
             scp: testCaseUtil.getScopesFromResult(row),
-            fhirUser: row.fhirUser,
+            fhirUser: testStubs.getFhirUserType(row.fhirUser),
         };
         if (row.patientContext) {
             result.decodedAccessToken = {
@@ -104,7 +102,6 @@ describe('verifyAccessToken-combo', () => {
             Promise.resolve(testCase.decodedAccessToken),
         );
         let testResult: any;
-        // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
             testResult = await authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request);
 
