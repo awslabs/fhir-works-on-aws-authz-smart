@@ -30,45 +30,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -132,34 +104,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/*.read",
       "user/*.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -226,6 +179,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -239,6 +193,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -327,7 +282,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/*.read",
       "user/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -423,6 +379,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -501,7 +458,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/Patient.read",
       "user/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -575,6 +533,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -588,6 +547,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -675,7 +635,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -683,6 +644,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -788,6 +750,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -894,32 +857,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "user/Patient.read",
       "system/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1006,6 +952,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1115,38 +1062,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "user/*.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1225,6 +1149,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1329,7 +1254,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/*.read",
       "user/Patient.read",
       "user/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -1425,43 +1351,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1546,34 +1446,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/*.read",
       "user/*.read",
       "system/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1658,37 +1539,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1782,34 +1643,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/*.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -1895,6 +1737,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1908,6 +1751,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -1956,6 +1800,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1969,6 +1814,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -2017,6 +1863,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/*.read",
       "system/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -2055,14 +1902,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/Patient.read",
       "user/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 [Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
 
 Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2091,7 +1939,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -2128,7 +1977,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -2136,6 +1986,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -2186,32 +2037,15 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "user/Patient.read",
       "system/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2243,6 +2077,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -2256,6 +2091,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -2309,7 +2145,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -2317,6 +2154,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -2924,6 +2762,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -2937,6 +2776,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -2991,39 +2831,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -3154,6 +2972,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -3167,6 +2986,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -3407,7 +3227,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "system/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
@@ -3415,6 +3236,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -3560,6 +3382,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -3573,6 +3396,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -3620,37 +3444,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -3680,7 +3484,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "system/Patient.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
@@ -3688,6 +3493,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -3739,39 +3545,17 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
+[Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
+
+Received promise rejected instead of resolved
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -3802,6 +3586,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "system/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -3815,6 +3600,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -3869,6 +3655,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4002,7 +3789,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "system/Patient.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
@@ -4010,6 +3798,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -4126,6 +3915,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4200,7 +3990,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -4208,6 +3999,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -4259,6 +4051,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/*.read",
       "user/Patient.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4299,6 +4092,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4312,6 +4106,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -4364,6 +4159,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/Patient.read",
       "user/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4373,7 +4169,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
 [Error: [2mexpect([22m[31mreceived[39m[2m).[22mresolves[2m.[22mtoMatchSnapshot[2m()[22m
 
 Received promise rejected instead of resolved
-Rejected to value: [31m[UnauthorizedError: access_token does not have permission for requested operation][39m]
+Rejected to value: [31m[UnauthorizedError: Requester's identity is in the incorrect format][39m]
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -4467,7 +4263,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/Patient.read",
       "system/Patient.read"
-    ]
+    ],
+    "fhirUser": "fhirUser"
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -4475,6 +4272,7 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
@@ -4524,6 +4322,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/*.read"
     ],
+    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -4537,6 +4336,7 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
+  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",

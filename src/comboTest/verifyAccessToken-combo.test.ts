@@ -2,13 +2,10 @@ import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
-import TestCaseUtil from './testCaseUtil';
+import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
+import { convertNAtoUndefined } from './testStubs';
 
-interface CsvRow {
-    patientContext: object | undefined;
-    fhirUser: string | undefined;
-    operation: string;
-    resourceType: string | undefined;
+interface CsvRow extends BaseCsvRow {
     id: string;
     vid: string;
     fhirServiceBaseUrl: string;
@@ -38,7 +35,7 @@ const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
     const csv = testCaseUtil.loadTestCase({
         isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
-        fhirServiceBaseUrl: (s: string) => (s === 'N/A' ? undefined : s),
+        fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
     });
     csv.forEach((inputRow, index) => {
         const result: any = {};
@@ -62,7 +59,7 @@ const loadAndPrepareTestCases = (): any[] => {
         if (row.patientContext) {
             result.decodedAccessToken = {
                 ...result.decodedAccessToken,
-                ...row.patientContext,
+                ...testStubs.patientContext,
             };
         }
         testCases.push([JSON.stringify(result, null, 2), result]);

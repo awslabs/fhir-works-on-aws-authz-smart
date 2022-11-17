@@ -80,3 +80,5 @@ export const getFhirUserObject = (fhirUser: string): FhirResource | undefined =>
     }
     return undefined;
 };
+
+export const convertNAtoUndefined = (s: string) => (s === 'N/A' ? undefined : s);

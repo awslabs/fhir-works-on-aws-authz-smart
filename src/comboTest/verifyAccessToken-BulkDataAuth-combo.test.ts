@@ -2,15 +2,12 @@ import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
-import TestCaseUtil from './testCaseUtil';
+import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
+import { convertNAtoUndefined } from './testStubs';
 
-interface CsvRow {
-    patientContext: object | undefined;
-    fhirUser: string | undefined;
-    operation: string;
+interface CsvRow extends BaseCsvRow {
     'BulkDataAuth.operation': string;
     'BulkDataAuth.exportType': string;
-    resourceType: string | undefined;
     id: string;
     vid: string;
     fhirServiceBaseUrl: string;
@@ -28,7 +25,7 @@ const loadAndPrepareTestCases = () => {
     const testCases: any[] = [];
     const csv = testcaseUtil.loadTestCase({
         isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
-        fhirServiceBaseUrl: (s: string) => (s === 'N/A' ? undefined : s),
+        fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
     });
 
     csv.forEach((inputRow, index) => {
@@ -55,7 +52,7 @@ const loadAndPrepareTestCases = () => {
         if (row.patientContext) {
             testCase.decodedAccessToken = {
                 ...testCase.decodedAccessToken,
-                ...row.patientContext,
+                ...testStubs.patientContext,
             };
         }
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);

@@ -1,46 +1,51 @@
 import * as path from 'path';
-import * as testStubs from './testStubs';
+import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { UserIdentity } from '../smartConfig';
-import { getFhirUserObject, scopeRule } from './testStubs';
+import { convertNAtoUndefined, getFhirUserObject, scopeRule } from './testStubs';
 import { filterOutUnusableScope } from '../smartScopeHelper';
 
 // TODO: Change name of the file to include .test, then exlucd it from running in project.json
 const { load } = require('csv-load-sync');
 
-export default class TestCaseUtil<GenericCsvRow> {
+export interface BaseCsvRow {
+    operation: string;
+    fhirUser?: string;
+    patientContext?: string;
+    resourceType?: string;
+}
+
+export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
     private readonly csvFilePath: string;
 
     constructor(csvFilePath: string) {
         this.csvFilePath = csvFilePath;
     }
 
-    loadTestCase(csvConvert?: any): { csvRow: GenericCsvRow; userIdentity: UserIdentity }[] {
-        const csvRow: GenericCsvRow[] = load(path.resolve(__dirname, this.csvFilePath), {
+    loadTestCase(csvConvertRule?: any): { csvRow: CsvRow; userIdentity: UserIdentity }[] {
+        const csvRow: CsvRow[] = load(path.resolve(__dirname, this.csvFilePath), {
             convert: {
-                resourceType: (s: string) => (s === 'N/A' ? undefined : s),
-                fhirUser: (s: string) => testStubs.getFhirUserType(s),
-                patientContext: (s: string) => (s === 'N/A' ? undefined : testStubs.patientContext),
-                ...csvConvert,
+                resourceType: (s: string) => convertNAtoUndefined(s),
+                fhirUser: (s: string) => convertNAtoUndefined(s),
+                patientContext: (s: string) => (s === 'N/A' ? undefined : s),
+                ...csvConvertRule,
             },
         });
-        const testCases: { csvRow: GenericCsvRow; userIdentity: UserIdentity }[] = [];
+        const testCases: { csvRow: CsvRow; userIdentity: UserIdentity }[] = [];
         csvRow.forEach((row) => {
             const scopes = this.getScopesFromResult(row);
             const userIdentity: UserIdentity = {
                 scopes,
             };
 
-            const fhirUserClaim = (row as any).fhirUser;
-            const patientContextClaim = (row as any).patientContext;
-
-            console.log(scopes);
+            const fhirUserClaim = row.fhirUser;
+            const patientContextClaim = row.patientContext;
 
             const usableScopes = filterOutUnusableScope(
                 scopes,
                 scopeRule(),
-                (row as any).operation,
+                row.operation as TypeOperation | SystemOperation,
                 false,
-                (row as any).resourceType,
+                row.resourceType,
                 undefined,
                 patientContextClaim,
                 fhirUserClaim,
@@ -63,7 +68,7 @@ export default class TestCaseUtil<GenericCsvRow> {
         // TODO
     }
 
-    getScopesFromResult = (result: GenericCsvRow) => {
+    getScopesFromResult = (result: CsvRow) => {
         const scopes: string[] = [];
         Object.entries(result).forEach(([key, value]) => {
             if ((key.startsWith('system/') || key.startsWith('user/') || key.startsWith('patient/')) && value === key) {
