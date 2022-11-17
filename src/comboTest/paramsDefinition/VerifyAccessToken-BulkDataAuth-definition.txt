@@ -7,7 +7,7 @@ fhirUser(enum): fhirUser,N/A
 operation(enum): read,delete
 BulkDataAuth.operation(enum): initiate-export,get-status-export,cancel-export
 BulkDataAuth.exportType(enum): system,group,patient
-fhirServiceBaseUrl(enum): https://fhir.server.com/dev,https://random.server.com/dev
+fhirServiceBaseUrl(enum): matchUrl,nonMatchUrl
 isUserScopeAllowedForSystemExport(enum): true,false
 patient/Patient.read(enum): patient/Patient.read,N/A
 patient/*.read(enum): patient/*.read,N/A

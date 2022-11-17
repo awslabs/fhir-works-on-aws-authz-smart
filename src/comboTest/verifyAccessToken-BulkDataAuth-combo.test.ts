@@ -41,12 +41,12 @@ const loadAndPrepareTestCases = () => {
             operation: row.operation,
             resourceType: row.resourceType || '',
             bulkDataAuth,
-            fhirServiceBaseUrl: row.fhirServiceBaseUrl,
+            fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
         };
         testCase.decodedAccessToken = {
             ...testStubs.baseAccessNoScopes,
             scp: testCaseUtil.getScopesFromResult(row),
-            fhirUser: row.fhirUser,
+            fhirUser: testStubs.getFhirUserType(row.fhirUser),
         };
         testCase.isUserScopeAllowedForSystemExport = row.isUserScopeAllowedForSystemExport;
         if (row.patientContext) {

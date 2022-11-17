@@ -51,7 +51,7 @@ const loadAndPrepareTestCases = (): any[] => {
             operation: row.operation,
             resourceType: row.resourceType || '',
             bulkDataAuth: undefined,
-            fhirServiceBaseUrl: row.fhirServiceBaseUrl,
+            fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
         };
         result.decodedAccessToken = {
             ...testStubs.baseAccessNoScopes,

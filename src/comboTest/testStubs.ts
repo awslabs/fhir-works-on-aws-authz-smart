@@ -29,6 +29,7 @@ export const baseAuthZConfig = (): SMARTConfig => ({
     jwksEndpoint: `${expectedIss}/jwks`,
 });
 export const apiUrl = 'https://fhir.server.com/dev';
+export const fakeUrl = 'https://random.server.com/dev';
 export const id = 'id';
 export const patientId = `Patient/${id}`;
 export const practitionerId = `Practitioner/${id}`;
@@ -82,3 +83,13 @@ export const getFhirUserObject = (fhirUser: string): FhirResource | undefined =>
 };
 
 export const convertNAtoUndefined = (s: string) => (s === 'N/A' ? undefined : s);
+
+export const convertToBaseUrl = (url: string): string | undefined => {
+    if (url === 'matchUrl') {
+        return apiUrl;
+    }
+    if (url === 'nonMatchUrl') {
+        return fakeUrl;
+    }
+    return undefined;
+}

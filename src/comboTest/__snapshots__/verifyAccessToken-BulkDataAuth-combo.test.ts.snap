@@ -10,7 +10,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -30,13 +30,46 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "system/Patient.read",
       "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 1",
@@ -48,7 +81,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -78,39 +111,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/*.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 3",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -132,6 +133,62 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 3",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/*.read",
+      "system/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 4",
   "request": {
     "accessToken": "fake",
@@ -141,7 +198,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -155,16 +212,14 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read",
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -173,27 +228,23 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -209,40 +260,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "user/Patient.read",
-      "user/*.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 6",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -256,9 +274,70 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "user/Patient.read"
+      "user/Patient.read",
+      "system/*.read"
     ],
-    "fhirUser": "fhirUser"
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 6",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/*.read"
+    ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
@@ -273,7 +352,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -286,7 +365,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
+      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
@@ -302,13 +381,13 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -333,7 +412,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -346,10 +425,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/*.read",
-      "system/Patient.read"
+      "user/Patient.read",
+      "user/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -367,7 +445,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -382,7 +460,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
+      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -402,39 +480,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 11",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -448,7 +494,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/*.read",
-      "system/Patient.read",
+      "user/Patient.read",
       "system/*.read"
     ]
   },
@@ -456,16 +502,16 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 12",
+  "testName": "Combo Test Row 11",
   "request": {
     "accessToken": "fake",
-    "operation": "delete",
+    "operation": "read",
     "resourceType": "",
     "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "system"
+      "operation": "initiate-export",
+      "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -479,16 +525,45 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/*.read"
+      "user/*.read",
+      "system/Patient.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 12",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/*.read",
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -497,27 +572,23 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
+    "patient/*.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
+    "patient/*.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -533,7 +604,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -546,15 +617,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/*.read",
-      "user/*.read"
+      "patient/Patient.read",
+      "user/Patient.read",
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 14",
@@ -566,7 +666,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -579,9 +679,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "system/Patient.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
+    ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -589,19 +689,21 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -618,7 +720,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -634,41 +736,11 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 16",
@@ -680,7 +752,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -692,10 +764,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "cid": "0oa8muazKSyk9gP5y5d5",
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read"
-    ],
-    "fhirUser": "fhirUser",
+    "scp": [],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -713,7 +782,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -726,6 +795,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
       "user/*.read",
@@ -749,6 +819,7 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
@@ -756,6 +827,7 @@ Object {
     "system/*.read",
   ],
   "scp": Array [
+    "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
     "user/*.read",
@@ -782,7 +854,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -795,38 +867,6 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "system/Patient.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 19",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
       "patient/*.read",
       "user/*.read",
       "system/*.read"
@@ -842,13 +882,11 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
     "patient/*.read",
     "user/*.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
     "patient/*.read",
     "user/*.read",
     "system/*.read",
@@ -857,6 +895,62 @@ Object {
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 19",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "user/Patient.read",
+      "system/Patient.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
   ],
   "ver": 1,
 }
@@ -872,40 +966,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 21",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -919,9 +980,6 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -942,23 +1000,81 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 21",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/Patient.read",
+      "user/*.read",
+      "system/Patient.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
   ],
   "ver": 1,
 }
@@ -974,7 +1090,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -990,13 +1106,42 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
+      "system/Patient.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
+    ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 23",
@@ -1008,7 +1153,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1021,32 +1166,11 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "system/Patient.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 24",
@@ -1058,7 +1182,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1072,42 +1196,6 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 25",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -1127,22 +1215,82 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
+    "patient/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
+    "patient/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
     "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 25",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/Patient.read",
+      "user/*.read",
+      "system/Patient.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
   ],
   "ver": 1,
 }
@@ -1158,39 +1306,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "user/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 27",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1204,8 +1320,66 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "system/Patient.read",
+      "patient/*.read",
+      "user/Patient.read",
       "system/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 27",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/*.read",
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -1218,20 +1392,17 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -1247,7 +1418,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1263,16 +1434,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 29",
@@ -1284,7 +1483,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1297,7 +1496,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "system/Patient.read"
+      "user/*.read",
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -1316,15 +1516,17 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "scp": Array [
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -1340,39 +1542,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/*.read",
-      "system/Patient.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 31",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1387,10 +1557,41 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "system/*.read"
+      "user/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 31",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "system/Patient.read",
+      "system/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -1400,18 +1601,19 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
+    "patient/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
+    "patient/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -1428,7 +1630,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1441,43 +1643,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 33",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
       "patient/*.read",
-      "user/*.read",
       "system/Patient.read"
     ],
     "ext": {
@@ -1497,21 +1663,82 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
     "patient/*.read",
-    "user/*.read",
     "system/Patient.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
     "patient/*.read",
-    "user/*.read",
     "system/Patient.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 33",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "user/Patient.read",
+      "user/*.read",
+      "system/*.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -1527,7 +1754,60 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/Patient.read",
+      "system/Patient.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 35",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1541,40 +1821,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
+      "patient/*.read",
       "user/*.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 35",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -1587,19 +1836,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "scp": Array [
+    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -1615,7 +1866,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1628,11 +1879,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/*.read",
       "user/Patient.read",
+      "system/Patient.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 37",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
       "user/*.read",
+      "system/Patient.read",
       "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1646,78 +1930,16 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "user/Patient.read",
     "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 37",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "system/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "fhirUser",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -1741,7 +1963,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1755,10 +1977,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "system/Patient.read"
+      "user/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -1776,7 +1996,93 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/Patient.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 40",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/*.read",
+      "system/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 41",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1791,74 +2097,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "user/Patient.read",
-      "user/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 40",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/*.read",
-      "user/Patient.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 41",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
+    ]
   },
   "isUserScopeAllowedForSystemExport": false
 } 1`] = `
@@ -1866,18 +2108,19 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -1902,7 +2145,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1915,13 +2158,38 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read",
-      "system/Patient.read"
-    ],
-    "fhirUser": "fhirUser"
+      "patient/*.read",
+      "user/*.read",
+      "system/*.read"
+    ]
   },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 43",
@@ -1933,7 +2201,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -1946,18 +2214,16 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
+      "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -1966,29 +2232,25 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
+    "patient/*.read",
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
+    "patient/*.read",
     "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -2004,7 +2266,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2018,35 +2280,30 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
+      "system/Patient.read"
+    ]
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "system/*.read",
+    "system/Patient.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "system/*.read",
+    "system/Patient.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/*.read",
+    "system/Patient.read",
   ],
   "ver": 1,
 }
@@ -2062,7 +2319,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2075,16 +2332,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
+      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read"
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
@@ -2096,7 +2381,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2111,14 +2396,13 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read"
+      "user/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2131,7 +2415,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2144,8 +2428,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
+      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -2165,7 +2450,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2178,9 +2463,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "patient/Patient.read",
+      "user/*.read",
+      "system/Patient.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": false
@@ -2193,20 +2478,19 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -2222,7 +2506,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2235,12 +2519,12 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -2250,19 +2534,19 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
+    "system/Patient.read",
   ],
   "scp": Array [
+    "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
+    "system/Patient.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/*.read",
+    "system/Patient.read",
   ],
   "ver": 1,
 }
@@ -2278,7 +2562,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2292,9 +2576,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
+      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read"
+      "system/*.read"
     ]
   },
   "isUserScopeAllowedForSystemExport": true
@@ -2308,20 +2592,20 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
+    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
+    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -2337,7 +2621,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2350,11 +2634,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "user/*.read"
+      "user/Patient.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2367,7 +2650,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2380,13 +2663,13 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/*.read"
+      "patient/Patient.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2399,7 +2682,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2412,15 +2695,16 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/*.read",
       "user/Patient.read",
       "user/*.read",
-      "system/Patient.read"
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -2433,19 +2717,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
+    "system/*.read",
   ],
   "scp": Array [
+    "patient/*.read",
     "user/Patient.read",
     "user/*.read",
-    "system/Patient.read",
+    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -2461,7 +2747,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2474,9 +2760,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.read"
+      "user/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
@@ -2495,7 +2781,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2509,12 +2795,12 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "user/*.read",
+      "user/Patient.read",
+      "system/Patient.read",
       "system/*.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -2525,14 +2811,14 @@ Object {
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
@@ -2554,7 +2840,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2567,10 +2853,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read"
+      "patient/*.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -2583,7 +2869,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2597,17 +2883,16 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
+      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -2616,20 +2901,19 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -2654,7 +2938,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2667,17 +2951,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
-      "system/*.read"
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 59",
@@ -2689,7 +3000,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2702,14 +3013,41 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/Patient.read"
+      "patient/*.read",
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 60",
@@ -2721,7 +3059,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2736,7 +3074,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
+      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ]
@@ -2753,14 +3091,14 @@ Object {
   "scopes": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -2784,7 +3122,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2798,11 +3136,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
-      "user/*.read",
+      "user/Patient.read",
+      "system/Patient.read",
       "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -2816,25 +3153,25 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
+    "user/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -2851,7 +3188,37 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/*.read",
+      "user/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 63",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2867,47 +3234,25 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/Patient.read",
       "system/Patient.read"
-    ]
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
   },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 63",
+  "testName": "Combo Test Row 64",
   "request": {
     "accessToken": "fake",
     "operation": "delete",
     "resourceType": "",
     "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "patient"
+      "operation": "get-status-export",
+      "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -2921,46 +3266,11 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "patient/*.read",
       "user/*.read",
-      "system/*.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 64",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "system/Patient.read",
-      "system/*.read"
+      "system/Patient.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -2970,20 +3280,19 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/*.read",
+    "patient/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -2999,7 +3308,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3012,15 +3321,41 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "user/Patient.read"
+      "patient/*.read",
+      "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 66",
@@ -3032,7 +3367,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3045,10 +3380,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "system/Patient.read"
-    ],
-    "fhirUser": "fhirUser"
+      "user/*.read",
+      "system/*.read"
+    ]
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
@@ -3056,22 +3390,21 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
+    "user/*.read",
+    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
-    "system/Patient.read",
+    "system/*.read",
   ],
   "ver": 1,
 }
@@ -3087,7 +3420,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3100,9 +3433,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/Patient.read",
       "patient/*.read",
       "user/Patient.read",
-      "user/*.read",
+      "system/Patient.read",
       "system/*.read"
     ]
   },
@@ -3116,20 +3450,23 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "patient/Patient.read",
     "patient/*.read",
     "user/Patient.read",
-    "user/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -3146,7 +3483,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3161,12 +3498,8 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+      "user/Patient.read"
+    ]
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
@@ -3181,7 +3514,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3194,10 +3527,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "user/*.read",
       "system/Patient.read",
       "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
@@ -3211,15 +3544,16 @@ Object {
   "ext": Object {
     "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
   },
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -3243,7 +3577,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3256,66 +3590,95 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "user/*.read",
-      "system/*.read"
+      "patient/Patient.read",
+      "user/Patient.read",
+      "system/Patient.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 71",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/*.read",
+    "patient/Patient.read",
     "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 71",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/*.read",
+      "user/*.read",
+      "system/Patient.read",
+      "system/*.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
+    "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
@@ -3338,7 +3701,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3351,17 +3714,44 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
+      "user/Patient.read",
       "user/*.read",
-      "system/Patient.read"
+      "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "user/Patient.read",
+    "user/*.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 73",
@@ -3373,7 +3763,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3388,47 +3778,14 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "scp": [
       "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.read"
+      "user/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "fhirUser",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 74",
@@ -3440,7 +3797,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3459,13 +3816,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+    ]
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -3478,7 +3831,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3491,10 +3844,10 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read"
+      "user/*.read"
     ]
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
@@ -3507,7 +3860,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3520,14 +3873,14 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
+      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
@@ -3540,16 +3893,17 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -3566,7 +3920,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3579,43 +3933,34 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
+      "user/*.read",
+      "system/Patient.read"
+    ]
   },
-  "isUserScopeAllowedForSystemExport": true
+  "isUserScopeAllowedForSystemExport": false
 } 1`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
+    "user/*.read",
     "system/Patient.read",
-    "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
     "system/Patient.read",
-    "system/*.read",
   ],
   "ver": 1,
 }
@@ -3631,7 +3976,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3644,12 +3989,14 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
-      "patient/Patient.read",
-      "patient/*.read",
+      "user/Patient.read",
       "user/*.read",
       "system/Patient.read",
       "system/*.read"
-    ]
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
   },
   "isUserScopeAllowedForSystemExport": true
 } 1`] = `
@@ -3657,19 +4004,20 @@ Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
+    "user/Patient.read",
     "user/*.read",
     "system/Patient.read",
     "system/*.read",
@@ -3694,7 +4042,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "initiate-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3708,15 +4056,43 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
-      "user/*.read"
+      "user/Patient.read",
+      "system/*.read"
     ],
-    "fhirUser": "fhirUser",
     "ext": {
       "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 80",
@@ -3728,7 +4104,223 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "get-status-export",
       "exportType": "system"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/*.read",
+      "user/Patient.read",
+      "system/*.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "patient/*.read",
+    "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 81",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/*.read",
+      "system/Patient.read"
+    ]
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 82",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "initiate-export",
+      "exportType": "system"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "patient/*.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 83",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "get-status-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "patient/Patient.read",
+      "user/Patient.read",
+      "user/*.read",
+      "system/Patient.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": false
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "patient/Patient.read",
+    "user/Patient.read",
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/Patient.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 84",
+  "request": {
+    "accessToken": "fake",
+    "operation": "read",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "patient"
+    },
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3749,205 +4341,6 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
 } 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 81",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser"
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "fhirUser",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 82",
-  "request": {
-    "accessToken": "fake",
-    "operation": "delete",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "initiate-export",
-      "exportType": "system"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/Patient.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 83",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "get-status-export",
-      "exportType": "group"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/*.read",
-      "system/Patient.read",
-      "system/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "fhirUser",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 84",
-  "request": {
-    "accessToken": "fake",
-    "operation": "read",
-    "resourceType": "",
-    "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "patient"
-    },
-    "fhirServiceBaseUrl": "https"
-  },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/*.read",
-      "user/Patient.read",
-      "user/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
-  },
-  "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: Requester's identity is in the incorrect format]`;
-
-exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 85",
   "request": {
     "accessToken": "fake",
@@ -3957,7 +4350,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "operation": "cancel-export",
       "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -3970,9 +4363,9 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "uid": "00u85ozwjjWRd17PB5d5",
     "sub": "test@test.com",
     "scp": [
+      "patient/Patient.read",
       "patient/*.read",
-      "user/Patient.read",
-      "user/*.read",
+      "system/Patient.read",
       "system/*.read"
     ],
     "ext": {
@@ -3992,20 +4385,21 @@ Object {
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
+    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "scp": Array [
+    "patient/Patient.read",
     "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
+    "system/Patient.read",
     "system/*.read",
   ],
   "sub": "test@test.com",
   "uid": "00u85ozwjjWRd17PB5d5",
   "usableScopes": Array [
+    "system/Patient.read",
     "system/*.read",
   ],
   "ver": 1,
@@ -4016,13 +4410,13 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 86",
   "request": {
     "accessToken": "fake",
-    "operation": "delete",
+    "operation": "read",
     "resourceType": "",
     "bulkDataAuth": {
       "operation": "cancel-export",
       "exportType": "group"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -4036,29 +4430,95 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "sub": "test@test.com",
     "scp": [
       "patient/Patient.read",
+      "patient/*.read",
       "user/Patient.read",
-      "system/Patient.read"
+      "system/*.read"
     ],
-    "fhirUser": "fhirUser"
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
   },
-  "isUserScopeAllowedForSystemExport": false
+  "isUserScopeAllowedForSystemExport": true
 } 1`] = `
 Object {
   "aud": "api://default",
   "cid": "0oa8muazKSyk9gP5y5d5",
   "exp": 2668546607,
-  "fhirUser": "fhirUser",
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
   "iat": 1668546607,
   "iss": "https://dev-6460611.okta.com/oauth2/default",
   "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
   "scopes": Array [
     "patient/Patient.read",
+    "patient/*.read",
     "user/Patient.read",
-    "system/Patient.read",
+    "system/*.read",
   ],
   "scp": Array [
     "patient/Patient.read",
+    "patient/*.read",
     "user/Patient.read",
+    "system/*.read",
+  ],
+  "sub": "test@test.com",
+  "uid": "00u85ozwjjWRd17PB5d5",
+  "usableScopes": Array [
+    "system/*.read",
+  ],
+  "ver": 1,
+}
+`;
+
+exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
+  "testName": "Combo Test Row 87",
+  "request": {
+    "accessToken": "fake",
+    "operation": "delete",
+    "resourceType": "",
+    "bulkDataAuth": {
+      "operation": "cancel-export",
+      "exportType": "group"
+    },
+    "fhirServiceBaseUrl": "https://random.server.com/dev"
+  },
+  "decodedAccessToken": {
+    "ver": 1,
+    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+    "iss": "https://dev-6460611.okta.com/oauth2/default",
+    "aud": "api://default",
+    "iat": 1668546607,
+    "exp": 2668546607,
+    "cid": "0oa8muazKSyk9gP5y5d5",
+    "uid": "00u85ozwjjWRd17PB5d5",
+    "sub": "test@test.com",
+    "scp": [
+      "user/*.read",
+      "system/Patient.read"
+    ],
+    "ext": {
+      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
+    }
+  },
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `
+Object {
+  "aud": "api://default",
+  "cid": "0oa8muazKSyk9gP5y5d5",
+  "exp": 2668546607,
+  "ext": Object {
+    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
+  },
+  "iat": 1668546607,
+  "iss": "https://dev-6460611.okta.com/oauth2/default",
+  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
+  "scopes": Array [
+    "user/*.read",
+    "system/Patient.read",
+  ],
+  "scp": Array [
+    "user/*.read",
     "system/Patient.read",
   ],
   "sub": "test@test.com",
@@ -4071,16 +4531,16 @@ Object {
 `;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
-  "testName": "Combo Test Row 87",
+  "testName": "Combo Test Row 88",
   "request": {
     "accessToken": "fake",
     "operation": "read",
     "resourceType": "",
     "bulkDataAuth": {
-      "operation": "cancel-export",
-      "exportType": "group"
+      "operation": "initiate-export",
+      "exportType": "patient"
     },
-    "fhirServiceBaseUrl": "https"
+    "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
   "decodedAccessToken": {
     "ver": 1,
@@ -4096,40 +4556,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
       "patient/Patient.read",
       "user/*.read",
       "system/*.read"
-    ],
-    "fhirUser": "fhirUser",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+    ]
   },
-  "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "fhirUser",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+  "isUserScopeAllowedForSystemExport": true
+} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
