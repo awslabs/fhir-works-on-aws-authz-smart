@@ -67,6 +67,8 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
         { field: 'request.operation', title: 'Operation' },
+        { field: 'request.bulkDataAuth.operation', title: 'Bulk Operation'},
+        { field: 'request.bulkDataAuth.exportType', title: 'Bulk Export Type'},
         { field: 'request.resourceType', title: ' Resource' },
         { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
         { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
