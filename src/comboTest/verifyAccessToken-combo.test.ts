@@ -33,7 +33,7 @@ interface CsvRow extends BaseCsvRow {
     'system/Binary.write': string;
 }
 
-const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-NoBulkDataAuth-params.csv');
+const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-NoBulkDataAuth-params.csv', 'verifyAccessToken');
 
 const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
@@ -85,7 +85,7 @@ describe('verifyAccessToken-combo', () => {
     ];
 
     afterAll(async () => {
-        await testCaseUtil.writeTestResultsToCsv(testResults, 'verifyAccessToken', keysToOutput);
+        await testCaseUtil.writeTestResultsToCsv(testResults, keysToOutput);
     });
     const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();

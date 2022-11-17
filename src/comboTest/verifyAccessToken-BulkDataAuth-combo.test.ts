@@ -19,7 +19,7 @@ interface CsvRow extends BaseCsvRow {
     'system/*.read': string;
     isUserScopeAllowedForSystemExport: boolean;
 }
-const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv');
+const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv', 'verifyAccessToken-BulkDataAuth');
 
 const loadAndPrepareTestCases = () => {
     const testCases: any[] = [];
@@ -75,7 +75,7 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
         { field: 'decodedAccessToken.scp', title: 'Scopes' },
     ];
     afterAll(async () => {
-        await testCaseUtil.writeTestResultsToCsv(testResults, 'verifyAccessToken-BulkDataAuth', keysToOutput);
+        await testCaseUtil.writeTestResultsToCsv(testResults, keysToOutput);
     });
     const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();

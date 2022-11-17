@@ -6,7 +6,9 @@
 /scripts/*.json
 # Ignore any zip files
 *.zip
-*output.csv
+
+#ignore output folder for csv
+/src/comboTest/output/*
 
 Info_Output.yml
 dist

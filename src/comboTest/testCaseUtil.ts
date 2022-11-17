@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { writeFileSync } from 'fs';
-import { json2csv, json2csvAsync } from 'json-2-csv';
+import { json2csvAsync } from 'json-2-csv';
 import { UserIdentity } from '../smartConfig';
 import { convertNAtoUndefined, getFhirUserObject, scopeRule } from './testStubs';
 import { filterOutUnusableScope } from '../smartScopeHelper';
@@ -9,6 +9,7 @@ import { filterOutUnusableScope } from '../smartScopeHelper';
 // TODO: Change name of the file to include .test, then exlucd it from running in project.json
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { load } = require('csv-load-sync');
+const OUTPUT_FOLDER_NAME = 'output';
 
 export interface BaseCsvRow {
     operation: string;
@@ -19,9 +20,11 @@ export interface BaseCsvRow {
 
 export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
     private readonly csvFilePath: string;
+    private readonly outputFilePath: string;
 
-    constructor(csvFilePath: string) {
+    constructor(csvFilePath: string, outputFilePath: string) {
         this.csvFilePath = csvFilePath;
+        this.outputFilePath = outputFilePath;
     }
 
     loadTestCase(csvConvertRule?: any): { csvRow: CsvRow; userIdentity: UserIdentity }[] {
@@ -69,21 +72,14 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
     // eslint-disable-next-line class-methods-use-this
     async writeTestResultsToCsv(
         testResults: { testCase: any; testResult: any }[],
-        fileName: string,
         keysToOutput: { field: string; title: string | undefined }[],
     ) {
-        // console.log(testResults);
-        // TODO
-        // const json2csvCallback = function (err: any, csv: any) {
-        //     if (err) throw err;
-        //     console.log(csv);
-        //     writeFileSync(path.join(__dirname, `./${fileName}_output.csv`), csv, {
-        //         flag: 'w',
-        //     });
-        // };
+        if (process.env.GENERATE_CSV_FOR_REVIEW !== 'true') {
+            return;
+        }
 
         const csv = await json2csvAsync(testResults, { keys: keysToOutput});
-        writeFileSync(path.join(__dirname, `./${fileName}_output.csv`), csv, {
+        writeFileSync(path.join(__dirname, `./${OUTPUT_FOLDER_NAME}/${this.outputFilePath}.csv`), csv, {
             flag: 'w',
         });
     }
