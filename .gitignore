@@ -6,6 +6,7 @@
 /scripts/*.json
 # Ignore any zip files
 *.zip
+*.DS_Store
 
 #ignore output folder for csv
 /src/comboTest/output/*
