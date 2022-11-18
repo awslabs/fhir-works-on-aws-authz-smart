@@ -9,6 +9,7 @@ import { filterOutUnusableScope } from '../smartScopeHelper';
 // TODO: Change name of the file to include .test, then exlucd it from running in project.json
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { load } = require('csv-load-sync');
+
 const OUTPUT_FOLDER_NAME = 'output';
 
 export interface BaseCsvRow {
@@ -20,6 +21,7 @@ export interface BaseCsvRow {
 
 export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
     private readonly csvFilePath: string;
+
     private readonly outputFilePath: string;
 
     constructor(csvFilePath: string, outputFilePath: string) {
@@ -78,7 +80,7 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             return;
         }
 
-        const csv = await json2csvAsync(testResults, { keys: keysToOutput});
+        const csv = await json2csvAsync(testResults, { keys: keysToOutput });
         writeFileSync(path.join(__dirname, `./${OUTPUT_FOLDER_NAME}/${this.outputFilePath}.csv`), csv, {
             flag: 'w',
         });
