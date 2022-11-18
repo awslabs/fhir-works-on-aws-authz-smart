@@ -92,4 +92,4 @@ export const convertToBaseUrl = (url: string): string | undefined => {
         return fakeUrl;
     }
     return undefined;
-}
+};

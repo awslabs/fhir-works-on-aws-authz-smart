@@ -19,7 +19,10 @@ interface CsvRow extends BaseCsvRow {
     'system/*.read': string;
     isUserScopeAllowedForSystemExport: boolean;
 }
-const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-BulkDataAuth-params.csv', 'verifyAccessToken-BulkDataAuth');
+const testCaseUtil = new TestCaseUtil<CsvRow>(
+    './params/VerifyAccessToken-BulkDataAuth-params.csv',
+    'verifyAccessToken-BulkDataAuth',
+);
 
 const loadAndPrepareTestCases = () => {
     const testCases: any[] = [];
@@ -61,15 +64,14 @@ const loadAndPrepareTestCases = () => {
 };
 
 describe('verifyAccessToken-BulkDataAuth-combo', () => {
-    
     const testResults: any[] = [];
     // TODO: Update for bulk
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
         { field: 'request.operation', title: 'Operation' },
-        { field: 'request.bulkDataAuth.operation', title: 'Bulk Operation'},
-        { field: 'request.bulkDataAuth.exportType', title: 'Bulk Export Type'},
-        { field: 'isUserScopeAllowedForSystemExport', title: 'User Scope Allowed'},
+        { field: 'request.bulkDataAuth.operation', title: 'Bulk Operation' },
+        { field: 'request.bulkDataAuth.exportType', title: 'Bulk Export Type' },
+        { field: 'isUserScopeAllowedForSystemExport', title: 'User Scope Allowed' },
         { field: 'request.resourceType', title: ' Resource' },
         { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
         { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
@@ -114,7 +116,7 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             // TODO: append errors to output file
-            testResult = { message: (e as Error).message};
+            testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
         testResults.push({ ...testCase, ...testResult });

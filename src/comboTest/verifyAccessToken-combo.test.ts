@@ -1,13 +1,9 @@
 import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
-import { json2csv, json2csvAsync } from 'json-2-csv';
-import { writeFileSync } from 'fs';
-import { join } from 'path';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
 import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
 import { convertNAtoUndefined } from './testStubs';
-let converter = require('json-2-csv');
 
 interface CsvRow extends BaseCsvRow {
     id: string;
@@ -33,7 +29,10 @@ interface CsvRow extends BaseCsvRow {
     'system/Binary.write': string;
 }
 
-const testCaseUtil = new TestCaseUtil<CsvRow>('./params/VerifyAccessToken-NoBulkDataAuth-params.csv', 'verifyAccessToken');
+const testCaseUtil = new TestCaseUtil<CsvRow>(
+    './params/VerifyAccessToken-NoBulkDataAuth-params.csv',
+    'verifyAccessToken',
+);
 
 const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
@@ -108,7 +107,7 @@ describe('verifyAccessToken-combo', () => {
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             // TODO: append errors to output file
-            testResult = { message: (e as Error).message};
+            testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
         testResults.push({ ...testCase, ...testResult });
