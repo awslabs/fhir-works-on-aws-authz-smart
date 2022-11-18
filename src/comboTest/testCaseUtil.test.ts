@@ -6,7 +6,6 @@ import { UserIdentity } from '../smartConfig';
 import { convertNAtoUndefined, getFhirUserObject, getFhirUserType, scopeRule } from './testStubs';
 import { filterOutUnusableScope } from '../smartScopeHelper';
 
-// TODO: Change name of the file to include .test, then exlucd it from running in project.json
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { load } = require('csv-load-sync');
 
