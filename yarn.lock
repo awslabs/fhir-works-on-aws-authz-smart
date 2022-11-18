@@ -1685,11 +1685,6 @@ csv-load-sync@^2.3.1:
   dependencies:
     check-more-types "^2.10.0"
 
-csv-parse@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.3.1.tgz#78b028eb2d2a3e16e62ee8abe710ff7a0b1f8b3b"
-  integrity sha512-R4Hv6eGJNzgcKdThZ6XORbSQ873HVcNke74QIq+LbwpT90LaZ8Xzl7KKiuIP16xq/P7ofzRt0h7S0xm+fVScsw==
-
 csv-writer@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/csv-writer/-/csv-writer-1.6.0.tgz#d0cea44b6b4d7d3baa2ecc6f3f7209233514bcf9"
