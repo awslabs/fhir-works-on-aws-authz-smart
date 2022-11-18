@@ -1,0 +1,4639 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 0",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 1",
+  "request": {
+    "userIdentity": {
+      "scopes": []
+    },
+    "operation": "search-type"
+  }
+} 1`] = `Array []`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 2",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 3",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 4",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 5",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 6",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 7",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 8",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 9",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 10",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 11",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 12",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 13",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 14",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 15",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 16",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 17",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 18",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 19",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 20",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 21",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 22",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 23",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Patient.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 24",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 25",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 26",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 27",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 28",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 29",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 30",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 31",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 32",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "system/Patient.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 33",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 34",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 35",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 36",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 37",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 38",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 39",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 40",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 41",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 42",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 43",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 44",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 45",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.read",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 46",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 47",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 48",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 49",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 50",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 51",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 52",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 53",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 54",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 55",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 56",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 57",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 58",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 59",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 60",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 61",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 62",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 63",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Patient.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 64",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 65",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 66",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 67",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 68",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 69",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.*",
+        "user/Patient.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 70",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 71",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.*",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 72",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 73",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 74",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 75",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 76",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 77",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 78",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 79",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 80",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 81",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 82",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "system/Patient.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 83",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 84",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 85",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 86",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 87",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 88",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 89",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 90",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 91",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 92",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 93",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 94",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 95",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 96",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 97",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 98",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 99",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 100",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 101",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 102",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 103",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 104",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 105",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 106",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 107",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 108",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 109",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 110",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 111",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 112",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 113",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 114",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 115",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 116",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 117",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 118",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 119",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 120",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 121",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 122",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 123",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 124",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 125",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 126",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 127",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 128",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 129",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 130",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 131",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "user/Patient.read",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 132",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 133",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 134",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 135",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 136",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 137",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 138",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 139",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 140",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 141",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 142",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 143",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 144",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 145",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 146",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 147",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 148",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 149",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 150",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 151",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 152",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 153",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 154",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 155",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 156",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 157",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "user/Observation.*",
+        "user/Condition.*",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "search-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 158",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Patient.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 159",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 160",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 161",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 162",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 163",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "system/Patient.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 164",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "system/Patient.read",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 165",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 166",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 167",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Observation.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 168",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 169",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 170",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 171",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-system"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 172",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 173",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "search-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 174",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Observation.*",
+        "patient/Condition.*",
+        "user/Patient.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 175",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.*",
+        "user/Observation.read",
+        "system/Patient.read",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 176",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Condition.read",
+        "patient/Condition.*",
+        "user/Observation.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.read",
+        "system/Observation.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 177",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.*",
+        "patient/Condition.*",
+        "user/Patient.read",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.*",
+        "system/Condition.read",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "history-type"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Condition",
+  "Observation",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 178",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Patient.read",
+        "patient/Patient.*",
+        "patient/Observation.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.*",
+        "user/Condition.read",
+        "user/Condition.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.read"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Patient",
+  "Observation",
+  "Condition",
+]
+`;
+
+exports[`getAllowedResourceTypesForOperation-combo CASE: {
+  "testName": "Combo Test Row 179",
+  "request": {
+    "userIdentity": {
+      "scopes": [
+        "patient/Observation.read",
+        "patient/Condition.read",
+        "user/Patient.read",
+        "user/Patient.*",
+        "user/Observation.read",
+        "user/Condition.*",
+        "system/Patient.*",
+        "system/Observation.read",
+        "system/Observation.*",
+        "system/Condition.*"
+      ]
+    },
+    "operation": "read"
+  }
+} 1`] = `
+Array [
+  "Observation",
+  "Condition",
+  "Patient",
+]
+`;
