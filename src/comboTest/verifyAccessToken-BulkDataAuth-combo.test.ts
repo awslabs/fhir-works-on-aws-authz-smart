@@ -69,6 +69,7 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
         { field: 'request.operation', title: 'Operation' },
         { field: 'request.bulkDataAuth.operation', title: 'Bulk Operation'},
         { field: 'request.bulkDataAuth.exportType', title: 'Bulk Export Type'},
+        { field: 'isUserScopeAllowedForSystemExport', title: 'User Scope Allowed'},
         { field: 'request.resourceType', title: ' Resource' },
         { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
         { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
