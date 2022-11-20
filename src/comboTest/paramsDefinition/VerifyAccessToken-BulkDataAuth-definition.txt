@@ -3,7 +3,7 @@ Name: VerifyAccessToken-BulkDataAuth
 
 [Parameter]
 patientContext(enum): patientIdentity,N/A
-fhirUser(enum): fhirUser,N/A
+fhirUser(enum): practitionerFhirUser,patientFhirUser,N/A
 operation(enum): read,delete
 BulkDataAuth.operation(enum): initiate-export,get-status-export,cancel-export
 BulkDataAuth.exportType(enum): system,group,patient
