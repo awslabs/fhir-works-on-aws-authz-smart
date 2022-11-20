@@ -75,9 +75,9 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
         testResults: { testCase: any; testResult: any }[],
         keysToOutput: { field: string; title: string | undefined }[],
     ) {
-        // if (process.env.GENERATE_CSV_FOR_REVIEW !== 'true') {
-        //     return;
-        // }
+        if (process.env.GENERATE_CSV_FOR_REVIEW !== 'true') {
+            return;
+        }
 
         const csv = await json2csvAsync(testResults, { keys: keysToOutput });
         writeFileSync(path.join(__dirname, `./${OUTPUT_FOLDER_NAME}/${this.outputFilePath}.csv`), csv, {
