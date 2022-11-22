@@ -59,14 +59,14 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
     const testResults: any[] = [];
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
-        { field: 'request.userIdentity.scopes', title: 'Scopes' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
         { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'request.resourceType', title: 'Resource Type' },
         { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
-        { field: 'errorMessage', title: 'Error' },
+        { field: 'request.userIdentity.scopes', title: 'Scopes' },
         { field: 'testResult', title: 'Search Filters' },
+        { field: 'errorMessage', title: 'Error' },
     ];
 
     afterAll(async () => {
