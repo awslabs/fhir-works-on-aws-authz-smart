@@ -49,17 +49,7 @@ const loadAndPrepareTestCases = (): any[] => {
             // operation: row.operation,
             resourceType: row.resourceType,
         };
-        testCase.decodedAccessToken = {
-            ...testStubs.baseAccessNoScopes,
-            scp: testCaseUtil.getScopesFromResult(row),
-            fhirUser: testStubs.getFhirUserType(row.fhirUser),
-        };
-        if (row.patientContext) {
-            testCase.decodedAccessToken = {
-                ...testCase.decodedAccessToken,
-                ...testStubs.patientContext,
-            };
-        }
+        testCase.rawCsvRow = row;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -67,19 +57,20 @@ const loadAndPrepareTestCases = (): any[] => {
 
 describe('getSearchFilterBasedOnIdentity-combo', () => {
     const testResults: any[] = [];
-    // const keysToOutput: any[] = [
-    //     { field: 'testName', title: 'Test Number' },
-    //     { field: 'request.operation', title: 'Operation' },
-    //     { field: 'request.resourceType', title: ' Resource' },
-    //     { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
-    //     { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
-    //     { field: 'message', title: 'Error' },
-    //     { field: 'usableScopes', title: 'Usable Scopes' },
-    //     { field: 'decodedAccessToken.scp', title: 'Scopes' },
-    // ];
+    const keysToOutput: any[] = [
+        { field: 'testName', title: 'Test Number' },
+        { field: 'request.userIdentity.scopes', title: 'Scopes' },
+        { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
+        { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
+        { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
+        { field: 'request.resourceType', title: 'Resource Type' },
+        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
+        { field: 'errorMessage', title: 'Error' },
+        { field: 'testResult', title: 'Search Filters' },
+    ];
 
     afterAll(async () => {
-        await testCaseUtil.writeTestResultsToCsv(testResults); // , keysToOutput);
+        await testCaseUtil.writeTestResultsToCsv(testResults, keysToOutput);
     });
     const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();
@@ -99,12 +90,12 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
             testResult = await authZHandler.getSearchFilterBasedOnIdentity(
                 <GetSearchFilterBasedOnIdentityRequest>testCase.request,
             );
-
+            console.log(testResult);
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            testResult = { message: (e as Error).message };
+            testResult = { errorMessage: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
-        testResults.push({ ...testCase, ...testResult });
+        testResults.push({ ...testCase, testResult });
     });
 });

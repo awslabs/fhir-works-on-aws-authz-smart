@@ -38,34 +38,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -79,18 +76,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -118,27 +127,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -178,25 +190,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -217,28 +234,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -259,24 +279,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "search-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -310,28 +335,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -371,25 +399,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -430,28 +463,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -485,26 +520,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -525,28 +564,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -567,24 +609,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "search-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -602,26 +649,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-type",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -642,26 +693,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -681,27 +735,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-type",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -729,25 +785,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -782,29 +843,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -843,23 +906,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+  "rawCsvRow": {
+    "operation": "search-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -880,28 +949,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -924,27 +996,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -964,26 +1039,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1001,22 +1080,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1045,28 +1132,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -1102,27 +1192,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "search-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1142,27 +1234,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1184,26 +1280,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1221,24 +1321,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1258,25 +1364,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1298,30 +1408,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1342,25 +1452,28 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "search-system",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1393,27 +1506,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -1462,26 +1579,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -1521,26 +1642,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1563,27 +1688,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1603,27 +1731,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "history-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1642,22 +1774,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1687,29 +1826,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1735,23 +1876,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Binary.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -1786,27 +1934,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+  "rawCsvRow": {
+    "operation": "history-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1827,28 +1977,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1872,28 +2025,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1912,22 +2067,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+  "rawCsvRow": {
+    "operation": "history-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1949,30 +2111,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1989,22 +2151,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-type",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2025,28 +2194,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-type",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2082,29 +2252,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -2151,24 +2323,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2213,24 +2391,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-system",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -2274,28 +2458,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2317,29 +2503,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2360,24 +2548,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2393,23 +2586,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "user/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2443,30 +2644,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2499,25 +2700,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2540,30 +2745,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2581,22 +2787,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2621,28 +2835,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2661,27 +2876,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-system",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2702,26 +2920,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2742,28 +2963,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-system",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2791,28 +3013,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2861,25 +3086,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -2929,29 +3159,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-instance",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2989,23 +3220,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3030,32 +3268,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3073,21 +3310,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "system/Binary.read"
-    ]
+  "rawCsvRow": {
+    "operation": "history-instance",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3124,30 +3369,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3185,23 +3431,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -3235,25 +3488,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-instance",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3275,29 +3532,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3316,23 +3575,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3353,27 +3619,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-instance",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3393,28 +3662,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-instance",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3434,25 +3705,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3470,22 +3745,28 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "history-instance",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3508,27 +3789,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3548,27 +3832,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "history-system",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3599,28 +3887,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id"
+  "rawCsvRow": {
+    "fhirUser": "patientFhirUser",
+    "operation": "history-instance",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3668,29 +3958,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-system",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "system/MedicationRequest.read",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3720,23 +4012,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Observation"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "history-type",
+    "resourceType": "Observation",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3758,25 +4057,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+  "rawCsvRow": {
+    "operation": "search-type",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3798,28 +4101,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://random.server.com/dev",
     "resourceType": "Invalid"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "search-system",
+    "resourceType": "Invalid",
+    "fhirServiceBaseUrl": "nonMatchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "patient/Patient.*",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "patient/MedicationRequest.*",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "user/Patient.read",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "N/A",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3839,25 +4144,29 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
+  "rawCsvRow": {
+    "fhirUser": "practitionerFhirUser",
+    "operation": "search-system",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "N/A",
+    "user/Binary.read": "user/Binary.read",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "system/Binary.read",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3884,25 +4193,30 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Binary"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.*"
-    ],
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "operation": "history-type",
+    "resourceType": "Binary",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "N/A",
+    "patient/Patient.read": "N/A",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "N/A",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "patient/Binary.read",
+    "patient/Binary.*": "patient/Binary.*",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "N/A",
+    "user/Observation.read": "user/MedicationRequest.read",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "N/A",
+    "system/Patient.*": "system/Patient.*",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "system/MedicationRequest.*",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -3947,27 +4261,31 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "fhirServiceBaseUrl": "https://fhir.server.com/dev",
     "resourceType": "Patient"
   },
-  "decodedAccessToken": {
-    "ver": 1,
-    "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-    "iss": "https://dev-6460611.okta.com/oauth2/default",
-    "aud": "api://default",
-    "iat": 1668546607,
-    "exp": 2668546607,
-    "cid": "0oa8muazKSyk9gP5y5d5",
-    "uid": "00u85ozwjjWRd17PB5d5",
-    "sub": "test@test.com",
-    "scp": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.*"
-    ],
-    "fhirUser": "https://fhir.server.com/dev/Patient/id",
-    "ext": {
-      "launch_response_patient": "https://fhir.server.com/dev/Patient/id"
-    }
+  "rawCsvRow": {
+    "patientContext": "patientIdentity",
+    "fhirUser": "patientFhirUser",
+    "operation": "search-type",
+    "resourceType": "Patient",
+    "fhirServiceBaseUrl": "matchUrl",
+    "id": "12345",
+    "patient/Patient.read": "patient/Patient.read",
+    "patient/Patient.*": "N/A",
+    "patient/Observation.read": "patient/MedicationRequest.read",
+    "patient/Observation.*": "N/A",
+    "patient/Binary.read": "N/A",
+    "patient/Binary.*": "N/A",
+    "user/Patient.read": "N/A",
+    "user/Patient.*": "user/Patient.*",
+    "user/Observation.read": "N/A",
+    "user/Observation.*": "user/MedicationRequest.*",
+    "user/Binary.read": "N/A",
+    "user/Binary.*": "user/Binary.*",
+    "system/Patient.read": "system/Patient.read",
+    "system/Patient.*": "N/A",
+    "system/Observation.read": "N/A",
+    "system/Observation.*": "N/A",
+    "system/Binary.read": "N/A",
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
