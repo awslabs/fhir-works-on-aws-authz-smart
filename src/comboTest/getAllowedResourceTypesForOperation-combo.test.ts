@@ -1,13 +1,12 @@
 import { AllowedResourceTypesForOperationRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
-import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
-import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
+import TestCaseUtil, { BaseCsvRow } from './testCaseUtil.test';
 import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {
-    'fhirServiceBaseUrl': string;
-    'id': string;
+    fhirServiceBaseUrl: string;
+    id: string;
     'patient/Patient.read': string;
     'patient/Patient.*': string;
     'patient/Observation.read': string;
@@ -30,7 +29,7 @@ interface CsvRow extends BaseCsvRow {
 
 const testCaseUtil = new TestCaseUtil<CsvRow>(
     './params/getAllowedResourceTypesForOperation-params.csv',
-    'GetAllowedResourceTypesForOperation'
+    'GetAllowedResourceTypesForOperation',
 );
 
 const loadAndPrepareTestCases = (): any[] => {
@@ -50,7 +49,6 @@ const loadAndPrepareTestCases = (): any[] => {
     });
     return testCases;
 };
-
 
 describe('getAllowedResourceTypesForOperation-combo', () => {
     const testResults: any[] = [];
@@ -78,7 +76,9 @@ describe('getAllowedResourceTypesForOperation-combo', () => {
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
         let testResult: any;
         try {
-            testResult = await authZHandler.getAllowedResourceTypesForOperation(<AllowedResourceTypesForOperationRequest>testCase.request);
+            testResult = await authZHandler.getAllowedResourceTypesForOperation(
+                <AllowedResourceTypesForOperationRequest>testCase.request,
+            );
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             testResult = { message: (e as Error).message };
