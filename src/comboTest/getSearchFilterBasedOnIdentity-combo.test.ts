@@ -49,6 +49,7 @@ const loadAndPrepareTestCases = (): any[] => {
             resourceType: row.resourceType,
         };
         testCase.rawCsvRow = row;
+        testCase.rawCsvRow.scopes = inputRow.userIdentity.scopes;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -60,12 +61,12 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
         { field: 'testName', title: 'Test Number' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
-        { field: 'rawCsv.scopes', title: 'Scopes' },
         { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'request.resourceType', title: 'Resource Type' },
-        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
         { field: 'testResult', title: 'Search Filters' },
         { field: 'errorMessage', title: 'Error' },
+        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
+        { field: 'rawCsvRow.scopes', title: ' Scopes' },
     ];
 
     afterAll(async () => {
@@ -88,7 +89,6 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
             testResult = await authZHandler.getSearchFilterBasedOnIdentity(
                 <GetSearchFilterBasedOnIdentityRequest>testCase.request,
             );
-            console.log(testResult);
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             testResult = { errorMessage: (e as Error).message };
