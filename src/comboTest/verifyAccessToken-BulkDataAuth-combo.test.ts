@@ -2,7 +2,7 @@ import { VerifyAccessTokenRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
 import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
-import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
+import TestCaseUtil, { BaseCsvRow } from './testCaseUtil.test';
 import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {

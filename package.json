@@ -46,8 +46,10 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "axios-mock-adapter": "^1.18.2",
+    "csv-writer": "^1.6.0",
+    "fs": "0.0.1-security",
+    "json-2-csv": "^3.17.2",
     "csv-load-sync": "^2.3.1",
-    "csv-parse": "^5.3.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -86,7 +88,8 @@
     "collectCoverage": true,
     "testPathIgnorePatterns": [
       "<rootDir>/src/comboTest/__snapshots__/",
-      "<rootDir>/node_modules/"
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/comboTest/testCaseUtil.test.ts"
     ]
   },
   "repository": {
