@@ -1,6 +1,5 @@
 import { AuthorizationBundleRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
-import * as smartAuthorizationHelper from '../smartAuthorizationHelper';
 import * as testStubs from './testStubs';
 import TestCaseUtil, { BaseCsvRow } from './testCaseUtil.test';
 import { convertNAtoUndefined } from './testStubs';
@@ -57,7 +56,6 @@ const loadAndPrepareTestCases = () => {
 
 describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
     const testResults: any[] = [];
-    // TODO: Update for bulk
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
