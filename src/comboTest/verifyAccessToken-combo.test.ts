@@ -103,10 +103,8 @@ describe('verifyAccessToken-combo', () => {
         let testResult: any;
         try {
             testResult = await authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request);
-
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            // TODO: append errors to output file
             testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
