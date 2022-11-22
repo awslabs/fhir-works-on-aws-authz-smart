@@ -45,6 +45,7 @@ const loadAndPrepareTestCases = (): any[] => {
             userIdentity: inputRow.userIdentity,
             operation: row.operation,
         };
+        testCase.rawCsvRow = row;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -54,6 +55,8 @@ describe('getAllowedResourceTypesForOperation-combo', () => {
     const testResults: any[] = [];
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
+        { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
+        { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
         { field: 'request.operation', title: 'Operation' },
         { field: 'request.userIdentity.scopes', title: ' Scopes' },
         { field: 'testResult', title: 'Allowed Resources' },

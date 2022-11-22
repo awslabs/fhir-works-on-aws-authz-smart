@@ -46,7 +46,6 @@ const loadAndPrepareTestCases = (): any[] => {
         testCase.request = {
             userIdentity: inputRow.userIdentity,
             fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
-            // operation: row.operation,
             resourceType: row.resourceType,
         };
         testCase.rawCsvRow = row;
@@ -61,10 +60,10 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
         { field: 'testName', title: 'Test Number' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
+        { field: 'rawCsv.scopes', title: 'Scopes' },
         { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'request.resourceType', title: 'Resource Type' },
         { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
-        { field: 'request.userIdentity.scopes', title: 'Scopes' },
         { field: 'testResult', title: 'Search Filters' },
         { field: 'errorMessage', title: 'Error' },
     ];
@@ -86,7 +85,6 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
         let testResult: any;
         try {
-            // console.log(testCase.request.userIdentity.fhirUserObject);
             testResult = await authZHandler.getSearchFilterBasedOnIdentity(
                 <GetSearchFilterBasedOnIdentityRequest>testCase.request,
             );
