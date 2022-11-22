@@ -1490,6 +1490,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -1841,6 +1846,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -2183,6 +2193,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -2563,6 +2578,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -4791,6 +4811,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -4971,6 +4996,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -5316,6 +5346,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Patient.write",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -5521,6 +5556,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -8403,6 +8443,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -8951,6 +8996,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -9843,6 +9893,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -10536,6 +10591,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/Condition.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -13023,6 +13083,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Patient.*",
         "system/Condition.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -13909,6 +13974,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "user/Observation.write",
         "user/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -14119,6 +14189,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -15232,6 +15307,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.read",
         "system/Observation.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -17035,6 +17115,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -17247,6 +17332,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -17616,6 +17706,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -19559,6 +19654,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "patientLaunchContext": {
         "hostname": "https://fhir.server.com/dev",
         "resourceType": "Patient",
@@ -20644,6 +20744,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/Condition.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -20996,6 +21101,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -22817,6 +22927,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/Condition.*"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -22990,6 +23105,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]
@@ -23678,6 +23798,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
       "usableScopes": [
         "user/*.read"
       ]

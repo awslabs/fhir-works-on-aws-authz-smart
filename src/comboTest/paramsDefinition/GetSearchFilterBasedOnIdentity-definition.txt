@@ -1,12 +1,12 @@
 [System]
-Name: GetSearchFilterBasedOnIdentity
+Name: getSearchFilterBasedOnIdentity
 
 [Parameter]
 patientContext(enum): patientIdentity, N/A
 fhirUser(enum): practitionerFhirUser,patientFhirUser,N/A 
 operation(enum): search-type, search-system, history-type, history-system, history-instance
 resourceType(enum): Patient, Observation, Binary, Invalid, N/A
-fhirServiceBaseUrl(enum): https://fhir.server.com/dev, https://random.server.com/dev
+fhirServiceBaseUrl(enum): matchUrl,nonMatchUrl
 id: 12345, N/A 
 patient/Patient.read(enum): patient/Patient.read,N/A 
 patient/Patient.*(enum): patient/Patient.*,N/A 
