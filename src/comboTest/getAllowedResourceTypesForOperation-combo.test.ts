@@ -6,24 +6,26 @@ import TestCaseUtil, { BaseCsvRow } from './testCaseUtil';
 import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {
-    'patient/Patient.': string
-    'patient/Patient.*': string
-    'patient/Observation.': string
-    'patient/Observation.*': string
-    'patient/Consideration.': string
-    'patient/Consideration.*': string
-    'user/Patient.': string
-    'user/Patient.*': string
-    'user/Observation.': string
-    'user/Observation.*': string
-    'user/Consideration.': string
-    'user/Consideration.*': string
-    'system/Patient.': string
-    'system/Patient.*': string
-    'system/Observation.': string
-    'system/Observation.*': string
-    'system/Consideration.': string
-    'system/Consideration.*': string
+    'fhirServiceBaseUrl': string;
+    'id': string;
+    'patient/Patient.read': string;
+    'patient/Patient.*': string;
+    'patient/Observation.read': string;
+    'patient/Observation.*': string;
+    'patient/Binary.read': string;
+    'patient/Binary.*': string;
+    'user/Patient.read': string;
+    'user/Patient.*': string;
+    'user/Observation.read': string;
+    'user/Observation.*': string;
+    'user/Binary.read': string;
+    'user/Binary.*': string;
+    'system/Patient.read': string;
+    'system/Patient.*': string;
+    'system/Observation.read': string;
+    'system/Observation.*': string;
+    'system/Binary.read': string;
+    'system/Binary.*': string;
 }
 
 const testCaseUtil = new TestCaseUtil<CsvRow>(
@@ -42,24 +44,8 @@ const loadAndPrepareTestCases = (): any[] => {
         testCase.testName = `Combo Test Row ${index}`;
         testCase.request = {
             userIdentity: inputRow.userIdentity,
-            // userIdentity: {
-            //     scopes: testCaseUtil.getScopesFromResult(row),
-            // },
-            // fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
             operation: row.operation,
-            // resourceType: row.resourceType,
         };
-        // testCase.decodedAccessToken = {
-        //     ...testStubs.baseAccessNoScopes,
-        //     scp: testCaseUtil.getScopesFromResult(row),
-        //     fhirUser: testStubs.getFhirUserType(row.fhirUser),
-        // };
-        // if (row.patientContext) {
-        //     testCase.decodedAccessToken = {
-        //         ...testCase.decodedAccessToken,
-        //         ...testStubs.patientContext,
-        //     };
-        // }
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -86,24 +72,15 @@ describe('getAllowedResourceTypesForOperation-combo', () => {
         '4.0.1',
         undefined,
         undefined,
-        true,
+        undefined,
     );
 
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
-        // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
-        // jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-        //     Promise.resolve(testCase.decodedAccessToken),
-        // );
-        // jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-        //     Promise.resolve(testCase.decodedAccessToken),
-        // );
         let testResult: any;
         try {
             testResult = await authZHandler.getAllowedResourceTypesForOperation(<AllowedResourceTypesForOperationRequest>testCase.request);
-            //console.log(testResult)
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            // TODO: append errors to output file
             testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
