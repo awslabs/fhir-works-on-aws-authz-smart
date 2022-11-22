@@ -219,6 +219,7 @@ export const generateBundle = (): BatchReadWriteRequest[] => {
             resourceType: 'Observation',
             id: validPatientObservation.id,
             resource: validPatientObservation,
+            // references generated as per this method in routing: https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L328
             references: [
                 {
                     resourceType: 'Patient',
