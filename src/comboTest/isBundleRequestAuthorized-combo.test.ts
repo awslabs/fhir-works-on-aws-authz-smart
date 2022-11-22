@@ -6,7 +6,6 @@ import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {
     fhirServiceBaseUrl: string;
-    operation: string;
     'patient/Patient.read': string;
     'patient/Patient.write': string;
     'patient/Observation.read': string;
@@ -70,15 +69,7 @@ describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
     });
     const testCases = loadAndPrepareTestCases();
     const authZConfig = testStubs.baseAuthZConfig();
-    const authZHandlerUserScope: SMARTHandler = new SMARTHandler(
-        authZConfig,
-        testStubs.apiUrl,
-        '4.0.1',
-        undefined,
-        undefined,
-        true,
-    );
-    const authZHandlerNoUserScope: SMARTHandler = new SMARTHandler(
+    const authZHandler: SMARTHandler = new SMARTHandler(
         authZConfig,
         testStubs.apiUrl,
         '4.0.1',
@@ -88,12 +79,8 @@ describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
     );
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
         let testResult: any;
-        const authZHandler = testCase.isUserScopeAllowedForSystemExport
-            ? authZHandlerUserScope
-            : authZHandlerNoUserScope;
         try {
             testResult = await authZHandler.isBundleRequestAuthorized(<AuthorizationBundleRequest>testCase.request);
-
             expect(testResult).toMatchSnapshot();
         } catch (e) {
             testResult = { message: (e as Error).message };
