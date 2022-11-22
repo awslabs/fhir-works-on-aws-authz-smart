@@ -26,24 +26,25 @@ interface CsvRow extends BaseCsvRow {
     'system/Consideration.*': string
 }
 
-const testCaseUtil = new TestCaseUtil<CsvRow>('./params/GetAllowedResourceTypesForOperation-params.csv', 'GetAllowedResourceTypesForOperation');
+const testCaseUtil = new TestCaseUtil<CsvRow>(
+    './params/getAllowedResourceTypesForOperation-params.csv',
+    'GetAllowedResourceTypesForOperation'
+);
 
 const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
     const csv = testCaseUtil.loadTestCase({
-        isUserScopeAllowedForSystemExport: (s: string) => s === 'true',
         fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
     });
     csv.forEach((inputRow, index) => {
         const testCase: any = {};
-
         const row = inputRow.csvRow;
-        //TODO: get usable scopes
         testCase.testName = `Combo Test Row ${index}`;
         testCase.request = {
-            userIdentity: {
-                scopes: testCaseUtil.getScopesFromResult(row),
-            },
+            userIdentity: inputRow.userIdentity,
+            // userIdentity: {
+            //     scopes: testCaseUtil.getScopesFromResult(row),
+            // },
             // fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
             operation: row.operation,
             // resourceType: row.resourceType,
