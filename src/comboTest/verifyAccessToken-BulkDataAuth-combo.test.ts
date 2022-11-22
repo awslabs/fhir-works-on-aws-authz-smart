@@ -65,7 +65,6 @@ const loadAndPrepareTestCases = () => {
 
 describe('verifyAccessToken-BulkDataAuth-combo', () => {
     const testResults: any[] = [];
-    // TODO: Update for bulk
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
         { field: 'request.operation', title: 'Operation' },
@@ -73,6 +72,7 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
         { field: 'request.bulkDataAuth.exportType', title: 'Bulk Export Type' },
         { field: 'isUserScopeAllowedForSystemExport', title: 'User Scope Allowed' },
         { field: 'request.resourceType', title: ' Resource' },
+        { field: 'request.fhirServiceBaseUrl', title: 'Base URL' },
         { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
         { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
         { field: 'message', title: 'Error' },
@@ -109,13 +109,10 @@ describe('verifyAccessToken-BulkDataAuth-combo', () => {
         const authZHandler = testCase.isUserScopeAllowedForSystemExport
             ? authZHandlerUserScope
             : authZHandlerNoUserScope;
-        // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
             testResult = await authZHandler.verifyAccessToken(<VerifyAccessTokenRequest>testCase.request);
-
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            // TODO: append errors to output file
             testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
