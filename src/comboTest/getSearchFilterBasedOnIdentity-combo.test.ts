@@ -28,8 +28,8 @@ interface CsvRow extends BaseCsvRow {
 }
 
 const testCaseUtil = new TestCaseUtil<CsvRow>(
-    './params/getSearchFilterBasedOnIdentity-params.csv',
-    'getSearchFilterBasedOnIdentity',
+    './params/GetSearchFilterBasedOnIdentity-params.csv',
+    'GetSearchFilterBasedOnIdentity',
 );
 
 const loadAndPrepareTestCases = (): any[] => {
