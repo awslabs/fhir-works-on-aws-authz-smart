@@ -28,7 +28,7 @@ interface CsvRow extends BaseCsvRow {
 }
 
 const testCaseUtil = new TestCaseUtil<CsvRow>(
-    './params/getAllowedResourceTypesForOperation-params.csv',
+    './params/GetAllowedResourceTypesForOperation-params.csv',
     'GetAllowedResourceTypesForOperation',
 );
 
