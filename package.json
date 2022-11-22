@@ -86,6 +86,7 @@
     },
     "testRegex": ".test.ts",
     "collectCoverage": true,
+    "coveragePathIgnorePatterns": ["<rootDir>/src/comboTest/"],
     "testPathIgnorePatterns": [
       "<rootDir>/src/comboTest/__snapshots__/",
       "<rootDir>/node_modules/",
