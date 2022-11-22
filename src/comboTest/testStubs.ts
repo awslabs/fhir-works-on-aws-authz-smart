@@ -1,6 +1,7 @@
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
+import { BatchReadWriteRequest } from 'fhir-works-on-aws-interface';
 
 export const scopeRule = (): ScopeRule => ({
     patient: {
@@ -210,3 +211,42 @@ export const getResourceType = (resourceBodyDescription: ResourceBodyDescription
             return 'Patient';
     }
 };
+
+export const generateBundle = (): BatchReadWriteRequest[] => {
+    return [
+        {
+            operation: 'create',
+            resourceType: 'Observation',
+            id: validPatientObservation.id,
+            resource: validPatientObservation,
+            references: [
+                {
+                    resourceType: 'Patient',
+                    id: patientId,
+                    vid: '1',
+                    rootUrl: apiUrl,
+                    referenceFullUrl: patientIdentity,
+                    referencePath: 'subject',
+                }
+            ]
+        },
+        {
+            operation: 'create',
+            resourceType: 'Condition',
+            id: validCondition.id,
+            resource: validCondition,
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id,
+            resource: undefined,
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id: 'PatientNotSameId',
+            resource: undefined,
+        },
+    ]
+}

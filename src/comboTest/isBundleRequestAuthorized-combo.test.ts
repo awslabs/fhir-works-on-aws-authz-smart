@@ -6,15 +6,26 @@ import TestCaseUtil, { BaseCsvRow } from './testCaseUtil.test';
 import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {
-    resourceBody: string | undefined;
     fhirServiceBaseUrl: string;
+    operation: string;
     'patient/Patient.read': string;
-    'patient/*.read': string;
+    'patient/Patient.write': string;
+    'patient/Observation.read': string;
+    'patient/Observation.write': string;
+    'patient/Condition.read': string;
+    'patient/Condition.write': string;
     'user/Patient.read': string;
-    'user/*.read': string;
+    'user/Patient.write': string;
+    'user/Observation.read': string;
+    'user/Observation.write': string;
+    'user/Condition.read': string;
+    'user/Condition.write': string;
     'system/Patient.read': string;
-    'system/*.read': string;
-    isUserScopeAllowedForSystemExport: boolean;
+    'system/Patient.write': string;
+    'system/Observation.read': string;
+    'system/Observation.write': string;
+    'system/Condition.read': string;
+    'system/Condition.write': string;
 }
 const testCaseUtil = new TestCaseUtil<CsvRow>(
     './params/isBundleRequestAuthorized-params.csv',
@@ -25,31 +36,20 @@ const loadAndPrepareTestCases = () => {
     const testCases: any[] = [];
     const csv = testCaseUtil.loadTestCase({
         fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
-        resourceBody: (s: string) => convertNAtoUndefined(s),
     });
+
+    const requests = testStubs.generateBundle();
 
     csv.forEach((inputRow, index) => {
         const testCase: any = {};
         const row = inputRow.csvRow;
         testCase.testName = `Combo Test Row ${index}`;
         testCase.request = {
-            accessToken: 'fake',
-            operation: row.operation,
-            resourceType: row.resourceBody || '',
+            userIdentity: inputRow.userIdentity,
             fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
+            requests,
         };
-        testCase.decodedAccessToken = {
-            ...testStubs.baseAccessNoScopes,
-            scp: testCaseUtil.getScopesFromResult(row),
-            fhirUser: testStubs.getFhirUserType(row.fhirUser),
-        };
-        testCase.isUserScopeAllowedForSystemExport = row.isUserScopeAllowedForSystemExport;
-        if (row.patientContext) {
-            testCase.decodedAccessToken = {
-                ...testCase.decodedAccessToken,
-                ...testStubs.patientContext,
-            };
-        }
+        testCase.rawCsvRow = inputRow.csvRow;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -60,13 +60,12 @@ describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
     // TODO: Update for bulk
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
-        { field: 'request.operation', title: 'Operation' },
-        { field: 'request.resourceBody', title: ' Resource Body' },
-        { field: 'decodedAccessToken.fhirUser', title: 'fhirUser' },
-        { field: 'decodedAccessToken.ext.launch_response_patient', title: 'Patient in Context' },
+        { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
+        { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
+        { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'message', title: 'Error' },
-        { field: 'usableScopes', title: 'Usable Scopes' },
-        { field: 'decodedAccessToken.scp', title: 'Scopes' },
+        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
+        { field: 'request.userIdentity.scopes', title: 'Scopes' },
     ];
     afterAll(async () => {
         await testCaseUtil.writeTestResultsToCsv(testResults, keysToOutput);
@@ -90,21 +89,15 @@ describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
         false,
     );
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
-        // Handling mocking modules when code is in TS: https://stackoverflow.com/a/60693903/14310364
-        jest.spyOn(smartAuthorizationHelper, 'verifyJwtToken').mockImplementation(() =>
-            Promise.resolve(testCase.decodedAccessToken),
-        );
         let testResult: any;
         const authZHandler = testCase.isUserScopeAllowedForSystemExport
             ? authZHandlerUserScope
             : authZHandlerNoUserScope;
-        // TODO: Snapshot contains timestamp, need to update logic to static or it fails on rerun
         try {
             testResult = await authZHandler.isBundleRequestAuthorized(<AuthorizationBundleRequest>testCase.request);
 
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            // TODO: append errors to output file
             testResult = { message: (e as Error).message };
             expect(e).toMatchSnapshot();
         }
