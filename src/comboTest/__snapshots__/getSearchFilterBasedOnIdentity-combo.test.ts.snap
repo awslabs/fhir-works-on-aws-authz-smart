@@ -62,21 +62,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -113,8 +99,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": []
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -165,15 +150,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -236,15 +213,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -289,15 +258,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -340,15 +301,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -406,15 +359,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -477,15 +422,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -549,16 +486,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -615,16 +543,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -669,15 +588,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -720,15 +631,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -769,13 +672,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -818,16 +715,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -869,15 +757,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -928,15 +808,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -995,16 +867,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -1065,14 +928,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1117,15 +973,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1171,17 +1019,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1224,14 +1062,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1272,12 +1103,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1330,15 +1156,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -1396,18 +1214,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1451,14 +1258,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1503,16 +1303,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1553,12 +1344,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1600,15 +1386,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -1653,17 +1431,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1705,16 +1473,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1771,14 +1530,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -1850,16 +1602,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -1922,14 +1665,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -1975,17 +1711,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2029,14 +1755,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2077,13 +1796,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2137,16 +1850,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2195,13 +1899,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Binary.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2258,18 +1956,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2314,15 +2001,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2369,18 +2048,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2421,13 +2089,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2472,17 +2134,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2521,12 +2173,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -2569,16 +2216,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2638,16 +2276,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -2717,14 +2346,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -2792,12 +2414,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -2864,18 +2481,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2921,16 +2527,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -2973,15 +2570,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3021,10 +2610,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "user/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3081,20 +2667,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3149,16 +2722,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3205,17 +2769,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3256,12 +2810,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3308,19 +2857,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3362,14 +2899,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3412,16 +2942,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3464,16 +2985,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3525,15 +3037,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3605,15 +3109,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -3686,17 +3182,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -3757,13 +3243,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3812,19 +3292,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -3864,12 +3332,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -3930,17 +3393,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -4001,13 +3454,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.*",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -4063,16 +3510,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4118,16 +3556,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -4169,13 +3598,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4219,15 +3642,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4270,15 +3685,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4320,15 +3727,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -4367,13 +3766,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.*",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4419,17 +3812,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.read",
-      "system/Patient.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -4473,14 +3856,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4534,18 +3910,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -4617,16 +3982,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "system/MedicationRequest.read",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [
@@ -4679,13 +4035,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4729,16 +4079,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Binary.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Patient.*",
-      "system/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4783,16 +4124,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Patient.*",
-      "patient/Binary.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `Array []`;
 
@@ -4834,15 +4166,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "system/Binary.read",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Binary.read",
-      "user/Patient.*",
-      "user/Binary.read",
-      "user/Binary.*",
-      "system/Binary.read"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -4892,13 +4216,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "system/MedicationRequest.*",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "N/A",
-    "scopes": [
-      "patient/Binary.read",
-      "patient/Binary.*",
-      "user/Binary.*",
-      "system/Patient.*"
-    ]
+    "system/Binary.*": "N/A"
   }
 } 1`] = `
 Array [
@@ -4967,14 +4285,7 @@ exports[`getSearchFilterBasedOnIdentity-combo CASE: {
     "system/Observation.read": "N/A",
     "system/Observation.*": "N/A",
     "system/Binary.read": "N/A",
-    "system/Binary.*": "system/Binary.*",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Binary.*",
-      "system/Patient.read",
-      "system/Binary.*"
-    ]
+    "system/Binary.*": "system/Binary.*"
   }
 } 1`] = `
 Array [

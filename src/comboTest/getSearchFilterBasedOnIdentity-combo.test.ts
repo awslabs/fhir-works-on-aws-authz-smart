@@ -49,7 +49,6 @@ const loadAndPrepareTestCases = (): any[] => {
             resourceType: row.resourceType,
         };
         testCase.rawCsvRow = row;
-        testCase.rawCsvRow.scopes = inputRow.userIdentity.scopes;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
     });
     return testCases;
@@ -66,7 +65,7 @@ describe('getSearchFilterBasedOnIdentity-combo', () => {
         { field: 'testResult', title: 'Search Filters' },
         { field: 'errorMessage', title: 'Error' },
         { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
-        { field: 'rawCsvRow.scopes', title: ' Scopes' },
+        { field: 'request.userIdentity.scopes', title: ' Scopes' },
     ];
 
     afterAll(async () => {
