@@ -3,7 +3,14 @@ import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { writeFileSync } from 'fs';
 import { json2csvAsync } from 'json-2-csv';
 import { UserIdentity } from '../smartConfig';
-import { convertNAtoUndefined, getFhirUserObject, getFhirUserType, scopeRule } from './testStubs';
+import {
+    convertNAtoUndefined,
+    getFhirUserObject,
+    getFhirUserType,
+    scopeRule,
+    getResourceType,
+    ResourceBodyDescription,
+} from './testStubs';
 import { filterOutUnusableScope } from '../smartScopeHelper';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -16,6 +23,7 @@ export interface BaseCsvRow {
     fhirUser?: string;
     patientContext?: string;
     resourceType?: string;
+    resourceBody?: ResourceBodyDescription;
 }
 
 export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
@@ -45,24 +53,26 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             };
 
             const fhirUserClaim = getFhirUserType(row.fhirUser);
-            const patientContextClaim = row.patientContext;
+            const patientContextClaim = getFhirUserType(row.patientContext);
+
+            const resourceType = row.resourceType ? row.resourceType : getResourceType(row.resourceBody);
 
             const usableScopes = filterOutUnusableScope(
                 scopes,
                 scopeRule(),
                 row.operation as TypeOperation | SystemOperation,
                 false,
-                row.resourceType,
+                resourceType,
                 undefined,
                 patientContextClaim,
                 fhirUserClaim,
             );
 
             if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
-                userIdentity.fhirUserObject = getFhirUserObject(fhirUserClaim);
+                userIdentity.fhirUserObject = getFhirUserObject(row.fhirUser);
             }
             if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
-                userIdentity.patientLaunchContext = getFhirUserObject(patientContextClaim);
+                userIdentity.patientLaunchContext = getFhirUserObject(row.patientContext);
             }
             userIdentity.usableScopes = usableScopes;
             testCases.push({ csvRow: row, userIdentity });
