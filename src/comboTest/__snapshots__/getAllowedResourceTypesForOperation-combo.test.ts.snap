@@ -54,29 +54,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -262,8 +240,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": []
+    "system/*.read": "N/A"
   }
 } 1`] = `Array []`;
 
@@ -311,20 +288,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -519,18 +483,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -728,169 +681,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -937,18 +734,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -1143,18 +929,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -1208,20 +983,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -1417,19 +1179,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -1625,19 +1375,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -1690,20 +1428,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -1897,18 +1622,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -2084,8 +1798,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "search-system"
@@ -2114,20 +1827,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -2330,18 +2030,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -2545,20 +2234,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -2726,9 +2402,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "user/Condition.read",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -2755,18 +2429,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -2969,18 +2632,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -3156,8 +2808,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "search-system"
@@ -3186,20 +2837,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -3395,19 +3033,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -3439,8 +3065,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "search-system"
@@ -3468,19 +3093,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -3650,9 +3263,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -3679,20 +3290,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -3894,18 +3492,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -4102,21 +3689,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -4283,9 +3856,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -4311,166 +3882,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -4517,167 +3935,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -4726,20 +3990,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -4936,20 +4187,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -5144,18 +4382,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -5213,23 +4440,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -5422,164 +4633,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -5626,19 +4685,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -5834,19 +4881,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -6040,166 +5075,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -6248,21 +5130,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -6459,21 +5327,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -6666,17 +5520,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -6872,18 +5716,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -6922,8 +5755,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
       },
       "usableScopes": [
         "patient/*.read",
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -6952,20 +5784,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -7141,8 +5960,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -7170,20 +5988,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -7378,18 +6183,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -7572,8 +6366,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
       },
       "usableScopes": [
         "patient/*.read",
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -7602,21 +6395,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -7811,23 +6590,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
   "Observation",
   "Condition",
-  "Patient",
 ]
 `;
 
@@ -7882,20 +6650,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -8063,9 +6818,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -8092,18 +6845,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -8297,17 +7039,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -8484,8 +7216,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "history-system"
@@ -8513,21 +7244,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -8716,13 +7433,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.*",
-      "user/Condition.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -8753,9 +7464,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -8781,25 +7490,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -8996,19 +7687,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -9205,19 +7884,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -9411,17 +8078,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -9619,21 +8276,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -9829,18 +8472,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -10038,20 +8670,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -10249,21 +8868,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -10457,17 +9062,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -10662,18 +9257,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -10870,20 +9454,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -10939,23 +9510,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -11146,15 +9701,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.*",
-      "system/Observation.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -11208,168 +9755,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -11417,19 +9808,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -11601,9 +9980,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -11631,171 +10008,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -11853,16 +10072,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/*.read",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -12063,23 +10273,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -12272,164 +10466,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
   "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
-  "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -12474,17 +10516,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -12661,8 +10693,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -12690,21 +10721,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -12903,22 +10920,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -13111,16 +11113,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -13318,21 +11311,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -13383,17 +11362,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -13593,15 +11562,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -13780,8 +11741,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "search-system"
@@ -13810,23 +11770,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -14025,21 +11969,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -14234,17 +12164,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -14422,8 +12342,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "history-system"
@@ -14452,22 +12371,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -14668,16 +12572,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -14873,18 +12768,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -14939,20 +12823,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -15146,18 +13017,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "system/Patient.*",
-      "system/Observation.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -15353,20 +13213,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -15558,16 +13405,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -15739,9 +13577,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.read",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -15767,22 +13603,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -15978,20 +13799,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -16185,18 +13993,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -16390,17 +14187,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Patient.write",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -16433,8 +14220,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "history-system"
@@ -16462,21 +14248,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -16670,18 +14442,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -16877,20 +14638,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -17085,18 +14833,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -17293,20 +15030,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -17502,19 +15226,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -17710,168 +15422,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -17927,21 +15483,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -18108,9 +15650,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -18137,17 +15677,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -18323,8 +15853,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "search-system"
@@ -18352,20 +15881,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -18560,18 +16076,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -18625,20 +16130,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -18833,18 +16325,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -19050,15 +16531,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/*.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -19231,9 +16704,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -19261,172 +16732,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
   "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -19451,8 +16763,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "search-system"
@@ -19480,18 +16791,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -19688,20 +16988,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -19755,20 +17042,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -19963,18 +17237,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -20173,21 +17436,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -20382,17 +17631,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -20447,20 +17686,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -20656,18 +17882,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -20836,9 +18051,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -20865,168 +18078,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
   "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
 ]
 `;
 
@@ -21080,19 +18138,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -21292,22 +18338,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -21501,16 +18532,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -21704,166 +18726,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
+  "Condition",
 ]
 `;
 
@@ -21912,21 +18781,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -22125,23 +18980,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -22332,21 +19171,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
   "Patient",
   "Observation",
-  "Condition",
 ]
 `;
 
@@ -22403,22 +19233,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -22584,9 +19399,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -22613,165 +19426,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "user/Patient.*",
-      "user/Observation.*",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Observation",
 ]
 `;
 
@@ -22818,18 +19478,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -23027,20 +19676,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -23239,23 +19875,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -23420,9 +20040,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -23448,15 +20066,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -23639,8 +20249,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
       },
       "usableScopes": [
         "patient/*.read",
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "search-system"
@@ -23669,21 +20278,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -23878,17 +20473,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -23933,8 +20518,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
       },
       "usableScopes": [
         "patient/*.read",
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -23963,26 +20547,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -24172,17 +20737,11 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
   "Observation",
-  "Condition",
 ]
 `;
 
@@ -24206,9 +20765,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -24235,23 +20792,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -24450,15 +20991,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -24658,23 +21191,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -24866,15 +21383,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -25067,17 +21576,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -25274,21 +21773,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -25487,23 +21972,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -25668,9 +22137,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Observation.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -25696,164 +22163,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
   "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
 ]
 `;
 
@@ -25900,19 +22215,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -25965,19 +22268,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -26176,22 +22467,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -26385,17 +22661,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -26593,20 +22859,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -26802,18 +23055,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -26998,8 +23240,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
       },
       "usableScopes": [
         "patient/*.read",
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -27028,23 +23269,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -27236,15 +23461,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -27302,23 +23519,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -27511,15 +23712,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -27575,22 +23768,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -27784,16 +23962,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -27990,21 +24159,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -28197,17 +24352,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -28410,19 +24555,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -28599,8 +24732,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "search-system"
@@ -28629,21 +24761,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -28845,18 +24963,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -29025,9 +25132,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -29055,168 +25160,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
   "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
+  "Condition",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
 ]
 `;
 
@@ -29262,23 +25212,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
   "Patient",
   "Observation",
-  "Condition",
 ]
 `;
 
@@ -29329,22 +25268,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -29518,9 +25442,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "search-system"
   },
@@ -29546,24 +25468,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -29754,14 +25659,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -29959,20 +25857,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -30167,24 +26052,12 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "user/Observation.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
   "Observation",
   "Condition",
-  "Patient",
 ]
 `;
 
@@ -30231,20 +26104,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -30410,9 +26270,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "system/Condition.*",
         "system/*.read"
       ],
-      "usableScopes": [
-        "system/*.read"
-      ]
+      "usableScopes": []
     },
     "operation": "history-system"
   },
@@ -30438,16 +26296,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -30649,25 +26498,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -30858,14 +26689,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -30917,20 +26741,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -31125,18 +26936,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -31339,19 +27139,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -31526,8 +27314,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -31556,19 +27343,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Condition.*",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -31765,20 +27540,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -31975,20 +27737,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/*.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -32186,21 +27935,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -32373,8 +28108,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "user/*.read",
-        "system/*.read"
+        "user/*.read"
       ]
     },
     "operation": "history-system"
@@ -32403,17 +28137,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -32607,167 +28331,13 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Observation.write",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Observation.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
-  "Account",
-  "ActivityDefinition",
-  "AdverseEvent",
-  "AllergyIntolerance",
-  "Appointment",
-  "AppointmentResponse",
-  "AuditEvent",
-  "Basic",
-  "Binary",
-  "BiologicallyDerivedProduct",
-  "BodyStructure",
-  "Bundle",
-  "CapabilityStatement",
-  "CarePlan",
-  "CareTeam",
-  "CatalogEntry",
-  "ChargeItem",
-  "ChargeItemDefinition",
-  "Claim",
-  "ClaimResponse",
-  "ClinicalImpression",
-  "CodeSystem",
-  "Communication",
-  "CommunicationRequest",
-  "CompartmentDefinition",
-  "Composition",
-  "ConceptMap",
-  "Condition",
-  "Consent",
-  "Contract",
-  "Coverage",
-  "CoverageEligibilityRequest",
-  "CoverageEligibilityResponse",
-  "DetectedIssue",
-  "Device",
-  "DeviceDefinition",
-  "DeviceMetric",
-  "DeviceRequest",
-  "DeviceUseStatement",
-  "DiagnosticReport",
-  "DocumentManifest",
-  "DocumentReference",
-  "EffectEvidenceSynthesis",
-  "Encounter",
-  "Endpoint",
-  "EnrollmentRequest",
-  "EnrollmentResponse",
-  "EpisodeOfCare",
-  "EventDefinition",
-  "Evidence",
-  "EvidenceVariable",
-  "ExampleScenario",
-  "ExplanationOfBenefit",
-  "FamilyMemberHistory",
-  "Flag",
-  "Goal",
-  "GraphDefinition",
-  "Group",
-  "GuidanceResponse",
-  "HealthcareService",
-  "ImagingStudy",
-  "Immunization",
-  "ImmunizationEvaluation",
-  "ImmunizationRecommendation",
-  "ImplementationGuide",
-  "InsurancePlan",
-  "Invoice",
-  "Library",
-  "Linkage",
-  "List",
-  "Location",
-  "Measure",
-  "MeasureReport",
-  "Media",
-  "Medication",
-  "MedicationAdministration",
-  "MedicationDispense",
-  "MedicationKnowledge",
-  "MedicationRequest",
-  "MedicationStatement",
-  "MedicinalProduct",
-  "MedicinalProductAuthorization",
-  "MedicinalProductContraindication",
-  "MedicinalProductIndication",
-  "MedicinalProductIngredient",
-  "MedicinalProductInteraction",
-  "MedicinalProductManufactured",
-  "MedicinalProductPackaged",
-  "MedicinalProductPharmaceutical",
-  "MedicinalProductUndesirableEffect",
-  "MessageDefinition",
-  "MessageHeader",
-  "MolecularSequence",
-  "NamingSystem",
-  "NutritionOrder",
-  "Observation",
-  "ObservationDefinition",
-  "OperationDefinition",
-  "OperationOutcome",
-  "Organization",
-  "OrganizationAffiliation",
-  "Parameters",
   "Patient",
-  "PaymentNotice",
-  "PaymentReconciliation",
-  "Person",
-  "PlanDefinition",
-  "Practitioner",
-  "PractitionerRole",
-  "Procedure",
-  "Provenance",
-  "Questionnaire",
-  "QuestionnaireResponse",
-  "RelatedPerson",
-  "RequestGroup",
-  "ResearchDefinition",
-  "ResearchElementDefinition",
-  "ResearchStudy",
-  "ResearchSubject",
-  "RiskAssessment",
-  "RiskEvidenceSynthesis",
-  "Schedule",
-  "SearchParameter",
-  "ServiceRequest",
-  "Slot",
-  "Specimen",
-  "SpecimenDefinition",
-  "StructureDefinition",
-  "StructureMap",
-  "Subscription",
-  "Substance",
-  "SubstanceNucleicAcid",
-  "SubstancePolymer",
-  "SubstanceProtein",
-  "SubstanceReferenceInformation",
-  "SubstanceSourceMaterial",
-  "SubstanceSpecification",
-  "SupplyDelivery",
-  "SupplyRequest",
-  "Task",
-  "TerminologyCapabilities",
-  "TestReport",
-  "TestScript",
-  "ValueSet",
-  "VerificationResult",
-  "VisionPrescription",
+  "Condition",
+  "Observation",
 ]
 `;
 
@@ -32811,17 +28381,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Condition.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -33020,22 +28580,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -33228,16 +28773,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "system/Patient.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -33435,21 +28971,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -33643,17 +29165,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -33707,19 +29219,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -33913,17 +29413,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/*.read",
-      "user/Patient.*",
-      "system/Patient.write",
-      "system/Observation.*",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -34119,18 +29609,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Patient.*",
-      "system/Condition.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -34182,18 +29661,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/*.read",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -34371,8 +29839,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
         "id": "id"
       },
       "usableScopes": [
-        "patient/*.read",
-        "system/*.read"
+        "patient/*.read"
       ]
     },
     "operation": "history-system"
@@ -34400,22 +29867,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.*",
-      "user/*.read",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -34612,21 +30064,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Observation.*",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -34684,23 +30122,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "patient/*.read",
-      "user/Patient.read",
-      "user/Patient.*",
-      "user/Observation.write",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.write",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -34896,19 +30318,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "N/A",
     "system/Condition.read": "N/A",
     "system/Condition.*": "N/A",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.*",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "user/Condition.read",
-      "user/Condition.*",
-      "user/*.read",
-      "system/Observation.read"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [
@@ -35108,22 +30518,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "system/Condition.read",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "system/*.read",
-    "scopes": [
-      "patient/Patient.read",
-      "patient/Observation.read",
-      "patient/Condition.write",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Condition.read",
-      "user/Condition.*",
-      "system/Patient.*",
-      "system/Observation.read",
-      "system/Observation.*",
-      "system/Condition.read",
-      "system/Condition.*",
-      "system/*.read"
-    ]
+    "system/*.read": "system/*.read"
   }
 } 1`] = `
 Array [
@@ -35316,15 +30711,7 @@ exports[`getAllowedResourceTypesForOperation-combo CASE: {
     "system/Observation.*": "system/Observation.*",
     "system/Condition.read": "N/A",
     "system/Condition.*": "system/Condition.*",
-    "system/*.read": "N/A",
-    "scopes": [
-      "patient/Observation.read",
-      "patient/Condition.*",
-      "user/Patient.read",
-      "user/Observation.*",
-      "system/Observation.*",
-      "system/Condition.*"
-    ]
+    "system/*.read": "N/A"
   }
 } 1`] = `
 Array [

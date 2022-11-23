@@ -13,8 +13,8 @@ export const scopeRule = (): ScopeRule => ({
     },
     system: {
         // "read" allows system export and group export
-        read: ['read', 'vread', 'search-type', 'search-system', 'history-instance', 'history-type', 'history-system'],
-        write: ['create', 'update', 'delete', 'patch', 'transaction', 'batch'],
+        read: ['read'],
+        write: [],
     },
 });
 export const expectedAud = 'api://default';
