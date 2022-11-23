@@ -235,7 +235,7 @@ export const generateBundle = (): BatchReadWriteRequest[] => {
             operation: 'create',
             resourceType: 'Condition',
             id: validCondition.id,
-            resource: validCondition,
+            resource: {...validCondition, subject: undefined }, // remove reference to patient
         },
         {
             operation: 'read',

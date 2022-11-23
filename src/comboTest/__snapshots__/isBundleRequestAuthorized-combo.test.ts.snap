@@ -193,9 +193,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -393,9 +390,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -603,9 +597,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -830,9 +821,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1048,9 +1036,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1264,9 +1249,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1481,9 +1463,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1697,9 +1676,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1920,9 +1896,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -1961,7 +1934,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 9",
@@ -2144,9 +2117,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -2367,9 +2337,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -2592,9 +2559,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -2810,9 +2774,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -2850,7 +2811,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 13",
@@ -3020,9 +2981,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -3236,9 +3194,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -3453,9 +3408,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -3670,9 +3622,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -3710,7 +3659,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 17",
@@ -3886,9 +3835,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -4105,9 +4051,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -4319,9 +4262,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -4530,9 +4470,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -4736,9 +4673,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -4944,9 +4878,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -5152,9 +5083,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -5375,9 +5303,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -5593,9 +5518,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -5818,9 +5740,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -6041,9 +5960,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -6257,9 +6173,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -6475,9 +6388,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -6683,9 +6593,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -6902,9 +6809,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -7120,9 +7024,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -7335,9 +7236,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -7548,9 +7446,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -7752,9 +7647,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -7975,9 +7867,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -8198,9 +8087,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -8417,9 +8303,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -8632,9 +8515,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -8850,9 +8730,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9065,9 +8942,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9274,9 +9148,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9482,9 +9353,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9700,9 +9568,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9918,9 +9783,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -9959,7 +9821,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "system/Condition.read",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
@@ -10138,9 +10000,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -10352,9 +10211,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -10567,9 +10423,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -10785,9 +10638,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -11011,9 +10861,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -11052,7 +10899,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 51",
@@ -11227,9 +11074,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -11444,9 +11288,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -11661,9 +11502,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -11869,9 +11707,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -12078,9 +11913,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -12304,9 +12136,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -12524,9 +12353,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -12738,9 +12564,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -12958,9 +12781,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -13165,9 +12985,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -13375,9 +13192,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -13593,9 +13407,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -13807,9 +13618,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -14028,9 +13836,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -14234,9 +14039,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -14464,9 +14266,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -14676,9 +14475,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -14894,9 +14690,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -15119,9 +14912,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -15160,7 +14950,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 70",
@@ -15337,9 +15127,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -15553,9 +15340,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -15762,9 +15546,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -15971,9 +15752,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -16187,9 +15965,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -16403,9 +16178,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -16624,9 +16396,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -16664,7 +16433,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "system/Condition.read",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 77",
@@ -16837,9 +16606,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -17061,9 +16827,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -17285,9 +17048,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -17326,7 +17086,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "N/A",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 80",
@@ -17506,9 +17266,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -17719,9 +17476,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -17944,9 +17698,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -18169,9 +17920,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -18210,7 +17958,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
     "system/Condition.read": "system/Condition.read",
     "system/Condition.write": "N/A"
   }
-} 1`] = `undefined`;
+} 1`] = `[UnauthorizedError: An entry within the Bundle is not authorized]`;
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 84",
@@ -18390,9 +18138,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
@@ -18614,9 +18359,6 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
               "text": "Left Ear"
             }
           ],
-          "subject": {
-            "reference": "https://fhir.server.com/dev/Patient/id"
-          },
           "onsetDateTime": "2012-05-24"
         }
       },
