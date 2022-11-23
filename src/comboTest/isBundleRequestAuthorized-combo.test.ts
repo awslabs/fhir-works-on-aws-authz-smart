@@ -42,6 +42,13 @@ const loadAndPrepareTestCases = () => {
         const testCase: any = {};
         const row = inputRow.csvRow;
         testCase.testName = `Combo Test Row ${index}`;
+
+        testCase.filteredScopes = inputRow.userIdentity.scopes.filter(
+            (scope: string) =>
+                (inputRow.userIdentity.patientLaunchContext && scope.startsWith('patient/')) ||
+                (inputRow.userIdentity.fhirUserObject && scope.startsWith('user/')) ||
+                scope.startsWith('system/'),
+        );
         testCase.request = {
             userIdentity: inputRow.userIdentity,
             fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
@@ -61,7 +68,7 @@ describe('isBundleRequestAuthorized-BulkDataAuth-combo', () => {
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
         { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'message', title: 'Error' },
-        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
+        { field: 'filteredScopes', title: 'Filtered Scopes' },
         { field: 'request.userIdentity.scopes', title: 'Scopes' },
     ];
     afterAll(async () => {

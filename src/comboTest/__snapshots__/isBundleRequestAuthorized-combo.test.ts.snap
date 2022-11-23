@@ -2,6 +2,26 @@
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 0",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -235,6 +255,7 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 1",
+  "filteredScopes": [],
   "request": {
     "userIdentity": {
       "scopes": [],
@@ -432,6 +453,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 2",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -639,6 +665,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 3",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "user/Patient.write",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -863,6 +900,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 4",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -1077,6 +1122,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 5",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -1290,6 +1343,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 6",
+  "filteredScopes": [
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -1504,6 +1565,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 7",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "system/Patient.read",
+    "system/Patient.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -1717,6 +1786,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 8",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.write",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -1938,6 +2018,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 9",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -2159,6 +2250,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 10",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "user/Patient.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "system/Patient.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -2379,6 +2480,18 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 11",
+  "filteredScopes": [
+    "patient/Observation.read",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.write",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -2601,6 +2714,13 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 12",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -2815,6 +2935,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 13",
+  "filteredScopes": [
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -3022,6 +3148,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 14",
+  "filteredScopes": [
+    "user/Observation.write",
+    "system/Patient.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -3235,6 +3367,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 15",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -3449,6 +3591,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 16",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "system/Observation.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -3663,6 +3813,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 17",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Condition.read",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -3876,6 +4034,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 18",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Condition.write",
+    "system/Patient.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -4092,6 +4260,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 19",
+  "filteredScopes": [
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "system/Patient.write",
+    "system/Observation.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -4303,6 +4477,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 20",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -4510,6 +4690,10 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 21",
+  "filteredScopes": [
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -4713,6 +4897,13 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 22",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -4918,6 +5109,9 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 23",
+  "filteredScopes": [
+    "system/Observation.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -5123,6 +5317,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 24",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -5345,6 +5550,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 25",
+  "filteredScopes": [
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -5560,6 +5776,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 26",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -5782,6 +6009,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 27",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Condition.read",
+    "user/Observation.read",
+    "user/Observation.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -6002,6 +6240,13 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 28",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -6214,6 +6459,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 29",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -6429,6 +6683,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 30",
+  "filteredScopes": [
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -6634,6 +6893,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 31",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -6850,6 +7119,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 32",
+  "filteredScopes": [
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -7065,6 +7344,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 33",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Condition.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -7277,6 +7562,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 34",
+  "filteredScopes": [
+    "system/Patient.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -7486,6 +7776,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 35",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -7687,6 +7982,18 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 36",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.read",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -7909,6 +8216,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 37",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -8129,6 +8446,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 38",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -8344,6 +8672,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 39",
+  "filteredScopes": [
+    "patient/Condition.write",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -8556,6 +8889,13 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 40",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -8771,6 +9111,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 41",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -8983,6 +9332,10 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 42",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -9188,6 +9541,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 43",
+  "filteredScopes": [
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -9393,6 +9752,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 44",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -9610,6 +9980,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 45",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -9825,6 +10205,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -10041,6 +10430,13 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 47",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -10252,6 +10648,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 48",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Observation.read",
+    "user/Condition.write",
+    "system/Observation.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -10464,6 +10868,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 49",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.write",
+    "user/Condition.read",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -10679,6 +11091,18 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 50",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -10903,6 +11327,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 51",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -11116,6 +11549,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 52",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "system/Patient.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -11329,6 +11770,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 53",
+  "filteredScopes": [
+    "patient/Observation.read",
+    "patient/Condition.write",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -11543,6 +11992,12 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 54",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -11747,6 +12202,10 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 55",
+  "filteredScopes": [
+    "system/Patient.write",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -11953,6 +12412,20 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 56",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -12178,6 +12651,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 57",
+  "filteredScopes": [
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "user/Observation.write",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -12395,6 +12876,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 58",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Observation.write",
+    "system/Patient.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -12605,6 +13091,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 59",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -12822,6 +13319,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 60",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -13025,6 +13527,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 61",
+  "filteredScopes": [
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -13232,6 +13739,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 62",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -13448,6 +13966,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 63",
+  "filteredScopes": [
+    "user/Observation.read",
+    "user/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -13659,6 +14182,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 64",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -13877,6 +14409,10 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 65",
+  "filteredScopes": [
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -14080,6 +14616,22 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 66",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -14308,6 +14860,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 67",
+  "filteredScopes": [
+    "patient/Condition.write",
+    "system/Observation.read",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -14517,6 +15074,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 68",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "system/Patient.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -14732,6 +15298,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 69",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -14954,6 +15531,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 70",
+  "filteredScopes": [
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.write",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -15168,6 +15753,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 71",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -15381,6 +15974,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 72",
+  "filteredScopes": [
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -15586,6 +16184,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 73",
+  "filteredScopes": [
+    "system/Observation.read",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -15792,6 +16395,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 74",
+  "filteredScopes": [
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -16006,6 +16617,14 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 75",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -16219,6 +16838,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 76",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -16437,6 +17067,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 77",
+  "filteredScopes": [
+    "user/Patient.write",
+    "system/Patient.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -16647,6 +17282,19 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 78",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Condition.read",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -16869,6 +17517,16 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 79",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.read",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.write",
+    "system/Observation.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -17090,6 +17748,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 80",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -17307,6 +17976,11 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 81",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Patient.write",
+    "system/Patient.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -17517,6 +18191,18 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 82",
+  "filteredScopes": [
+    "patient/Patient.read",
+    "patient/Observation.read",
+    "patient/Observation.write",
+    "patient/Condition.write",
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Observation.read",
+    "user/Condition.write",
+    "system/Observation.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -17740,6 +18426,17 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 83",
+  "filteredScopes": [
+    "patient/Patient.write",
+    "patient/Observation.write",
+    "patient/Condition.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -17962,6 +18659,15 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 84",
+  "filteredScopes": [
+    "user/Patient.read",
+    "user/Patient.write",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Observation.read",
+    "system/Observation.write",
+    "system/Condition.read"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
@@ -18179,6 +18885,18 @@ exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
 
 exports[`isBundleRequestAuthorized-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 85",
+  "filteredScopes": [
+    "patient/Observation.read",
+    "patient/Condition.read",
+    "patient/Condition.write",
+    "user/Observation.read",
+    "user/Observation.write",
+    "user/Condition.read",
+    "user/Condition.write",
+    "system/Patient.read",
+    "system/Patient.write",
+    "system/Condition.write"
+  ],
   "request": {
     "userIdentity": {
       "scopes": [
