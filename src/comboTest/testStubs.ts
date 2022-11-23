@@ -1,5 +1,6 @@
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
+import { validPatient, validPatientObservation } from '../smartHandler.test';
 
 export const scopeRule = (): ScopeRule => ({
     patient: {
@@ -59,6 +60,82 @@ export const baseAccessNoScopes: any = {
     sub,
 };
 
+const validCondition: any = {
+    resourceType: 'Condition',
+    id: 'example',
+    text: {
+        status: 'generated',
+        div: '<div xmlns="http://www.w3.org/1999/xhtml">Severe burn of left ear (Date: 24-May 2012)</div>',
+    },
+    clinicalStatus: {
+        coding: [
+            {
+                system: 'http://terminology.hl7.org/CodeSystem/condition-clinical',
+                code: 'active',
+            },
+        ],
+    },
+    verificationStatus: {
+        coding: [
+            {
+                system: 'http://terminology.hl7.org/CodeSystem/condition-ver-status',
+                code: 'confirmed',
+            },
+        ],
+    },
+    category: [
+        {
+            coding: [
+                {
+                    system: 'http://terminology.hl7.org/CodeSystem/condition-category',
+                    code: 'encounter-diagnosis',
+                    display: 'Encounter Diagnosis',
+                },
+                {
+                    system: 'http://snomed.info/sct',
+                    code: '439401001',
+                    display: 'Diagnosis',
+                },
+            ],
+        },
+    ],
+    severity: {
+        coding: [
+            {
+                system: 'http://snomed.info/sct',
+                code: '24484000',
+                display: 'Severe',
+            },
+        ],
+    },
+    code: {
+        coding: [
+            {
+                system: 'http://snomed.info/sct',
+                code: '39065001',
+                display: 'Burn of ear',
+            },
+        ],
+        text: 'Burnt Ear',
+    },
+    bodySite: [
+        {
+            coding: [
+                {
+                    system: 'http://snomed.info/sct',
+                    code: '49521004',
+                    display: 'Left external ear structure',
+                },
+            ],
+            text: 'Left Ear',
+        },
+    ],
+    subject: {
+        reference: patientIdentity,
+    },
+    onsetDateTime: '2012-05-24',
+};
+
 export const getFhirUserType = (fhirUser: string | undefined): string | undefined => {
     if (fhirUser === 'practitionerFhirUser') {
         return practitionerIdentity;
@@ -69,7 +146,7 @@ export const getFhirUserType = (fhirUser: string | undefined): string | undefine
     return undefined;
 };
 
-export const getFhirUserObject = (fhirUser: string): FhirResource | undefined => {
+export const getFhirUserObject = (fhirUser: string | undefined): FhirResource | undefined => {
     if (fhirUser === 'practitionerFhirUser') {
         return getFhirUser(practitionerIdentity);
     }
@@ -89,4 +166,47 @@ export const convertToBaseUrl = (url: string): string | undefined => {
         return fakeUrl;
     }
     return undefined;
+};
+
+export type ResourceBodyDescription =
+    | 'matchObservation'
+    | 'unmatchCondition'
+    | 'matchPatient'
+    | 'unmatchPatient'
+    | 'patientReferencePractitioner';
+
+export const getResourceBody = (resourceBodyDescription: ResourceBodyDescription) => {
+    switch (resourceBodyDescription) {
+        case 'matchObservation':
+            return validPatientObservation;
+        case 'unmatchCondition':
+            return {
+                ...validCondition,
+                subject: {
+                    reference: `${apiUrl}/another-id`,
+                },
+            };
+        case 'matchPatient':
+            return validPatient;
+        case 'unmatchPatient':
+            return { ...validPatient, id: 'another-id' };
+        case 'patientReferencePractitioner':
+            return { ...validPatient, generalPractitioner: { reference: practitionerIdentity } };
+        default:
+            return undefined;
+    }
+};
+
+export const getResourceType = (resourceBodyDescription: ResourceBodyDescription | undefined) => {
+    if (!resourceBodyDescription) {
+        return undefined;
+    }
+    switch (resourceBodyDescription) {
+        case 'matchObservation':
+            return 'Observation';
+        case 'unmatchCondition':
+            return 'Condition';
+        default:
+            return 'Patient';
+    }
 };
