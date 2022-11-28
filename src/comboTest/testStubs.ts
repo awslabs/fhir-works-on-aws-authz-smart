@@ -1,3 +1,4 @@
+import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
@@ -47,6 +48,14 @@ export const patientFhirUser: any = {
 export const practitionerFhirUser: any = {
     fhirUser: practitionerIdentity,
 };
+
+export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
+    'search-type',
+    'search-system',
+    'history-type',
+    'history-instance',
+    'history-system',
+];
 
 export const baseAccessNoScopes: any = {
     ver: 1,
@@ -209,4 +218,16 @@ export const getResourceType = (resourceBodyDescription: ResourceBodyDescription
         default:
             return 'Patient';
     }
+};
+
+export const getReadResponse = (operation: string) => {
+    if (SEARCH_OPERATIONS.includes(operation as TypeOperation | SystemOperation)) {
+        return {
+            total: 4,
+            entry: [],
+        };
+    }
+    // check if we want to return a medicationRequest, Condition, or Patient resource and return
+    // the appropriate resource
+    return { ...validCondition, subject: undefined };
 };
