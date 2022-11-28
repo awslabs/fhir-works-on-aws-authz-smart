@@ -1,3 +1,4 @@
+import { BatchReadWriteRequest } from 'fhir-works-on-aws-interface';
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
@@ -209,4 +210,44 @@ export const getResourceType = (resourceBodyDescription: ResourceBodyDescription
         default:
             return 'Patient';
     }
+};
+
+export const generateBundle = (): BatchReadWriteRequest[] => {
+    return [
+        {
+            operation: 'create',
+            resourceType: 'Observation',
+            id: validPatientObservation.id,
+            resource: validPatientObservation,
+            // references generated as per this method in routing: https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L328
+            references: [
+                {
+                    resourceType: 'Patient',
+                    id: patientId,
+                    vid: '1',
+                    rootUrl: apiUrl,
+                    referenceFullUrl: patientIdentity,
+                    referencePath: 'subject',
+                },
+            ],
+        },
+        {
+            operation: 'create',
+            resourceType: 'Condition',
+            id: validCondition.id,
+            resource: { ...validCondition, subject: undefined }, // remove reference to patient
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id,
+            resource: undefined,
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id: 'PatientNotSameId',
+            resource: undefined,
+        },
+    ];
 };
