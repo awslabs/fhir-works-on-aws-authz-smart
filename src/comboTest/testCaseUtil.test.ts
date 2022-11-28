@@ -41,7 +41,7 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             convert: {
                 resourceType: (s: string) => convertNAtoUndefined(s),
                 fhirUser: (s: string) => convertNAtoUndefined(s),
-                patientContext: (s: string) => (s === 'N/A' ? undefined : s),
+                patientContext: (s: string) => convertNAtoUndefined(s),
                 ...csvConvertRule,
             },
         });
@@ -56,11 +56,12 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             const patientContextClaim = getFhirUserType(row.patientContext);
 
             const resourceType = row.resourceType ? row.resourceType : getResourceType(row.resourceBody);
+            const operation = row.operation ? row.operation : 'transaction';
 
             const usableScopes = filterOutUnusableScope(
                 scopes,
                 scopeRule(),
-                row.operation as TypeOperation | SystemOperation,
+                operation as TypeOperation | SystemOperation,
                 false,
                 resourceType,
                 undefined,

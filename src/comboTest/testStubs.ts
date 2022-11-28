@@ -1,4 +1,8 @@
-import { SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+<<<<<<< HEAD
+import { BatchReadWriteRequest, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+=======
+import { BatchReadWriteRequest } from 'fhir-works-on-aws-interface';
+>>>>>>> origin
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
@@ -224,10 +228,50 @@ export const getReadResponse = (operation: string) => {
     if (SEARCH_OPERATIONS.includes(operation as TypeOperation | SystemOperation)) {
         return {
             total: 4,
-            entry: [],
+            entry: generateBundle(),
         };
     }
     // check if we want to return a medicationRequest, Condition, or Patient resource and return
     // the appropriate resource
     return { ...validCondition, subject: undefined };
+};
+
+export const generateBundle = (): BatchReadWriteRequest[] => {
+    return [
+        {
+            operation: 'create',
+            resourceType: 'Observation',
+            id: validPatientObservation.id,
+            resource: validPatientObservation,
+            // references generated as per this method in routing: https://github.com/awslabs/fhir-works-on-aws-routing/blob/mainline/src/router/bundle/bundleParser.ts#L328
+            references: [
+                {
+                    resourceType: 'Patient',
+                    id: patientId,
+                    vid: '1',
+                    rootUrl: apiUrl,
+                    referenceFullUrl: patientIdentity,
+                    referencePath: 'subject',
+                },
+            ],
+        },
+        {
+            operation: 'create',
+            resourceType: 'Condition',
+            id: validCondition.id,
+            resource: { ...validCondition, subject: undefined }, // remove reference to patient
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id,
+            resource: undefined,
+        },
+        {
+            operation: 'read',
+            resourceType: 'Patient',
+            id: 'PatientNotSameId',
+            resource: undefined,
+        },
+    ];
 };
