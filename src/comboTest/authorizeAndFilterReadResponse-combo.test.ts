@@ -67,6 +67,7 @@ describe('authorizeAndFilterReadResponse-combo', () => {
         { field: 'testName', title: 'Test Number' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
+        { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
         { field: 'rawCsvRow.unmatchPatient', title: 'Another Patient?' },
         { field: 'rawCsvRow.matchPatient', title: 'Current Patient?' },
         { field: 'rawCsvRow.matchMedicationRequest', title: 'MedicationRequest?' },
