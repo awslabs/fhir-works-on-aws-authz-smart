@@ -253,22 +253,22 @@ export const generateSearchBundle = (
     const items = [];
     if (condition) {
         items.push({
-            resource: { ...validCondition, subject: undefined }
+            resource: { ...validCondition, subject: undefined },
         });
     }
     if (medicationRequest) {
         items.push({
-            resource: validMedicationRequest
+            resource: validMedicationRequest,
         });
     }
     if (patient) {
         items.push({
-            resource: validPatient
+            resource: validPatient,
         });
     }
     if (unmatchPatient) {
         items.push({
-            resource: { ...validPatient, id: 'notSamePatient' }
+            resource: { ...validPatient, id: 'notSamePatient' },
         });
     }
     return items;
@@ -281,7 +281,12 @@ export const getReadResponse = (
     unmatchPatient: boolean,
 ) => {
     if (SEARCH_OPERATIONS.includes(operation as TypeOperation | SystemOperation)) {
-        const searchBundle = generateSearchBundle(unmatchCondition, matchMedicationRequest, matchPatient, unmatchPatient);
+        const searchBundle = generateSearchBundle(
+            unmatchCondition,
+            matchMedicationRequest,
+            matchPatient,
+            unmatchPatient,
+        );
         return {
             total: searchBundle.length,
             entry: searchBundle,

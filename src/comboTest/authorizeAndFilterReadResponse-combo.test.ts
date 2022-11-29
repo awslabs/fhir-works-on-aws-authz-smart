@@ -96,10 +96,18 @@ describe('authorizeAndFilterReadResponse-combo', () => {
             testResult = await authZHandler.authorizeAndFilterReadResponse(
                 <ReadResponseAuthorizedRequest>testCase.request,
             );
-            testResult = {...testResult, previousTotal: testCase.request.readResponse.total, finalTotal: testResult.total}
+            testResult = {
+                ...testResult,
+                previousTotal: testCase.request.readResponse.total,
+                finalTotal: testResult.total,
+            };
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            testResult = { errorMessage: (e as Error).message, previousTotal: testCase.request.readResponse.total, finalTotal: 0 };
+            testResult = {
+                errorMessage: (e as Error).message,
+                previousTotal: testCase.request.readResponse.total,
+                finalTotal: 0,
+            };
             expect(e).toMatchSnapshot();
         }
         testResults.push({ ...testCase, ...testResult });
