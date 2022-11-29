@@ -1,4 +1,4 @@
-import { BatchReadWriteRequest, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+import { BatchReadWriteRequest } from 'fhir-works-on-aws-interface';
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
@@ -272,23 +272,18 @@ export const getReadResponseAndOperation = (
     unmatchCondition: boolean,
     unmatchPatient: boolean,
 ) => {
-    const searchBundle = generateSearchBundle(
-        unmatchCondition,
-        matchMedicationRequest,
-        matchPatient,
-        unmatchPatient,
-    );
-    if (searchBundle.length == 1) {
+    const searchBundle = generateSearchBundle(unmatchCondition, matchMedicationRequest, matchPatient, unmatchPatient);
+    if (searchBundle.length === 1) {
         return {
             readResponse: searchBundle[0],
             operation: 'read',
         };
     }
-    return { 
+    return {
         readResponse: {
             total: searchBundle.length,
             entry: searchBundle,
-        }, 
+        },
         operation: SEARCH_OPERATIONS[Math.floor(Math.random() * SEARCH_OPERATIONS.length)],
     };
 };

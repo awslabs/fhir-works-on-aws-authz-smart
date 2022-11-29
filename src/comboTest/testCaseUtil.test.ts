@@ -36,7 +36,10 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
         this.outputFilePath = outputFilePath;
     }
 
-    loadTestCase(csvConvertRule?: any): { csvRow: CsvRow; userIdentity: UserIdentity }[] {
+    loadTestCase(
+        csvConvertRule?: any,
+        useDefaultResourceType?: boolean,
+    ): { csvRow: CsvRow; userIdentity: UserIdentity }[] {
         const csvRow: CsvRow[] = load(path.resolve(__dirname, this.csvFilePath), {
             convert: {
                 resourceType: (s: string) => convertNAtoUndefined(s),
@@ -55,7 +58,10 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             const fhirUserClaim = getFhirUserType(row.fhirUser);
             const patientContextClaim = getFhirUserType(row.patientContext);
 
-            const resourceType = row.resourceType ? row.resourceType : getResourceType(row.resourceBody);
+            let resourceType = row.resourceType ? row.resourceType : getResourceType(row.resourceBody);
+            if (useDefaultResourceType && !resourceType) {
+                resourceType = 'Patient';
+            }
             const operation = row.operation ? row.operation : 'transaction';
 
             const usableScopes = filterOutUnusableScope(

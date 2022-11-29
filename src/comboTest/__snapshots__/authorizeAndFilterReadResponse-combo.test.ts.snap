@@ -7,7 +7,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -20,7 +20,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -229,7 +242,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [],
       "usableScopes": []
@@ -378,7 +391,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -402,10 +422,110 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "bodySite": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "49521004",
+                "display": "Left external ear structure",
+                "system": "http://snomed.info/sct",
+              },
+            ],
+            "text": "Left Ear",
+          },
+        ],
+        "category": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis",
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              },
+              Object {
+                "code": "439401001",
+                "display": "Diagnosis",
+                "system": "http://snomed.info/sct",
+              },
+            ],
+          },
+        ],
+        "clinicalStatus": Object {
+          "coding": Array [
+            Object {
+              "code": "active",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            },
+          ],
+        },
+        "code": Object {
+          "coding": Array [
+            Object {
+              "code": "39065001",
+              "display": "Burn of ear",
+              "system": "http://snomed.info/sct",
+            },
+          ],
+          "text": "Burnt Ear",
+        },
+        "id": "example",
+        "onsetDateTime": "2012-05-24",
+        "resourceType": "Condition",
+        "severity": Object {
+          "coding": Array [
+            Object {
+              "code": "24484000",
+              "display": "Severe",
+              "system": "http://snomed.info/sct",
+            },
+          ],
+        },
+        "subject": undefined,
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Severe burn of left ear (Date: 24-May 2012)</div>",
+          "status": "generated",
+        },
+        "verificationStatus": Object {
+          "coding": Array [
+            Object {
+              "code": "confirmed",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            },
+          ],
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "notSamePatient",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 0,
+  "total": 2,
 }
 `;
 
@@ -488,7 +608,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -632,7 +752,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -640,7 +760,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -812,7 +939,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -976,14 +1110,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "user/Patient.read",
         "user/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -1007,10 +1148,35 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -1143,7 +1309,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -1314,14 +1480,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -1529,7 +1702,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -1799,7 +1972,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -1992,7 +2165,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -2209,7 +2382,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -2328,7 +2501,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -2337,7 +2510,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -2362,10 +2548,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -2498,7 +2732,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -2602,7 +2836,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -2696,7 +2937,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "patient/MedicationRequest.read",
         "patient/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -2905,7 +3153,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -2915,7 +3163,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -3351,7 +3606,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -3488,7 +3750,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -3605,7 +3867,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -3615,7 +3877,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -3993,7 +4262,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "system/Patient.read"
@@ -4134,7 +4403,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -4142,7 +4411,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -4243,10 +4525,34 @@ Object {
         },
       },
     },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "notSamePatient",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -4329,7 +4635,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -4505,7 +4811,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -4529,10 +4842,82 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 0,
+  "total": 2,
 }
 `;
 
@@ -4642,7 +5027,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -4794,7 +5179,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -4922,14 +5314,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -5187,7 +5586,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -5196,7 +5595,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -5221,6 +5627,53 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
 } 1`] = `
 Object {
   "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
     Object {
       "resource": Object {
         "address": Array [
@@ -5270,9 +5723,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 2,
+  "finalTotal": 3,
   "previousTotal": 4,
-  "total": 2,
+  "total": 3,
 }
 `;
 
@@ -5283,7 +5736,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -5483,7 +5936,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -5725,7 +6185,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -5976,7 +6436,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -6154,7 +6614,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -6313,7 +6786,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -6321,7 +6794,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "patient/Condition.read",
         "user/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -6345,10 +6825,82 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 0,
+  "total": 2,
 }
 `;
 
@@ -6591,7 +7143,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -6800,7 +7365,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -6945,7 +7510,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -6954,7 +7519,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -7164,7 +7736,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -7462,7 +8034,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -7472,7 +8044,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -7655,7 +8234,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -7881,14 +8460,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "user/MedicationRequest.read",
         "user/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -7913,10 +8499,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -8026,7 +8660,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -8036,7 +8670,15 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read",
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -8345,7 +8987,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -8353,7 +8995,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -8400,7 +9044,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -8487,7 +9138,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -8654,7 +9305,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -8665,7 +9316,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read",
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -8766,10 +9431,57 @@ Object {
         },
       },
     },
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -8876,7 +9588,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -8887,7 +9599,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -9097,7 +9811,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "user/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -9274,7 +9995,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -9283,7 +10004,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "user/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -9307,10 +10035,82 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 2,
   "previousTotal": 3,
-  "total": 0,
+  "total": 2,
 }
 `;
 
@@ -9349,7 +10149,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -9502,7 +10304,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -9512,7 +10314,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -9860,7 +10664,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -9870,7 +10674,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -10005,7 +10822,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -10150,7 +10967,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -10162,7 +10979,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -10373,7 +11203,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Condition.read"
@@ -10417,7 +11247,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -10428,7 +11258,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -10637,7 +11480,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -10828,7 +11671,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -10836,7 +11679,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -10863,6 +11713,81 @@ Object {
   "entry": Array [
     Object {
       "resource": Object {
+        "bodySite": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "49521004",
+                "display": "Left external ear structure",
+                "system": "http://snomed.info/sct",
+              },
+            ],
+            "text": "Left Ear",
+          },
+        ],
+        "category": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis",
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              },
+              Object {
+                "code": "439401001",
+                "display": "Diagnosis",
+                "system": "http://snomed.info/sct",
+              },
+            ],
+          },
+        ],
+        "clinicalStatus": Object {
+          "coding": Array [
+            Object {
+              "code": "active",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            },
+          ],
+        },
+        "code": Object {
+          "coding": Array [
+            Object {
+              "code": "39065001",
+              "display": "Burn of ear",
+              "system": "http://snomed.info/sct",
+            },
+          ],
+          "text": "Burnt Ear",
+        },
+        "id": "example",
+        "onsetDateTime": "2012-05-24",
+        "resourceType": "Condition",
+        "severity": Object {
+          "coding": Array [
+            Object {
+              "code": "24484000",
+              "display": "Severe",
+              "system": "http://snomed.info/sct",
+            },
+          ],
+        },
+        "subject": undefined,
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Severe burn of left ear (Date: 24-May 2012)</div>",
+          "status": "generated",
+        },
+        "verificationStatus": Object {
+          "coding": Array [
+            Object {
+              "code": "confirmed",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            },
+          ],
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -10886,9 +11811,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 3,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -10990,7 +11915,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -11012,7 +11944,34 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
     "matchPatient": false,
     "unmatchPatient": true
   }
-} 1`] = `[UnauthorizedError: User does not have permission for requested resource]`;
+} 1`] = `
+Object {
+  "finalTotal": undefined,
+  "previousTotal": undefined,
+  "resource": Object {
+    "address": Array [
+      Object {
+        "city": "Ruppertshofen",
+      },
+    ],
+    "birthDate": "1972-10-13",
+    "gender": "male",
+    "id": "notSamePatient",
+    "meta": Object {
+      "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+      "versionId": "1",
+    },
+    "name": Array [
+      Object {
+        "given": Array [
+          "JONNY",
+        ],
+      },
+    ],
+    "resourceType": "Patient",
+  },
+}
+`;
 
 exports[`authorizeAndFilterReadResponse-combo CASE: {
   "testName": "Combo Test Row 69",
@@ -11173,7 +12132,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -11505,7 +12466,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -11513,7 +12474,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -11540,6 +12508,53 @@ Object {
   "entry": Array [
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -11563,9 +12578,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -11699,14 +12714,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "user/MedicationRequest.read",
         "user/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -11731,10 +12753,35 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 3,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -11798,7 +12845,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -11879,7 +12933,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -11889,7 +12943,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -12106,7 +13167,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -12131,10 +13199,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -12194,7 +13310,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -12205,7 +13321,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -12415,13 +13538,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -12559,7 +13689,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -12567,7 +13697,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read",
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -12703,7 +13847,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -12921,7 +14065,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -13018,7 +14162,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "system/MedicationRequest.read",
@@ -13207,7 +14351,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -13540,7 +14684,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -13832,7 +14976,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -13842,7 +14986,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -13976,7 +15127,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "user/MedicationRequest.read",
@@ -14093,7 +15244,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -14101,7 +15252,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -14262,7 +15415,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -14407,7 +15560,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -14550,7 +15703,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -14559,7 +15712,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -14744,7 +15904,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -14940,14 +16100,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -15010,7 +16177,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -15018,7 +16185,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -15226,7 +16400,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -15441,7 +16615,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -15450,7 +16624,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -15477,6 +16658,53 @@ Object {
   "entry": Array [
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -15500,9 +16728,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -15612,7 +16840,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -15738,7 +16966,15 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -15865,7 +17101,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -16065,7 +17301,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -16166,10 +17409,81 @@ Object {
         },
       },
     },
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
   ],
-  "finalTotal": 1,
+  "finalTotal": 3,
   "previousTotal": 3,
-  "total": 1,
+  "total": 3,
 }
 `;
 
@@ -16208,7 +17522,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -16362,7 +17683,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -16533,7 +17854,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -16542,7 +17863,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -16659,7 +17993,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -16836,7 +18172,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -16844,7 +18180,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -17080,7 +18423,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -17089,7 +18432,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "user/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -17114,10 +18464,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -17177,7 +18575,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -17185,7 +18583,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -17273,7 +18678,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -17489,7 +18894,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -17499,7 +18904,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -17743,7 +19161,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -17770,6 +19195,53 @@ Object {
   "entry": Array [
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -17793,9 +19265,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -17905,7 +19377,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/MedicationRequest.read",
@@ -17980,7 +19452,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -18158,14 +19643,16 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "user/MedicationRequest.read",
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -18324,7 +19811,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -18332,7 +19819,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "patient/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -18356,10 +19850,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -18469,7 +20011,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -18748,7 +20290,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "system/MedicationRequest.read",
@@ -18845,7 +20387,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -18999,7 +20548,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -19139,7 +20688,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -19149,7 +20698,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -19174,10 +20736,106 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "notSamePatient",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 3,
   "previousTotal": 3,
-  "total": 0,
+  "total": 3,
 }
 `;
 
@@ -19707,7 +21365,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -19716,7 +21374,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -19789,10 +21454,34 @@ Object {
         },
       },
     },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -19902,14 +21591,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
         "patient/MedicationRequest.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -19973,7 +21669,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -19986,7 +21682,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -20267,7 +21970,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -20452,7 +22162,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "user/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -20477,10 +22194,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 3,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -20491,7 +22256,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -20710,7 +22475,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [],
       "usableScopes": []
@@ -20849,7 +22614,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-type",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -20967,7 +22732,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
@@ -20975,7 +22740,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -21218,7 +22985,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
@@ -21530,7 +23297,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -21539,7 +23306,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/MedicationRequest.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -21611,10 +23385,58 @@ Object {
         },
       },
     },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "notSamePatient",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
   ],
-  "finalTotal": 1,
+  "finalTotal": 3,
   "previousTotal": 4,
-  "total": 1,
+  "total": 3,
 }
 `;
 
@@ -21625,14 +23447,16 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "user/Condition.read",
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -21767,7 +23591,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -21780,7 +23604,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -22176,7 +24007,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -22279,6 +24117,53 @@ Object {
     },
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -22302,9 +24187,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 2,
+  "finalTotal": 3,
   "previousTotal": 3,
-  "total": 2,
+  "total": 3,
 }
 `;
 
@@ -22342,7 +24227,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -22496,7 +24388,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -22507,7 +24399,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -22531,10 +24430,58 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -22594,7 +24541,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -22750,7 +24697,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -22775,10 +24735,35 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 2,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -22868,7 +24853,15 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read",
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -23004,7 +24997,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -23015,7 +25008,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "user/Condition.read",
         "system/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -23042,6 +25042,53 @@ Object {
   "entry": Array [
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -23065,9 +25112,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 1,
+  "finalTotal": 2,
   "previousTotal": 2,
-  "total": 1,
+  "total": 2,
 }
 `;
 
@@ -23177,14 +25224,21 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "user/Patient.read",
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -23346,7 +25400,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -23358,7 +25412,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -23754,7 +25815,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -23856,6 +25924,53 @@ Object {
     },
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -23879,9 +25994,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 2,
+  "finalTotal": 3,
   "previousTotal": 3,
-  "total": 2,
+  "total": 3,
 }
 `;
 
@@ -23991,13 +26106,20 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-instance",
     "userIdentity": {
       "scopes": [
         "patient/MedicationRequest.read",
         "user/Patient.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -24139,7 +26261,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -24164,10 +26293,35 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
   }
 } 1`] = `
 Object {
-  "entry": Array [],
-  "finalTotal": 0,
+  "entry": Array [
+    Object {
+      "resource": Object {
+        "address": Array [
+          Object {
+            "city": "Ruppertshofen",
+          },
+        ],
+        "birthDate": "1972-10-13",
+        "gender": "male",
+        "id": "id",
+        "meta": Object {
+          "lastUpdated": "2020-06-28T12:03:29.421+00:00",
+          "versionId": "1",
+        },
+        "name": Array [
+          Object {
+            "given": Array [
+              "JONNY",
+            ],
+          },
+        ],
+        "resourceType": "Patient",
+      },
+    },
+  ],
+  "finalTotal": 1,
   "previousTotal": 3,
-  "total": 0,
+  "total": 1,
 }
 `;
 
@@ -24300,7 +26454,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "search-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -24309,7 +26463,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -24613,7 +26774,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
       "total": 0,
       "entry": []
     },
-    "operation": "history-instance",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -24623,7 +26784,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "fhirUserObject": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Practitioner",
+        "id": "id"
+      },
+      "usableScopes": [
+        "user/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -24757,7 +26925,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -24766,7 +26934,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/MedicationRequest.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -24952,7 +27127,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-type",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -24961,7 +27136,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/MedicationRequest.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },
@@ -25170,7 +27352,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "history-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -25179,7 +27361,14 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "patientLaunchContext": {
+        "hostname": "https://fhir.server.com/dev",
+        "resourceType": "Patient",
+        "id": "id"
+      },
+      "usableScopes": [
+        "patient/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://fhir.server.com/dev"
   },
@@ -25282,6 +27471,53 @@ Object {
     },
     Object {
       "resource": Object {
+        "authoredOn": "2019-06-24",
+        "dosageInstruction": Array [
+          Object {
+            "text": "Takes 1-2 tablets once daily at bedtime as needed for restless legs",
+          },
+        ],
+        "encounter": Object {
+          "display": "Office Visit",
+          "reference": "Encounter/example-1",
+        },
+        "id": "self-tylenol",
+        "identifier": Array [
+          Object {
+            "system": "http://acme.org/prescriptions",
+            "use": "official",
+            "value": "12345689",
+          },
+        ],
+        "intent": "plan",
+        "medicationCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "1187314",
+              "display": "Tylenol PM Pill",
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            },
+          ],
+          "text": "Tylenol PM Pill",
+        },
+        "reportedBoolean": true,
+        "requester": Object {
+          "display": "**self-prescribed**",
+          "reference": "Patient/example",
+        },
+        "resourceType": "MedicationRequest",
+        "status": "active",
+        "subject": Object {
+          "reference": "https://fhir.server.com/dev/Patient/id",
+        },
+        "text": Object {
+          "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative</b></p><p><b>id</b>: self-tylenol</p><p><b>identifier</b>: id: 12345689 (OFFICIAL)</p><p><b>status</b>: active</p><p><b>intent</b>: plan</p><p><b>reported</b>: true</p><p><b>medication</b>: <span title=\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1187314}\\">Tylenol PM Pill</span></p><p><b>subject</b>: <a href=\\"Patient-example.html\\">Amy V. Shaw. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>encounter</b>: <a href=\\"Encounter-example-1.html\\">Office Visit. Generated Summary: id: example-1; status: finished; <span title=\\"{http://terminology.hl7.org/CodeSystem/v3-ActCode AMB}\\">ambulatory</span>; <span title=\\"Codes: {http://www.ama-assn.org/go/cpt 99201}\\">Office Visit</span>; period: 02/11/2015 9:00:14 AM --&gt; 02/11/2015 10:00:14 AM</a></p><p><b>authoredOn</b>: 2019-06-24</p><p><b>requester</b>: <a href=\\"Patient-example.html\\">**self-prescribed**. Generated Summary: id: example; Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; ph: 555-555-5555(HOME), amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>dosageInstruction</b>: </p></div>",
+          "status": "generated",
+        },
+      },
+    },
+    Object {
+      "resource": Object {
         "address": Array [
           Object {
             "city": "Ruppertshofen",
@@ -25305,9 +27541,9 @@ Object {
       },
     },
   ],
-  "finalTotal": 2,
+  "finalTotal": 3,
   "previousTotal": 3,
-  "total": 2,
+  "total": 3,
 }
 `;
 
@@ -25464,7 +27700,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "system/Patient.read"
@@ -25607,7 +27843,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-instance",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -25853,7 +28089,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "search-system",
+    "operation": "history-system",
     "userIdentity": {
       "scopes": [
         "patient/Condition.read",
@@ -26254,7 +28490,7 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         }
       ]
     },
-    "operation": "history-system",
+    "operation": "search-type",
     "userIdentity": {
       "scopes": [
         "patient/Patient.read",
@@ -26263,7 +28499,9 @@ exports[`authorizeAndFilterReadResponse-combo CASE: {
         "system/Patient.read",
         "system/Condition.read"
       ],
-      "usableScopes": []
+      "usableScopes": [
+        "system/Patient.read"
+      ]
     },
     "fhirServiceBaseUrl": "https://random.server.com/dev"
   },

@@ -30,13 +30,16 @@ const testCaseUtil = new TestCaseUtil<CsvRow>(
 
 const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
-    const csv = testCaseUtil.loadTestCase({
-        fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
-        unmatchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
-        matchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
-        matchMedicationRequest: (s: string) => convertNAtoUndefined(s) === undefined,
-        unmatchCondition: (s: string) => convertNAtoUndefined(s) === undefined,
-    });
+    const csv = testCaseUtil.loadTestCase(
+        {
+            fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
+            unmatchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
+            matchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
+            matchMedicationRequest: (s: string) => convertNAtoUndefined(s) === undefined,
+            unmatchCondition: (s: string) => convertNAtoUndefined(s) === undefined,
+        },
+        true,
+    );
     csv.forEach((inputRow, index) => {
         const testCase: any = {};
         const row = inputRow.csvRow;
@@ -71,6 +74,7 @@ describe('authorizeAndFilterReadResponse-combo', () => {
         { field: 'previousTotal', title: 'Total Before Filter' },
         { field: 'finalTotal', title: 'Total After Filter' },
         { field: 'errorMessage', title: 'Error' },
+        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
         { field: 'request.userIdentity.scopes', title: 'Scopes' },
     ];
 
