@@ -2,6 +2,7 @@ import { BatchReadWriteRequest, SystemOperation, TypeOperation } from 'fhir-work
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
 import { validPatient, validPatientObservation } from '../smartHandler.test';
+import { SEARCH_OPERATIONS } from '../smartScopeHelper';
 
 export const scopeRule = (): ScopeRule => ({
     patient: {
@@ -48,14 +49,6 @@ export const patientFhirUser: any = {
 export const practitionerFhirUser: any = {
     fhirUser: practitionerIdentity,
 };
-
-export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
-    'search-type',
-    'search-system',
-    'history-type',
-    'history-instance',
-    'history-system',
-];
 
 export const baseAccessNoScopes: any = {
     ver: 1,
@@ -273,37 +266,31 @@ export const generateSearchBundle = (
     }
     return items;
 };
-export const getReadResponse = (
-    operation: string,
+export const getReadResponseAndOperation = (
     matchMedicationRequest: boolean,
     matchPatient: boolean,
     unmatchCondition: boolean,
     unmatchPatient: boolean,
 ) => {
-    if (SEARCH_OPERATIONS.includes(operation as TypeOperation | SystemOperation)) {
-        const searchBundle = generateSearchBundle(
-            unmatchCondition,
-            matchMedicationRequest,
-            matchPatient,
-            unmatchPatient,
-        );
+    const searchBundle = generateSearchBundle(
+        unmatchCondition,
+        matchMedicationRequest,
+        matchPatient,
+        unmatchPatient,
+    );
+    if (searchBundle.length == 1) {
         return {
-            total: searchBundle.length,
-            entry: searchBundle,
+            readResponse: searchBundle[0],
+            operation: 'read',
         };
     }
-    // check if we want to return a medicationRequest, Condition, or Patient resource and return
-    // the appropriate resource
-    if (unmatchCondition) {
-        return { ...validCondition, subject: undefined };
-    }
-    if (matchMedicationRequest) {
-        return validMedicationRequest;
-    }
-    if (unmatchPatient) {
-        return { ...validPatient, id: 'notSamePatient' };
-    }
-    return validPatient;
+    return { 
+        readResponse: {
+            total: searchBundle.length,
+            entry: searchBundle,
+        }, 
+        operation: SEARCH_OPERATIONS[Math.floor(Math.random() * SEARCH_OPERATIONS.length)],
+    };
 };
 
 export const generateBundle = (): BatchReadWriteRequest[] => {

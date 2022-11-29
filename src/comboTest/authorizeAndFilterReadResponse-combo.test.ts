@@ -40,18 +40,17 @@ const loadAndPrepareTestCases = (): any[] => {
     csv.forEach((inputRow, index) => {
         const testCase: any = {};
         const row = inputRow.csvRow;
+        const readResponseAndOperation = testStubs.getReadResponseAndOperation(
+            row.matchMedicationRequest,
+            row.matchPatient,
+            row.unmatchCondition,
+            row.unmatchPatient,
+        );
         testCase.testName = `Combo Test Row ${index}`;
         testCase.request = {
+            ...readResponseAndOperation,
             userIdentity: inputRow.userIdentity,
-            operation: row.operation,
             fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
-            readResponse: testStubs.getReadResponse(
-                row.operation,
-                row.matchMedicationRequest,
-                row.matchPatient,
-                row.unmatchCondition,
-                row.unmatchPatient,
-            ),
         };
         testCase.rawCsvRow = row;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
@@ -63,7 +62,6 @@ describe('authorizeAndFilterReadResponse-combo', () => {
     const testResults: any[] = [];
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
-        { field: 'request.operation', title: 'Operation' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
         { field: 'rawCsvRow.unmatchPatient', title: 'Another Patient?' },
