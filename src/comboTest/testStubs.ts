@@ -284,7 +284,7 @@ export const getReadResponseAndOperation = (
             total: searchBundle.length,
             entry: searchBundle,
         },
-        operation: SEARCH_OPERATIONS[Math.floor(Math.random() * SEARCH_OPERATIONS.length)],
+        operation: SEARCH_OPERATIONS[0],
     };
 };
 
