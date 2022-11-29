@@ -1,11 +1,15 @@
-import { ReadResponseAuthorizedRequest, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+import { ReadResponseAuthorizedRequest } from 'fhir-works-on-aws-interface';
 import { SMARTHandler } from '../smartHandler';
 import * as testStubs from './testStubs';
 import TestCaseUtil, { BaseCsvRow } from './testCaseUtil.test';
-import { convertNAtoUndefined, ResourceBodyDescription } from './testStubs';
+import { convertNAtoUndefined } from './testStubs';
 
 interface CsvRow extends BaseCsvRow {
     fhirServiceBaseUrl: string;
+    matchMedicationRequest: boolean;
+    unmatchCondition: boolean;
+    matchPatient: boolean;
+    unmatchPatient: boolean;
     'patient/Patient.read': string;
     'patient/Observation.write': string;
     'patient/Observation.read': string;
@@ -28,6 +32,10 @@ const loadAndPrepareTestCases = (): any[] => {
     const testCases: any[] = [];
     const csv = testCaseUtil.loadTestCase({
         fhirServiceBaseUrl: (s: string) => convertNAtoUndefined(s),
+        unmatchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
+        matchPatient: (s: string) => convertNAtoUndefined(s) === undefined,
+        matchMedicationRequest: (s: string) => convertNAtoUndefined(s) === undefined,
+        unmatchCondition: (s: string) => convertNAtoUndefined(s) === undefined,
     });
     csv.forEach((inputRow, index) => {
         const testCase: any = {};
@@ -37,7 +45,13 @@ const loadAndPrepareTestCases = (): any[] => {
             userIdentity: inputRow.userIdentity,
             operation: row.operation,
             fhirServiceBaseUrl: testStubs.convertToBaseUrl(row.fhirServiceBaseUrl),
-            readResponse: testStubs.getReadResponse(row.operation),
+            readResponse: testStubs.getReadResponse(
+                row.operation,
+                row.matchMedicationRequest,
+                row.matchPatient,
+                row.unmatchCondition,
+                row.unmatchPatient,
+            ),
         };
         testCase.rawCsvRow = row;
         testCases.push([JSON.stringify(testCase, null, 2), testCase]);
@@ -45,17 +59,20 @@ const loadAndPrepareTestCases = (): any[] => {
     return testCases;
 };
 
-describe('isWriteRequestAuthorized-combo', () => {
+describe('authorizeAndFilterReadResponse-combo', () => {
     const testResults: any[] = [];
     const keysToOutput: any[] = [
         { field: 'testName', title: 'Test Number' },
         { field: 'request.operation', title: 'Operation' },
         { field: 'rawCsvRow.fhirUser', title: 'FHIR User' },
         { field: 'rawCsvRow.patientContext', title: 'Patient Context' },
-        { field: 'rawCsvRow.resourceBody', title: 'Resource Body' },
-        { field: 'rawCsvRow.fhirServiceBaseUrl', title: 'Base Url' },
+        { field: 'rawCsvRow.unmatchPatient', title: 'Another Patient?' },
+        { field: 'rawCsvRow.matchPatient', title: 'Current Patient?' },
+        { field: 'rawCsvRow.matchMedicationRequest', title: 'MedicationRequest?' },
+        { field: 'rawCsvRow.unmatchCondition', title: 'Another Condition?' },
+        { field: 'previousTotal', title: 'Total Before Filter' },
+        { field: 'finalTotal', title: 'Total After Filter' },
         { field: 'errorMessage', title: 'Error' },
-        { field: 'request.userIdentity.usableScopes', title: 'Usable Scopes' },
         { field: 'request.userIdentity.scopes', title: 'Scopes' },
     ];
 
@@ -76,10 +93,13 @@ describe('isWriteRequestAuthorized-combo', () => {
     test.each(testCases)('CASE: %s', async (testCaseString, testCase) => {
         let testResult: any;
         try {
-            testResult = await authZHandler.authorizeAndFilterReadResponse(<ReadResponseAuthorizedRequest>testCase.request);
+            testResult = await authZHandler.authorizeAndFilterReadResponse(
+                <ReadResponseAuthorizedRequest>testCase.request,
+            );
+            testResult = {...testResult, previousTotal: testCase.request.readResponse.total, finalTotal: testResult.total}
             expect(testResult).toMatchSnapshot();
         } catch (e) {
-            testResult = { errorMessage: (e as Error).message };
+            testResult = { errorMessage: (e as Error).message, previousTotal: testCase.request.readResponse.total, finalTotal: 0 };
             expect(e).toMatchSnapshot();
         }
         testResults.push({ ...testCase, ...testResult });
