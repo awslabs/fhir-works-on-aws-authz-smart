@@ -59,6 +59,8 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
             const patientContextClaim = getFhirUserType(row.patientContext);
 
             let resourceType = row.resourceType ? row.resourceType : getResourceType(row.resourceBody);
+            // This is setting the default resourceType to Patient for the specific case
+            // of performing a test search on only one resource
             if (useDefaultResourceType && !resourceType) {
                 resourceType = 'Patient';
             }
