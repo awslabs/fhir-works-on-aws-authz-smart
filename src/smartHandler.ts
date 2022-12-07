@@ -28,6 +28,7 @@ import {
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
     isScopeSufficient,
+    rejectInvalidScopeCombination,
     SEARCH_OPERATIONS,
 } from './smartScopeHelper';
 import {
@@ -124,6 +125,7 @@ export class SMARTHandler implements Authorization {
 
         // get just the scopes that apply to this request
         const scopes = getScopes(decodedToken[this.config.scopeKey]);
+        rejectInvalidScopeCombination(scopes);
         const usableScopes = filterOutUnusableScope(
             scopes,
             this.config.scopeRule,

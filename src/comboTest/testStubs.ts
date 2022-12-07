@@ -1,7 +1,6 @@
 import { BatchReadWriteRequest } from 'fhir-works-on-aws-interface';
 import { FhirResource, ScopeRule, SMARTConfig } from '../smartConfig';
 import { getFhirUser } from '../smartAuthorizationHelper';
-import { validPatient, validPatientObservation } from '../smartHandler.test';
 import { SEARCH_OPERATIONS } from '../smartScopeHelper';
 
 export const scopeRule = (): ScopeRule => ({
@@ -60,6 +59,87 @@ export const baseAccessNoScopes: any = {
     cid: '0oa8muazKSyk9gP5y5d5',
     uid: '00u85ozwjjWRd17PB5d5',
     sub,
+};
+
+const validPatient = {
+    resourceType: 'Patient',
+    id,
+    meta: {
+        versionId: '1',
+        lastUpdated: '2020-06-28T12:03:29.421+00:00',
+    },
+    name: [
+        {
+            given: ['JONNY'],
+        },
+    ],
+    gender: 'male',
+    birthDate: '1972-10-13',
+    address: [
+        {
+            city: 'Ruppertshofen',
+        },
+    ],
+};
+
+const validPatientObservation = {
+    resourceType: 'Observation',
+    id: '1274045',
+    meta: {
+        versionId: '1',
+        lastUpdated: '2020-06-28T12:55:47.134+00:00',
+    },
+    status: 'final',
+    code: {
+        coding: [
+            {
+                system: 'http://loinc.org',
+                code: '15074-8',
+                display: 'Glucose [Moles/volume] in Blood',
+            },
+        ],
+    },
+    subject: {
+        reference: patientIdentity,
+        display: 'JONNY',
+    },
+    effectivePeriod: {
+        start: '2013-04-02T09:30:10+01:00',
+    },
+    issued: '2013-04-03T15:30:10+01:00',
+    valueQuantity: {
+        value: 6.3,
+        unit: 'mmol/l',
+        system: 'http://unitsofmeasure.org',
+        code: 'mmol/L',
+    },
+    interpretation: [
+        {
+            coding: [
+                {
+                    system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
+                    code: 'H',
+                    display: 'High',
+                },
+            ],
+        },
+    ],
+    referenceRange: [
+        {
+            low: {
+                value: 3.1,
+                unit: 'mmol/l',
+                system: 'http://unitsofmeasure.org',
+                code: 'mmol/L',
+            },
+            high: {
+                value: 6.2,
+                unit: 'mmol/l',
+                system: 'http://unitsofmeasure.org',
+                code: 'mmol/L',
+            },
+        },
+    ],
 };
 
 const validCondition: any = {

@@ -2,7 +2,7 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { BulkDataAuth, SystemOperation, TypeOperation } from 'fhir-works-on-aws-interface';
+import { BulkDataAuth, SystemOperation, TypeOperation, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import { AccessModifier, ClinicalSmartScope, ScopeRule, ScopeType } from './smartConfig';
 import getComponentLogger from './loggerBuilder';
 
@@ -143,6 +143,17 @@ export function isScopeSufficient(
     }
 
     return false;
+}
+
+export function rejectInvalidScopeCombination(scopes: string[]): void {
+    if (
+        scopes.some((scope: string) => scope.startsWith('system')) &&
+        (scopes.some((scope: string) => scope.startsWith('user')) ||
+            scopes.some((scope: string) => scope.startsWith('patient')))
+    ) {
+        console.log(scopes);
+        throw new UnauthorizedError('Scopes defined in access_token are not a valid combination');
+    }
 }
 
 /**
