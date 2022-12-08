@@ -575,6 +575,12 @@ describe('rejectInvalidScopeCombination', () => {
         }).toThrowError(UnauthorizedError);
     });
     test('allow patient scope mixed with user scope', () => {
-        expect(rejectInvalidScopeCombination(['user/Organization.read', 'patient/Patient.read'])).toBeUndefined();
+        expect(rejectInvalidScopeCombination(['user/Organization.read', 'patient/Encounter.read'])).toBeUndefined();
+    });
+    test('allow system scope', () => {
+        expect(rejectInvalidScopeCombination(['system/Patient.read'])).toBeUndefined();
+    });
+    test('allow multiple system scopes', () => {
+        expect(rejectInvalidScopeCombination(['system/Organization.read', 'system/Patient.read'])).toBeUndefined();
     });
 });

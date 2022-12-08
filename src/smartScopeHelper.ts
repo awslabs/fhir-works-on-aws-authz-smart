@@ -19,6 +19,15 @@ export const SEARCH_OPERATIONS: (TypeOperation | SystemOperation)[] = [
 export const FHIR_SCOPE_REGEX =
     /^(?<scopeType>patient|user|system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
 
+export const FHIR_PATIENT_SCOPE_REGEX =
+    /^(?<scopeType>patient)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+
+export const FHIR_USER_SCOPE_REGEX =
+    /^(?<scopeType>user)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+
+export const FHIR_SYSTEM_SCOPE_REGEX =
+    /^(?<scopeType>system)\/(?<scopeResourceType>[A-Z][a-zA-Z]+|\*)\.(?<accessType>read|write|\*)$/;
+
 export function convertScopeToSmartScope(scope: string): ClinicalSmartScope {
     const matchClinicalScope = scope.match(FHIR_SCOPE_REGEX);
     if (matchClinicalScope) {
@@ -141,17 +150,15 @@ export function isScopeSufficient(
         // Caused by trying to convert non-SmartScope to SmartScope, for example converting non-SMART scope 'openid'
         logger.debug((e as any).message);
     }
-
     return false;
 }
 
 export function rejectInvalidScopeCombination(scopes: string[]): void {
     if (
-        scopes.some((scope: string) => scope.startsWith('system')) &&
-        (scopes.some((scope: string) => scope.startsWith('user')) ||
-            scopes.some((scope: string) => scope.startsWith('patient')))
+        scopes.some((scope: string) => FHIR_SYSTEM_SCOPE_REGEX.test(scope)) &&
+        (scopes.some((scope: string) => FHIR_PATIENT_SCOPE_REGEX.test(scope)) ||
+            scopes.some((scope: string) => FHIR_USER_SCOPE_REGEX.test(scope)))
     ) {
-        console.log(scopes);
         throw new UnauthorizedError('Scopes defined in access_token are not a valid combination');
     }
 }
@@ -174,9 +181,9 @@ export function filterOutUnusableScope(
 ): string[] {
     const filteredScopes: string[] = scopes.filter(
         (scope: string) =>
-            ((patientContext && scope.startsWith('patient/')) ||
-                (fhirUser && scope.startsWith('user/')) ||
-                scope.startsWith('system/')) &&
+            ((patientContext && FHIR_PATIENT_SCOPE_REGEX.test(scope)) ||
+                (fhirUser && FHIR_USER_SCOPE_REGEX.test(scope)) ||
+                FHIR_SYSTEM_SCOPE_REGEX.test(scope)) &&
             isScopeSufficient(
                 scope,
                 scopeRule,

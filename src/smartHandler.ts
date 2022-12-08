@@ -24,6 +24,9 @@ import { JwksClient } from 'jwks-rsa';
 import { SMARTConfig, UserIdentity } from './smartConfig';
 import {
     convertScopeToSmartScope,
+    FHIR_PATIENT_SCOPE_REGEX,
+    FHIR_SYSTEM_SCOPE_REGEX,
+    FHIR_USER_SCOPE_REGEX,
     filterOutUnusableScope,
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
@@ -153,7 +156,7 @@ export class SMARTHandler implements Authorization {
             }
             if (
                 !usableScopes.some((scope: string) => {
-                    return scope.startsWith('system');
+                    return FHIR_SYSTEM_SCOPE_REGEX.test(scope);
                 })
             ) {
                 // if requestor is relying on the "user" scope we need to verify they are coming from the correct endpoint & resourceType
@@ -167,10 +170,10 @@ export class SMARTHandler implements Authorization {
             }
         }
 
-        if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
+        if (fhirUserClaim && usableScopes.some((scope) => FHIR_USER_SCOPE_REGEX.test(scope))) {
             userIdentity.fhirUserObject = getFhirUser(fhirUserClaim);
         }
-        if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
+        if (patientContextClaim && usableScopes.some((scope) => FHIR_PATIENT_SCOPE_REGEX.test(scope))) {
             userIdentity.patientLaunchContext = getFhirResource(patientContextClaim, fhirServiceBaseUrl);
         }
         userIdentity.scopes = scopes;
@@ -247,9 +250,9 @@ export class SMARTHandler implements Authorization {
         const { scopes, fhirUserObject, patientLaunchContext } = request.userIdentity;
         const usableScopes: string[] = scopes.filter(
             (scope: string) =>
-                (patientLaunchContext && scope.startsWith('patient/')) ||
-                (fhirUserObject && scope.startsWith('user/')) ||
-                scope.startsWith('system/'),
+                (patientLaunchContext && FHIR_PATIENT_SCOPE_REGEX.test(scope)) ||
+                (fhirUserObject && FHIR_USER_SCOPE_REGEX.test(scope)) ||
+                FHIR_SYSTEM_SCOPE_REGEX.test(scope),
         );
 
         // Are the scopes the request have good enough for every entry in the bundle?
