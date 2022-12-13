@@ -2,7 +2,7 @@
  *  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: Apache-2.0
  */
-import { BulkDataAuth, ExportType } from 'fhir-works-on-aws-interface';
+import { BulkDataAuth, ExportType, UnauthorizedError } from 'fhir-works-on-aws-interface';
 import { ScopeRule, ScopeType } from './smartConfig';
 import {
     isScopeSufficient,
@@ -10,6 +10,7 @@ import {
     filterOutUnusableScope,
     getScopes,
     getValidOperationsForScopeTypeAndAccessType,
+    rejectInvalidScopeCombination,
 } from './smartScopeHelper';
 
 const emptyScopeRule = (): ScopeRule => ({
@@ -559,5 +560,27 @@ describe('convertScopeToSmartScope', () => {
             resourceType: 'Fake',
             scopeType: 'patient',
         });
+    });
+});
+
+describe('rejectInvalidScopeCombination', () => {
+    test('reject system scope mixed with uer scope', () => {
+        expect(() => {
+            rejectInvalidScopeCombination(['system/Patient.read', 'user/Organization.read']);
+        }).toThrowError(UnauthorizedError);
+    });
+    test('reject system scope mixed with patient scope', () => {
+        expect(() => {
+            rejectInvalidScopeCombination(['system/Patient.read', 'patient/Observation.read']);
+        }).toThrowError(UnauthorizedError);
+    });
+    test('allow patient scope mixed with user scope', () => {
+        expect(rejectInvalidScopeCombination(['user/Organization.read', 'patient/Encounter.read'])).toBeUndefined();
+    });
+    test('allow system scope', () => {
+        expect(rejectInvalidScopeCombination(['system/Patient.read'])).toBeUndefined();
+    });
+    test('allow multiple system scopes', () => {
+        expect(rejectInvalidScopeCombination(['system/Organization.read', 'system/Patient.read'])).toBeUndefined();
     });
 });

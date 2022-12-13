@@ -6,25 +6,25 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import MockAdapter from 'axios-mock-adapter';
 import {
-    VerifyAccessTokenRequest,
+    AccessBulkDataJobRequest,
+    AllowedResourceTypesForOperationRequest,
+    AuthorizationBundleRequest,
+    BASE_R4_RESOURCES,
+    BASE_STU3_RESOURCES,
+    GetSearchFilterBasedOnIdentityRequest,
     ReadResponseAuthorizedRequest,
     SystemOperation,
     TypeOperation,
     UnauthorizedError,
+    VerifyAccessTokenRequest,
     WriteRequestAuthorizedRequest,
-    AccessBulkDataJobRequest,
-    AllowedResourceTypesForOperationRequest,
-    BASE_R4_RESOURCES,
-    AuthorizationBundleRequest,
-    GetSearchFilterBasedOnIdentityRequest,
-    BASE_STU3_RESOURCES,
 } from 'fhir-works-on-aws-interface';
 
 import * as smartAuthorizationHelper from './smartAuthorizationHelper';
-import { SMARTHandler } from './smartHandler';
-import { SMARTConfig, ScopeRule } from './smartConfig';
-import { getScopes } from './smartScopeHelper';
 import { getFhirResource, getFhirUser } from './smartAuthorizationHelper';
+import { SMARTHandler } from './smartHandler';
+import { ScopeRule, SMARTConfig } from './smartConfig';
+import { getScopes } from './smartScopeHelper';
 
 jest.mock('jsonwebtoken');
 
@@ -389,10 +389,10 @@ describe('verifyAccessToken', () => {
             false,
         ],
         [
-            'system&user&patient_manyWrite_no context or fhirUser',
+            'system scope can not be mixed with patient or user',
             { accessToken: 'fake', operation: 'create', resourceType: 'Patient' },
             { ...baseAccessNoScopes, scp: 'user/*.*  patient/*.write system/Patient.write' },
-            true,
+            false,
         ],
         [
             'system_manyRead_Write',
@@ -671,7 +671,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
             },
             { ...baseAccessNoScopes, scp: ['user/*.read', 'system/*.read'], fhirUser: externalPractitionerIdentity },
-            true,
+            false,
         ],
         [
             'System & internal patient read scope: get-status-export',
@@ -682,7 +682,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 bulkDataAuth: { exportType: 'system', operation: 'get-status-export' },
             },
             { ...baseAccessNoScopes, scp: ['user/*.read', 'system/*.read'], ...patientContext },
-            true,
+            false,
         ],
     ];
 
@@ -731,7 +731,7 @@ describe('verifyAccessToken; System level export requests', () => {
                 bulkDataAuth: { exportType: 'system', operation: 'initiate-export' },
             },
             { ...baseAccessNoScopes, scp: ['system/*.read', 'patient/*.*'], ...practitionerFhirUser },
-            true,
+            false,
         ],
         [
             'Read and Write Access: get-status-export',

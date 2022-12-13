@@ -11,7 +11,7 @@ import {
     getResourceType,
     ResourceBodyDescription,
 } from './testStubs';
-import { filterOutUnusableScope } from '../smartScopeHelper';
+import { FHIR_PATIENT_SCOPE_REGEX, FHIR_USER_SCOPE_REGEX, filterOutUnusableScope } from '../smartScopeHelper';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { load } = require('csv-load-sync');
@@ -77,10 +77,10 @@ export default class TestCaseUtil<CsvRow extends BaseCsvRow> {
                 fhirUserClaim,
             );
 
-            if (fhirUserClaim && usableScopes.some((scope) => scope.startsWith('user/'))) {
+            if (fhirUserClaim && usableScopes.some((scope) => FHIR_USER_SCOPE_REGEX.test(scope))) {
                 userIdentity.fhirUserObject = getFhirUserObject(row.fhirUser);
             }
-            if (patientContextClaim && usableScopes.some((scope) => scope.startsWith('patient/'))) {
+            if (patientContextClaim && usableScopes.some((scope) => FHIR_PATIENT_SCOPE_REGEX.test(scope))) {
                 userIdentity.patientLaunchContext = getFhirUserObject(row.patientContext);
             }
             userIdentity.usableScopes = usableScopes;

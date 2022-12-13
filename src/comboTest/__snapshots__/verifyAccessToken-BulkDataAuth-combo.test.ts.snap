@@ -36,48 +36,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 1",
@@ -140,36 +99,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 3",
@@ -201,33 +131,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 4",
@@ -262,7 +166,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 5",
@@ -294,7 +198,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 6",
@@ -330,45 +234,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 7",
@@ -434,36 +300,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 9",
@@ -495,33 +332,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 10",
@@ -587,40 +398,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 12",
@@ -655,36 +433,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 13",
@@ -716,40 +465,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 14",
@@ -784,42 +500,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 15",
@@ -851,33 +532,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 16",
@@ -912,36 +567,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 17",
@@ -973,39 +599,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 18",
@@ -1040,7 +634,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 19",
@@ -1072,33 +666,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 20",
@@ -1228,7 +796,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 23",
@@ -1260,7 +828,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 24",
@@ -1296,44 +864,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 25",
@@ -1364,31 +895,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 26",
@@ -1455,38 +962,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 28",
@@ -1553,34 +1029,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 30",
@@ -1616,39 +1065,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 31",
@@ -1714,36 +1131,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 33",
@@ -1775,39 +1163,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 34",
@@ -1845,50 +1201,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 35",
@@ -1950,35 +1263,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 37",
@@ -2009,7 +1294,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 38",
@@ -2074,35 +1359,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 40",
@@ -2136,7 +1393,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 41",
@@ -2203,40 +1460,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 43",
@@ -2330,33 +1554,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 46",
@@ -2391,37 +1589,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 47",
@@ -2451,30 +1619,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 48",
@@ -2508,35 +1653,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 49",
@@ -2567,32 +1684,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 50",
@@ -2656,39 +1748,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 52",
@@ -2722,36 +1782,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 53",
@@ -2876,44 +1907,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 56",
@@ -2944,32 +1938,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 57",
@@ -3036,44 +2005,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 59",
@@ -3105,34 +2037,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 60",
@@ -3167,37 +2072,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 61",
@@ -3314,44 +2189,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 64",
@@ -3386,36 +2224,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 65",
@@ -3449,7 +2258,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 66",
@@ -3484,39 +2293,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 67",
@@ -3549,36 +2326,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 68",
@@ -3611,7 +2359,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 69",
@@ -3641,7 +2389,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 70",
@@ -3708,36 +2456,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 72",
@@ -3806,42 +2525,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Patient",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 74",
@@ -3875,35 +2559,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 75",
@@ -3940,40 +2596,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 76",
@@ -4003,30 +2626,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "user/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 77",
@@ -4061,36 +2661,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 78",
@@ -4186,33 +2757,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 81",
@@ -4305,38 +2850,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 83",
@@ -4399,35 +2913,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     ]
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 85",
@@ -4496,36 +2982,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/*.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 87",
@@ -4590,34 +3047,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 89",
@@ -4683,39 +3113,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Practitioner/id"
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "fhirUserObject": Object {
-    "hostname": "https://fhir.server.com/dev",
-    "id": "id",
-    "resourceType": "Practitioner",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "user/*.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 91",
@@ -4783,40 +3181,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Patient/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 93",
@@ -4883,7 +3248,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 95",
@@ -5008,38 +3373,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/*.read",
-    "system/Patient.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 98",
@@ -5071,7 +3405,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     "fhirUser": "https://fhir.server.com/dev/Patient/id"
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `[UnauthorizedError: access_token does not have permission for requested operation]`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 99",
@@ -5108,41 +3442,7 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": false
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "fhirUser": "https://fhir.server.com/dev/Practitioner/id",
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "user/Patient.read",
-    "user/*.read",
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/Patient.read",
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
 
 exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
   "testName": "Combo Test Row 100",
@@ -5177,34 +3477,4 @@ exports[`verifyAccessToken-BulkDataAuth-combo CASE: {
     }
   },
   "isUserScopeAllowedForSystemExport": true
-} 1`] = `
-Object {
-  "aud": "api://default",
-  "cid": "0oa8muazKSyk9gP5y5d5",
-  "exp": 2668546607,
-  "ext": Object {
-    "launch_response_patient": "https://fhir.server.com/dev/Patient/id",
-  },
-  "iat": 1668546607,
-  "iss": "https://dev-6460611.okta.com/oauth2/default",
-  "jti": "AT.6a7kncTCpu1X9eo2QhH1z_WLUK4TyV43n_9I6kZNwPY",
-  "scopes": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "scp": Array [
-    "patient/Patient.read",
-    "patient/*.read",
-    "user/Patient.read",
-    "system/*.read",
-  ],
-  "sub": "test@test.com",
-  "uid": "00u85ozwjjWRd17PB5d5",
-  "usableScopes": Array [
-    "system/*.read",
-  ],
-  "ver": 1,
-}
-`;
+} 1`] = `[UnauthorizedError: Scopes defined in access_token are not a valid combination]`;
