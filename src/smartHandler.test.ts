@@ -89,7 +89,7 @@ const baseAccessNoScopes: any = {
     sub,
 };
 
-const validPatient = {
+export const validPatient = {
     resourceType: 'Patient',
     id,
     meta: {
@@ -109,7 +109,7 @@ const validPatient = {
         },
     ],
 };
-const validPatientObservation = {
+export const validPatientObservation = {
     resourceType: 'Observation',
     id: '1274045',
     meta: {
@@ -168,7 +168,7 @@ const validPatientObservation = {
         },
     ],
 };
-const validPatientEncounter = {
+export const validPatientEncounter = {
     resourceType: 'Encounter',
     id: '1339909',
     meta: {
