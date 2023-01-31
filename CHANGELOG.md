@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.4](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v3.1.3...v3.1.4) (2023-01-26)
+
+### Tests
+
+* Added more extensive tests ([#105](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/105), [#104](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/104), [#103](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/103), [#102](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/102), [#101](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/101), [#100](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/100), [#99](https://github.com/awslabs/fhir-works-on-aws-authz-smart/pull/99))
+
 ### [3.1.3](https://github.com/awslabs/fhir-works-on-aws-authz-smart/compare/v3.1.2...v3.1.3) (2022-09-12)
 
 

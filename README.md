@@ -7,7 +7,7 @@ Versions 3.1.1 and 3.1.2 of the `fhir-works-on-aws-authz-smart` package have bee
 
 ## Purpose
 
-This package is an implementation of the authorization interface from the [FHIR Works interface](https://github.com/awslabs/fhir-works-on-aws-interface/blob/mainline/src/authorization.ts). It uses the [Substitutable Medical Applications, Reusable Technologies (SMART on FHIR) specification v1.0.0](http://www.hl7.org/fhir/smart-app-launch/1.0.0) to authorize users. Requests are authorized by if the requestor or the patient in context is [**referenced**](https://www.hl7.org/fhir/references.html) in the resource in question.
+This package is an implementation of the authorization interface from the [FHIR Works interface](https://github.com/awslabs/fhir-works-on-aws-interface/blob/mainline/src/authorization.ts). It uses the [Substitutable Medical Applications, Reusable Technologies (SMART on FHIR) specification v1.0.0](http://www.hl7.org/fhir/smart-app-launch/1.0.0) to authorize users. Requests are authorized if the requestor or the patient in context is [**referenced**](https://www.hl7.org/fhir/references.html) in the resource in question.
 
 To use and deploy this component please follow the overall [`smart-mainline` branch README](https://github.com/awslabs/fhir-works-on-aws-deployment/tree/smart-mainline)
 
@@ -15,19 +15,19 @@ To use and deploy this component please follow the overall [`smart-mainline` bra
 
 The following assumptions have been made while creating this package:
 
-- An [OAuth2](https://oauth.net/2/) [OpenID Connect](https://openid.net/connect/) authorization server already exists and is used as or in conjunction with an identity provider.
+- An [OAuth2](https://oauth.net/2/) [OpenID Connect](https://openid.net/connect/) authorization server already exists and is used as, or in conjunction with, an identity provider.
   - The OAuth2 server complies with the [SMART on FHIR specification](https://docs.smarthealthit.org/)
-  - The OAuth2 server has a JSON Web Key Set endpoint used to get the key for verifying incoming access token
+  - The OAuth2 server has a JSON Web Key Set endpoint used to get the key for verifying incoming access tokens
 - The identity provider has a user claim (either `fhirUser` or `profile`) representing who this user is in context to this FHIR server. This user must be represented by a fully qualified URL in the claim.
-  - As an example the `fhirUser` claim should look like: `https://www.fhir.com/Patient/1234`
+  - As an example, the `fhirUser` claim should look like: `https://www.fhir.com/Patient/1234`
   - When using `user` scopes it is assumed that the `fhirUser` will be in the access token to determine who the requestor is
 - [`launch` scopes and contextual request](http://www.hl7.org/fhir/smart-app-launch/1.0.0/scopes-and-launch-context/#scopes-for-requesting-context-data) will be handled by the authorization server.
 - Once launch context is given to the authorization server it will be included with a `patient` scope and the Patient's resourceType and id in the `launch_response_patient` claim within the access token.
-  - As an example the `launch_response_patient` claim should look like: `Patient/id`
+  - As an example, the `launch_response_patient` claim should look like: `Patient/id`
 
 ## Authorization
 
-This packages uses SMART scopes and the references found in the resources as a way to determine access. Scopes are used to tell the authorization and resource server what access the requestor has. In addition the references are used to do further authorization, in an attribute based access control model.
+This packages uses SMART scopes and the references found in the resources as a way to determine access. Scopes are used to tell the authorization and resource server what access the requestor has. In addition, the references are used to do further authorization, in an attribute based access control model.
 
 ### Scopes
 
@@ -44,7 +44,7 @@ The resource server also supports [SMART's Flat FHIR or Bulk Data `system` scope
 This implementation of the SMART on FHIR specification uses attribute based access control. Access to a resource is given if one of the following statements is true:
 
 - The fhirUser making the request is considered an Admin (default configuration makes a Practitioner an admin).
-- The fhirUser making the request or the patient in context looking up their own resource (verified via the `resourceType` and `id`).
+- The fhirUser making the request or the patient in context is looking up their own resource (verified via the `resourceType` and `id`).
 - The fhirUser making the request or the patient in context is referenced in the resource in which they are taking action on.
 
 As an example below, the Patient resource is accessible by:
@@ -52,8 +52,8 @@ As an example below, the Patient resource is accessible by:
 - Admins of the system
 - Requests with the usage of the `system` scope
 - `Patient/example`: via `resourceType` and `id` check
-- `Patient/diffPatient`: since it is referenced in the `link` field
-- `Practitioner/DrBell`: since it is referenced in the `generalPractitioner` field
+- `Patient/diffPatient`: because it is referenced in the `link` field
+- `Practitioner/DrBell`: because it is referenced in the `generalPractitioner` field
 
 ```json
 // Example Patient resource with references
@@ -110,9 +110,9 @@ The SMART specification gives a lot of room for interpretation between the resou
 
 ### SMART on FHIR scope rules
 
-Within the [SMARTConfig](./src/smartConfig.ts) you can see an example implementation of a ScopeRule. The ScopeRule lays what operations a scope gives access to. For example, the `user/*.write` scope provides 'create' resource access but not 'update' resource.
+Within the [SMARTConfig](./src/smartConfig.ts) you can see an example implementation of a ScopeRule. The ScopeRule says which operations a scope gives access to. For example, the `user/*.write` scope provides access to 'create' resource but not 'update' resource.
 
-For an example usage of the SMARTConfig, please see [authZConfig.ts](https://github.com/awslabs/fhir-works-on-aws-deployment/blob/smart-mainline/src/authZConfig.ts) in the deployment package
+For an example usage of the SMARTConfig, please see [authZConfig.ts](https://github.com/awslabs/fhir-works-on-aws-deployment/blob/smart-mainline/src/authZConfig.ts) in the deployment package.
 
 ## Dependency tree
 
